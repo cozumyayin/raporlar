@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV TAK-TİK 1. Raporlama – 05.06.2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --red: #C8102E;
+    --red-dark: #9b0c22;
+    --red-light: #fde8ec;
+    --ink: #1a1a1a;
+    --ink-mid: #444;
+    --ink-light: #888;
+    --border: #e0e0e0;
+    --bg: #f5f4f0;
+    --white: #ffffff;
+    --green: #1a7a4a;
+    --green-bg: #e8f5ee;
+    --amber: #b45309;
+    --amber-bg: #fef3c7;
+    --blue: #1d4ed8;
+    --blue-bg: #eff6ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--white);
+    border-bottom: 4px solid var(--red);
+    padding: 0;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 40px;
+  }
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .logo-circle {
+    width: 48px; height: 48px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.5px;
+  }
+  .logo-text {
+    font-size: 11px;
+    color: var(--ink-mid);
+    line-height: 1.3;
+  }
+  .logo-text strong { font-size: 14px; color: var(--ink); display: block; }
+  .header-title {
+    flex: 1;
+    border-left: 2px solid var(--border);
+    padding-left: 20px;
+  }
+  .header-title h1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+  }
+  .header-title p { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .date-badge {
+    background: var(--red);
+    color: white;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── KPI BAND ── */
+  .kpi-band {
+    background: var(--red);
+    color: white;
+    padding: 8px 40px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .kpi-band .label { opacity: 0.75; font-weight: 400; }
+  .kpi-band .value { font-weight: 700; letter-spacing: 0.2px; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 28px 20px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--red);
+    margin-bottom: 16px;
+    margin-top: 28px;
+  }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .sum-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--red);
+    padding: 14px 16px;
+    border-radius: 4px;
+  }
+  .sum-card .name {
+    font-size: 11px;
+    color: var(--ink-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .sum-card .product {
+    font-size: 10px;
+    color: var(--ink-mid);
+    margin-bottom: 8px;
+    min-height: 28px;
+  }
+  .sum-card .big-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .sum-card .sub {
+    font-size: 10px;
+    color: var(--ink-light);
+    margin-top: 4px;
+  }
+  .sum-card .growth {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .growth.up { background: var(--green-bg); color: var(--green); }
+  .growth.down { background: var(--amber-bg); color: var(--amber); }
+  .growth.neu { background: var(--blue-bg); color: var(--blue); }
+
+  /* ── REPORT BLOCKS ── */
+  .report-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .report-block-header {
+    background: var(--ink);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .report-block-header .rb-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+  .report-block-header .rb-product {
+    font-size: 11px;
+    opacity: 0.65;
+    font-weight: 400;
+  }
+  .report-block-header .rb-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .rb-badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    white-space: nowrap;
+  }
+  .rb-badge.highlight { background: var(--red); border-color: var(--red-dark); }
+
+  .report-block-body {
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .rb-section h4 {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .rb-section p {
+    font-size: 12px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .stat-cell {
+    flex: 1;
+    padding: 10px 14px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .sc-label {
+    font-size: 9px;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+  }
+  .stat-cell .sc-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .stat-cell .sc-sub { font-size: 9px; color: var(--ink-light); }
+
+  /* ── BREAKDOWN BARS ── */
+  .breakdown {
+    border-top: 1px solid var(--border);
+    padding: 14px 20px;
+  }
+  .breakdown h4 {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .bar-label {
+    width: 120px;
+    font-size: 11px;
+    color: var(--ink-mid);
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--red);
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+  .bar-fill.green { background: var(--green); }
+  .bar-fill.amber { background: var(--amber); }
+  .bar-num {
+    width: 60px;
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 32px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--ink-light);
+  }
+  .footer strong { color: var(--red); }
+  .watermark {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    font-size: 9px;
+    color: rgba(200,16,46,0.12);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    pointer-events: none;
+    transform: rotate(-15deg);
+    font-size: 32px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 12px; }
+    .watermark { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watermark">ÇÖZÜM</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-circle">ÇYG</div>
+      <div class="logo-text">
+        <strong>Çözüm Yayın Grubu</strong>
+        Satış & Bölge Raporlaması
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>Eğitim Vadisi TAK-TİK — 1. Raporlama</h1>
+      <p>4 Bölge Yöneticisi · Sezonsal Ürün Takip Takvimi · Konsolide Durum</p>
+    </div>
+    <div class="date-badge">05.06.2026</div>
+  </div>
+  <div class="kpi-band">
+    <span class="label">KPI Maddesi:</span>
+    <span class="value">Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ÖZET KARTLAR -->
+  <div class="section-title">Bölge Bazlı Özet</div>
+
+  <div class="summary-grid">
+
+    <div class="sum-card">
+      <div class="name">Vedat Adsan</div>
+      <div class="product">EV 9-10-11. Sınıf TAK-TİK</div>
+      <div class="big-num">26.988</div>
+      <div class="sub">9+10+11. Sınıf toplam ön sipariş</div>
+      <span class="growth up">▲ Geçen yıl: 1.158 BGK</span>
+    </div>
+
+    <div class="sum-card">
+      <div class="name">Süleyman İşpınar</div>
+      <div class="product">EV Ara Sınıf TAK-TİK</div>
+      <div class="big-num">52.732</div>
+      <div class="sub">9+10+11. Sınıf toplam ön sipariş</div>
+      <span class="growth up">▲ Geçen yıl: 11.424 BGK</span>
+    </div>
+
+    <div class="sum-card">
+      <div class="name">Muhsin Özbalcı</div>
+      <div class="product">EV TAK-TİK (Tüm Sınıflar)</div>
+      <div class="big-num">62.216</div>
+      <div class="sub">Bu yıl BGK toplam satış adedi</div>
+      <span class="growth up">▲ %417 büyüme (geçen yıl BGK)</span>
+    </div>
+
+    <div class="sum-card">
+      <div class="name">İsa Aydoğdu</div>
+      <div class="product">EV TAK (Konu Anlatım) + TİK (İzleme)</div>
+      <div class="big-num">29.710</div>
+      <div class="sub">TAK 12.380 + TİK 17.330</div>
+      <span class="growth neu">↗ Geçen yıl toplam: 39.939</span>
+    </div>
+
+  </div>
+
+  <!-- BLOK 1: VEDAT ADSAN -->
+  <div class="section-title">Bölge Detayları</div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Vedat Adsan — EĞİTİM VADİSİ 9-10-11. Sınıf TAK-TİK</div>
+        <div class="rb-product">1. Raporlama · 05.06.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">35 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 53.976</span>
+        <span class="rb-badge highlight">Geçen Yıl BGK: 1.158</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="sc-label">9. Sınıf TAK-TİK</div>
+        <div class="sc-val">10.110</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">10. Sınıf TAK-TİK</div>
+        <div class="sc-val">11.002</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">11. Sınıf TAK-TİK</div>
+        <div class="sc-val">5.876</div>
+        <div class="sc-sub">yeni lansman</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Geçen Yıl Toplam</div>
+        <div class="sc-val">35.847</div>
+        <div class="sc-sub">tüm sezon</div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h4>Sınıf Dağılımı (Sipariş Oranı)</h4>
+      <div class="bar-row">
+        <div class="bar-label">9. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill" style="width:37%"></div></div>
+        <div class="bar-num">10.110</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">10. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:41%"></div></div>
+        <div class="bar-num">11.002</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">11. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:22%"></div></div>
+        <div class="bar-num">5.876</div>
+      </div>
+    </div>
+
+    <div class="report-block-body">
+      <div class="rb-section">
+        <h4>Sonuç</h4>
+        <p>Bölgedeki 41 bayinin 35'i ön sipariş girişlerini tamamlamıştır. Geçtiğimiz yıl aynı dönemde 286 adet olan satış performansı, bu yıl 10.556 adede ulaşarak 10.270 adetlik net büyüme sağlamıştır. Yeni lansmanı gerçekleştirilen 11. Sınıf Tak-Tik ürününe alınan ön siparişlerle birlikte toplam adet 13.494 seviyesine yükselmiştir. Mevcut sipariş trendi dikkate alındığında ürün grubunda büyümenin devam edeceği öngörülmektedir.</p>
+      </div>
+      <div class="rb-section">
+        <h4>Öneriler</h4>
+        <p>Mevcut satış ivmesinin korunması için kurum görüşmeleri ve erken anlaşmalar hızlandırılmalıdır. Talep yoğunluğu görülen bölgelerde stok planlaması güçlendirilmelidir. Ürünün başarısını desteklemek amacıyla benzer segment ürünlerde çapraz satış stratejileri uygulanmalıdır. Bayilere yönelik bilgilendirme ve teşvik çalışmaları artırılarak satış motivasyonu sürdürülebilir hale getirilmelidir.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOK 2: SÜLEYMAN İŞPINAR -->
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Süleyman İşpınar — EĞİTİM VADİSİ Ara Sınıf TAK-TİK</div>
+        <div class="rb-product">1. Raporlama · 05.06.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">39 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 105.464</span>
+        <span class="rb-badge highlight">Geçen Yıl BGK: 11.424</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="sc-label">9. Sınıf TAK-TİK</div>
+        <div class="sc-val">16.816</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">10. Sınıf TAK-TİK</div>
+        <div class="sc-val">26.436</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">11. Sınıf TAK-TİK</div>
+        <div class="sc-val">9.480</div>
+        <div class="sc-sub">yeni ürün</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Geçen Yıl Toplam</div>
+        <div class="sc-val">72.850</div>
+        <div class="sc-sub">tüm sezon</div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h4>Sınıf Dağılımı (Sipariş Oranı)</h4>
+      <div class="bar-row">
+        <div class="bar-label">9. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill" style="width:32%"></div></div>
+        <div class="bar-num">16.816</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">10. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:50%"></div></div>
+        <div class="bar-num">26.436</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">11. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:18%"></div></div>
+        <div class="bar-num">9.480</div>
+      </div>
+    </div>
+
+    <div class="report-block-body">
+      <div class="rb-section">
+        <h4>Sonuç</h4>
+        <p>Geçen yıl aynı dönemde 10. sınıf ürünleri henüz stoklarda bulunmadığından sağlıklı bir dönemsel kıyaslama yapmak mümkün olmamakla birlikte, bayilerin bu ürün grubuna olan güven ve inancının her geçen gün arttığı gözlemlenmektedir. Bu yıl 11. sınıf ürünlerinin de tamamlanmasıyla birlikte ara sınıflarda tam set ürün yapısına ulaşılmaktadır.</p>
+      </div>
+      <div class="rb-section">
+        <h4>Öneriler</h4>
+        <p>11. sınıf ürünlerinin en kısa sürede stoklara alınması ve saha tanıtımlarının hızlandırılması büyük önem taşımaktadır. Sahadan gelen geri bildirimlerde TAK ve TİK içeriklerinin tek kitapta birleştirilmesine yönelik talepler iletilmiştir. Önümüzdeki yıl TYT-AYT grubunda yayımlanacak ürünlerde kapsamlı içeriklerin tercih edilmesi satış başarısı için kritik bir kriter olarak değerlendirilmektedir.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOK 3: MUHSİN ÖZBALCI -->
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Muhsin Özbalcı — EĞİTİM VADİSİ TAK-TİK (Tüm Sınıflar)</div>
+        <div class="rb-product">1. Raporlama · 05.06.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">39 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 62.216</span>
+        <span class="rb-badge highlight">▲ %417 Büyüme</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="sc-label">9. Sınıf TAK-TİK</div>
+        <div class="sc-val">29.056</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">10. Sınıf TAK-TİK</div>
+        <div class="sc-val">31.226</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">11. Sınıf TAK-TİK</div>
+        <div class="sc-val">1.934</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Geçen Yıl BGK</div>
+        <div class="sc-val">12.036</div>
+        <div class="sc-sub">→ bu yıl 62.216</div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h4>Sınıf Dağılımı (Sipariş Oranı)</h4>
+      <div class="bar-row">
+        <div class="bar-label">9. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill" style="width:46%"></div></div>
+        <div class="bar-num">29.056</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">10. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:50%"></div></div>
+        <div class="bar-num">31.226</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">11. Sınıf TAK-TİK</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:4%"></div></div>
+        <div class="bar-num">1.934</div>
+      </div>
+    </div>
+
+    <div class="report-block-body">
+      <div class="rb-section">
+        <h4>Sonuç ve Tespit</h4>
+        <p>9, 10 ve 11. sınıf TAK-TİK ürünlerinde geçen yıl aynı döneme göre 25.090 adetlik artış gerçekleşmiş, yaklaşık %417 büyüme sağlanmıştır. Ürünler özellikle kolejlerde takım olarak tercih edilmekte ve genel beğeni kazanmaktadır. Ancak müfredat değişikliği beklentisi nedeniyle bayiler ürün alımlarında kontrollü ilerlemekte ve stok riskinden kaçınmaktadır.</p>
+      </div>
+      <div class="rb-section">
+        <h4>Öneri / Aksiyon</h4>
+        <p>Haziran ayı içerisinde tüm bayilerle görüşülerek 11. sınıf ürünleri başta olmak üzere sipariş girişleri hızlandırılmalıdır. Müfredat netleştikten sonra ürünlerdeki değişimler sahaya doğru şekilde aktarılmalıdır. TAK ürünlerinde soru sayısı, TİK ürünlerinde etkinlik-soru dengesi yeniden değerlendirilmelidir.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOK 4: İSA AYDOĞDU -->
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">İsa Aydoğdu — EV Tam Konu Anlatım (TAK) + Tam İzleme (TİK)</div>
+        <div class="rb-product">1. Raporlama · 05.06.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">36 Bayi</span>
+        <span class="rb-badge">TAK: 12.380</span>
+        <span class="rb-badge">TİK: 17.330</span>
+        <span class="rb-badge highlight">Geçen Yıl Toplam: 39.939</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="sc-label">TAK (Konu Anlatım)</div>
+        <div class="sc-val">12.380</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">TİK (İzleme)</div>
+        <div class="sc-val">17.330</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Bu Yıl BGK Toplam</div>
+        <div class="sc-val">29.710</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Geçen Yıl Toplam</div>
+        <div class="sc-val">39.939</div>
+        <div class="sc-sub">tüm sezon → %37'ye ulaşıldı</div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h4>TAK / TİK Dağılımı</h4>
+      <div class="bar-row">
+        <div class="bar-label">TAK (Konu Anlatım)</div>
+        <div class="bar-track"><div class="bar-fill" style="width:42%"></div></div>
+        <div class="bar-num">12.380</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">TİK (İzleme)</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:58%"></div></div>
+        <div class="bar-num">17.330</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Geçen Yıl Toplamı</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:100%"></div></div>
+        <div class="bar-num">39.939</div>
+      </div>
+    </div>
+
+    <div class="report-block-body">
+      <div class="rb-section">
+        <h4>Sonuç</h4>
+        <p>Geçen yıl bu döneme kadarki satış tabanı çok düşük olduğundan dönemsel yüzde oranı anlamlı bir gösterge değildir; kıyas geçen yılın tüm yıl toplamı üzerinden yapılmıştır. Geçen yıl toplam 39.939 adetlik satışa karşılık, bu yıl bu döneme kadar 14.855 adede ulaşılmış; geçen yıl hacminin yaklaşık %37'sine sezon ortasında erişilmiştir. Adetsel öne çıkan bayiler: Ada Beyan (4.300), Motto (3.232), Kaşıbeyaz (1.584), Özdeniz (1.510), YKM (1.321).</p>
+      </div>
+      <div class="rb-section">
+        <h4>Aksiyon Planı</h4>
+        <p>Kurum ve kursların kayıt dönemleri sürmekte olup, kesinleşen öğrenci sayılarıyla toplu sipariş geçişlerinin hızlanması beklenmektedir. Stoğu bulunan bayilerde stok çıkış tarihleri takip edilerek tükenmeyle birlikte sipariş girişi sağlanacaktır. Yeni bayilere doğrudan sipariş girdirilecektir. Sezon ortasında %37'ye ulaşılması, yıl sonunda 39.939 adetlik toplamın aşılması yönünde güçlü bir göstergedir.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>
+      <strong>Çözüm Yayın Grubu</strong> · Satış & Raporlama Birimi · 1. Raporlama Dönemi
+    </div>
+    <div>
+      Power BI – Ürün Raporu baz alınarak hazırlanmıştır · 05.06.2026
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
