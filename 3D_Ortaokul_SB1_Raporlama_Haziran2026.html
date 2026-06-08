@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>3D Ortaokul SB 1. Raporlama — Haziran 2026</title>
+<style>
+:root{--bg:#ffffff;--panel:#f7f8fa;--panel2:#eef1f5;--text:#1f2328;--muted:#5a6472;--border:#e1e4e8;
+--accent:#C1272D;--accentd:#8C1D2C;--green:#2f9d5b;--up:#1f8a4c;--dn:#c0392b;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+--kritik:#d64545;--zayif:#e0853c;--orta:#cca42e;--iyi:#3f9d5b;--asti:#2e7d4f;}
+:root[data-theme="dark"]{--bg:#0f1419;--panel:#171c23;--panel2:#1f262f;--text:#e6edf3;--muted:#9aa4b0;--border:#2a313a;
+--accent:#ef5360;--accentd:#c1272d;--green:#46b06f;--up:#3fb96b;--dn:#f0683b;--shadow:0 1px 3px rgba(0,0,0,.4);
+--kritik:#e35d5d;--zayif:#e89a52;--orta:#d9b94a;--iyi:#54b06f;--asti:#46a06a;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);margin:0;overflow-x:hidden}
+body{font-family:Arial,"Segoe UI",system-ui,sans-serif;font-size:14px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding:0 18px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 0;flex-wrap:wrap;gap:10px}
+.brand{font-weight:700;font-size:15px;letter-spacing:.3px}.brand .dotb{color:var(--accent)}
+.tgroup{display:flex;gap:8px;flex-wrap:wrap}
+.toggle{background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:600}
+.toggle:hover{border-color:var(--accent)}
+header.hero{border-top:3px solid var(--accent);background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+header.hero h1{margin:0 0 4px;font-size:22px;letter-spacing:-.3px}
+header.hero p{margin:0;color:var(--muted);font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:8px}
+.kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi.accent{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.kl{font-size:11.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.kv{font-size:24px;font-weight:800;margin:3px 0;letter-spacing:-.5px}
+.kv .sub{font-size:14px;color:var(--muted);font-weight:600}
+.ks{font-size:11.5px;color:var(--muted)} .ks.up{color:var(--up)}
+.fn{font-size:11px;color:var(--muted);font-style:italic;margin:6px 2px 16px;line-height:1.6}
+.banner{background:linear-gradient(90deg,var(--accentd),var(--accent));color:#fff;border-radius:12px;padding:14px 20px;margin:12px 0 6px;font-size:13.5px;font-weight:500}
+.banner b{font-weight:800}
+.sec-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin:24px 2px 10px;border-bottom:2px solid var(--border);padding-bottom:6px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:14px}
+.card h2{margin:0 0 3px;font-size:16px}
+.card .hint{color:var(--muted);font-size:12px;margin:0 0 12px}
+.by-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.by-badge{background:var(--accent);color:#fff;font-size:12px;font-weight:800;padding:3px 12px;border-radius:20px}
+.by-title{font-size:16px;font-weight:700;margin:0}
+.by-sub{font-size:12px;color:var(--muted)}
+.aciklama-box{background:var(--panel2);border-left:3px solid var(--accent);border-radius:8px;padding:11px 15px;font-size:12.5px;line-height:1.65;color:var(--text);margin-bottom:14px;white-space:pre-wrap;word-break:break-word}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.tscroll>table{margin:0;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:right;font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:700;padding:7px 8px;border-bottom:2px solid var(--border);white-space:nowrap}
+th.l,td.l{text-align:left}th.c,td.c{text-align:center}
+td{padding:7px 8px;border-bottom:1px solid var(--border);white-space:nowrap}
+td.l{font-weight:600;white-space:normal;min-width:160px}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+td.b{font-weight:800} td.sm{font-size:11px;color:var(--muted)}
+td.good{color:var(--iyi)!important} td.bad{color:var(--kritik)!important}
+td.warn{color:var(--zayif)!important}
+tbody tr:hover td{background:var(--panel2)}
+tr.totr td{background:var(--panel2);border-top:2px solid var(--border);font-weight:800}
+.up{color:var(--up)} .dn{color:var(--dn)} .mut{color:var(--muted)}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700}
+.pill.risk{background:rgba(214,69,69,.16);color:var(--kritik)}
+.pill.warn{background:rgba(224,133,60,.18);color:var(--zayif)}
+.pill.ok{background:rgba(63,157,91,.18);color:var(--iyi)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-bottom:18px}
+.chart-wrap{position:relative;height:280px;width:100%;overflow:hidden}
+.chart-wrap canvas{display:block;width:100%!important;height:100%!important}
+.scrollnote{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--accent);font-weight:700;margin:0 0 6px}
+.scrollnote .ar{display:inline-block;font-size:14px;animation:bpnudge 1.5s ease-in-out infinite}
+@keyframes bpnudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+/* MOBILE TOGGLE */
+body.mview .wrap{max-width:430px;border:1px solid var(--border);border-radius:22px;margin:10px auto;padding:4px 12px 36px;box-shadow:0 12px 36px rgba(0,0,0,.14)}
+body.mview .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+body.mview .grid2{grid-template-columns:minmax(0,1fr)}
+body.mview .kv{font-size:20px}
+body.mview header.hero h1{font-size:17px}
+body.mview .topbar{position:sticky;top:0;background:var(--bg);z-index:20;border-bottom:1px solid var(--border)}
+body.mview .chart-wrap{height:220px}
+@media(max-width:1080px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.grid2{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:680px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{padding:0 12px 50px}table{font-size:11.5px}.kv{font-size:20px}}
+@media(max-width:820px){.tscroll>table{white-space:nowrap}.tscroll td.l{white-space:normal;min-width:130px}.grid2{grid-template-columns:minmax(0,1fr)}.chart-wrap{height:240px}}
+footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--muted);text-align:center;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="topbar">
+  <div class="brand"><span class="dotb">●</span> ÇÖZÜM YAYIN GRUBU · Sezonsal Ürün Takip</div>
+  <div class="tgroup">
+    <button class="toggle" id="vw" onclick="toggleView()">📱 Mobil görünüm</button>
+    <button class="toggle" id="tg" onclick="toggleTheme()">🌙 Koyu tema</button>
+  </div>
+</div>
+
+<header class="hero">
+  <h1>3D Ortaokul 5-6-7-8. Sınıf Soru Bankası — 1. Raporlama <span style="font-size:12px;color:var(--accent);font-weight:700">Haziran 2026</span></h1>
+  <p>4 Bölge Yöneticisi · KPI: Sezonsal Ürün Takip Takvimi · Kaynak: Power BI Ürün Raporu · 04–05.06.2026</p>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><div class="kl">İsa — 8. Sınıf SB</div><div class="kv">6.884</div><div class="ks up">GY BGK: 5.339 · +%28,9</div></div>
+  <div class="kpi"><div class="kl">Muhsin — 8. Sınıf SB</div><div class="kv">30.440</div><div class="ks up">GY BGK: 15.893 · +%91,5</div></div>
+  <div class="kpi accent"><div class="kl">Süleyman — LGS SB</div><div class="kv">36.297</div><div class="ks up">GY BGK: 31.076 · +%16,8</div></div>
+  <div class="kpi"><div class="kl">Süleyman — Ara Sınıf</div><div class="kv">6.510</div><div class="ks">Yeni ürün · geçen yıl yok</div></div>
+  <div class="kpi"><div class="kl">Vedat — 5-6-7-8. Sınıf</div><div class="kv">12.229</div><div class="ks up">GY BGK: 7.872 · +%55,4</div></div>
+</div>
+
+<p class="fn"><b>BGK</b> = Bu güne kadar (sezon başından raporlama tarihine kadar). &nbsp; <b>GY BGK</b> = Geçen yıl aynı dönem. &nbsp; 5-6-7. sınıf ürünleri bu yıl B2B'de ilk kez açıldı — geçen yıl kıyas verisi bulunmuyor. &nbsp; Müfredat değişikliği beklentisi 4 BY'de de temkinli sipariş davranışı yaratıyor.</p>
+
+<div class="banner">📈 <b>Genel Tablo:</b> 4 BY toplam <b>55.471 adet</b> (sadece 8. sınıf + yeni ara sınıf) vs geçen yıl 60.180 · Süleyman + Muhsin bölgeleri dominant · <b>Müfredat değişikliği</b> tüm BY raporlarında ortak risk olarak geçiyor · 5-6-7. sınıf sipariş girişleri Haziran'a taşınıyor.</div>
+
+<div class="sec-title">Bölge Büyümesi — 8. Sınıf SB Karşılaştırması</div>
+<div class="grid2">
+  <div class="card">
+    <h2>BGK Karşılaştırma</h2>
+    <p class="hint">Bu yıl (renkli) vs geçen yıl (gri) — adet</p>
+    <div class="chart-wrap"><canvas id="chBY" role="img" aria-label="BY büyüme karşılaştırması"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Büyüme Oranı (%)</h2>
+    <p class="hint">Bu yıl BGK ÷ Geçen yıl BGK</p>
+    <div class="chart-wrap"><canvas id="chGrowth" role="img" aria-label="Büyüme oranları"></canvas></div>
+  </div>
+</div>
+
+<div class="sec-title">İsa Aydoğdu — 3D 8. Sınıf SB · 04.06.2026</div>
+<div class="card">
+  <div class="by-header">
+    <span class="by-badge">İSA AYDOĞDU</span>
+    <div>
+      <p class="by-title">3D 5-6-7-8. Sınıf Soru Bankası — 1. Raporlama</p>
+      <p class="by-sub">35 bayi · BGK: 6.884 adet · GY BGK: 5.339 · Artış: +1.545 (+%28,9)</p>
+    </div>
+  </div>
+  <div class="aciklama-box">Geçen yılın bu döneme kadarki sipariş adedi 5.339 iken, bu yıl aynı dönemde 7.874 adede ulaşılmıştır. Buna göre adetsel büyüme +2.575, yüzdesel büyüme +%40,3'tür. (Geçen yıl tüm yıl toplamı 16.923 olup, sezon ilerledikçe hedef bu rakamın aşılmasıdır.)
+
+ADETSEL OLARAK ÖNE ÇIKAN BAYİLER
+• Fleck Art (Yalova): 1.215 adet – en yüksek hacim; geçen yıl aynı döneme göre +815 adet.
+• Motto (Samsun/İlkadım): 1.205 adet – bu dönem en büyük yeni hacim katkısı.
+• Ada Beyan (Sakarya): 990 adet – güçlü yeni katkı.
+• Mega Mağaza (Sivas/Şarkışla): 810 adet – geçen yıla göre +735 adet, en yüksek artışlardan.
+• Özlem Gülsoy (Tokat): 612 adet – mevcut bayide istikrarlı büyüme (+165).
+• Umut Kitap (Sivas) 400 ve Tokat Libro 340: kayda değer yeni/perakende katkı.
+
+SİPARİŞ "0" / DÜŞÜK GÖRÜNEN BAYİLER (STOK KAYNAKLI)
+DK Kitap, Ergün Şahin, Es Eğitim, İbrikçioğlu ve Soner Algül'ün geçen yıl satışı bulunmakla birlikte bu dönem sipariş girmemesinin nedeni depolarındaki mevcut stoklardır; stok çıkışları takip edilmekte, tükendikçe sipariş geçilecektir. Özdeniz, geçen yıl aynı dönemde 3.000 gibi yüksek bir tabandan geldiği için bu dönem 160 adetle düşük oranda görünmekte olup, bölgenin en büyük sipariş potansiyelini barındıran bayisidir; öncelikli takiptedir.
+
+PAZAR DİNAMİĞİ
+Bu yıl kurum alımları ve toplu tercihler satışın ana motorudur. 8. sınıfta gelecek yıl uygulanacak müfredat değişikliği bayilerde stok temkinliliği yaratmakta, büyük hacimli siparişlerde duraksamaya yol açmaktadır. Özel kurum ve kursların kayıt dönemleri sürmekte olup, kesinleşen öğrenci sayılarıyla toplu siparişlerin Mart–Mayıs'ta hızlanması beklenmektedir.</div>
+  <div class="scrollnote"><span class="ar">↔</span> Tabloyu yana kaydırabilirsiniz</div>
+  <div class="tscroll">
+  <table><thead><tr>
+    <th class="l">Bayi Adı</th>
+    <th class="c">İl</th>
+    <th>GY BGK</th>
+    <th>BY BGK</th>
+    <th>GY Toplam</th>
+    <th class="c">Durum</th>
+  </tr></thead><tbody>
+<tr>
+<td class="l">AHMET AKBULUT - ISTASYON KIRTASIYE</td>
+<td class="c sm">TOKAT</td>
+<td class="n">0</td>
+<td class="n b mut">50</td>
+<td class="n">575</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">AHTERA KASIBEYAZ SERKAN SAKIN</td>
+<td class="c sm">KOCAELI</td>
+<td class="n">0</td>
+<td class="n b mut">60</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">ALI YILMAZ UMIT YILDIZ ORT. - UMIT KITAP KIRTASIYE</td>
+<td class="c sm">GIRESUN</td>
+<td class="n">25</td>
+<td class="n b warn">21</td>
+<td class="n">217</td>
+<td class="c"><span class="pill warn">Sarı (Orta)</span></td>
+</tr><tr>
+<td class="l">ANT YAYIN SAT LTD STI</td>
+<td class="c sm">TRABZON</td>
+<td class="n">0</td>
+<td class="n b mut">50</td>
+<td class="n">415</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">ARMADA KITAPEVI-OSMAN TIBET PEKER</td>
+<td class="c sm">ORDU</td>
+<td class="n">0</td>
+<td class="n b mut">20</td>
+<td class="n">253</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">BULANCAK KITAP MERKEZI ELIF YILDIZ</td>
+<td class="c sm">GIRESUN</td>
+<td class="n">90</td>
+<td class="n b good">152</td>
+<td class="n">518</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">CAN EGITIM ARAÇLARI KITAP KIRTASIYE / FATMA DALGIC</td>
+<td class="c sm">BARTIN</td>
+<td class="n">45</td>
+<td class="n b good">45</td>
+<td class="n">165</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">CIZGI KITAP GROSS- MUSTAFA OZDEMIR</td>
+<td class="c sm">TOKAT</td>
+<td class="n">0</td>
+<td class="n b mut">42</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">DETAY KITAP KIRTASIYE EGITIM GIDA INS. LTD. STI</td>
+<td class="c sm">KOCAELI</td>
+<td class="n">0</td>
+<td class="n b mut">30</td>
+<td class="n">484</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">DK KITAP KIRTASIYE LTD. STI.</td>
+<td class="c sm">RIZE</td>
+<td class="n">90</td>
+<td class="n b bad">0</td>
+<td class="n">210</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">ELIF KITAP KIRTASIYE ALI TORUN VE BURAK ERGENC ADI</td>
+<td class="c sm">SAMSUN</td>
+<td class="n">136</td>
+<td class="n b good">405</td>
+<td class="n">896</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">ERGUN SAHIN</td>
+<td class="c sm">SAMSUN</td>
+<td class="n">90</td>
+<td class="n b bad">0</td>
+<td class="n">225</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">ERHAN CICEK (BOLU KAMPUS KITAP KIRTASIYE)</td>
+<td class="c sm">BOLU</td>
+<td class="n">105</td>
+<td class="n b good">120</td>
+<td class="n">775</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">ES EGITIM KIRTASIYE - SENNUR ENTES</td>
+<td class="c sm">ZONGULDAK</td>
+<td class="n">30</td>
+<td class="n b bad">0</td>
+<td class="n">536</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">FLECK ART TECH TEKNOLOJI SISTEMLERI VE REKLAM TIC.</td>
+<td class="c sm">YALOVA</td>
+<td class="n">400</td>
+<td class="n b good">1,215</td>
+<td class="n">740</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">MAHMUT IBRIKCIOGLU (IBRIKCIOGLU KIRTASIYE)</td>
+<td class="c sm">TOKAT</td>
+<td class="n">73</td>
+<td class="n b bad">0</td>
+<td class="n">193</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">MEGA MAGZA KIRTASIYE  FURKAN OZKAN</td>
+<td class="c sm">SIVAS</td>
+<td class="n">75</td>
+<td class="n b good">810</td>
+<td class="n">1,362</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">MOTTO KITAP YAYIN DAGITIM-AYDIN BOLAT</td>
+<td class="c sm">SAMSUN</td>
+<td class="n">0</td>
+<td class="n b mut">1,205</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">MUSTAFA CITGIDEN (CARSAMBA BATI BIRLIK KIRTASIYE)</td>
+<td class="c sm">SAMSUN</td>
+<td class="n">5</td>
+<td class="n b good">130</td>
+<td class="n">155</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">NEFISE YENIGUL (YENIGUL KIRTASIYE)</td>
+<td class="c sm">ARTVIN</td>
+<td class="n">0</td>
+<td class="n b mut">5</td>
+<td class="n">40</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">NIKSAR CIZGI KITAP KIRTASIYE KURSAT OZDEMIR</td>
+<td class="c sm">TOKAT</td>
+<td class="n">0</td>
+<td class="n b mut">22</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">ORDU KITAPCI DAYIM KITABEVI IBRAHIM AKKAYA</td>
+<td class="c sm">ORDU</td>
+<td class="n">30</td>
+<td class="n b good">410</td>
+<td class="n">390</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">OZDENIZ KITAP KIRTASIYE EGITIM ORGANIZASYON BASIM </td>
+<td class="c sm">MALATYA</td>
+<td class="n">3,000</td>
+<td class="n b bad">160</td>
+<td class="n">3,340</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">OZGEN KITAP KIRTASIYE TICARET LIMITED SIRKETI</td>
+<td class="c sm">ORDU</td>
+<td class="n">78</td>
+<td class="n b good">168</td>
+<td class="n">466</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">OZLEM GULSOY Z KIRTASIYE</td>
+<td class="c sm">TOKAT</td>
+<td class="n">447</td>
+<td class="n b good">612</td>
+<td class="n">1,662</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">PATIKA KITABEVI ONUR DEDE</td>
+<td class="c sm">ARTVIN</td>
+<td class="n">0</td>
+<td class="n b mut">0</td>
+<td class="n">120</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">ROTA KITABEVI - SEVILAY OZABACI</td>
+<td class="c sm">SINOP</td>
+<td class="n">0</td>
+<td class="n b mut">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">SONER ALGUL</td>
+<td class="c sm">DÜZCE</td>
+<td class="n">610</td>
+<td class="n b bad">0</td>
+<td class="n">655</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">TKM TURHAL KITAP KIRTASIYE OMER CAN OZTURK</td>
+<td class="c sm">TOKAT</td>
+<td class="n">0</td>
+<td class="n b mut">68</td>
+<td class="n">191</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">TOKAT ISLER LIBRO KITAPYAYIN DAG KIRT TIC LTD STI</td>
+<td class="c sm">TOKAT</td>
+<td class="n">0</td>
+<td class="n b mut">340</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">UMUT KITAP KIRTASIYE-ABDULLAH KARATAS</td>
+<td class="c sm">SIVAS</td>
+<td class="n">0</td>
+<td class="n b mut">400</td>
+<td class="n">1,376</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">URPAK KIRTASIYE</td>
+<td class="c sm">RIZE</td>
+<td class="n">10</td>
+<td class="n b good">233</td>
+<td class="n">519</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">VERGUL KITABEVI-TABIP VERGUL</td>
+<td class="c sm">SAKARYA</td>
+<td class="n">0</td>
+<td class="n b mut">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">ZONGULDAK ISLER KITABEVLERI FIRAT GOKKAYA</td>
+<td class="c sm">ZONGULDAK</td>
+<td class="n">0</td>
+<td class="n b mut">50</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">77 KERVAN KIRTASIYE KITAP DAG PAZ EGT HIZ SAN TIC </td>
+<td class="c sm">KARABÜK</td>
+<td class="n">0</td>
+<td class="n b mut">61</td>
+<td class="n">445</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr>
+  <tr class="totr"><td class="l">TOPLAM</td><td></td>
+    <td class="n">5.339</td><td class="n">6.884</td><td class="n">16.923</td><td></td>
+  </tr>
+  </tbody></table></div>
+</div>
+
+<div class="sec-title">Muhsin Özbalcı — 3D 5-6-7-8. Sınıf SB · 04.06.2026</div>
+<div class="card">
+  <div class="by-header">
+    <span class="by-badge">MUHSİN ÖZBALCI</span>
+    <div>
+      <p class="by-title">3D 5-6-7-8. Sınıf Soru Bankası — 1. Raporlama</p>
+      <p class="by-sub">42 bayi · 8. Sınıf: 30.440 adet · 5-6-7. Sınıf: 260 adet · GY BGK: 15.893 · Artış: +%91,5</p>
+    </div>
+  </div>
+  <div class="aciklama-box">Bölgemde 3D LGS Soru Bankası ürününde geçen yıl aynı dönemde toplam 15.893 adet sipariş girişi yapılmışken, bu yıl aynı dönemde toplam 31.180 adet sipariş girişi gerçekleşmiştir. Geçen yılın aynı dönemine göre 15.287 adetlik artış sağlanmış olup, yaklaşık %96 oranında büyüme gerçekleşmiştir.
+
+3D Yayınları ortaokul grubundaki ürünlerimiz, sahada her geçen yıl bilinirliğini ve tercih edilme oranını artırmaya devam etmektedir. 3D LGS Soru Bankası ürünümüzde geçen yılın aynı dönemine göre neredeyse iki katına yakın büyüme sağlanmasına rağmen, önümüzdeki yıl müfredat değişikliği beklentisi sebebiyle bayi stoklarında çok yüksek miktarda ürün bulunmamaktadır.
+
+Bayi stoklarında yüklü miktarda ürün olmamasına rağmen geçen yılın aynı dönemine göre ciddi bir büyüme sağlanması olumlu değerlendirilmektedir. Ürünlerimiz içerik kalitesi, soru seviyesi ve LGS hazırlık sürecine uygunluğu bakımından sahada beğenilmekte ve olumlu geri bildirimler alınmaktadır.
+
+Ürünün kullanım alanı incelendiğinde, devlet okullarından ziyade özel öğretim kursları tarafından daha fazla tercih edildiği görülmektedir. Bu durumun temel sebeplerinden biri, 3D Yayınları’nın özellikle lise grubundaki güçlü marka algısının kurslar nezdinde ortaokul ürünlerine de olumlu yansımasıdır. Özellikle matematik branşı sahada daha fazla öne çıkmakta olup, ara sınıf ürünleriyle ilgili beklentinin de yüksek olduğu görülmektedir.
+
+Genel değerlendirmede, 3D LGS Soru Bankası ürünümüzün ortaokul grubunda marka algısını güçlendirmeye devam ettiği, özellikle kurs kanalında güçlü karşılık bulduğu ve mevcut müfredat değişikliği beklentisine rağmen ciddi bir büyüme sağladığı görülmektedir. Önümüzdeki süreçte Proje İmam Hatip okullarına yapılacak örnek çalışmalarının da ürünün bilinirliği ve tercih edilme oranına olumlu katkı sağlaması beklenmektedir.
+
+Ayrıca 5, 6 ve 7. sınıf ürünlerimiz B2B’de siparişe açılmış olmasına rağmen henüz sipariş girişi yapılmamıştır. Yapılan bayi görüşmelerinde, önümüzdeki yıl müfredatın yeniden değişecek olması ve sürecin henüz netleşmemesi gerekçe olarak belirtilmiştir. Bu nedenle sipariş giriş süreçlerine şu ana kadar yoğunlaşılmamıştır. Ancak Haziran ayı içerisinde tüm bayilerle görüşülerek sipariş girişlerinin yaptırılması hedeflenmektedir.</div>
+  <div class="scrollnote"><span class="ar">↔</span> Tabloyu yana kaydırabilirsiniz</div>
+  <div class="tscroll">
+  <table><thead><tr>
+    <th class="l">Bayi Adı</th>
+    <th class="c">İl</th>
+    <th>8. Sınıf BY</th>
+    <th>5-6-7. Sınıf</th>
+    <th>GY BGK</th>
+    <th>GY Toplam</th>
+    <th class="c">Durum</th>
+  </tr></thead><tbody>
+<tr>
+<td class="l">AKDENIZ LIDER KITAP DAGITIM LTD STI</td>
+<td class="c sm">ANTALYA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">60</td>
+<td class="n">150</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">ANTALYA ATLAS KITABEVI OZAN ERIPEK</td>
+<td class="c sm">ANTALYA</td>
+<td class="n">215</td>
+<td class="n">0</td>
+<td class="n">40</td>
+<td class="n">516</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">ANTALYA-ATLAS KITABEVI MELEKSAH ERIPEK</td>
+<td class="c sm">ANTALYA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">125</td>
+<td class="n">125</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI</td>
+<td class="c sm">ESKISEHIR</td>
+<td class="n">733</td>
+<td class="n">55</td>
+<td class="n">858</td>
+<td class="n">1,216</td>
+<td class="c"><span class="pill warn">Sarı (Orta)</span></td>
+</tr><tr>
+<td class="l">BANDIRMA KITAP KIRTASIYE GULBAHAR BAHADIR</td>
+<td class="c sm">BALIKESIR</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">222</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">BANDIRMA OGRETMEN KITABEVI UMIT OKTAY</td>
+<td class="c sm">BALIKESIR</td>
+<td class="n">460</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">BARIS KIRTASIYE-HABERAL CAMLIBOGAZ</td>
+<td class="c sm">KONYA</td>
+<td class="n">12</td>
+<td class="n">0</td>
+<td class="n">6</td>
+<td class="n">160</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">BASARIRLAR YAYIN DAGITIM AS</td>
+<td class="c sm">DENIZLI</td>
+<td class="n">218</td>
+<td class="n">0</td>
+<td class="n">130</td>
+<td class="n">451</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC.LTD.S</td>
+<td class="c sm">ANTALYA</td>
+<td class="n">240</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">CAGRI KITABEVI-ERHAN EVRAN</td>
+<td class="c sm">MANISA</td>
+<td class="n">13</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">645</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">CETIN YAYIN DAGITIM A.S</td>
+<td class="c sm">BALIKESIR</td>
+<td class="n">90</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">375</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">DKM YAYIN BASIM DAGITIM REKLAM EGITIM ÖGRETIM SANA</td>
+<td class="c sm">DENIZLI</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">30</td>
+<td class="n">30</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">EGE KITAP KIRTASIYE-DONDU YILGIN</td>
+<td class="c sm">BALIKESIR</td>
+<td class="n">53</td>
+<td class="n">0</td>
+<td class="n">50</td>
+<td class="n">204</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">EREN KITAP KIRTASIYE MUHARREM AKMAN</td>
+<td class="c sm">BILECIK</td>
+<td class="n">20</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">130</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.CIHAZLAR</td>
+<td class="c sm">MUGLA</td>
+<td class="n">205</td>
+<td class="n">0</td>
+<td class="n">150</td>
+<td class="n">357</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">GUVEN KIRTASIYE - OZAN TUNCEL</td>
+<td class="c sm">KÜTAHYA</td>
+<td class="n">1</td>
+<td class="n">0</td>
+<td class="n">10</td>
+<td class="n">25</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">HALIT KAYA (ALANYA AKADEMI KIRTASIYE)</td>
+<td class="c sm">ANTALYA</td>
+<td class="n">100</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">60</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)</td>
+<td class="c sm">KONYA</td>
+<td class="n">30</td>
+<td class="n">0</td>
+<td class="n">180</td>
+<td class="n">180</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">HILAL KITAP KIRTASIYE-HUMA CELIK</td>
+<td class="c sm">BURDUR</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">146</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN</td>
+<td class="c sm">BURDUR</td>
+<td class="n">300</td>
+<td class="n">150</td>
+<td class="n">275</td>
+<td class="n">629</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">KITAP SAATI EGITM.HIZ.TIC.LTD.STI</td>
+<td class="c sm">ANTALYA</td>
+<td class="n">3,165</td>
+<td class="n">0</td>
+<td class="n">3,160</td>
+<td class="n">8,240</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">KUMBET KIRTASIYE YAYINCILIK INS. NAK. HEDIYE ESYA </td>
+<td class="c sm">AFYONKARAHISAR</td>
+<td class="n">80</td>
+<td class="n">0</td>
+<td class="n">40</td>
+<td class="n">363</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">LIDYA KITABEVI - MUSTAFA CANDAN</td>
+<td class="c sm">MANISA</td>
+<td class="n">44</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">MEDRESE KITABEVI- DAVUT GUNDOGAN</td>
+<td class="c sm">AFYONKARAHISAR</td>
+<td class="n">64</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">MESEKAN BASIM YAYIN DAG.PAZ.KIR.TEK.TEM.SAN.TIC.LT</td>
+<td class="c sm">BURSA</td>
+<td class="n">36</td>
+<td class="n">0</td>
+<td class="n">2,460</td>
+<td class="n">3,910</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC. LTD. S</td>
+<td class="c sm">ÇANAKKALE</td>
+<td class="n">1,838</td>
+<td class="n">0</td>
+<td class="n">32</td>
+<td class="n">1,750</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">MSM KIRTASIYE - BIRGUL TIRAS</td>
+<td class="c sm">USAK</td>
+<td class="n">48</td>
+<td class="n">0</td>
+<td class="n">37</td>
+<td class="n">614</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI</td>
+<td class="c sm">MUGLA</td>
+<td class="n">817</td>
+<td class="n">0</td>
+<td class="n">562</td>
+<td class="n">810</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">MURAT AYDIN - MKM - MARMARA KULTUR MERKEZI & OKULL</td>
+<td class="c sm">BILECIK</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">12</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">NEJLA KANSU -KANSU KITABEVI</td>
+<td class="c sm">ANTALYA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">119</td>
+<td class="n">184</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">ORTACA-ERAY KITAP KIRTASIYE YAYINCILIK LTD.STI</td>
+<td class="c sm">MUGLA</td>
+<td class="n">27</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">305</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE</td>
+<td class="c sm">KONYA</td>
+<td class="n">86</td>
+<td class="n">0</td>
+<td class="n">31</td>
+<td class="n">150</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">SED-KANGURU KITAP MUSAMETTIN KUCAK</td>
+<td class="c sm">MANISA</td>
+<td class="n">360</td>
+<td class="n">0</td>
+<td class="n">325</td>
+<td class="n">1,406</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">SEMA BOZ (ATILA FOTOKOPI VE KITAP EVI)</td>
+<td class="c sm">KONYA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">110</td>
+<td class="n">190</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">SERKAN ISIK - AYRAC KITABEVI</td>
+<td class="c sm">AYDIN</td>
+<td class="n">18</td>
+<td class="n">0</td>
+<td class="n">6</td>
+<td class="n">47</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">TERCIH KITABEVI/GUROL SULUHAN</td>
+<td class="c sm">AYDIN</td>
+<td class="n">80</td>
+<td class="n">0</td>
+<td class="n">70</td>
+<td class="n">210</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">TURKER KIRTASIYE-FATIH BAS</td>
+<td class="c sm">MANISA</td>
+<td class="n">30</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">186</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">UC YILDIZ KITABEVI (IBRAHIM YILDIZ)</td>
+<td class="c sm">ISPARTA</td>
+<td class="n">194</td>
+<td class="n">0</td>
+<td class="n">47</td>
+<td class="n">461</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">UMRAN KITAP KIRTASIYE - ADEM TETIK</td>
+<td class="c sm">BURDUR</td>
+<td class="n">67</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">147</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">USAK KITAP MARKET-FATIH DULGER</td>
+<td class="c sm">USAK</td>
+<td class="n">30</td>
+<td class="n">55</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">YESIL BEYAZ YAYIN DAG(MITHAT APARCI)</td>
+<td class="c sm">KONYA</td>
+<td class="n">6,041</td>
+<td class="n">0</td>
+<td class="n">6,980</td>
+<td class="n">10,345</td>
+<td class="c"><span class="pill warn">Sarı (Orta)</span></td>
+</tr><tr>
+<td class="l">YONCE YAYIN DAGITIM KITABEVI LTD.STI</td>
+<td class="c sm">BURSA</td>
+<td class="n">14,725</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr>
+  <tr class="totr"><td class="l">TOPLAM</td><td></td>
+    <td class="n">30.440</td><td class="n">260</td><td class="n">15.893</td><td class="n">34.951</td><td></td>
+  </tr>
+  </tbody></table></div>
+</div>
+
+<div class="sec-title">Süleyman İşpınar — 3D LGS Soru Bankası · 04.06.2026</div>
+<div class="card">
+  <div class="by-header">
+    <span class="by-badge">SÜLEYMAN İŞPINAR</span>
+    <div>
+      <p class="by-title">3D LGS Soru Bankası — 1. Raporlama</p>
+      <p class="by-sub">39 bayi · BGK: 36.297 adet · GY BGK: 31.076 · Artış: +5.221 (+%16,8)</p>
+    </div>
+  </div>
+  <div class="aciklama-box">3D LGS Soru Bankaları ürün grubumuz, sahada beklenen satış performansına her geçen dönemde artan bir ivmeyle ulaşmaya devam etmektedir. Özellikle geçtiğimiz sezon sonunda bayilerimizin ürüne duyduğu güven doğrultusunda gerçekleştirdikleri yüksek stoklu alımlar, ürün grubunun sahadaki güçlü karşılığını ve sürdürülebilir talep yapısını açıkça ortaya koymuştur.
+
+Bu dönemde sisteme dahil olan yeni bayilerimizin de sürece olumlu katkı sağladığı ve sipariş girişlerini gerçekleştirerek ürünlerimizin yaygınlaşmasına destek verdiği görülmektedir. Bu durum, markamızın yeni bölgelerde de kabul görmeye başladığını ve büyüme potansiyelinin devam ettiğini göstermektedir.
+
+Liste incelendiğinde, geçen yıla göre satışları daha düşük görünen bazı bayilerimizin performansları değerlendirilirken aşağıdaki hususların dikkate alınması gerekmektedir:
+
+-Küçük ilçe bayilerimizin raflarında hâlihazırda ürün bulunması,
+-Büyük bayilerimizin depolarında geçen sezondan kalan stokların bulunması,
+-Sezon öncesi planlanan ön siparişlerin büyük ölçüde ağustos ayında çekilecek olması.
+
+Bu nedenlerle mevcut tablo, talep azalmasından ziyade siparişlerin dönemsel olarak ötelenmesinden kaynaklanmaktadır. Bayilerimizle yapılan görüşmelerde ürün grubuna yönelik ilginin ve güvenin devam ettiği açık şekilde görülmektedir.
+
+Bununla birlikte bu yıl ara sınıf ürünlerimizin de satışa sunulacak olması, 8. sınıf soru bankalarının satış performansına olumlu katkı sağlayacaktır. Özellikle tüm kademelerde aynı markayı tercih etmek isteyen kurumların tam set alımlarına yönelmesi beklenmekte olup, bu durum ürün grubunun toplam satış hacmini destekleyecektir.
+
+Önümüzdeki süreçte öğretmenlere özel yürütülecek tanıtım çalışmaları, proje okullarına gönderilecek örnek ürünler ve saha destek faaliyetleri sayesinde ürünlerimizin görünürlüğü daha da artacaktır. Bu çalışmaların hem sezon içerisindeki satış adetlerine hem de markamızın eğitim camiasındaki algısına önemli katkılar sağlaması beklenmektedir.</div>
+  <div class="scrollnote"><span class="ar">↔</span> Tabloyu yana kaydırabilirsiniz</div>
+  <div class="tscroll">
+  <table><thead><tr>
+    <th class="l">Bayi Adı</th>
+    <th class="c">İl</th>
+    <th>GY BGK</th>
+    <th>BY BGK</th>
+    <th>GY Toplam</th>
+  </tr></thead><tbody>
+<tr>
+<td class="l">ADNAN DUMAN - DUMAN KITABEVI</td>
+<td class="c sm">KIRSEHIR</td>
+<td class="n">120</td>
+<td class="n b">20</td>
+<td class="n">140</td>
+</tr><tr>
+<td class="l">ALTIN KITAP KIRTASIYE MALZ.INS.TAAH.TARIM HAYV.ZUC</td>
+<td class="c sm">KIRSEHIR</td>
+<td class="n">95</td>
+<td class="n b">60</td>
+<td class="n">140</td>
+</tr><tr>
+<td class="l">ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZARLAMA LTD</td>
+<td class="c sm">ADANA</td>
+<td class="n">0</td>
+<td class="n b">9,120</td>
+<td class="n">0</td>
+</tr><tr>
+<td class="l">ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.</td>
+<td class="c sm">HATAY</td>
+<td class="n">560</td>
+<td class="n b">830</td>
+<td class="n">1,200</td>
+</tr><tr>
+<td class="l">ASEL KITAP KIRTASIYE ASLI CEKEN</td>
+<td class="c sm">AMASYA</td>
+<td class="n">0</td>
+<td class="n b">0</td>
+<td class="n">20</td>
+</tr><tr>
+<td class="l">BEREN KIRTASIYE-SALIH ERTAN</td>
+<td class="c sm">AKSARAY</td>
+<td class="n">484</td>
+<td class="n b">844</td>
+<td class="n">704</td>
+</tr><tr>
+<td class="l">BEYAZIM KITAP EVI - SERKAN KABAAGIL</td>
+<td class="c sm">OSMANIYE</td>
+<td class="n">0</td>
+<td class="n b">63</td>
+<td class="n">0</td>
+</tr><tr>
+<td class="l">BINDEBIR KITAP KIRTASIYE LTD.STI</td>
+<td class="c sm">MERSIN</td>
+<td class="n">173</td>
+<td class="n b">1,360</td>
+<td class="n">601</td>
+</tr><tr>
+<td class="l">CAN KITAP KIRTASIYE ABDULKADIR CAN</td>
+<td class="c sm">MERSIN</td>
+<td class="n">260</td>
+<td class="n b">103</td>
+<td class="n">475</td>
+</tr><tr>
+<td class="l">CAN KITAP KIRTASIYE-AHMET YILDIRIM</td>
+<td class="c sm">YOZGAT</td>
+<td class="n">0</td>
+<td class="n b">80</td>
+<td class="n">197</td>
+</tr><tr>
+<td class="l">DEVELI YAPRAK DAGITIM DAVUT KENDIRCI</td>
+<td class="c sm">KAYSERI</td>
+<td class="n">0</td>
+<td class="n b">15</td>
+<td class="n">0</td>
+</tr><tr>
+<td class="l">DUNYA KULTUR MERKEZI IRFAN YESILNAR</td>
+<td class="c sm">AMASYA</td>
+<td class="n">0</td>
+<td class="n b">0</td>
+<td class="n">10</td>
+</tr><tr>
+<td class="l">ETHEM DEMIRBAG (ERDEM KIRTASIYE)</td>
+<td class="c sm">ADANA</td>
+<td class="n">400</td>
+<td class="n b">138</td>
+<td class="n">485</td>
+</tr><tr>
+<td class="l">EYUP ZAFER ATES - ZAFER KIRTASIYE</td>
+<td class="c sm">MERSIN</td>
+<td class="n">5</td>
+<td class="n b">10</td>
+<td class="n">92</td>
+</tr><tr>
+<td class="l">GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .</td>
+<td class="c sm">KAYSERI</td>
+<td class="n">10</td>
+<td class="n b">420</td>
+<td class="n">395</td>
+</tr><tr>
+<td class="l">GOKKUSAGI KIRTASIYE METIN SEYREKBASAN</td>
+<td class="c sm">KILIS</td>
+<td class="n">0</td>
+<td class="n b">12</td>
+<td class="n">20</td>
+</tr><tr>
+<td class="l">GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.ZUC.HED</td>
+<td class="c sm">ADANA</td>
+<td class="n">3,000</td>
+<td class="n b">563</td>
+<td class="n">3,733</td>
+</tr><tr>
+<td class="l">HILAL KIRTASIYE/SONER DEDE</td>
+<td class="c sm">ÇORUM</td>
+<td class="n">0</td>
+<td class="n b">0</td>
+<td class="n">25</td>
+</tr><tr>
+<td class="l">ISKENDERUN EMEK KITABEVI COZUM SISTEMLERI SAN TIC </td>
+<td class="c sm">HATAY</td>
+<td class="n">1,025</td>
+<td class="n b">0</td>
+<td class="n">2,232</td>
+</tr><tr>
+<td class="l">ISKENDERUN OZGUN KITAP KIRTASIYE HABIBE OZGUN</td>
+<td class="c sm">HATAY</td>
+<td class="n">0</td>
+<td class="n b">70</td>
+<td class="n">0</td>
+</tr><tr>
+<td class="l">KARANFIL KITAP KIRTASIYE UMUT GOKMEN</td>
+<td class="c sm">OSMANIYE</td>
+<td class="n">1,000</td>
+<td class="n b">220</td>
+<td class="n">1,740</td>
+</tr><tr>
+<td class="l">KILAVUZ KIRTASIYE - AYSE HAZIRLAR</td>
+<td class="c sm">HATAY</td>
+<td class="n">80</td>
+<td class="n b">80</td>
+<td class="n">115</td>
+</tr><tr>
+<td class="l">KIYAK YAY. DAG. INS. SAN. TIC. LTD. STI.</td>
+<td class="c sm">GAZIANTEP</td>
+<td class="n">800</td>
+<td class="n b">0</td>
+<td class="n">2,600</td>
+</tr><tr>
+<td class="l">KURT YAYIN DAGITIM TICARET LTD STI</td>
+<td class="c sm">HATAY</td>
+<td class="n">49</td>
+<td class="n b">48</td>
+<td class="n">140</td>
+</tr><tr>
+<td class="l">MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.</td>
+<td class="c sm">KAHRAMANMARAS</td>
+<td class="n">1,010</td>
+<td class="n b">1,500</td>
+<td class="n">2,202</td>
+</tr><tr>
+<td class="l">MAVI KITAP KIRTASIYE MEHMET ALI KUH</td>
+<td class="c sm">HATAY</td>
+<td class="n">10</td>
+<td class="n b">0</td>
+<td class="n">40</td>
+</tr><tr>
+<td class="l">MEHMET CETIN - CETIN KITAP KIRTASIYE</td>
+<td class="c sm">HATAY</td>
+<td class="n">300</td>
+<td class="n b">0</td>
+<td class="n">330</td>
+</tr><tr>
+<td class="l">MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI</td>
+<td class="c sm">MERSIN</td>
+<td class="n">3,410</td>
+<td class="n b">1,020</td>
+<td class="n">4,410</td>
+</tr><tr>
+<td class="l">MINI KITAP KIRTASIYE ALPAY ERDAL</td>
+<td class="c sm">KAHRAMANMARAS</td>
+<td class="n">0</td>
+<td class="n b">67</td>
+<td class="n">32</td>
+</tr><tr>
+<td class="l">MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTASIYE</td>
+<td class="c sm">YOZGAT</td>
+<td class="n">92</td>
+<td class="n b">0</td>
+<td class="n">330</td>
+</tr><tr>
+<td class="l">MUSTAFA DANIS - DANIS KITABEVI</td>
+<td class="c sm">KARAMAN</td>
+<td class="n">60</td>
+<td class="n b">190</td>
+<td class="n">700</td>
+</tr><tr>
+<td class="l">NEVSEHIR MY VIP - RAMAZAN SINAN OZDEMIR</td>
+<td class="c sm">NEVSEHIR</td>
+<td class="n">900</td>
+<td class="n b">0</td>
+<td class="n">1,236</td>
+</tr><tr>
+<td class="l">NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI</td>
+<td class="c sm">ÇORUM</td>
+<td class="n">120</td>
+<td class="n b">766</td>
+<td class="n">820</td>
+</tr><tr>
+<td class="l">TEBESIR KITABEVI - MEHMET ERHAN KARAHAN</td>
+<td class="c sm">GAZIANTEP</td>
+<td class="n">845</td>
+<td class="n b">50</td>
+<td class="n">990</td>
+</tr><tr>
+<td class="l">TORE KIRTASIYE TICARET VE SANAYI LTD STI</td>
+<td class="c sm">NIGDE</td>
+<td class="n">500</td>
+<td class="n b">190</td>
+<td class="n">556</td>
+</tr><tr>
+<td class="l">VIZYON PLUS KITABEVI OKKES ANIL MART</td>
+<td class="c sm">OSMANIYE</td>
+<td class="n">140</td>
+<td class="n b">0</td>
+<td class="n">620</td>
+</tr><tr>
+<td class="l">YENI CAMLIK KITAP KIRTASIYE ORHAN BALLI</td>
+<td class="c sm">OSMANIYE</td>
+<td class="n">15</td>
+<td class="n b">20</td>
+<td class="n">55</td>
+</tr><tr>
+<td class="l">ZAFERCAN KIRTASIYE -TUBA OZUDOGRU</td>
+<td class="c sm">AMASYA</td>
+<td class="n">75</td>
+<td class="n b">270</td>
+<td class="n">395</td>
+</tr><tr>
+<td class="l">Total</td>
+<td class="c sm"></td>
+<td class="n">15,538</td>
+<td class="n b">18,168</td>
+<td class="n">27,780</td>
+</tr>
+  <tr class="totr"><td class="l">TOPLAM</td><td></td>
+    <td class="n">31.076</td><td class="n">36.297</td><td class="n">55.560</td>
+  </tr>
+  </tbody></table></div>
+</div>
+
+<div class="sec-title">Süleyman İşpınar — 3D Ara Sınıf (5-6-7) Soru Bankası · 04.06.2026</div>
+<div class="card">
+  <div class="by-header">
+    <span class="by-badge" style="background:var(--green)">SÜLEYMAN — ARA SINIF</span>
+    <div>
+      <p class="by-title">3D 5-6-7. Sınıf Soru Bankası — Yeni Ürün</p>
+      <p class="by-sub">6 bayi · BGK: 6.510 adet · Geçen yıl bu ürün yoktu</p>
+    </div>
+  </div>
+  <div class="aciklama-box">3D Ara Sınıf yeni dönem ürünlerimizin B2B sisteminde tanımlanması tamamlanmış olup, konu bayilerimizle paylaşılmıştır. Sürecin başlamasıyla birlikte listede yer alan bazı bayilerimiz sipariş girişlerini gerçekleştirmiştir.
+
+Sipariş girişlerinin henüz tüm bayilerimiz tarafından tamamlanmamış olmasının temel nedeni, ara sınıflarda yeniden gerçekleştirilen müfredat değişikliği nedeniyle bayilerimizin temkinli hareket etmesidir. Bayilerimiz ürünlerimizin güncel müfredata uygun olarak hazırlandığını bilmelerine rağmen, yeni müfredatın sahadaki etkilerini görmek istemeleri sebebiyle sipariş kararlarını kontrollü şekilde vermektedirler. 
+
+Gerçekleştirilen bayi ziyaretlerinde ve görüşmelerde, ürünlerimizin güncel müfredat uyumluluğu detaylı şekilde anlatılmakta, süreç hakkında gerekli bilgilendirmeler yapılmakta ve sipariş girişlerinin hızlandırılması sağlanmaktadır. Devam eden saha çalışmaları neticesinde ay sonuna kadar tüm bayilerimizin sipariş girişlerini tamamlaması beklenmektedir.
+
+Ürünlerimizin depolara giriş yapmasının ardından oluşacak saha geri bildirimleri, kurum ve öğrenci talepleri ile sipariş gelişimleri sonraki raporlama dönemlerinde ayrıca değerlendirilecektir.
+
+Bayilerimizle yapılan görüşmelerde, yeni çıkacak ara sınıf ürünlerimizin sahada güçlü bir karşılık bulacağına dair olumlu görüşler alınmıştır. Özellikle 8. sınıf ürün grubunda elde edilen başarı ve marka algısının ara sınıf ürünlerine de yansıyacağı yönünde ortak bir kanaat oluştuğu gözlemlenmiştir.</div>
+  <div class="tscroll">
+  <table><thead><tr>
+    <th class="l">Bayi Adı</th>
+    <th class="c">İl</th>
+    <th>BY Adet</th>
+  </tr></thead><tbody>
+<tr>
+<td class="l">KARANFIL KITAP KIRTASIYE UMUT GOKMEN</td>
+<td class="c sm">OSMANIYE</td>
+<td class="n b good">320</td>
+</tr><tr>
+<td class="l">KILAVUZ KIRTASIYE - AYSE HAZIRLAR</td>
+<td class="c sm">HATAY</td>
+<td class="n b good">70</td>
+</tr><tr>
+<td class="l">KIYAK YAY. DAG. INS. SAN. TIC. LTD. STI.</td>
+<td class="c sm">GAZIANTEP</td>
+<td class="n b good">5,600</td>
+</tr><tr>
+<td class="l">MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.</td>
+<td class="c sm">KAHRAMANMARAS</td>
+<td class="n b good">70</td>
+</tr><tr>
+<td class="l">MEHMET CETIN - CETIN KITAP KIRTASIYE</td>
+<td class="c sm">HATAY</td>
+<td class="n b good">290</td>
+</tr><tr>
+<td class="l">MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI</td>
+<td class="c sm">MERSIN</td>
+<td class="n b good">160</td>
+</tr>
+  <tr class="totr"><td class="l">TOPLAM</td><td></td><td class="n">6.510</td></tr>
+  </tbody></table></div>
+</div>
+
+<div class="sec-title">Vedat Adsan — 3D Ortaokul 5-6-7-8. Sınıf SB · 04.06.2026</div>
+<div class="card">
+  <div class="by-header">
+    <span class="by-badge">VEDAT ADSAN</span>
+    <div>
+      <p class="by-title">3D Ortaokul 5-6-7-8. Sınıf Soru Bankası — 1. Raporlama</p>
+      <p class="by-sub">35 bayi · BGK: 12.229 adet · GY BGK: 7.872 · Artış: +4.357 (+%55,4)</p>
+    </div>
+  </div>
+  <div class="aciklama-box">Bölgemizde faaliyet gösteren 37 adet 3D Ortaokul bayisinin 36’sı, 5-6-7. sınıf soru bankaları için ön sipariş girişlerini tamamlamıştır. Geçtiğimiz yıl aynı dönemde yalnızca 8. sınıf ürünlerinin bulunması nedeniyle toplam 8.032 adet satış gerçekleşirken, bu yıl mevcut 8. sınıf ürünlerine ek olarak yeni çıkan 5-6-7. sınıf soru bankalarının da siparişe açılmasıyla ön sipariş adedi 13.959’a ulaşmıştır. Bu durum geçen yılın aynı dönemine göre önemli bir büyüme potansiyeline işaret etmektedir.
+Kurum görüşmeleri ve anlaşma süreçleri halen devam etmekte olup, yeni eğitim öğretim döneminde devlet okullarının açılmasıyla birlikte 5-6-7-8. sınıf ürünlerinin tanıtım ve satış faaliyetleri yoğunlaştırılacaktır. Bayi ziyaretleri, öğretmen tanıtımları ve kurum çalışmaları artırılarak mevcut siparişlerin büyütülmesi ve satış adetlerinin daha da yukarı taşınması hedeflenmektedir.</div>
+  <div class="scrollnote"><span class="ar">↔</span> Tabloyu yana kaydırabilirsiniz</div>
+  <div class="tscroll">
+  <table><thead><tr>
+    <th class="l">Bayi Adı</th>
+    <th class="c">İl</th>
+    <th>5. Sınıf</th>
+    <th>6. Sınıf</th>
+    <th>7. Sınıf</th>
+    <th>8. Sınıf</th>
+    <th>GY BGK</th>
+    <th>BY Toplam</th>
+    <th>GY Toplam</th>
+    <th class="c">Durum</th>
+  </tr></thead><tbody>
+<tr>
+<td class="l">AKSU KIRTASIYE - AZIZ AKSU</td>
+<td class="c sm">HAKKARI</td>
+<td class="n">30</td>
+<td class="n">25</td>
+<td class="n">25</td>
+<td class="n">30</td>
+<td class="n">0</td>
+<td class="n b ">110</td>
+<td class="n">140</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">ARDAHAN BILIM KIRTASIYE ERCAN ERDINC TIRPANCI</td>
+<td class="c sm">ARDAHAN</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n b ">0</td>
+<td class="n">20</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">AY KIRTASIYE KITAP TEK.TEM.INS.MOB. SAN.TIC.LTD.ST</td>
+<td class="c sm">AGRI</td>
+<td class="n">39</td>
+<td class="n">34</td>
+<td class="n">45</td>
+<td class="n">305</td>
+<td class="n">20</td>
+<td class="n b good">423</td>
+<td class="n">808</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">BILIM KITABEVI SEYIT ATES</td>
+<td class="c sm">SANLIURFA</td>
+<td class="n">36</td>
+<td class="n">30</td>
+<td class="n">30</td>
+<td class="n">98</td>
+<td class="n">0</td>
+<td class="n b ">194</td>
+<td class="n">729</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">BKM BATMAN KITAP MERKEZI KIRTASIYE</td>
+<td class="c sm">BATMAN</td>
+<td class="n">180</td>
+<td class="n">150</td>
+<td class="n">150</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n b ">480</td>
+<td class="n">600</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">DENAS LOJISTIK PETROL INSAAT</td>
+<td class="c sm">SIRNAK</td>
+<td class="n">36</td>
+<td class="n">30</td>
+<td class="n">30</td>
+<td class="n">80</td>
+<td class="n">0</td>
+<td class="n b ">176</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">DOGUBAYAZIT SERHAT KITAPEVI SERHAT CELIK</td>
+<td class="c sm">AGRI</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">70</td>
+<td class="n">0</td>
+<td class="n b ">70</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">DORUK SANAYI VE TICARET LIMITED SIRKETI</td>
+<td class="c sm">MARDIN</td>
+<td class="n">60</td>
+<td class="n">50</td>
+<td class="n">50</td>
+<td class="n">160</td>
+<td class="n">25</td>
+<td class="n b good">320</td>
+<td class="n">94</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">ELAZIG ANKA KITAP KIRTASIYE - CAHIT AYHAN</td>
+<td class="c sm">ELAZIG</td>
+<td class="n">360</td>
+<td class="n">300</td>
+<td class="n">300</td>
+<td class="n">485</td>
+<td class="n">1,200</td>
+<td class="n b good">1,445</td>
+<td class="n">1,350</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ</td>
+<td class="c sm">GÜMÜSHANE</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">74</td>
+<td class="n">0</td>
+<td class="n b ">74</td>
+<td class="n">14</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">GUNEYDOGU TELEKOMUNASYON</td>
+<td class="c sm">SIRNAK</td>
+<td class="n">60</td>
+<td class="n">50</td>
+<td class="n">50</td>
+<td class="n">0</td>
+<td class="n">60</td>
+<td class="n b good">160</td>
+<td class="n">791</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">GUZEL OZEL EGT KIRT INS SAN TIC LTD STI</td>
+<td class="c sm">DIYARBAKIR</td>
+<td class="n">165</td>
+<td class="n">150</td>
+<td class="n">165</td>
+<td class="n">20</td>
+<td class="n">18</td>
+<td class="n b good">500</td>
+<td class="n">111</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">HEDEF KIRTASIYE-ZAFER YAVUZER</td>
+<td class="c sm">VAN</td>
+<td class="n">300</td>
+<td class="n">250</td>
+<td class="n">250</td>
+<td class="n">0</td>
+<td class="n">5,930</td>
+<td class="n b bad">800</td>
+<td class="n">6,000</td>
+<td class="c"><span class="pill risk">Kırmızı (Düşük)</span></td>
+</tr><tr>
+<td class="l">IGDIR KULTUR KITAP KIRTASIYE-MEHMET NURI YIGIT</td>
+<td class="c sm">IGDIR</td>
+<td class="n">120</td>
+<td class="n">100</td>
+<td class="n">100</td>
+<td class="n">210</td>
+<td class="n">60</td>
+<td class="n b good">530</td>
+<td class="n">170</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">KOMMAGENE KITAP DEPOSU RAHIME BILGIC</td>
+<td class="c sm">ADIYAMAN</td>
+<td class="n">120</td>
+<td class="n">100</td>
+<td class="n">100</td>
+<td class="n">360</td>
+<td class="n">0</td>
+<td class="n b ">680</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)</td>
+<td class="c sm">BAYBURT</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n b ">0</td>
+<td class="n">34</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI</td>
+<td class="c sm">MARDIN</td>
+<td class="n">36</td>
+<td class="n">30</td>
+<td class="n">30</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n b ">96</td>
+<td class="n">100</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">MIDYAT BARIS KIRTASIYE BESIR ULUG</td>
+<td class="c sm">MARDIN</td>
+<td class="n">18</td>
+<td class="n">15</td>
+<td class="n">15</td>
+<td class="n">78</td>
+<td class="n">19</td>
+<td class="n b good">126</td>
+<td class="n">27</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">NAYIF AYDEMIR (VAROL KIRTASIYE)</td>
+<td class="c sm">BITLIS</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">1,010</td>
+<td class="n">85</td>
+<td class="n b good">1,010</td>
+<td class="n">395</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">NURULLAH OLCAN KITABEVI</td>
+<td class="c sm">SIRNAK</td>
+<td class="n">36</td>
+<td class="n">30</td>
+<td class="n">30</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n b ">96</td>
+<td class="n">190</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">OKURKENT KIRTASIYE GIYASETTIN DEMIR</td>
+<td class="c sm">MUS</td>
+<td class="n">60</td>
+<td class="n">50</td>
+<td class="n">50</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n b ">160</td>
+<td class="n">104</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">OZCELIK KIRTASIYE MUHAMMED OZCELIK</td>
+<td class="c sm">SANLIURFA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">390</td>
+<td class="n">0</td>
+<td class="n b ">390</td>
+<td class="n">0</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA LTD STI</td>
+<td class="c sm">KARS</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">225</td>
+<td class="n">40</td>
+<td class="n b ">225</td>
+<td class="n">226</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">POZITIF BASKI HIZMETLERI KITAP KIRTASIYE</td>
+<td class="c sm">ERZURUM</td>
+<td class="n">180</td>
+<td class="n">150</td>
+<td class="n">250</td>
+<td class="n">356</td>
+<td class="n">90</td>
+<td class="n b ">936</td>
+<td class="n">1,875</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">POZITIF BOLGE YAYIN DAGITIM EGITIM</td>
+<td class="c sm">DIYARBAKIR</td>
+<td class="n">180</td>
+<td class="n">150</td>
+<td class="n">150</td>
+<td class="n">313</td>
+<td class="n">0</td>
+<td class="n b ">793</td>
+<td class="n">1,412</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">SAH KIRTASIYE MINE BENZER</td>
+<td class="c sm">SANLIURFA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">85</td>
+<td class="n">0</td>
+<td class="n b ">85</td>
+<td class="n">15</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">SAMI YILDIRIM VE ORTAKLIGI (GENC CARSI KITAP KIRTA</td>
+<td class="c sm">ERZINCAN</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">67</td>
+<td class="n">80</td>
+<td class="n b ">67</td>
+<td class="n">254</td>
+<td class="c"><span class="pill warn">Sarı (Orta)</span></td>
+</tr><tr>
+<td class="l">SEBIL KIRTASIYE-UZEYIR AKCELIK</td>
+<td class="c sm">BITLIS</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">30</td>
+<td class="n">0</td>
+<td class="n b ">30</td>
+<td class="n">100</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">SEDAT KIRTASIYE (ABUBEKIR YUCEL)</td>
+<td class="c sm">SANLIURFA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">114</td>
+<td class="n">0</td>
+<td class="n b ">114</td>
+<td class="n">300</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">SIIRT ARI KITAPEVI  ALI KURT</td>
+<td class="c sm">SIIRT</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">50</td>
+<td class="n">60</td>
+<td class="n b ">50</td>
+<td class="n">336</td>
+<td class="c"><span class="pill warn">Sarı (Orta)</span></td>
+</tr><tr>
+<td class="l">SIVEREK AKADEMI KITAP KIRTASIYE BILGISAYAR</td>
+<td class="c sm">SANLIURFA</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">25</td>
+<td class="n">0</td>
+<td class="n b ">25</td>
+<td class="n">1,500</td>
+<td class="c"><span class="pill ">—</span></td>
+</tr><tr>
+<td class="l">TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.</td>
+<td class="c sm">MARDIN</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">0</td>
+<td class="n">920</td>
+<td class="n">70</td>
+<td class="n b good">920</td>
+<td class="n">580</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">TEBLIG KIRTASIYE TEKS. TAS. TUR. SAN. VE. TIC. LTD</td>
+<td class="c sm">DIYARBAKIR</td>
+<td class="n">36</td>
+<td class="n">30</td>
+<td class="n">30</td>
+<td class="n">0</td>
+<td class="n">40</td>
+<td class="n b good">96</td>
+<td class="n">440</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">UCAR DAGITIM PAZARLAMA ITH IHR TIC SAN LTD STI</td>
+<td class="c sm">MARDIN</td>
+<td class="n">120</td>
+<td class="n">100</td>
+<td class="n">100</td>
+<td class="n">288</td>
+<td class="n">10</td>
+<td class="n b good">608</td>
+<td class="n">915</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr><tr>
+<td class="l">UMUT KIRTASIYE-MEHMET ALI CEYHAN</td>
+<td class="c sm">DIYARBAKIR</td>
+<td class="n">120</td>
+<td class="n">100</td>
+<td class="n">100</td>
+<td class="n">120</td>
+<td class="n">65</td>
+<td class="n b good">440</td>
+<td class="n">120</td>
+<td class="c"><span class="pill ok">Yeşil (İyi)</span></td>
+</tr>
+  <tr class="totr"><td class="l">TOPLAM</td><td></td>
+    <td class="n">2.352</td><td class="n">1.974</td><td class="n">2.100</td><td class="n">5.803</td>
+    <td class="n">7.872</td><td class="n">12.229</td><td class="n">19.750</td><td></td>
+  </tr>
+  </tbody></table></div>
+</div>
+
+<footer>
+ÇÖZÜM Yayın Grubu — 3D Ortaokul SB 1. Raporlama · Haziran 2026<br>
+Kaynak: Power BI Ürün Raporu · 4 BY Excel dosyası (04–05.06.2026) · KPI: Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function toggleTheme(){
+  var h=document.documentElement, d=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',d?'light':'dark');
+  document.getElementById('tg').textContent=d?'🌙 Koyu tema':'☀️ Açık tema';
+  try{localStorage.setItem('bp_theme',d?'light':'dark')}catch(e){}
+  setTimeout(renderCharts,30);
+}
+(function(){try{var t=localStorage.getItem('bp_theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('tg').textContent='☀️ Açık tema';}}catch(e){}})();
+
+function toggleView(){
+  var b=document.body, m=b.classList.toggle('mview');
+  document.getElementById('vw').textContent=m?'🖥 Web görünüm':'📱 Mobil görünüm';
+  try{localStorage.setItem('bp_view',m?'mobile':'web');}catch(e){}
+  setTimeout(function(){try{renderCharts();}catch(e){}},70);
+}
+(function(){try{if(localStorage.getItem('bp_view')==='mobile'){document.body.classList.add('mview');document.getElementById('vw').textContent='🖥 Web görünüm';}}catch(e){}})();
+
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+var _charts={};
+function mk(id,cfg){
+  var el=document.getElementById(id); if(!el) return;
+  try{if(_charts[id])_charts[id].destroy(); _charts[id]=new Chart(el.getContext('2d'),cfg);}
+  catch(e){console.error(id,e);}
+}
+function renderCharts(){
+  var mut=cssv('--muted'), grid=cssv('--border'), green=cssv('--green'), accent=cssv('--accent');
+  Chart.defaults.font.family='Arial,sans-serif';
+  Chart.defaults.color=mut;
+
+  mk('chBY',{type:'bar',data:{
+    labels:['İsa (8.Sınıf)','Muhsin (8.Sınıf)','Süleyman (LGS)','Vedat (5-8.Sınıf)'],
+    datasets:[
+      {label:'Geçen Yıl BGK',data:[5339,15893,31076,7872],backgroundColor:mut,borderRadius:5,barPercentage:0.65},
+      {label:'Bu Yıl BGK',data:[6884,30440,36297,12229],backgroundColor:green,borderRadius:5,barPercentage:0.65}
+    ]},
+    options:{animation:false,maintainAspectRatio:false,
+      plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},
+      scales:{y:{beginAtZero:true,grid:{color:grid},ticks:{callback:function(v){return (v/1000).toFixed(0)+'K';}}},x:{grid:{display:false}}}}
+  });
+
+  mk('chGrowth',{type:'bar',data:{
+    labels:['İsa','Muhsin','Süleyman LGS','Süleyman Ara*','Vedat'],
+    datasets:[{
+      label:'Büyüme %',
+      data:[28.9,91.5,16.8,null,55.4],
+      backgroundColor:[green,accent,green,cssv('--zayif'),green],
+      borderRadius:6
+    }]},
+    options:{animation:false,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw!==null?'+%'+c.raw:'Yeni ürün';}}}},
+      scales:{y:{beginAtZero:true,grid:{color:grid},ticks:{callback:function(v){return '%'+v;}}},x:{grid:{display:false}}}}
+  });
+}
+
+function markScrollables(){
+  document.querySelectorAll('.tscroll').forEach(function(el){
+    var sc=el.scrollWidth>el.clientWidth+4;
+    var prev=el.previousElementSibling;
+    var has=prev&&prev.classList&&prev.classList.contains('scrollnote');
+    if(sc&&!has){var d=document.createElement('div');d.className='scrollnote';d.innerHTML='<span class="ar">↔</span> Tabloyu yana kaydırabilirsiniz';el.parentNode.insertBefore(d,el);}
+    else if(has){prev.style.display=sc?'flex':'none';}
+  });
+}
+
+function tryInit(){
+  if(typeof Chart!=='undefined'){renderCharts();markScrollables();return;}
+  var n=0,i=setInterval(function(){n++;
+    if(typeof Chart!=='undefined'){clearInterval(i);renderCharts();markScrollables();}
+    else if(n>50){clearInterval(i);}
+  },100);
+}
+var _rsz;window.addEventListener('resize',function(){clearTimeout(_rsz);_rsz=setTimeout(function(){try{renderCharts();}catch(e){}try{markScrollables();}catch(e){}},180);});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tryInit);else tryInit();
+</script>
+</body></html>
