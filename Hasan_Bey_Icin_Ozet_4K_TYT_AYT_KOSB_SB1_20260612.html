@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasan Bey İçin Özet Rapor — 4K TYT-AYT KOSB SB1</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F5F4F0;
+    color: #1C1C1C;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .top-band {
+    background: #C00000;
+    color: #fff;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .top-band .label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.85;
+  }
+  .top-band h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+  .top-band .meta {
+    font-size: 12px;
+    opacity: 0.8;
+    text-align: right;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+  .section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    color: #C00000;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ozet-text { font-size: 15.5px; line-height: 1.75; color: #2a2a2a; }
+  .ozet-text p { margin-bottom: 10px; }
+  .ozet-text p:last-child { margin-bottom: 0; }
+
+  .metrik-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .metrik-kart {
+    background: #F5F4F0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-top: 3px solid #ccc;
+  }
+  .metrik-kart.iyi { border-top-color: #2f9d5b; }
+  .metrik-kart.dusus { border-top-color: #C00000; }
+  .metrik-kart.nort { border-top-color: #e0853c; }
+  .metrik-kart .mk-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #777; margin-bottom: 6px; }
+  .metrik-kart .mk-val { font-family: 'DM Serif Display', serif; font-size: 26px; color: #1C1C1C; line-height: 1.1; }
+  .metrik-kart .mk-sub { font-size: 12px; margin-top: 4px; }
+  .mk-sub.up { color: #2f9d5b; font-weight: 600; }
+  .mk-sub.dn { color: #C00000; font-weight: 600; }
+  .mk-sub.nt { color: #e0853c; font-weight: 600; }
+
+  .bulgu-liste { list-style: none; padding: 0; }
+  .bulgu-liste li { padding: 9px 0; border-bottom: 1px solid #eee; font-size: 14.5px; display: flex; gap: 10px; align-items: flex-start; }
+  .bulgu-liste li:last-child { border-bottom: none; }
+  .bulgu-liste li .bicon { font-size: 16px; flex-shrink: 0; }
+
+  .red-flag-item {
+    border-left: 4px solid #C00000;
+    background: #FFF5F5;
+    border-radius: 0 8px 8px 0;
+    padding: 13px 18px;
+    margin-bottom: 12px;
+    font-size: 14.5px;
+  }
+  .red-flag-item:last-child { margin-bottom: 0; }
+  .red-flag-item strong { color: #C00000; }
+
+  .soru-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 14.5px; }
+  .soru-item:last-child { border-bottom: none; }
+  .soru-no { background: #C00000; color: #fff; font-weight: 700; font-size: 13px; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+  .aksiyon-item { background: #F5F4F0; border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; font-size: 14.5px; display: flex; gap: 12px; align-items: flex-start; }
+  .aksiyon-item:last-child { margin-bottom: 0; }
+  .aksiyon-item .a-icon { font-size: 18px; flex-shrink: 0; }
+  .aksiyon-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 700; }
+  .tag.sahip { background: #e8f5ec; color: #1f7a40; }
+  .tag.tarih { background: #fff0e5; color: #b85c00; }
+
+  .gs-notu { border-left: 4px solid #C00000; background: #FFF5F5; border-radius: 0 8px 8px 0; padding: 16px 20px; font-style: italic; color: #3a3a3a; font-size: 14.5px; line-height: 1.75; }
+
+  footer { text-align: center; font-size: 11.5px; color: #999; padding: 20px 0 40px; }
+
+  @media(max-width: 600px) {
+    .metrik-grid { grid-template-columns: 1fr 1fr; }
+    .top-band { padding: 14px 20px; }
+    .container { padding: 24px 14px 40px; }
+    .section { padding: 20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-band">
+  <div>
+    <div class="label">İcra Kurulu Genel Sekreteri Çalışması</div>
+    <h1>Hasan Bey İçin Özet Rapor</h1>
+  </div>
+  <div class="meta">
+    4K TYT-AYT KOSB · 1. Raporlama<br>
+    12 Haziran 2026
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1. 3 Cümlede Özet -->
+  <div class="section">
+    <div class="section-title">📋 3 Cümlede Özet</div>
+    <div class="ozet-text">
+      <p>4K TYT-AYT Konu Özeti Soru Bankası'nda 3 bölge yöneticisinin 10 Haziran itibarıyla toplam satışı <strong>82.150 adet</strong> olup geçen yılın aynı dönemine göre <strong>%3.2 geride</strong> seyretmektedir.</p>
+      <p>Muhsin ve Süleyman bölgelerindeki düşüşün büyük bölümü <strong>2-3 kilit bayinin dönemsel sipariş gecikmesinden</strong> kaynaklanmakta; Vedat bölgesi düşük bir tabandan toparlamış olmakla birlikte mutlak rakamda <strong>hâlâ 3 BY'nin en küçük portföyü</strong> konumundadır ve büyümesinin neredeyse tamamı yalnızca 2 bayiye dayanmaktadır.</p>
+      <p>Haziran sonu ve Temmuz-Ağustos'ta beklenen kurum siparişlerinin sisteme girmesiyle farkın kapanması öngörülmektedir; ancak bu projeksiyon <strong>henüz sisteme yansımamış rakamlara dayanmakta</strong> olup doğrulama gerektirmektedir.</p>
+    </div>
+  </div>
+
+  <!-- 2. Ana Bulgular -->
+  <div class="section">
+    <div class="section-title">📊 Ana Bulgular</div>
+    <div class="metrik-grid">
+      <div class="metrik-kart dusus">
+        <div class="mk-label">Muhsin Özbalcı</div>
+        <div class="mk-val">21.858</div>
+        <div class="mk-sub dn">GY: 33.455 · −34.7%</div>
+      </div>
+      <div class="metrik-kart nort">
+        <div class="mk-label">Vedat Adsan</div>
+        <div class="mk-val">16.274</div>
+        <div class="mk-sub nt">GY: 1.766 · +821.5% (düşük taban)</div>
+      </div>
+      <div class="metrik-kart dusus">
+        <div class="mk-label">Süleyman İşpınar</div>
+        <div class="mk-val">44.018</div>
+        <div class="mk-sub dn">GY: 49.618 · −11.3%</div>
+      </div>
+    </div>
+    <ul class="bulgu-liste">
+      <li><span class="bicon">🔵</span><span>3 BY toplamı <strong>82.150 adet</strong> (GY: 84.839) — toplam fark yalnızca <strong>2.689 adet</strong>; ancak 3 bölgenin tamamı geçen yılın gerisinde ya da yeni taban üzerinde.</span></li>
+      <li><span class="bicon">📍</span><span>Muhsin bölgesindeki 11.597 adetlik farkın <strong>~15.750 adeti tek bayiden</strong> (Yönce Dağıtım, Bursa) geliyor; geçen yıl yeni bayilik açılışında toplu çekim yapılmıştı.</span></li>
+      <li><span class="bicon">📍</span><span>Vedat bölgesi geçen yıl fiilen sıfıra yakındı (1.766 adet) — bu yıl 16.274'e gelmiş. Toparlanma gerçek ancak büyümenin <strong>tamamına yakını 2 bayi</strong>: Doruk/Mardin (7.315) + Bilim/Şanlıurfa (3.200).</span></li>
+      <li><span class="bicon">📍</span><span>Süleyman bölgesinde bayiler "müfredat değişikliğine hazırlık" gerekçesiyle ihtiyaç kadar sipariş veriyor; tedbir stoku artık yok.</span></li>
+      <li><span class="bicon">⏳</span><span>Tüm 3 BY Haziran–Temmuz–Ağustos'ta <strong>kurum siparişlerinin netleşeceğini</strong> belirtiyor; rakamlar henüz sisteme yansımadı.</span></li>
+    </ul>
+  </div>
+
+  <!-- 3. Red Flags -->
+  <div class="section">
+    <div class="section-title">🚩 Red Flags</div>
+    <div class="red-flag-item">
+      <strong>Projeksiyon doğrulaması yok.</strong> Tüm BY'lar "Haziran–Ağustos'ta siparişler gelecek" diyor; ancak beklenen adetler henüz sisteme girilmemiş. Projeksiyon yazıya dayalı, rakama dayalı değil.
+    </div>
+    <div class="red-flag-item">
+      <strong>Yönce Dağıtım (Bursa) riski.</strong> Geçen yıl 16.650 adet çeken bayi bu yıl yalnızca 900 adette. BY "Haziran içinde kurum siparişlerini gireceğini söyledi" diyor — ancak yazılı teyit veya sistem girişi henüz mevcut değil.
+    </div>
+    <div class="red-flag-item">
+      <strong>Vedat büyümesi 2 bayiye bağımlı.</strong> +%821 büyümenin neredeyse tamamı Doruk (Mardin) ve Bilim (Şanlıurfa) bayilerinden geliyor; geçen yıl ikisi de sıfırdaydı. Portföy derinliği henüz oluşmamış.
+    </div>
+    <div class="red-flag-item">
+      <strong>Müfredat değişikliğinin satış tavanına etkisi belirsiz.</strong> Bayiler değişimi gerekçe göstererek tedbir stoku yapmıyor; bu hem düşük sipariş riskini hem de olası tükenmez durumu barındırıyor.
+    </div>
+  </div>
+
+  <!-- 4. Hasan Bey'in 3 Sorusu -->
+  <div class="section">
+    <div class="section-title">❓ Hasan Bey'in 3 Sorusu</div>
+    <div class="soru-item">
+      <div class="soru-no">1</div>
+      <div>"Haziran sonunda kurum siparişleri gelirse kaç adete ulaşacağız — BY'ların ortak tahmini nedir ve bu tahmin neye dayalı?"</div>
+    </div>
+    <div class="soru-item">
+      <div class="soru-no">2</div>
+      <div>"Yönce Dağıtım'ın siparişi Haziran içinde gelmezse senaryomuz ne — bunu 2. raporlamada nasıl takip ediyoruz?"</div>
+    </div>
+    <div class="soru-item">
+      <div class="soru-no">3</div>
+      <div>"Vedat bölgesi rakam olarak hâlâ en küçük portföy; büyüme eğilimi devam edecek mi yoksa bu yıla özgü bir durum mu?"</div>
+    </div>
+  </div>
+
+  <!-- 5. Önerilen Aksiyon -->
+  <div class="section">
+    <div class="section-title">🎯 Önerilen Aksiyon</div>
+    <div class="aksiyon-item">
+      <div class="a-icon">1️⃣</div>
+      <div>
+        <div>Yönce Dağıtım (Bursa) ve Sed-Kanguru (Manisa) için BY Muhsin'den <strong>yazılı kurum taahhüt tablosu</strong> talep edilsin — "söz verdi" yerine sisteme giriş veya imzalı liste.</div>
+        <div class="aksiyon-meta">
+          <span class="tag sahip">Sahip: BY Muhsin / GS takip</span>
+          <span class="tag tarih">Tarih: 20 Haziran 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="aksiyon-item">
+      <div class="a-icon">2️⃣</div>
+      <div>
+        <div>3 BY'dan <strong>tahmini Haziran–Ağustos sipariş projeksiyonu</strong> (adet bazlı, bayi bazlı) toplanarak 2. raporlamaya konsolide edilsin; "siparişler gelecek" ifadesi rakama dönüştürülsün.</div>
+        <div class="aksiyon-meta">
+          <span class="tag sahip">Sahip: Satış Planlama / GS koordinasyon</span>
+          <span class="tag tarih">Tarih: 25 Haziran 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="aksiyon-item">
+      <div class="a-icon">3️⃣</div>
+      <div>
+        <div>Vedat bölgesinde Doruk ve Bilim bayilerindeki büyümenin <strong>sürdürülebilirliği</strong> değerlendirilsin — geçen yıl sıfır olmaları, bu yılki siparişin tek seferlik mi yoksa portföy genişlemesinin başlangıcı mı olduğunu netleştiriyor.</div>
+        <div class="aksiyon-meta">
+          <span class="tag sahip">Sahip: BY Vedat</span>
+          <span class="tag tarih">Tarih: 2. Raporlama öncesi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. GS Notu -->
+  <div class="section">
+    <div class="section-title">📝 GS Notu</div>
+    <div class="gs-notu">
+      Toplamda %-3.2 olan fark makul görünüyor ve BY açıklamaları teknik olarak tutarlı; ancak tüm iyimser projeksiyonun sisteme yansımayan siparişlere dayanması, Hasan Bey'in "bu bizi nereye götürür" sorusunu şu an yanıtlanamaz kılıyor. Vedat bölgesinin toparlanması olumlu bir sinyal olmakla birlikte, düşük tabandan gelen yüzdesel büyümenin 3 BY karşılaştırmasında ayrıca belirtilmesi gerekiyor. 2. raporlamayı beklemeden Yönce + Sed-Kanguru + Balıkesir YDS Eğitim'in yazılı taahhütleri alınırsa Haziran sonu fotoğrafı çok daha net okunur.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Çözüm Yayın Grubu · İcra Kurulu Genel Sekreteri Çalışması · 4K TYT-AYT KOSB 1. Raporlama · Haziran 2026<br>
+  Kaynak: Power BI Ürün Raporu · 3 BY Excel dosyası · 10.06.2026
+</footer>
+
+</body>
+</html>
