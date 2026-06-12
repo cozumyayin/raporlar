@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasan Bey İçin Özet Rapor – MSÜ Deneme Memnuniyet Anketi</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    background: #F5F4F0;
+    color: #1A1A1A;
+    min-height: 100vh;
+  }
+
+  /* ── ÜST BANT ── */
+  .top-band {
+    background: #C00000;
+    padding: 28px 48px 24px;
+  }
+  .top-band .label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+    margin-bottom: 6px;
+  }
+  .top-band h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .top-band .meta {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* ── ANA KAPSAYICI ── */
+  .container {
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 24px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ── KART ── */
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px 32px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    color: #1A1A1A;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── 3 CÜMLEDE ÖZET ── */
+  .ozet-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: #333;
+  }
+
+  /* ── METRİK KARTLAR ── */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .metric-box {
+    background: #FAF9F7;
+    border: 1px solid #ECEAE4;
+    border-radius: 8px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .metric-box .val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: #C00000;
+    line-height: 1;
+  }
+  .metric-box .desc {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .bulgu-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .bulgu-list li {
+    font-size: 14.5px;
+    color: #333;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .bulgu-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #C00000;
+    font-size: 13px;
+  }
+
+  /* ── RED FLAG ── */
+  .red-flag-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .red-flag-list li {
+    border-left: 3px solid #C00000;
+    padding: 10px 14px;
+    background: #FEF6F6;
+    border-radius: 0 6px 6px 0;
+    font-size: 14.5px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .red-flag-list li strong {
+    color: #C00000;
+    font-weight: 600;
+  }
+
+  /* ── HASAN BEY'İN SORULARI ── */
+  .soru-list {
+    list-style: none;
+    counter-reset: soru;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .soru-list li {
+    counter-increment: soru;
+    display: flex;
+    gap: 14px;
+    font-size: 14.5px;
+    color: #333;
+    line-height: 1.6;
+  }
+  .soru-list li::before {
+    content: counter(soru);
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    background: #C00000;
+    color: #fff;
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* ── AKSİYON ── */
+  .aksiyon-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .aksiyon-table thead tr {
+    background: #F0ECEC;
+  }
+  .aksiyon-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: #555;
+    text-transform: uppercase;
+  }
+  .aksiyon-table td {
+    padding: 11px 14px;
+    vertical-align: top;
+    border-bottom: 1px solid #F0ECEC;
+    line-height: 1.5;
+    color: #333;
+  }
+  .aksiyon-table tr:last-child td { border-bottom: none; }
+  .aksiyon-table .sahip {
+    font-weight: 600;
+    color: #C00000;
+    white-space: nowrap;
+  }
+  .aksiyon-table .tarih {
+    white-space: nowrap;
+    font-size: 13px;
+    color: #666;
+  }
+  .aksiyon-table .oncelik {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .oncelik.yuksek { background: #FDECEC; color: #C00000; }
+  .oncelik.orta   { background: #FDF4E3; color: #B07800; }
+
+  /* ── GS NOTU ── */
+  .gs-notu {
+    border-left: 3px solid #C00000;
+    padding: 14px 18px;
+    background: #FEF6F6;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    font-size: 14px;
+    color: #444;
+    line-height: 1.65;
+  }
+  .gs-notu strong { color: #C00000; font-style: normal; }
+
+  /* ── ALT BİLGİ ── */
+  .footer {
+    text-align: center;
+    font-size: 11.5px;
+    color: #AAA;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ÜST BANT -->
+<div class="top-band">
+  <div class="label">İcra Kurulu Genel Sekreteri Çalışması</div>
+  <h1>Hasan Bey İçin Özet Rapor</h1>
+  <div class="meta">Konu: MSÜ Prova Deneme Sınavı Sonrası Memnuniyet Anketi &nbsp;|&nbsp; Hazırlayan: 4K Süreç Yönetmeni Büşra Kurt &nbsp;|&nbsp; Rapor Tarihi: 23.02.2026 &nbsp;|&nbsp; GS Özeti: 12.06.2026</div>
+</div>
+
+<div class="container">
+
+  <!-- 1. 3 CÜMLEDE ÖZET -->
+  <div class="card">
+    <div class="card-title">📋 3 Cümlede Özet</div>
+    <p class="ozet-text">
+      MSÜ Prova Deneme Sınavı'na katılan öğrencilerden yalnızca <strong>5 kişi</strong> geri bildirim formunu doldurdu; bu örneklem kararları desteklemek için henüz yetersiz. Sınav zorluğu <strong>3,6/5 ortalama</strong> ile "orta–zor" bandında algılandı, başvuru süreci ise %100 olumlu değerlendirildi. Matematik testinde süre baskısı ve Fen–Sosyal'de heterojen zorluk algısı, içerik kalibrasyon süreçlerinde dikkate alınması gereken sinyal niteliğinde.
+    </p>
+  </div>
+
+  <!-- 2. ANA BULGULAR -->
+  <div class="card">
+    <div class="card-title">📊 Ana Bulgular</div>
+    <div class="metric-grid">
+      <div class="metric-box">
+        <div class="val">5</div>
+        <div class="desc">Ankete Katılan Öğrenci</div>
+      </div>
+      <div class="metric-box">
+        <div class="val">3,6/5</div>
+        <div class="desc">Genel Zorluk Ortalaması</div>
+      </div>
+      <div class="metric-box">
+        <div class="val">%100</div>
+        <div class="desc">Başvuru Süreci Memnuniyeti</div>
+      </div>
+    </div>
+    <ul class="bulgu-list">
+      <li>Türkçe ve Matematik testleri <strong>%100 "Orta"</strong> değerlendirmesi aldı — homojen zorluk algısı.</li>
+      <li>Sosyal Bilimler: 3 öğrenci Orta, 2 öğrenci Zor; diğer branşlara kıyasla <strong>daha yüksek zorluk</strong> algısı.</li>
+      <li>Fen Bilimleri: 3 Orta, 1 Zor, 1 Kolay — <strong>en heterojen algı</strong> dağılımı bu branşta.</li>
+      <li>Açık uçlu yorumlarda öğrenciler sınavı "gerçek sınav deneyimine yakın" bulduğunu belirtti.</li>
+      <li>Video çözümler olumlu karşılandı; farklı branş öğretmenlerinin çeşitliliği beğeni topladı.</li>
+    </ul>
+  </div>
+
+  <!-- 3. RED FLAGS -->
+  <div class="card">
+    <div class="card-title">🚩 Red Flags</div>
+    <ul class="red-flag-list">
+      <li><strong>Örneklem çok küçük:</strong> 5 yanıt, istatistiksel olarak anlamlı bir ölçüm için yetersiz. Karar almaya temel teşkil etmesi riskli; ancak SMS / uygulama içi yönlendirme sisteme eklenirse sonraki dönem verisi çok daha güçlü bir zemin sunar.</li>
+      <li><strong>Matematik'te süre baskısı:</strong> Nicel veri "Orta" gösterse de açık uçlu yorumlarda birden fazla öğrenci zaman yönetiminden bahsetti. Soruların işlem yoğunluğu incelenirse bu sinyal değerlendirilebilir.</li>
+      <li><strong>Fen Bilimleri zorluk dağılımı:</strong> Kolay–Orta–Zor arasında dağılan algı, soru kalibrasyonunun gözden geçirilmesine zemin hazırlar — bu bir sorun değil, iyileştirme fırsatı.</li>
+    </ul>
+  </div>
+
+  <!-- 4. HASAN BEY'İN 3 SORUSU -->
+  <div class="card">
+    <div class="card-title">❓ Hasan Bey'in 3 Sorusu</div>
+    <ol class="soru-list">
+      <li>
+        <span><strong>Sınava kaç öğrenci girdi, kaçı anketi doldurdu?</strong> Katılım oranı açıklanmamış. Anketi dolduranların toplam sınav katılımcısına oranı bilinmeden "%100 memnuniyet" rakamını anlamlı kılmak güç. Bu oran raporun bir sonraki versiyonuna eklenmeli.</span>
+      </li>
+      <li>
+        <span><strong>Matematikte süre sorunu yapısal mı, sınava özgü mü?</strong> Önceki denemelerle kıyaslama yapılmamış. Bir önceki MSÜ Prova denemeleriyle matematik zorluk ortalaması karşılaştırılırsa trendi okumak mümkün olur.</span>
+      </li>
+      <li>
+        <span><strong>Bu bulgular bir sonraki deneme içeriğine nasıl yansıyacak?</strong> Raporda öneriler var; ancak kimin ne zamana kadar hangi aksiyonu alacağı belirli değil. Aksiyon sahibi ve tarihi netleştirilmeli.</span>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 5. ÖNERİLEN AKSİYON -->
+  <div class="card">
+    <div class="card-title">🎯 Önerilen Aksiyon</div>
+    <table class="aksiyon-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Aksiyon</th>
+          <th>Öncelik</th>
+          <th>Sahip</th>
+          <th>Tarih</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Anket katılım oranını (sınava giren / anketi dolduran) bir sonraki rapora ekle</td>
+          <td><span class="oncelik yuksek">Yüksek</span></td>
+          <td class="sahip">4K Süreç Yönetmeni</td>
+          <td class="tarih">Sonraki Deneme</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>SMS / uygulama içi yönlendirme ile anket katılımını artır; hedef: en az 30 yanıt</td>
+          <td><span class="oncelik yuksek">Yüksek</span></td>
+          <td class="sahip">Dijital Ürün Ekibi</td>
+          <td class="tarih">Bir sonraki deneme öncesi</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Matematik soru havuzunu işlem yoğunluğu ve paragraf uzunluğu perspektifinden gözden geçir</td>
+          <td><span class="oncelik orta">Orta</span></td>
+          <td class="sahip">Matematik Editörü</td>
+          <td class="tarih">30 gün içinde</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Fen ve Sosyal Bilimler branşlarında "zor soru konumlandırması" üzerine mikro kalibrasyon çalışması yap</td>
+          <td><span class="oncelik orta">Orta</span></td>
+          <td class="sahip">Ölçme-Değerlendirme Ekibi</td>
+          <td class="tarih">Sonraki deneme içerik toplantısı</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6. GS NOTU -->
+  <div class="card">
+    <div class="card-title">📝 GS Notu</div>
+    <div class="gs-notu">
+      Rapor özenli hazırlanmış; bulgular açık, öneriler yerinde. <strong>Asıl açık nokta örneklem büyüklüğü.</strong> 5 yanıt üzerinden üretilen sonuçlar yön gösterici olabilir ancak karar belgesine dönüştürmek için erken. Bir sonraki adım olarak <strong>katılım artırma mekanizmasının</strong> (SMS / uygulama bildirimi) hayata geçirilmesini ve sahip–tarih atamasının tamamlanmasını öneririm. Bu iki adım atıldığında gelecek dönem raporunun karar kalitesi belirgin biçimde artacak.
+    </div>
+  </div>
+
+  <div class="footer">İcra Kurulu Genel Sekreteri Çalışması &nbsp;·&nbsp; Hasan Bey İçin Özet Rapor &nbsp;·&nbsp; 12.06.2026</div>
+
+</div>
+</body>
+</html>
