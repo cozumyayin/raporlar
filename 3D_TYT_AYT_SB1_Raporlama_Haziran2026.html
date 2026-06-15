@@ -144,7 +144,7 @@ function cssv(n){return getComputedStyle(document.documentElement).getPropertyVa
 var _ch={};
 function mk(id,cfg){var el=document.getElementById(id);if(!el)return;try{if(_ch[id])_ch[id].destroy();_ch[id]=new Chart(el.getContext('2d'),cfg);}catch(e){}}
 function renderCharts(){
-  var mut=cssv('--muted'),grid=cssv('--border'),green=cssv('--green');
+  var mut=cssv('--muted'),grid=cssv('--border'),green=cssv('--green'),dn=cssv('--dn');
   Chart.defaults.font.family='Arial,sans-serif';
   Chart.defaults.color=mut;
   mk('chBY',{type:'bar',data:{
