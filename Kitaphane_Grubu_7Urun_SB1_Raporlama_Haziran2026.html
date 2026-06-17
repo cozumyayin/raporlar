@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kitaphane Grubu 1. Raporlama Haziran 2026</title>
+<style>:root{--bg:#fff;--panel:#f7f8fa;--panel2:#eef1f5;--text:#1f2328;--muted:#5a6472;--border:#e1e4e8;--accent:#C1272D;--accentd:#8C1D2C;--green:#2f9d5b;--up:#1f8a4c;--dn:#c0392b;--kritik:#d64545;--zayif:#e0853c;--iyi:#3f9d5b;}
+:root[data-theme="dark"]{--bg:#0f1419;--panel:#171c23;--panel2:#1f262f;--text:#e6edf3;--muted:#9aa4b0;--border:#2a313a;--accent:#ef5360;--accentd:#c1272d;--green:#46b06f;--up:#3fb96b;--dn:#f0683b;--kritik:#e35d5d;--zayif:#e89a52;--iyi:#54b06f;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{background:var(--bg);color:var(--text);margin:0;overflow-x:hidden}
+body{font-family:Arial,"Segoe UI",system-ui,sans-serif;font-size:14px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding:0 18px 60px}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 0;flex-wrap:wrap;gap:10px}
+.brand{font-weight:700;font-size:15px}.brand .dotb{color:var(--accent)}
+.tgroup{display:flex;gap:8px}
+.toggle{background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:600}.toggle:hover{border-color:var(--accent)}
+header.hero{border-top:3px solid var(--accent);background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+header.hero h1{margin:0 0 4px;font-size:22px}header.hero p{margin:0;color:var(--muted);font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:8px}
+.kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.kpi.up{border-color:var(--green)}
+.kl{font-size:11.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.kv{font-size:24px;font-weight:800;margin:3px 0}.ks{font-size:11.5px;color:var(--muted)}.ks.up{color:var(--up)}
+.fn{font-size:11px;color:var(--muted);font-style:italic;margin:6px 2px 16px;line-height:1.6}
+.banner{background:linear-gradient(90deg,#1a6b3a,#2f9d5b);color:#fff;border-radius:12px;padding:14px 20px;margin:12px 0 6px;font-size:13.5px;font-weight:500}.banner b{font-weight:800}
+.sec-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin:24px 2px 10px;border-bottom:2px solid var(--border);padding-bottom:6px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:18px 20px;margin-bottom:14px}
+.by-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.by-badge{background:var(--accent);color:#fff;font-size:12px;font-weight:800;padding:3px 12px;border-radius:20px}
+.by-title{font-size:16px;font-weight:700;margin:0}.by-sub{font-size:12px;color:var(--muted)}
+.aciklama-box{background:var(--panel2);border-left:3px solid var(--accent);border-radius:8px;padding:11px 15px;font-size:12.5px;line-height:1.65;margin-bottom:14px;white-space:pre-wrap;word-break:break-word}
+.taphint{display:flex;align-items:center;gap:9px;background:var(--panel2);border:1px solid var(--accent);border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:12.8px}.taphint b{font-weight:700;color:var(--accent)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}.tscroll>table{margin:0;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:right;font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);font-weight:700;padding:7px 8px;border-bottom:2px solid var(--border);white-space:nowrap}
+th.l,td.l{text-align:left}th.c,td.c{text-align:center}
+td{padding:7px 8px;border-bottom:1px solid var(--border);white-space:nowrap}
+td.l{font-weight:600;white-space:normal;min-width:160px}td.n{text-align:right;font-variant-numeric:tabular-nums}
+td.b{font-weight:800}td.sm{font-size:11px;color:var(--muted)}
+td.good{color:var(--iyi)!important}td.bad{color:var(--kritik)!important}
+tbody tr:hover td{background:var(--panel2)}tr.totr td{background:var(--panel2);border-top:2px solid var(--border);font-weight:800}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700}
+.pill.risk{background:rgba(214,69,69,.16);color:var(--kritik)}.pill.warn{background:rgba(224,133,60,.18);color:var(--zayif)}.pill.ok{background:rgba(63,157,91,.18);color:var(--iyi)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-bottom:18px}
+.chart-wrap{position:relative;height:280px;width:100%;overflow:hidden}.chart-wrap canvas{display:block;width:100%!important;height:100%!important}
+.scrollnote{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--accent);font-weight:700;margin:0 0 6px}
+.scrollnote .ar{display:inline-block;font-size:14px;animation:bpnudge 1.5s ease-in-out infinite}
+@keyframes bpnudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+.drow{cursor:pointer}.drow.open td{background:rgba(193,39,45,.07);box-shadow:inset 3px 0 0 var(--accent)}
+.erow{display:none}.erow td{padding:0;border-bottom:1px solid var(--border)}
+.ecmt{background:var(--panel2);padding:12px 16px;font-size:12.5px;line-height:1.65;border-left:3px solid var(--accent)}
+.ecmt .elbl{display:block;font-weight:700;color:var(--accent);font-size:11.5px;margin-bottom:6px}
+.ctxt{color:var(--text);white-space:normal;word-break:break-word}.ctxt.nocmt{color:var(--muted);font-style:italic}
+.car{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:5px;background:var(--accent);color:#fff;font-size:10px;font-weight:800}
+.drow.open .car{background:var(--muted)}
+body.mview .wrap{max-width:430px;border:1px solid var(--border);border-radius:22px;margin:10px auto;padding:4px 12px 36px}
+body.mview .kpis{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px}
+body.mview .grid2{grid-template-columns:minmax(0,1fr)}body.mview .kv{font-size:20px}
+body.mview header.hero h1{font-size:17px}
+body.mview .topbar{position:sticky;top:0;background:var(--bg);z-index:20;border-bottom:1px solid var(--border)}
+@media(max-width:820px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr)) !important}.grid2{grid-template-columns:minmax(0,1fr)}.chart-wrap{height:240px}}
+@media(max-width:680px){.wrap{padding:0 12px 50px}table{font-size:11.5px}.kv{font-size:20px}}
+footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--muted);text-align:center;line-height:1.7}
+
+.urun-card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:18px 20px;margin-bottom:18px}
+.urun-title{font-size:16px;font-weight:700;margin:0 0 14px;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:8px}
+.sehir-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.sehir-kpi{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center}
+.sehir-kpi.up{border-color:var(--green)}
+.sehir-kpi.down{border-color:var(--zayif)}
+.sehir-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.sehir-by{font-size:22px;font-weight:800;margin:2px 0}
+.sehir-gy{font-size:11.5px}
+.sehir-gy.up{color:var(--up)}.sehir-gy.down{color:var(--dn)}
+.sehir-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+.sehir-tbl th{text-align:center;font-size:10.5px;text-transform:uppercase;color:var(--muted);font-weight:700;padding:5px 8px;border-bottom:2px solid var(--border)}
+.sehir-tbl th.l{text-align:left}
+.sehir-tbl td{padding:7px 8px;border-bottom:1px solid var(--border);text-align:center;font-variant-numeric:tabular-nums}
+.sehir-tbl td.l{text-align:left;font-weight:600}
+.sehir-tbl td.b{font-weight:800}
+.sehir-tbl td.up{color:var(--up)!important}.sehir-tbl td.dn{color:var(--dn)!important}
+@media(max-width:820px){.sehir-grid{grid-template-columns:minmax(0,1fr)}}
+body.mview .sehir-grid{grid-template-columns:minmax(0,1fr)}
+</style></head><body>
+<div class="wrap">
+<div class="topbar"><div class="brand"><span class="dotb">&#9679;</span> &#199;&#214;Z&#220;M YAYIN GRUBU &middot; Kitaphane Grubu Sezonsal Rapor</div>
+<div class="tgroup"><button class="toggle" id="vw" onclick="toggleView()">&#128241; Mobil g&#246;r&#252;n&#252;m</button>
+<button class="toggle" id="tg" onclick="toggleTheme()">&#127769; Koyu tema</button></div></div>
+<header class="hero">
+<h1>Kitaphane Grubu &mdash; 7 &#220;r&#252;n 1. Raporlama <span style="font-size:12px;color:var(--accent);font-weight:700">Haziran 2026</span></h1>
+<p>Ankara &middot; &#304;stanbul &middot; &#304;zmir &middot; KPI: Sezonsal &#220;r&#252;n Takip Takvimi &middot; Kaynak: Power BI &#220;r&#252;n Raporu &middot; Haziran 2026</p>
+</header>
+<div class="kpis" style="grid-template-columns:repeat(7,minmax(0,1fr))">
+<div class="kpi up"><div class="kl" style="font-size:10px">3D Ortaokul 5-6-7-8 S&#30...</div><div class="kv" style="font-size:18px">46,830</div><div class="ks up" style="font-size:10.5px">GY: 16,800 &middot; +%178.8</div></div>
+<div class="kpi up"><div class="kl" style="font-size:10px">E&#287;itim Vadisi 9-10 T...</div><div class="kv" style="font-size:18px">41,457</div><div class="ks up" style="font-size:10.5px">GY: 12,270 &middot; +%237.9</div></div>
+<div class="kpi down"><div class="kl" style="font-size:10px">E&#287;itim Vadisi PDF TY...</div><div class="kv" style="font-size:18px">30,220</div><div class="ks dn" style="font-size:10.5px">GY: 35,737 &middot; %-15.4</div></div>
+<div class="kpi up"><div class="kl" style="font-size:10px">4K TKT TYT-AYT...</div><div class="kv" style="font-size:18px">12,193</div><div class="ks up" style="font-size:10.5px">GY: 10,301 &middot; +%18.4</div></div>
+<div class="kpi up"><div class="kl" style="font-size:10px">4K 9-10-11 ESB...</div><div class="kv" style="font-size:18px">15,693</div><div class="ks up" style="font-size:10.5px">GY: 3,257 &middot; +%381.8</div></div>
+<div class="kpi down"><div class="kl" style="font-size:10px">4K KOSB TYT-AYT...</div><div class="kv" style="font-size:18px">29,287</div><div class="ks dn" style="font-size:10.5px">GY: 36,150 &middot; %-19.0</div></div>
+<div class="kpi down"><div class="kl" style="font-size:10px">E&#287;itim Vadisi MSB TY...</div><div class="kv" style="font-size:18px">25,593</div><div class="ks dn" style="font-size:10.5px">GY: 27,425 &middot; %-6.7</div></div>
+</div>
+
+<p class="fn"><b>BGK</b> = Bu g&#252;ne kadar. &nbsp; <b>GY BGK</b> = Ge&#231;en y&#305;l ayn&#305; d&#246;nem. &nbsp; Her &#351;ehirde 1 Kitaphane bayisi bulunmaktad&#305;r. &nbsp; Genel toplam: <b>201,273 adet</b> (GY: 141,940) &middot; De&#287;i&#351;im: <b>+%41.8</b>.</p>
+<div class="banner green">&#128200; <b>Genel De&#287;erlendirme:</b> 7 &#252;r&#252;n toplam +%41.8 &middot; Ankara b&#246;lgesi dominant &middot; 3D Ortaokul SB ve EV TAK-T&#304;K en y&#252;ksek b&#252;y&#252;me</div>
+
+<div class="sec-title">&#220;r&#252;n Bazl&#305; BGK Kar&#351;&#305;la&#351;t&#305;rmas&#305;</div>
+<div class="grid2">
+<div class="card"><h2>BGK Kar&#351;&#305;la&#351;t&#305;rma</h2><p class="hint">Ge&#231;en y&#305;l (gri) vs bu y&#305;l &#8212; adet</p>
+<div class="chart-wrap"><canvas id="chBY" role="img"></canvas></div></div>
+<div class="card"><h2>De&#287;i&#351;im Oran&#305; (%)</h2><p class="hint">Bu y&#305;l &#247; Ge&#231;en y&#305;l</p>
+<div class="chart-wrap"><canvas id="chGrowth" role="img"></canvas></div></div>
+</div>
+
+<div class="sec-title">Genel &#214;zet &mdash; T&#252;m &#220;r&#252;nler</div>
+<div class="card"><div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#220;r&#252;n</th><th>ANKARA BY</th><th>&#304;STANBUL BY</th><th>&#304;ZM&#304;R BY</th><th>TOPLAM BY</th><th>GY TOPLAM</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">3D Ortaokul 5-6-7-8 S&#305;n&#305;f Soru Bankas&#305;</td><td class="b">32,510</td><td class="b">7,620</td><td class="b">6,700</td><td class="b">46,830</td><td>16,800</td><td class="up b">+%178.8</td></tr>
+<tr><td class="l">E&#287;itim Vadisi 9-10 TAK-T&#304;K</td><td class="b">41,057</td><td class="b">250</td><td class="b">150</td><td class="b">41,457</td><td>12,270</td><td class="up b">+%237.9</td></tr>
+<tr><td class="l">E&#287;itim Vadisi PDF TYT-AYT</td><td class="b">9,831</td><td class="b">2,220</td><td class="b">18,169</td><td class="b">30,220</td><td>35,737</td><td class="dn b">%-15.4</td></tr>
+<tr><td class="l">4K TKT TYT-AYT</td><td class="b">5,432</td><td class="b">1,049</td><td class="b">5,712</td><td class="b">12,193</td><td>10,301</td><td class="up b">+%18.4</td></tr>
+<tr><td class="l">4K 9-10-11 ESB</td><td class="b">15,100</td><td class="b">243</td><td class="b">350</td><td class="b">15,693</td><td>3,257</td><td class="up b">+%381.8</td></tr>
+<tr><td class="l">4K KOSB TYT-AYT</td><td class="b">17,186</td><td class="b">1,100</td><td class="b">11,001</td><td class="b">29,287</td><td>36,150</td><td class="dn b">%-19.0</td></tr>
+<tr><td class="l">E&#287;itim Vadisi MSB TYT-AYT</td><td class="b">10,529</td><td class="b">239</td><td class="b">14,825</td><td class="b">25,593</td><td>27,425</td><td class="dn b">%-6.7</td></tr>
+</tbody></table></div></div>
+
+<div class="sec-title">3D Ortaokul 5-6-7-8 S&#305;n&#305;f Soru Bankas&#305;</div>
+<div class="urun-card">
+<div class="sehir-grid">
+<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">32,510</div><div class="sehir-gy up">GY: 9,000 &middot; +%261.2</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">7,620</div><div class="sehir-gy up">GY: 4,300 &middot; +%77.2</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">İZMİR</div><div class="sehir-by">6,700</div><div class="sehir-gy up">GY: 3,500 &middot; +%91.4</div></div>
+</div>
+<div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>9,000</td><td class="b">32,510</td><td>15,180</td><td class="up b">+%261.2</td></tr>
+<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>4,300</td><td class="b">7,620</td><td>18,750</td><td class="up b">+%77.2</td></tr>
+<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>3,500</td><td class="b">6,700</td><td>4,495</td><td class="up b">+%91.4</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>9,000</td><td class="b">32,510</td><td></td><td class="up b">+%261.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>4,300</td><td class="b">7,620</td><td></td><td class="up b">+%77.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>3,500</td><td class="b">6,700</td><td></td><td class="up b">+%91.4</td></tr>
+<tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>16,800</td><td class="b">46,830</td><td></td><td class="up b">+%178.8</td></tr>
+</tbody></table></div>
+</div>
+<div class="sec-title">E&#287;itim Vadisi 9-10 TAK-T&#304;K</div>
+<div class="urun-card">
+<div class="sehir-grid">
+<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">41,057</div><div class="sehir-gy up">GY: 7,650 &middot; +%436.7</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">250</div><div class="sehir-gy up">GY: 0 &middot; Yeni &#252;r&#252;n</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">150</div><div class="sehir-gy down">GY: 4,620 &middot; %-96.8</div></div>
+</div>
+<div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>7,650</td><td class="b">41,057</td><td>30,272</td><td class="up b">+%436.7</td></tr>
+<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>0</td><td class="b">250</td><td>42,250</td><td class="up b">—</td></tr>
+<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>4,620</td><td class="b">150</td><td>7,744</td><td class="dn b">%-96.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>7,650</td><td class="b">41,057</td><td></td><td class="up b">+%436.7</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>0</td><td class="b">250</td><td></td><td class="up b">—</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>4,620</td><td class="b">150</td><td></td><td class="dn b">%-96.8</td></tr>
+<tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>12,270</td><td class="b">41,457</td><td></td><td class="up b">+%237.9</td></tr>
+</tbody></table></div>
+</div>
+<div class="sec-title">E&#287;itim Vadisi PDF TYT-AYT</div>
+<div class="urun-card">
+<div class="sehir-grid">
+<div class="sehir-kpi down"><div class="sehir-name">ANKARA</div><div class="sehir-by">9,831</div><div class="sehir-gy down">GY: 22,192 &middot; %-55.7</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">2,220</div><div class="sehir-gy up">GY: 1,350 &middot; +%64.4</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">İZMİR</div><div class="sehir-by">18,169</div><div class="sehir-gy up">GY: 12,195 &middot; +%49.0</div></div>
+</div>
+<div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>22,192</td><td class="b">9,831</td><td>33,332</td><td class="dn b">%-55.7</td></tr>
+<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>1,350</td><td class="b">2,220</td><td>50,520</td><td class="up b">+%64.4</td></tr>
+<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>12,195</td><td class="b">18,169</td><td>13,351</td><td class="up b">+%49.0</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>22,192</td><td class="b">9,831</td><td></td><td class="dn b">%-55.7</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>1,350</td><td class="b">2,220</td><td></td><td class="up b">+%64.4</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>12,195</td><td class="b">18,169</td><td></td><td class="up b">+%49.0</td></tr>
+<tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>35,737</td><td class="b">30,220</td><td></td><td class="dn b">%-15.4</td></tr>
+</tbody></table></div>
+</div>
+<div class="sec-title">4K TKT TYT-AYT</div>
+<div class="urun-card">
+<div class="sehir-grid">
+<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">5,432</div><div class="sehir-gy up">GY: 1,380 &middot; +%293.6</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">1,049</div><div class="sehir-gy down">GY: 1,560 &middot; %-32.8</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">5,712</div><div class="sehir-gy down">GY: 7,361 &middot; %-22.4</div></div>
+</div>
+<div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>1,380</td><td class="b">5,432</td><td>9,295</td><td class="up b">+%293.6</td></tr>
+<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>1,560</td><td class="b">1,049</td><td>6,597</td><td class="dn b">%-32.8</td></tr>
+<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>7,361</td><td class="b">5,712</td><td>9,630</td><td class="dn b">%-22.4</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>1,380</td><td class="b">5,432</td><td></td><td class="up b">+%293.6</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>1,560</td><td class="b">1,049</td><td></td><td class="dn b">%-32.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>7,361</td><td class="b">5,712</td><td></td><td class="dn b">%-22.4</td></tr>
+<tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>10,301</td><td class="b">12,193</td><td></td><td class="up b">+%18.4</td></tr>
+</tbody></table></div>
+</div>
+<div class="sec-title">4K 9-10-11 ESB</div>
+<div class="urun-card">
+<div class="sehir-grid">
+<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">15,100</div><div class="sehir-gy up">GY: 2,157 &middot; +%600.0</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">243</div><div class="sehir-gy down">GY: 400 &middot; %-39.2</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">350</div><div class="sehir-gy down">GY: 700 &middot; %-50.0</div></div>
+</div>
+<div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>2,157</td><td class="b">15,100</td><td>9,872</td><td class="up b">+%600.0</td></tr>
+<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>400</td><td class="b">243</td><td>33,780</td><td class="dn b">%-39.2</td></tr>
+<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>700</td><td class="b">350</td><td>2,990</td><td class="dn b">%-50.0</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>2,157</td><td class="b">15,100</td><td></td><td class="up b">+%600.0</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>400</td><td class="b">243</td><td></td><td class="dn b">%-39.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>700</td><td class="b">350</td><td></td><td class="dn b">%-50.0</td></tr>
+<tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>3,257</td><td class="b">15,693</td><td></td><td class="up b">+%381.8</td></tr>
+</tbody></table></div>
+</div>
+<div class="sec-title">4K KOSB TYT-AYT</div>
+<div class="urun-card">
+<div class="sehir-grid">
+<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">17,186</div><div class="sehir-gy up">GY: 60 &middot; +%28543.3</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">1,100</div><div class="sehir-gy down">GY: 23,330 &middot; %-95.3</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">11,001</div><div class="sehir-gy down">GY: 12,760 &middot; %-13.8</div></div>
+</div>
+<div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>60</td><td class="b">17,186</td><td>19,109</td><td class="up b">+%28543.3</td></tr>
+<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>23,330</td><td class="b">1,100</td><td>52,510</td><td class="dn b">%-95.3</td></tr>
+<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>12,760</td><td class="b">11,001</td><td>13,050</td><td class="dn b">%-13.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>60</td><td class="b">17,186</td><td></td><td class="up b">+%28543.3</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>23,330</td><td class="b">1,100</td><td></td><td class="dn b">%-95.3</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>12,760</td><td class="b">11,001</td><td></td><td class="dn b">%-13.8</td></tr>
+<tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>36,150</td><td class="b">29,287</td><td></td><td class="dn b">%-19.0</td></tr>
+</tbody></table></div>
+</div>
+<div class="sec-title">E&#287;itim Vadisi MSB TYT-AYT</div>
+<div class="urun-card">
+<div class="sehir-grid">
+<div class="sehir-kpi down"><div class="sehir-name">ANKARA</div><div class="sehir-by">10,529</div><div class="sehir-gy down">GY: 13,710 &middot; %-23.2</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">239</div><div class="sehir-gy down">GY: 4,550 &middot; %-94.7</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">İZMİR</div><div class="sehir-by">14,825</div><div class="sehir-gy up">GY: 9,165 &middot; +%61.8</div></div>
+</div>
+<div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
+<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>13,710</td><td class="b">10,529</td><td>28,170</td><td class="dn b">%-23.2</td></tr>
+<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>4,550</td><td class="b">239</td><td>20,860</td><td class="dn b">%-94.7</td></tr>
+<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>9,165</td><td class="b">14,825</td><td>15,216</td><td class="up b">+%61.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>13,710</td><td class="b">10,529</td><td></td><td class="dn b">%-23.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>4,550</td><td class="b">239</td><td></td><td class="dn b">%-94.7</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>9,165</td><td class="b">14,825</td><td></td><td class="up b">+%61.8</td></tr>
+<tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>27,425</td><td class="b">25,593</td><td></td><td class="dn b">%-6.7</td></tr>
+</tbody></table></div>
+</div>
+
+
+<footer>&#199;&#214;Z&#220;M Yay&#305;n Grubu &mdash; Kitaphane Grubu 7 &#220;r&#252;n 1. Raporlama &middot; Haziran 2026<br>
+Ankara &middot; &#304;stanbul &middot; &#304;zmir &middot; KPI: Sezonsal &#220;r&#252;n Takip Takvimindeki &#304;&#351; S&#252;re&#231;lerinin Zaman&#305;nda Yerine Getirilmesi</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>function toggleTheme(){var h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.getElementById('tg').textContent=d?'\u{1F319} Koyu tema':'\u2600\uFE0F A\u00e7\u0131k tema';try{localStorage.setItem('bp_theme',d?'light':'dark')}catch(e){}setTimeout(renderCharts,30);}
+(function(){try{var t=localStorage.getItem('bp_theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('tg').textContent='\u2600\uFE0F A\u00e7\u0131k tema';}}catch(e){}})();
+function toggleView(){var b=document.body,m=b.classList.toggle('mview');document.getElementById('vw').textContent=m?'\u{1F5A5} Web g\u00f6r\u00fcn\u00fcm':'\u{1F4F1} Mobil g\u00f6r\u00fcn\u00fcm';try{localStorage.setItem('bp_view',m?'mobile':'web');}catch(e){}setTimeout(function(){try{renderCharts();}catch(e){}},70);}
+(function(){try{if(localStorage.getItem('bp_view')==='mobile'){document.body.classList.add('mview');document.getElementById('vw').textContent='\u{1F5A5} Web g\u00f6r\u00fcn\u00fcm';}}catch(e){}})();
+function toggleRow(r){var er=r.nextElementSibling;if(!er||!er.classList.contains('erow'))return;var open=er.style.display==='table-row';er.style.display=open?'none':'table-row';r.classList.toggle('open',!open);var car=r.querySelector('.car');if(car)car.textContent=open?'\u25b8':'\u25be';}
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+var _ch={};
+function mk(id,cfg){var el=document.getElementById(id);if(!el)return;try{if(_ch[id])_ch[id].destroy();_ch[id]=new Chart(el.getContext('2d'),cfg);}catch(e){}}
+function renderCharts(){
+  var mut=cssv('--muted'),grid=cssv('--border'),green=cssv('--green'),dn=cssv('--dn'),accent=cssv('--accent');
+  Chart.defaults.font.family='Arial,sans-serif';
+  Chart.defaults.color=mut;
+  var labels=['3D SB','EV TAK','EV PDF','4K TKT','4K ESB','4K KOSB','EV MSB'];
+  mk('chBY',{type:'bar',data:{
+    labels:labels,
+    datasets:[
+      {label:'Ankara GY',data:[9000,7650,22192,1380,2157,60,13710],backgroundColor:'rgba(193,39,45,0.3)',borderRadius:3,barPercentage:0.55},
+      {label:'Ankara BY',data:[32510,41057,9831,5432,15100,17186,10529],backgroundColor:'#C1272D',borderRadius:3,barPercentage:0.55},
+      {label:'\u0130stanbul GY',data:[4300,0,1350,1560,400,23330,4550],backgroundColor:'rgba(47,157,91,0.3)',borderRadius:3,barPercentage:0.55},
+      {label:'\u0130stanbul BY',data:[7620,250,2220,1049,243,1100,239],backgroundColor:'#2f9d5b',borderRadius:3,barPercentage:0.55},
+      {label:'\u0130zmir GY',data:[3500,4620,12195,7361,700,12760,9165],backgroundColor:'rgba(26,111,168,0.3)',borderRadius:3,barPercentage:0.55},
+      {label:'\u0130zmir BY',data:[6700,150,18169,5712,350,11001,14825],backgroundColor:'#1a6fa8',borderRadius:3,barPercentage:0.55}
+    ]},
+    options:{animation:false,maintainAspectRatio:false,
+      plugins:{legend:{labels:{boxWidth:10,font:{size:10}}}},
+      scales:{
+        y:{beginAtZero:true,grid:{color:grid},ticks:{callback:function(v){return (v/1000).toFixed(0)+'K';}}},
+        x:{grid:{display:false}}
+      }
+    }
+  });
+  mk('chGrowth',{type:'bar',data:{
+    labels:labels,
+    datasets:[
+      {label:'Ankara',data:[178.0,436.7,-55.7,293.6,599.9,28543.3,-23.2],backgroundColor:'#C1272D',borderRadius:4,barPercentage:0.6},
+      {label:'\u0130stanbul',data:[77.2,0.0,64.4,-32.8,-39.3,-95.3,-94.7],backgroundColor:'#2f9d5b',borderRadius:4,barPercentage:0.6},
+      {label:'\u0130zmir',data:[91.4,-96.8,49.0,-22.4,-50.0,-13.8,61.8],backgroundColor:'#1a6fa8',borderRadius:4,barPercentage:0.6}
+    ]},
+    options:{animation:false,maintainAspectRatio:false,
+      plugins:{legend:{labels:{boxWidth:10,font:{size:10}}}},
+      scales:{
+        y:{grid:{color:grid},ticks:{callback:function(v){return v+'%';}}},
+        x:{grid:{display:false}}
+      }
+    }
+  });
+}
+
+function markScrollables(){document.querySelectorAll('.tscroll').forEach(function(el){var sc=el.scrollWidth>el.clientWidth+4;var prev=el.previousElementSibling;var has=prev&&prev.classList&&prev.classList.contains('scrollnote');if(sc&&!has){var d=document.createElement('div');d.className='scrollnote';d.innerHTML='<span class="ar">\u2194</span> Tabloyu yana kayd\u0131rabilirsiniz';el.parentNode.insertBefore(d,el);}else if(has){prev.style.display=sc?'flex':'none';}});}
+function tryInit(){if(typeof Chart!=='undefined'){renderCharts();markScrollables();return;}var n=0,i=setInterval(function(){n++;if(typeof Chart!=='undefined'){clearInterval(i);renderCharts();markScrollables();}else if(n>50){clearInterval(i);}},100);}
+var _rsz;window.addEventListener('resize',function(){clearTimeout(_rsz);_rsz=setTimeout(function(){try{renderCharts();}catch(e){}try{markScrollables();}catch(e){}},180);});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tryInit);else tryInit();
+</script>
+</body></html>
