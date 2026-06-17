@@ -101,12 +101,8 @@ body.mview .sehir-grid{grid-template-columns:minmax(0,1fr)}
 <div class="banner green">&#128200; <b>Genel De&#287;erlendirme:</b> 7 &#252;r&#252;n toplam +%41.8 &middot; Ankara b&#246;lgesi dominant &middot; 3D Ortaokul SB ve EV TAK-T&#304;K en y&#252;ksek b&#252;y&#252;me</div>
 
 <div class="sec-title">&#220;r&#252;n Bazl&#305; BGK Kar&#351;&#305;la&#351;t&#305;rmas&#305;</div>
-<div class="grid2">
-<div class="card"><h2>BGK Kar&#351;&#305;la&#351;t&#305;rma</h2><p class="hint">Ge&#231;en y&#305;l (gri) vs bu y&#305;l &#8212; adet</p>
-<div class="chart-wrap"><canvas id="chBY" role="img"></canvas></div></div>
-<div class="card"><h2>De&#287;i&#351;im Oran&#305; (%)</h2><p class="hint">Bu y&#305;l &#247; Ge&#231;en y&#305;l</p>
-<div class="chart-wrap"><canvas id="chGrowth" role="img"></canvas></div></div>
-</div>
+<div class="card"><h2>BGK Kar&#351;&#305;la&#351;t&#305;rma &#8212; &#350;ehir Baz&#305;nda</h2><p class="hint">Ankara (k&#305;rm&#305;z&#305;) &middot; &#304;stanbul (ye&#351;il) &middot; &#304;zmir (mavi) &middot; koyu = bu y&#305;l / soluk = ge&#231;en y&#305;l</p>
+<div class="chart-wrap" style="height:320px"><canvas id="chBY" role="img" aria-label="Kitaphane grubu şehir bazlı BGK karşılaştırması">Kitaphane Grubu 7 ürün şehir bazlı BGK karşılaştırması</canvas></div></div>
 
 <div class="sec-title">Genel &#214;zet &mdash; T&#252;m &#220;r&#252;nler</div>
 <div class="card"><div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#220;r&#252;n</th><th>ANKARA BY</th><th>&#304;STANBUL BY</th><th>&#304;ZM&#304;R BY</th><th>TOPLAM BY</th><th>GY TOPLAM</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
@@ -122,124 +118,157 @@ body.mview .sehir-grid{grid-template-columns:minmax(0,1fr)}
 <div class="sec-title">3D Ortaokul 5-6-7-8 S&#305;n&#305;f Soru Bankas&#305;</div>
 <div class="urun-card">
 <div class="sehir-grid">
-<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">32,510</div><div class="sehir-gy up">GY: 9,000 &middot; +%261.2</div></div>
-<div class="sehir-kpi up"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">7,620</div><div class="sehir-gy up">GY: 4,300 &middot; +%77.2</div></div>
-<div class="sehir-kpi up"><div class="sehir-name">İZMİR</div><div class="sehir-by">6,700</div><div class="sehir-gy up">GY: 3,500 &middot; +%91.4</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">Ankara</div><div class="sehir-by">32,510</div><div class="sehir-gy up">GY: 9,000 &middot; +%261.2</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">&#304;stanbul</div><div class="sehir-by">7,620</div><div class="sehir-gy up">GY: 4,300 &middot; +%77.2</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">&#304;zmir</div><div class="sehir-by">6,700</div><div class="sehir-gy up">GY: 3,500 &middot; +%91.4</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px">
+<div style="background:var(--panel2);border-left:3px solid #C1272D;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#C1272D;margin-bottom:5px;text-transform:uppercase">Ankara Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Geçen sene bölgemizde etkinlik ve çalışma kitabı pek tutulmamıştı. Herkes Soru bankası bekliyordu. Yeni yılda ürün gammıza ekleneceğini kurumlara iletmiştik. Adetlerimizin yükseleceğini planlıyoruz.  Devlet okullarında daha etkili ve girmek istioruz .Fasiküller piyasada şuan çok revaçta ve talep görmektedir.  Ortaokul potansiyel siparişlerimiz gayet iyi gitmektedir.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #2f9d5b;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#2f9d5b;margin-bottom:5px;text-transform:uppercase">&#304;stanbul Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Kurum siparişleri yeni oluşmaya başlıyor. Henüz ciddi bir hareketlilik başlamadı. İlerleyen  süreçlerde siparişlerimiz oluşacaktır. Burada ara sınıf ürünlerinin çıkması devlet okullarında çok elzemdir. Ortaokul grubunu ayağa kaldıracak olan itici güç burada yatmaktadır.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #1a6fa8;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#1a6fa8;margin-bottom:5px;text-transform:uppercase">&#304;zmir Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Ara sınıflarda henüz soru bankaları olmadığı için henüz hareketlilik başlamadı. LGS de satışlarımız devam ediyor. Bu sene geçen senenin çok züerinde bir büyüme hedefliyoruz.</div></div>
 </div>
 <div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
-<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>9,000</td><td class="b">32,510</td><td>15,180</td><td class="up b">+%261.2</td></tr>
-<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>4,300</td><td class="b">7,620</td><td>18,750</td><td class="up b">+%77.2</td></tr>
-<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>3,500</td><td class="b">6,700</td><td>4,495</td><td class="up b">+%91.4</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>9,000</td><td class="b">32,510</td><td></td><td class="up b">+%261.2</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>4,300</td><td class="b">7,620</td><td></td><td class="up b">+%77.2</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>3,500</td><td class="b">6,700</td><td></td><td class="up b">+%91.4</td></tr>
+<tr><td class="l">Ankara</td><td class="l">KİTAPHANE</td><td>9,000</td><td class="b">32,510</td><td>15,180</td><td class="up b">+%261.2</td></tr>
+<tr><td class="l">&#304;stanbul</td><td class="l">KİTAPHANE</td><td>4,300</td><td class="b">7,620</td><td>18,750</td><td class="up b">+%77.2</td></tr>
+<tr><td class="l">&#304;zmir</td><td class="l">KİTAPHANE</td><td>3,500</td><td class="b">6,700</td><td>4,495</td><td class="up b">+%91.4</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">Ankara TOPLAM</td><td></td><td>9,000</td><td class="b">32,510</td><td></td><td class="up b">+%261.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;stanbul TOPLAM</td><td></td><td>4,300</td><td class="b">7,620</td><td></td><td class="up b">+%77.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;zmir TOPLAM</td><td></td><td>3,500</td><td class="b">6,700</td><td></td><td class="up b">+%91.4</td></tr>
 <tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>16,800</td><td class="b">46,830</td><td></td><td class="up b">+%178.8</td></tr>
 </tbody></table></div>
 </div>
 <div class="sec-title">E&#287;itim Vadisi 9-10 TAK-T&#304;K</div>
 <div class="urun-card">
 <div class="sehir-grid">
-<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">41,057</div><div class="sehir-gy up">GY: 7,650 &middot; +%436.7</div></div>
-<div class="sehir-kpi up"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">250</div><div class="sehir-gy up">GY: 0 &middot; Yeni &#252;r&#252;n</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">150</div><div class="sehir-gy down">GY: 4,620 &middot; %-96.8</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">Ankara</div><div class="sehir-by">41,057</div><div class="sehir-gy up">GY: 7,650 &middot; +%436.7</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">&#304;stanbul</div><div class="sehir-by">250</div><div class="sehir-gy up">GY: 0 &middot; Yeni &#252;r&#252;n</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;zmir</div><div class="sehir-by">150</div><div class="sehir-gy down">GY: 4,620 &middot; %-96.8</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px">
+<div style="background:var(--panel2);border-left:3px solid #C1272D;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#C1272D;margin-bottom:5px;text-transform:uppercase">Ankara Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Önümüzde dönemde çalışacağımız kurumları anlaşması netleşmiş olanların sipariş girişleri yapılmıştır. Geçen sene aldığımız ürünün tamamı kadar sipariş girişi yapılmıştır. Sezona kadar bu adetler ile devam edileceği öngörülmektedir. Ürünlerimizin geçen seneki tanıtımları olumlu bir havaya dönüşmüştür. Bu sayede YKS grubunda PDF VE MSB  güncelenmemiş algısını TAK-TİK ler ile çözüleceğin düşünmekteyiz. 11 .Sınıflarda siparişler olacak.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #2f9d5b;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#2f9d5b;margin-bottom:5px;text-transform:uppercase">&#304;stanbul Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Var olan stoktaki ürünler ile devam edilmektedir.  Bellib branşlarda sipariş girişleri olacaktır. Sezona doğru tüm ürün gruplarında siparişleri girileceği öngörülmektedir.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #1a6fa8;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#1a6fa8;margin-bottom:5px;text-transform:uppercase">&#304;zmir Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Geçtiğimiz yıl, tek seferde alınan toplu siparişlerle yıllık hedef adetler tamamlanmıştır. Ancak bu yıl henüz kurumlardan ve özel okullardan sipariş alınmamıştır. Ara sınıflarda öğrenci sayısı çok az.</div></div>
 </div>
 <div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
-<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>7,650</td><td class="b">41,057</td><td>30,272</td><td class="up b">+%436.7</td></tr>
-<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>0</td><td class="b">250</td><td>42,250</td><td class="up b">—</td></tr>
-<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>4,620</td><td class="b">150</td><td>7,744</td><td class="dn b">%-96.8</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>7,650</td><td class="b">41,057</td><td></td><td class="up b">+%436.7</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>0</td><td class="b">250</td><td></td><td class="up b">—</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>4,620</td><td class="b">150</td><td></td><td class="dn b">%-96.8</td></tr>
+<tr><td class="l">Ankara</td><td class="l">KİTAPHANE</td><td>7,650</td><td class="b">41,057</td><td>30,272</td><td class="up b">+%436.7</td></tr>
+<tr><td class="l">&#304;stanbul</td><td class="l">KİTAPHANE</td><td>0</td><td class="b">250</td><td>42,250</td><td class="up b">&#8212;</td></tr>
+<tr><td class="l">&#304;zmir</td><td class="l">KİTAPHANE</td><td>4,620</td><td class="b">150</td><td>7,744</td><td class="dn b">%-96.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">Ankara TOPLAM</td><td></td><td>7,650</td><td class="b">41,057</td><td></td><td class="up b">+%436.7</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;stanbul TOPLAM</td><td></td><td>0</td><td class="b">250</td><td></td><td class="up b">&#8212;</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;zmir TOPLAM</td><td></td><td>4,620</td><td class="b">150</td><td></td><td class="dn b">%-96.8</td></tr>
 <tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>12,270</td><td class="b">41,457</td><td></td><td class="up b">+%237.9</td></tr>
 </tbody></table></div>
 </div>
 <div class="sec-title">E&#287;itim Vadisi PDF TYT-AYT</div>
 <div class="urun-card">
 <div class="sehir-grid">
-<div class="sehir-kpi down"><div class="sehir-name">ANKARA</div><div class="sehir-by">9,831</div><div class="sehir-gy down">GY: 22,192 &middot; %-55.7</div></div>
-<div class="sehir-kpi up"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">2,220</div><div class="sehir-gy up">GY: 1,350 &middot; +%64.4</div></div>
-<div class="sehir-kpi up"><div class="sehir-name">İZMİR</div><div class="sehir-by">18,169</div><div class="sehir-gy up">GY: 12,195 &middot; +%49.0</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">Ankara</div><div class="sehir-by">9,831</div><div class="sehir-gy down">GY: 22,192 &middot; %-55.7</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">&#304;stanbul</div><div class="sehir-by">2,220</div><div class="sehir-gy up">GY: 1,350 &middot; +%64.4</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">&#304;zmir</div><div class="sehir-by">18,169</div><div class="sehir-gy up">GY: 12,195 &middot; +%49.0</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px">
+<div style="background:var(--panel2);border-left:3px solid #C1272D;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#C1272D;margin-bottom:5px;text-transform:uppercase">Ankara Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Kurumlar ile görüşmeler yapılmaktadır. Fakat  süreç çok durgun ilerlemektedir. Netleşen kurumların siparişşleri girilmiştir. Aralık ayında girilen siparişler 2026 yılının yani önümüzdeki sezon için girilen siparişler olduğu için  bu sene geçen seneyi yakalayamayacağımızı öngörmekteyiz.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #2f9d5b;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#2f9d5b;margin-bottom:5px;text-transform:uppercase">&#304;stanbul Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Geçen seneden devreden stok ile talelper karşılanmaktadır. Bu alanda satışlarımızın çoğu devlet okuluna sezonda gerçekleşmektedir. Kurum görüşmeleri devam etmektedir. Ağustos ve Eylül ayında siparişlerimiz oluşacaktır.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #1a6fa8;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#1a6fa8;margin-bottom:5px;text-transform:uppercase">&#304;zmir Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Geçen sene toplam adedimizin üzerine çıkmış durumdayız aynı kurumlarla devam ediyoruz.</div></div>
 </div>
 <div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
-<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>22,192</td><td class="b">9,831</td><td>33,332</td><td class="dn b">%-55.7</td></tr>
-<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>1,350</td><td class="b">2,220</td><td>50,520</td><td class="up b">+%64.4</td></tr>
-<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>12,195</td><td class="b">18,169</td><td>13,351</td><td class="up b">+%49.0</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>22,192</td><td class="b">9,831</td><td></td><td class="dn b">%-55.7</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>1,350</td><td class="b">2,220</td><td></td><td class="up b">+%64.4</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>12,195</td><td class="b">18,169</td><td></td><td class="up b">+%49.0</td></tr>
+<tr><td class="l">Ankara</td><td class="l">KİTAPHANE</td><td>22,192</td><td class="b">9,831</td><td>33,332</td><td class="dn b">%-55.7</td></tr>
+<tr><td class="l">&#304;stanbul</td><td class="l">KİTAPHANE</td><td>1,350</td><td class="b">2,220</td><td>50,520</td><td class="up b">+%64.4</td></tr>
+<tr><td class="l">&#304;zmir</td><td class="l">KİTAPHANE</td><td>12,195</td><td class="b">18,169</td><td>13,351</td><td class="up b">+%49.0</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">Ankara TOPLAM</td><td></td><td>22,192</td><td class="b">9,831</td><td></td><td class="dn b">%-55.7</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;stanbul TOPLAM</td><td></td><td>1,350</td><td class="b">2,220</td><td></td><td class="up b">+%64.4</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;zmir TOPLAM</td><td></td><td>12,195</td><td class="b">18,169</td><td></td><td class="up b">+%49.0</td></tr>
 <tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>35,737</td><td class="b">30,220</td><td></td><td class="dn b">%-15.4</td></tr>
 </tbody></table></div>
 </div>
 <div class="sec-title">4K TKT TYT-AYT</div>
 <div class="urun-card">
 <div class="sehir-grid">
-<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">5,432</div><div class="sehir-gy up">GY: 1,380 &middot; +%293.6</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">1,049</div><div class="sehir-gy down">GY: 1,560 &middot; %-32.8</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">5,712</div><div class="sehir-gy down">GY: 7,361 &middot; %-22.4</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">Ankara</div><div class="sehir-by">5,432</div><div class="sehir-gy up">GY: 1,380 &middot; +%293.6</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;stanbul</div><div class="sehir-by">1,049</div><div class="sehir-gy down">GY: 1,560 &middot; %-32.8</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;zmir</div><div class="sehir-by">5,712</div><div class="sehir-gy down">GY: 7,361 &middot; %-22.4</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px">
+<div style="background:var(--panel2);border-left:3px solid #C1272D;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#C1272D;margin-bottom:5px;text-transform:uppercase">Ankara Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Her 3 bölgede geçen sene TKT siparişlerinde teslim cari modülü aktif kullanılamadığından bazı teslimatlarda sorunlar yaşanmıştı. Buna rağmen geçen sene bugüne göre artış trendi sürmektedir. Devlet ve özellerde çok beğenildi. Kullanımı pratik ve olumsuz geri dönüş bildirilmemiş. Devlet okulu siparişleri netleşemedi. Geçen seneki adetleri geçeçiğimiz öngörmekteyiz.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #2f9d5b;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#2f9d5b;margin-bottom:5px;text-transform:uppercase">&#304;stanbul Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Henüz bir hareketlilik yok TKT&#39;lerde. Şu dönemde daha çok toplu siparişe  yönelim daha fazla. Okul sipariş ile adetlerimizin artacağını planlıyoruz.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #1a6fa8;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#1a6fa8;margin-bottom:5px;text-transform:uppercase">&#304;zmir Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">İki büyük kurumun siparişleri girildi. Geçen sene verdiğimiz kuurmlar yine talep etti. Sözleşmesini yaptığımız kurumlar var. Geçen seneki adetleri yakalayacağımızı düşünüyorum.</div></div>
 </div>
 <div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
-<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>1,380</td><td class="b">5,432</td><td>9,295</td><td class="up b">+%293.6</td></tr>
-<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>1,560</td><td class="b">1,049</td><td>6,597</td><td class="dn b">%-32.8</td></tr>
-<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>7,361</td><td class="b">5,712</td><td>9,630</td><td class="dn b">%-22.4</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>1,380</td><td class="b">5,432</td><td></td><td class="up b">+%293.6</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>1,560</td><td class="b">1,049</td><td></td><td class="dn b">%-32.8</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>7,361</td><td class="b">5,712</td><td></td><td class="dn b">%-22.4</td></tr>
+<tr><td class="l">Ankara</td><td class="l">KİTAPHANE</td><td>1,380</td><td class="b">5,432</td><td>9,295</td><td class="up b">+%293.6</td></tr>
+<tr><td class="l">&#304;stanbul</td><td class="l">KİTAPHANE</td><td>1,560</td><td class="b">1,049</td><td>6,597</td><td class="dn b">%-32.8</td></tr>
+<tr><td class="l">&#304;zmir</td><td class="l">KİTAPHANE</td><td>7,361</td><td class="b">5,712</td><td>9,630</td><td class="dn b">%-22.4</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">Ankara TOPLAM</td><td></td><td>1,380</td><td class="b">5,432</td><td></td><td class="up b">+%293.6</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;stanbul TOPLAM</td><td></td><td>1,560</td><td class="b">1,049</td><td></td><td class="dn b">%-32.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;zmir TOPLAM</td><td></td><td>7,361</td><td class="b">5,712</td><td></td><td class="dn b">%-22.4</td></tr>
 <tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>10,301</td><td class="b">12,193</td><td></td><td class="up b">+%18.4</td></tr>
 </tbody></table></div>
 </div>
 <div class="sec-title">4K 9-10-11 ESB</div>
 <div class="urun-card">
 <div class="sehir-grid">
-<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">15,100</div><div class="sehir-gy up">GY: 2,157 &middot; +%600.0</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">243</div><div class="sehir-gy down">GY: 400 &middot; %-39.2</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">350</div><div class="sehir-gy down">GY: 700 &middot; %-50.0</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">Ankara</div><div class="sehir-by">15,100</div><div class="sehir-gy up">GY: 2,157 &middot; +%600.0</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;stanbul</div><div class="sehir-by">243</div><div class="sehir-gy down">GY: 400 &middot; %-39.2</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;zmir</div><div class="sehir-by">350</div><div class="sehir-gy down">GY: 700 &middot; %-50.0</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px">
+<div style="background:var(--panel2);border-left:3px solid #C1272D;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#C1272D;margin-bottom:5px;text-transform:uppercase">Ankara Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Geçen sene toplam adedini geçmiş durumdayız. Yıl bitmeden anlaşmış olduğumuz kurumlara istinaden sipariş girişleri yapılmıştır.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #2f9d5b;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#2f9d5b;margin-bottom:5px;text-transform:uppercase">&#304;stanbul Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Geçen seneden devreden stok ile talelper karşılanmaktadır. Bu alanda satışlarımızın çoğu devlet okuluna sezonda gerçekleşmektedir. Ürünümüz beğenilmektedir. Sezon siparişlerini gelmesi ve anlaşmalar beklenmektedir .</div></div>
+<div style="background:var(--panel2);border-left:3px solid #1a6fa8;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#1a6fa8;margin-bottom:5px;text-transform:uppercase">&#304;zmir Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Kursların Ara sınıflarında görüşmelerimiz devam etmektedir. Devlet okullarıdan beklentilerimizi bulunmaktadır.  Bölgemizde ara sınfıların azlığı nedeniyle ürünümüz satmakta zorlanmaktayız.</div></div>
 </div>
 <div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
-<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>2,157</td><td class="b">15,100</td><td>9,872</td><td class="up b">+%600.0</td></tr>
-<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>400</td><td class="b">243</td><td>33,780</td><td class="dn b">%-39.2</td></tr>
-<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>700</td><td class="b">350</td><td>2,990</td><td class="dn b">%-50.0</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>2,157</td><td class="b">15,100</td><td></td><td class="up b">+%600.0</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>400</td><td class="b">243</td><td></td><td class="dn b">%-39.2</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>700</td><td class="b">350</td><td></td><td class="dn b">%-50.0</td></tr>
+<tr><td class="l">Ankara</td><td class="l">KİTAPHANE</td><td>2,157</td><td class="b">15,100</td><td>9,872</td><td class="up b">+%600.0</td></tr>
+<tr><td class="l">&#304;stanbul</td><td class="l">KİTAPHANE</td><td>400</td><td class="b">243</td><td>33,780</td><td class="dn b">%-39.2</td></tr>
+<tr><td class="l">&#304;zmir</td><td class="l">KİTAPHANE</td><td>700</td><td class="b">350</td><td>2,990</td><td class="dn b">%-50.0</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">Ankara TOPLAM</td><td></td><td>2,157</td><td class="b">15,100</td><td></td><td class="up b">+%600.0</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;stanbul TOPLAM</td><td></td><td>400</td><td class="b">243</td><td></td><td class="dn b">%-39.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;zmir TOPLAM</td><td></td><td>700</td><td class="b">350</td><td></td><td class="dn b">%-50.0</td></tr>
 <tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>3,257</td><td class="b">15,693</td><td></td><td class="up b">+%381.8</td></tr>
 </tbody></table></div>
 </div>
 <div class="sec-title">4K KOSB TYT-AYT</div>
 <div class="urun-card">
 <div class="sehir-grid">
-<div class="sehir-kpi up"><div class="sehir-name">ANKARA</div><div class="sehir-by">17,186</div><div class="sehir-gy up">GY: 60 &middot; +%28543.3</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">1,100</div><div class="sehir-gy down">GY: 23,330 &middot; %-95.3</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İZMİR</div><div class="sehir-by">11,001</div><div class="sehir-gy down">GY: 12,760 &middot; %-13.8</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">Ankara</div><div class="sehir-by">17,186</div><div class="sehir-gy up">GY: 60 &middot; +%28543.3</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;stanbul</div><div class="sehir-by">1,100</div><div class="sehir-gy down">GY: 23,330 &middot; %-95.3</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;zmir</div><div class="sehir-by">11,001</div><div class="sehir-gy down">GY: 12,760 &middot; %-13.8</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px">
+<div style="background:var(--panel2);border-left:3px solid #C1272D;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#C1272D;margin-bottom:5px;text-transform:uppercase">Ankara Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Geçtiğimiz yıl devreden stok nedeniyle yıl içerisinde sipariş adetleri sınırlı kalmıştı. Bu yıl ise herhangi bir mazeret olmaksızın KOSB’larda ciddi bir artış trendi beklenmekteydi. Kurumlardan alınan siparişler sisteme girilmiştir. Bir kurumdan beklediğimiz yüklü bir siparişimiz bulunmaktadır.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #2f9d5b;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#2f9d5b;margin-bottom:5px;text-transform:uppercase">&#304;stanbul Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Kurumsal ürünümüz daha çok devlet okullarında ilgi görmetkedir. Ürünler beğeniliyor. Geçen sene verdiğimiz devlet okulları ile yine çalışmayı buna ek devlet okulları ekleyeceğiz. Adetlerde ilerleyen süreçlerde artış gösterecektir.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #1a6fa8;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#1a6fa8;margin-bottom:5px;text-transform:uppercase">&#304;zmir Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">İzmir&#39;de Kosblarda hızlı bir ivme yakalanmıştı. Kurs  ve devlet okullarından güzel bir talep oluşmuştu. Bu sene beklentimiz daha yüksekti fakat. Geçen sene verilen kurumlardan olumsuz geri bildirimler oluştu. Alternatif ürünlerimiz tercih edildi.( 3D SB )</div></div>
 </div>
 <div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
-<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>60</td><td class="b">17,186</td><td>19,109</td><td class="up b">+%28543.3</td></tr>
-<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>23,330</td><td class="b">1,100</td><td>52,510</td><td class="dn b">%-95.3</td></tr>
-<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>12,760</td><td class="b">11,001</td><td>13,050</td><td class="dn b">%-13.8</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>60</td><td class="b">17,186</td><td></td><td class="up b">+%28543.3</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>23,330</td><td class="b">1,100</td><td></td><td class="dn b">%-95.3</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>12,760</td><td class="b">11,001</td><td></td><td class="dn b">%-13.8</td></tr>
+<tr><td class="l">Ankara</td><td class="l">KİTAPHANE</td><td>60</td><td class="b">17,186</td><td>19,109</td><td class="up b">+%28543.3</td></tr>
+<tr><td class="l">&#304;stanbul</td><td class="l">KİTAPHANE</td><td>23,330</td><td class="b">1,100</td><td>52,510</td><td class="dn b">%-95.3</td></tr>
+<tr><td class="l">&#304;zmir</td><td class="l">KİTAPHANE</td><td>12,760</td><td class="b">11,001</td><td>13,050</td><td class="dn b">%-13.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">Ankara TOPLAM</td><td></td><td>60</td><td class="b">17,186</td><td></td><td class="up b">+%28543.3</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;stanbul TOPLAM</td><td></td><td>23,330</td><td class="b">1,100</td><td></td><td class="dn b">%-95.3</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;zmir TOPLAM</td><td></td><td>12,760</td><td class="b">11,001</td><td></td><td class="dn b">%-13.8</td></tr>
 <tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>36,150</td><td class="b">29,287</td><td></td><td class="dn b">%-19.0</td></tr>
 </tbody></table></div>
 </div>
 <div class="sec-title">E&#287;itim Vadisi MSB TYT-AYT</div>
 <div class="urun-card">
 <div class="sehir-grid">
-<div class="sehir-kpi down"><div class="sehir-name">ANKARA</div><div class="sehir-by">10,529</div><div class="sehir-gy down">GY: 13,710 &middot; %-23.2</div></div>
-<div class="sehir-kpi down"><div class="sehir-name">İSTANBUL</div><div class="sehir-by">239</div><div class="sehir-gy down">GY: 4,550 &middot; %-94.7</div></div>
-<div class="sehir-kpi up"><div class="sehir-name">İZMİR</div><div class="sehir-by">14,825</div><div class="sehir-gy up">GY: 9,165 &middot; +%61.8</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">Ankara</div><div class="sehir-by">10,529</div><div class="sehir-gy down">GY: 13,710 &middot; %-23.2</div></div>
+<div class="sehir-kpi down"><div class="sehir-name">&#304;stanbul</div><div class="sehir-by">239</div><div class="sehir-gy down">GY: 4,550 &middot; %-94.7</div></div>
+<div class="sehir-kpi up"><div class="sehir-name">&#304;zmir</div><div class="sehir-by">14,825</div><div class="sehir-gy up">GY: 9,165 &middot; +%61.8</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px">
+<div style="background:var(--panel2);border-left:3px solid #C1272D;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#C1272D;margin-bottom:5px;text-transform:uppercase">Ankara Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Satış hareketliliği düşük bir ivmeyle ilerlemektedir. Sipariş girişleri yapılmış olmakla birlikte devreden stokta da ürünler bulunmaktadır. Zamdan etkilenmemek amacıyla tedbirli bir sipariş planlaması yapılmış olabileceği değerlendirilmektedir. Ürünlerin güncel olmadığı yönünde eleştirilerde gelmektedir.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #2f9d5b;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#2f9d5b;margin-bottom:5px;text-transform:uppercase">&#304;stanbul Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Var olan stoktaki ürünler ile devam edilmektedir.  Belli branşlarda sipariş girişleri olacaktır. Sezona doğru tüm ürün gruplarında siparişleri girileceği öngörülmektedir.</div></div>
+<div style="background:var(--panel2);border-left:3px solid #1a6fa8;border-radius:8px;padding:10px 12px"><div style="font-size:11px;font-weight:700;color:#1a6fa8;margin-bottom:5px;text-transform:uppercase">&#304;zmir Notu</div><div style="font-size:12px;line-height:1.6;color:var(--text)">Netleşen kurumlarımızın sipariş girişleri yapılmıştır. Ürününü güncellenmesi gerektiği vurgulanıyor. Ürünün yüzü eskimiş olduğu belirtiliyor.</div></div>
 </div>
 <div class="tscroll"><table class="sehir-tbl"><thead><tr><th class="l">&#350;ehir</th><th class="l">Bayi</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>De&#287;i&#351;im</th></tr></thead><tbody>
-<tr><td class="l">ANKARA</td><td class="l">KİTAPHANE</td><td>13,710</td><td class="b">10,529</td><td>28,170</td><td class="dn b">%-23.2</td></tr>
-<tr><td class="l">İSTANBUL</td><td class="l">KİTAPHANE</td><td>4,550</td><td class="b">239</td><td>20,860</td><td class="dn b">%-94.7</td></tr>
-<tr><td class="l">İZMİR</td><td class="l">KİTAPHANE</td><td>9,165</td><td class="b">14,825</td><td>15,216</td><td class="up b">+%61.8</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">ANKARA TOPLAM</td><td></td><td>13,710</td><td class="b">10,529</td><td></td><td class="dn b">%-23.2</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İSTANBUL TOPLAM</td><td></td><td>4,550</td><td class="b">239</td><td></td><td class="dn b">%-94.7</td></tr>
-<tr style="background:var(--panel2);font-weight:700"><td class="l">İZMİR TOPLAM</td><td></td><td>9,165</td><td class="b">14,825</td><td></td><td class="up b">+%61.8</td></tr>
+<tr><td class="l">Ankara</td><td class="l">KİTAPHANE</td><td>13,710</td><td class="b">10,529</td><td>28,170</td><td class="dn b">%-23.2</td></tr>
+<tr><td class="l">&#304;stanbul</td><td class="l">KİTAPHANE</td><td>4,550</td><td class="b">239</td><td>20,860</td><td class="dn b">%-94.7</td></tr>
+<tr><td class="l">&#304;zmir</td><td class="l">KİTAPHANE</td><td>9,165</td><td class="b">14,825</td><td>15,216</td><td class="up b">+%61.8</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">Ankara TOPLAM</td><td></td><td>13,710</td><td class="b">10,529</td><td></td><td class="dn b">%-23.2</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;stanbul TOPLAM</td><td></td><td>4,550</td><td class="b">239</td><td></td><td class="dn b">%-94.7</td></tr>
+<tr style="background:var(--panel2);font-weight:700"><td class="l">&#304;zmir TOPLAM</td><td></td><td>9,165</td><td class="b">14,825</td><td></td><td class="up b">+%61.8</td></tr>
 <tr class="totr"><td class="l" colspan="2">GENEL TOPLAM</td><td>27,425</td><td class="b">25,593</td><td></td><td class="dn b">%-6.7</td></tr>
 </tbody></table></div>
 </div>
-
-
 <footer>&#199;&#214;Z&#220;M Yay&#305;n Grubu &mdash; Kitaphane Grubu 7 &#220;r&#252;n 1. Raporlama &middot; Haziran 2026<br>
 Ankara &middot; &#304;stanbul &middot; &#304;zmir &middot; KPI: Sezonsal &#220;r&#252;n Takip Takvimindeki &#304;&#351; S&#252;re&#231;lerinin Zaman&#305;nda Yerine Getirilmesi</footer>
 </div>
@@ -278,14 +307,14 @@ function renderCharts(){
   mk('chGrowth',{type:'bar',data:{
     labels:labels,
     datasets:[
-      {label:'Ankara',data:[178.0,436.7,-55.7,293.6,599.9,28543.3,-23.2],backgroundColor:'#C1272D',borderRadius:4,barPercentage:0.6},
-      {label:'\u0130stanbul',data:[77.2,0.0,64.4,-32.8,-39.3,-95.3,-94.7],backgroundColor:'#2f9d5b',borderRadius:4,barPercentage:0.6},
-      {label:'\u0130zmir',data:[91.4,-96.8,49.0,-22.4,-50.0,-13.8,61.8],backgroundColor:'#1a6fa8',borderRadius:4,barPercentage:0.6}
+      {label:'Ankara BY',data:[32510,41057,9831,5432,15100,17186,10529],backgroundColor:'#C1272D',borderRadius:4,barPercentage:0.6},
+      {label:'\u0130stanbul BY',data:[7620,250,2220,1049,243,1100,239],backgroundColor:'#2f9d5b',borderRadius:4,barPercentage:0.6},
+      {label:'\u0130zmir BY',data:[6700,150,18169,5712,350,11001,14825],backgroundColor:'#1a6fa8',borderRadius:4,barPercentage:0.6}
     ]},
     options:{animation:false,maintainAspectRatio:false,
       plugins:{legend:{labels:{boxWidth:10,font:{size:10}}}},
       scales:{
-        y:{grid:{color:grid},ticks:{callback:function(v){return v+'%';}}},
+        y:{beginAtZero:true,grid:{color:grid},ticks:{callback:function(v){return (v/1000).toFixed(0)+'K';}}},
         x:{grid:{display:false}}
       }
     }
