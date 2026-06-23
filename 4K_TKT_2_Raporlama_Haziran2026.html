@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4K TKT TYT-AYT · 2. Raporlama · Haziran 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --red: #C8102E;
+  --red-dark: #9b0c22;
+  --red-light: #fdf2f3;
+  --green: #1a7a4a;
+  --green-bg: #e8f5ee;
+  --amber: #b45309;
+  --amber-bg: #fef3c7;
+  --blue: #1d4ed8;
+  --blue-bg: #eff6ff;
+  --ink: #1a1a1a;
+  --ink2: #444;
+  --ink3: #777;
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --border: #e5e3de;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
+}
+[data-theme="dark"] {
+  --ink: #f0eeea;
+  --ink2: #c8c5be;
+  --ink3: #888;
+  --bg: #1a1917;
+  --surface: #252320;
+  --border: #3a3835;
+  --shadow: 0 1px 4px rgba(0,0,0,.4);
+  --red-light: #2a1215;
+  --green-bg: #0d2318;
+  --amber-bg: #2a1d08;
+  --blue-bg: #0d1829;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; transition: background .3s, color .3s; }
+
+/* HEADER */
+.header {
+  background: var(--red);
+  color: #fff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(200,16,46,.35);
+}
+.header-left { display: flex; align-items: center; gap: 14px; }
+.logo-circle {
+  width: 40px; height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--red); font-size: 13px;
+}
+.header-title { font-weight: 700; font-size: 15px; line-height: 1.2; }
+.header-subtitle { font-size: 11px; opacity: .75; font-weight: 400; }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.badge {
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.toggle-btn {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  transition: background .2s;
+}
+.toggle-btn:hover { background: rgba(255,255,255,.25); }
+
+/* COMPARE BANNER */
+.compare-banner {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  color: #fff;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.compare-icon { font-size: 18px; }
+.compare-text strong { font-weight: 600; }
+
+/* SUMMARY GRID */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.kpi-card {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.kpi-name { font-size: 12px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
+.kpi-product { font-size: 11px; color: var(--ink3); margin-bottom: 12px; }
+.kpi-numbers { display: flex; gap: 16px; margin-bottom: 14px; }
+.kpi-num { flex: 1; }
+.kpi-num-label { font-size: 10px; color: var(--ink3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: .5px; }
+.kpi-num-val { font-size: 22px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; color: var(--ink); line-height: 1; }
+.kpi-num-val.muted { color: var(--ink3); font-size: 16px; }
+/* Progress comparison bars */
+.compare-bars { display: flex; flex-direction: column; gap: 6px; }
+.cbar-row { display: flex; align-items: center; gap: 8px; }
+.cbar-label { font-size: 10px; color: var(--ink3); width: 56px; flex-shrink: 0; text-align: right; }
+.cbar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.cbar-fill { height: 100%; border-radius: 4px; transition: width .5s ease; }
+.cbar-r1 { background: #94a3b8; }
+.cbar-r2 { background: var(--red); }
+.cbar-gy { background: var(--ink3); opacity: .5; }
+.cbar-count { font-size: 10px; font-family: 'IBM Plex Mono', monospace; color: var(--ink2); width: 40px; }
+.growth-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; margin-top: 8px;
+}
+.pill-up { background: var(--green-bg); color: var(--green); }
+.pill-down { background: #fde8eb; color: var(--red-dark); }
+.pill-new { background: var(--blue-bg); color: var(--blue); }
+.pill-same { background: var(--amber-bg); color: var(--amber); }
+.r2-delta {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--ink3);
+}
+.r2-delta strong { color: var(--ink2); font-family: 'IBM Plex Mono', monospace; }
+
+/* MAIN CONTENT */
+.main { max-width: 1400px; margin: 0 auto; padding: 0 24px 24px; }
+
+/* BY SECTION */
+.by-section {
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.by-header {
+  background: var(--red);
+  color: #fff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.by-header-left { display: flex; flex-direction: column; gap: 4px; }
+.by-title { font-size: 16px; font-weight: 700; }
+.by-subtitle { font-size: 11px; opacity: .75; }
+.by-header-badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-start; }
+.hbadge {
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.hbadge.green { background: rgba(26,122,74,.6); border-color: rgba(26,122,74,.8); }
+.hbadge.amber { background: rgba(180,83,9,.5); border-color: rgba(180,83,9,.7); }
+
+/* Stat row */
+.stat-row {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.stat-item {
+  flex: 1;
+  min-width: 100px;
+  padding: 16px 20px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.stat-item:last-child { border-right: none; }
+.stat-label { font-size: 10px; color: var(--ink3); text-transform: uppercase; letter-spacing: .6px; font-weight: 600; }
+.stat-val { font-size: 20px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; color: var(--ink); }
+.stat-val.red { color: var(--red); }
+.stat-val.green { color: var(--green); }
+.stat-delta { font-size: 11px; color: var(--ink3); }
+.stat-delta .up { color: var(--green); }
+.stat-delta .down { color: var(--red-dark); }
+
+/* RAPORLAMA COMPARE STRIP */
+.rapor-compare {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 12px 20px;
+  background: var(--blue-bg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.rapor-compare-label { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .7px; flex-shrink: 0; }
+.rapor-compare-items { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.rapor-box {
+  display: flex; flex-direction: column; gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+}
+.rapor-box-label { font-size: 10px; color: var(--ink3); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+.rapor-box-val { font-size: 18px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; color: var(--ink); }
+.rapor-box-val.r1 { color: #64748b; }
+.rapor-box-val.r2 { color: var(--red); }
+.rapor-arrow { font-size: 18px; color: var(--ink3); }
+.rapor-delta-box {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 14px;
+}
+.rapor-delta-label { font-size: 10px; color: var(--ink3); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+.rapor-delta-val { font-size: 16px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+.rapor-delta-val.plus { color: var(--green); }
+.rapor-delta-val.zero { color: var(--amber); }
+.rapor-delta-val.minus { color: var(--red-dark); }
+
+/* ACIKLAMA BOX */
+.aciklama-box {
+  border-left: 4px solid var(--red);
+  background: var(--red-light);
+  padding: 12px 16px;
+  margin: 14px 20px;
+  border-radius: 0 6px 6px 0;
+}
+.aciklama-label {
+  font-size: 10px; font-weight: 700; color: var(--red);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+}
+.aciklama-box p { font-size: 12.5px; color: var(--ink2); line-height: 1.6; }
+
+/* CHART AREA */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.chart-wrap {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+.chart-title { font-size: 11px; font-weight: 700; color: var(--ink3); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 10px; }
+.chart-wrap canvas { max-height: 180px; }
+
+/* TABLE */
+.tbl-wrap { overflow-x: auto; }
+.tbl-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 8px;
+}
+.tbl-head-label { font-size: 11px; font-weight: 700; color: var(--ink3); text-transform: uppercase; letter-spacing: .6px; }
+.scrollnote { font-size: 10px; color: var(--ink3); display: none; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  background: var(--bg);
+  color: var(--ink3);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.drow td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--ink2);
+  white-space: nowrap;
+}
+.drow { cursor: pointer; transition: background .15s; }
+.drow:hover { background: var(--bg); }
+.expand-icon { color: var(--red); font-size: 10px; width: 22px; text-align: center; }
+.erow-content {
+  padding: 10px 16px;
+  background: var(--red-light);
+  font-size: 12px;
+  color: var(--ink2);
+  border-left: 3px solid var(--red);
+  line-height: 1.55;
+}
+.r1-col { color: #64748b; font-family: 'IBM Plex Mono', monospace; }
+.r2-col { color: var(--red); font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+.gy-col { color: var(--ink3); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.delta-pos { color: var(--green); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.delta-neg { color: var(--red-dark); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.delta-zero { color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+.totr td {
+  background: var(--bg);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 9px 12px;
+  border-top: 2px solid var(--border);
+  color: var(--ink);
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--ink3);
+  font-size: 11px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .summary-grid { padding: 14px; gap: 12px; grid-template-columns: 1fr; }
+  .main { padding: 0 14px 14px; }
+  .charts-grid { grid-template-columns: 1fr; }
+  .scrollnote { display: block; }
+  .by-header { flex-direction: column; }
+  .stat-row { flex-direction: row; flex-wrap: wrap; }
+  .stat-item { min-width: 50%; border-right: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="logo-circle">ÇYG</div>
+    <div>
+      <div class="header-title">Çözüm Yayın Grubu</div>
+      <div class="header-subtitle">4K TKT TYT-AYT · 2. Raporlama</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge">19.06.2026</span>
+    <button class="toggle-btn" onclick="toggleTheme()" id="themeBtn">🌙 Karanlık</button>
+  </div>
+</header>
+
+<div class="compare-banner">
+  <span class="compare-icon">📊</span>
+  <span class="compare-text"><strong>Karşılaştırmalı Görünüm:</strong> Bu rapor, 09.06.2026 tarihli 1. Raporlama ile 19.06.2026 tarihli 2. Raporlama arasındaki değişimi göstermektedir. Aralarındaki fark yaklaşık <strong>10 gün</strong>dir.</span>
+</div>
+
+<!-- SUMMARY KPI CARDS -->
+<div class="summary-grid">
+
+  <!-- VEDAT CARD -->
+  <div class="kpi-card">
+    <div class="kpi-name">Vedat Adsan</div>
+    <div class="kpi-product">4K Yayınları TKT TYT-AYT</div>
+    <div class="kpi-numbers">
+      <div class="kpi-num">
+        <div class="kpi-num-label">1. Raporlama</div>
+        <div class="kpi-num-val muted">0</div>
+      </div>
+      <div class="kpi-num">
+        <div class="kpi-num-label">2. Raporlama</div>
+        <div class="kpi-num-val">840</div>
+      </div>
+      <div class="kpi-num">
+        <div class="kpi-num-label">GY BGK</div>
+        <div class="kpi-num-val muted">1.400</div>
+      </div>
+    </div>
+    <div class="compare-bars">
+      <div class="cbar-row">
+        <span class="cbar-label">1. Rap.</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-r1" style="width:0%"></div></div>
+        <span class="cbar-count">0</span>
+      </div>
+      <div class="cbar-row">
+        <span class="cbar-label">2. Rap.</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-r2" style="width:60%"></div></div>
+        <span class="cbar-count">840</span>
+      </div>
+      <div class="cbar-row">
+        <span class="cbar-label">GY BGK</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-gy" style="width:100%"></div></div>
+        <span class="cbar-count">1.400</span>
+      </div>
+    </div>
+    <div>
+      <span class="growth-pill pill-down">▼ %60 GY'nin altında</span>
+    </div>
+    <div class="r2-delta">
+      <span>1.→2. Rap. değişim:</span>
+      <strong class="delta-pos">+840 adet</strong>
+    </div>
+  </div>
+
+  <!-- SÜLEYMAN CARD -->
+  <div class="kpi-card">
+    <div class="kpi-name">Süleyman İşpınar</div>
+    <div class="kpi-product">4K TKT</div>
+    <div class="kpi-numbers">
+      <div class="kpi-num">
+        <div class="kpi-num-label">1. Raporlama</div>
+        <div class="kpi-num-val muted">4.512</div>
+      </div>
+      <div class="kpi-num">
+        <div class="kpi-num-label">2. Raporlama</div>
+        <div class="kpi-num-val">4.674</div>
+      </div>
+      <div class="kpi-num">
+        <div class="kpi-num-label">GY BGK</div>
+        <div class="kpi-num-val muted">12.356</div>
+      </div>
+    </div>
+    <div class="compare-bars">
+      <div class="cbar-row">
+        <span class="cbar-label">1. Rap.</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-r1" style="width:36.5%"></div></div>
+        <span class="cbar-count">4.512</span>
+      </div>
+      <div class="cbar-row">
+        <span class="cbar-label">2. Rap.</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-r2" style="width:37.8%"></div></div>
+        <span class="cbar-count">4.674</span>
+      </div>
+      <div class="cbar-row">
+        <span class="cbar-label">GY BGK</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-gy" style="width:100%"></div></div>
+        <span class="cbar-count">12.356</span>
+      </div>
+    </div>
+    <div>
+      <span class="growth-pill pill-down">▼ %37.8 GY'nin altında</span>
+    </div>
+    <div class="r2-delta">
+      <span>1.→2. Rap. değişim:</span>
+      <strong class="delta-pos">+162 adet</strong>
+    </div>
+  </div>
+
+  <!-- MUHSİN CARD -->
+  <div class="kpi-card">
+    <div class="kpi-name">Muhsin Özbalcı</div>
+    <div class="kpi-product">4K TYT-AYT TKT</div>
+    <div class="kpi-numbers">
+      <div class="kpi-num">
+        <div class="kpi-num-label">1. Raporlama</div>
+        <div class="kpi-num-val muted">830</div>
+      </div>
+      <div class="kpi-num">
+        <div class="kpi-num-label">2. Raporlama</div>
+        <div class="kpi-num-val">830</div>
+      </div>
+      <div class="kpi-num">
+        <div class="kpi-num-label">GY BGK</div>
+        <div class="kpi-num-val muted">4.131</div>
+      </div>
+    </div>
+    <div class="compare-bars">
+      <div class="cbar-row">
+        <span class="cbar-label">1. Rap.</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-r1" style="width:20.1%"></div></div>
+        <span class="cbar-count">830</span>
+      </div>
+      <div class="cbar-row">
+        <span class="cbar-label">2. Rap.</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-r2" style="width:20.1%"></div></div>
+        <span class="cbar-count">830</span>
+      </div>
+      <div class="cbar-row">
+        <span class="cbar-label">GY BGK</span>
+        <div class="cbar-track"><div class="cbar-fill cbar-gy" style="width:100%"></div></div>
+        <span class="cbar-count">4.131</span>
+      </div>
+    </div>
+    <div>
+      <span class="growth-pill pill-down">▼ %20.1 GY'nin altında</span>
+    </div>
+    <div class="r2-delta">
+      <span>1.→2. Rap. değişim:</span>
+      <strong class="delta-zero">+0 adet (değişim yok)</strong>
+    </div>
+  </div>
+
+</div>
+
+<!-- MAIN SECTIONS -->
+<div class="main">
+
+<!-- ===== VEDAT ADSAN ===== -->
+<section class="by-section">
+  <div class="by-header">
+    <div class="by-header-left">
+      <div class="by-title">Vedat Adsan</div>
+      <div class="by-subtitle">4K Yayınları TKT TYT-AYT · 11 Bayi</div>
+    </div>
+    <div class="by-header-badges">
+      <span class="hbadge">GY BGK: 1.400</span>
+      <span class="hbadge">GY TOP: 16.800</span>
+      <span class="hbadge amber">2. Rap: 840</span>
+    </div>
+  </div>
+
+  <!-- Raporlama karşılaştırma şeridi -->
+  <div class="rapor-compare">
+    <span class="rapor-compare-label">📈 Raporlamalar Arası</span>
+    <div class="rapor-compare-items">
+      <div class="rapor-box">
+        <div class="rapor-box-label">1. Raporlama (09.06)</div>
+        <div class="rapor-box-val r1">0</div>
+      </div>
+      <div class="rapor-arrow">→</div>
+      <div class="rapor-box">
+        <div class="rapor-box-label">2. Raporlama (19.06)</div>
+        <div class="rapor-box-val r2">840</div>
+      </div>
+      <div class="rapor-delta-box">
+        <div class="rapor-delta-label">10 günde değişim</div>
+        <div class="rapor-delta-val plus">+840 adet</div>
+      </div>
+      <div class="rapor-delta-box">
+        <div class="rapor-delta-label">GY'ye oranı</div>
+        <div class="rapor-delta-val zero">%60</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-label">GY BGK</div>
+      <div class="stat-val">1.400</div>
+      <div class="stat-delta">Geçen yıl bu güne kadar</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">1. Raporlama</div>
+      <div class="stat-val" style="color:#64748b">0</div>
+      <div class="stat-delta">09.06.2026</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">2. Raporlama</div>
+      <div class="stat-val red">840</div>
+      <div class="stat-delta">19.06.2026</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Büyüme (GY'ye)</div>
+      <div class="stat-val red">%60</div>
+      <div class="stat-delta"><span class="down">▼ GY altında</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">GY Toplam</div>
+      <div class="stat-val muted" style="font-size:18px;color:var(--ink3)">16.800</div>
+      <div class="stat-delta">Geçen yıl dönem sonu</div>
+    </div>
+  </div>
+
+  <div class="aciklama-box">
+    <div class="aciklama-label">BY Genel Değerlendirmesi (2. Raporlama)</div>
+    <p>Geçtiğimiz yıl ürünü kullanan bayilerden ve kurumlardan alınan geri bildirimler genel olarak olumludur. 4K Yayınları TKT TYT-AYT ürünü; içerik yapısı, sınav sistemine uygunluğu ve öğrenci başarısına katkısı nedeniyle kurumlar ve kullanıcılar tarafından beğeniyle karşılanmaktadır. Kurum görüşmeleri planlanan çalışma takvimi doğrultusunda devam etmekte olup geçen yıl anlaşma sağlanan kurumlarla yeniden temas kurulmuştur. Mevcut dönemde bazı kurumların erken anlaşma süreçlerini henüz tamamlamamış olması nedeniyle siparişlerin önemli bir bölümü sisteme yansımamıştır. Temmuz ve Ağustos aylarında Tam Okul anlaşmaları ile birlikte satış adetlerinin artması beklenmektedir.</p>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-wrap">
+      <div class="chart-title">Raporlama Karşılaştırması</div>
+      <canvas id="vedat-chart1"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">GY'ye Göre Gerçekleşme</div>
+      <canvas id="vedat-chart2"></canvas>
+    </div>
+  </div>
+
+  <div class="tbl-head">
+    <span class="tbl-head-label">Bayi Detayları</span>
+    <span class="scrollnote">← Kaydırın →</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Bayi</th>
+          <th>İl</th>
+          <th>GY BGK</th>
+          <th>1. Rap. BGK</th>
+          <th>2. Rap. BGK</th>
+          <th>10G Δ</th>
+          <th>GY Top</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="vedat-tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SÜLEYMAN İŞPINAR ===== -->
+<section class="by-section">
+  <div class="by-header">
+    <div class="by-header-left">
+      <div class="by-title">Süleyman İşpınar</div>
+      <div class="by-subtitle">4K TKT · 19 Bayi</div>
+    </div>
+    <div class="by-header-badges">
+      <span class="hbadge">GY BGK: 12.356</span>
+      <span class="hbadge">GY TOP: 23.185</span>
+      <span class="hbadge amber">2. Rap: 4.674</span>
+    </div>
+  </div>
+
+  <div class="rapor-compare">
+    <span class="rapor-compare-label">📈 Raporlamalar Arası</span>
+    <div class="rapor-compare-items">
+      <div class="rapor-box">
+        <div class="rapor-box-label">1. Raporlama (09.06)</div>
+        <div class="rapor-box-val r1">4.512</div>
+      </div>
+      <div class="rapor-arrow">→</div>
+      <div class="rapor-box">
+        <div class="rapor-box-label">2. Raporlama (19.06)</div>
+        <div class="rapor-box-val r2">4.674</div>
+      </div>
+      <div class="rapor-delta-box">
+        <div class="rapor-delta-label">10 günde değişim</div>
+        <div class="rapor-delta-val plus">+162 adet</div>
+      </div>
+      <div class="rapor-delta-box">
+        <div class="rapor-delta-label">GY'ye oranı</div>
+        <div class="rapor-delta-val zero">%37.8</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-label">GY BGK</div>
+      <div class="stat-val">12.356</div>
+      <div class="stat-delta">Geçen yıl bu güne kadar</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">1. Raporlama</div>
+      <div class="stat-val" style="color:#64748b">4.512</div>
+      <div class="stat-delta">09.06.2026</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">2. Raporlama</div>
+      <div class="stat-val red">4.674</div>
+      <div class="stat-delta">19.06.2026</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Büyüme (GY'ye)</div>
+      <div class="stat-val red">%37.8</div>
+      <div class="stat-delta"><span class="down">▼ GY altında</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">GY Toplam</div>
+      <div class="stat-val" style="font-size:18px;color:var(--ink3)">23.185</div>
+      <div class="stat-delta">Geçen yıl dönem sonu</div>
+    </div>
+  </div>
+
+  <div class="aciklama-box">
+    <div class="aciklama-label">BY Genel Değerlendirmesi (2. Raporlama)</div>
+    <p>Karar süreçlerini henüz tamamlamamış kurumlar ve özellikle ağustos ayında alım yapması beklenen kurs merkezleriyle görüşmeler sıklaştırılmalı, ürünün soru kalitesi ve video çözüm avantajları daha etkin şekilde vurgulanmalıdır. Ayrıca fiyat hassasiyeti bulunan kurumlar için alternatif teklif ve kampanya modelleri değerlendirilerek ürünün tercih edilme oranının artırılması hedeflenmelidir. Mevcut olumlu görüşmelerin yakından takip edilmesi ve potansiyel kurumlara yönelik çalışmaların artırılmasıyla satış performansının desteklenmesi önerilmektedir. Ürünlerimizin YKS grubunda tanıtımı yapılırken Tam Okul dijital platformuna uyumu vurgulanmalı ve paket şeklinde satışı sağlanmalıdır.</p>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-wrap">
+      <div class="chart-title">Raporlama Karşılaştırması</div>
+      <canvas id="suleyman-chart1"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Aktif Bayi Dağılımı (2. Rap.)</div>
+      <canvas id="suleyman-chart2"></canvas>
+    </div>
+  </div>
+
+  <div class="tbl-head">
+    <span class="tbl-head-label">Bayi Detayları</span>
+    <span class="scrollnote">← Kaydırın →</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Bayi</th>
+          <th>İl</th>
+          <th>GY BGK</th>
+          <th>1. Rap. BGK</th>
+          <th>2. Rap. BGK</th>
+          <th>10G Δ</th>
+          <th>GY Top</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="suleyman-tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== MUHSİN ÖZBALCI ===== -->
+<section class="by-section">
+  <div class="by-header">
+    <div class="by-header-left">
+      <div class="by-title">Muhsin Özbalcı</div>
+      <div class="by-subtitle">4K TYT-AYT TKT · 8 Bayi</div>
+    </div>
+    <div class="by-header-badges">
+      <span class="hbadge">GY BGK: 4.131</span>
+      <span class="hbadge">GY TOP: 12.386</span>
+      <span class="hbadge amber">2. Rap: 830</span>
+    </div>
+  </div>
+
+  <div class="rapor-compare">
+    <span class="rapor-compare-label">📈 Raporlamalar Arası</span>
+    <div class="rapor-compare-items">
+      <div class="rapor-box">
+        <div class="rapor-box-label">1. Raporlama (09.06)</div>
+        <div class="rapor-box-val r1">830</div>
+      </div>
+      <div class="rapor-arrow">→</div>
+      <div class="rapor-box">
+        <div class="rapor-box-label">2. Raporlama (19.06)</div>
+        <div class="rapor-box-val r2">830</div>
+      </div>
+      <div class="rapor-delta-box">
+        <div class="rapor-delta-label">10 günde değişim</div>
+        <div class="rapor-delta-val zero">+0 adet</div>
+      </div>
+      <div class="rapor-delta-box">
+        <div class="rapor-delta-label">GY'ye oranı</div>
+        <div class="rapor-delta-val zero">%20.1</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-label">GY BGK</div>
+      <div class="stat-val">4.131</div>
+      <div class="stat-delta">Geçen yıl bu güne kadar</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">1. Raporlama</div>
+      <div class="stat-val" style="color:#64748b">830</div>
+      <div class="stat-delta">09.06.2026</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">2. Raporlama</div>
+      <div class="stat-val red">830</div>
+      <div class="stat-delta">19.06.2026</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Büyüme (GY'ye)</div>
+      <div class="stat-val red">%20.1</div>
+      <div class="stat-delta"><span class="down">▼ GY altında</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">GY Toplam</div>
+      <div class="stat-val" style="font-size:18px;color:var(--ink3)">12.386</div>
+      <div class="stat-delta">Geçen yıl dönem sonu</div>
+    </div>
+  </div>
+
+  <div class="aciklama-box">
+    <div class="aciklama-label">BY Genel Değerlendirmesi (2. Raporlama)</div>
+    <p>TKT ürün grubumuz içerik ve kalite açısından kabul görmektedir. Konumlandırma itibarıyla ana kaynak ürün kategorisinde değil, tamamlayıcı/ara ürün segmentinde yer almaktadır. Satış başarısı büyük ölçüde doğru paketleme, fiyatlandırma ve hedef kurum seçimine bağlıdır. Ürünlerin ana kaynak setlerle birlikte paket şeklinde konumlandırılması, yüksek iskonto oranlarıyla kurumsal hedefli satış modelinin uygulanması önerilmektedir. Belediyeler ve Halk Eğitim Merkezleri gibi büyük kurumlarla görüşmelere ağırlık verilmesi planlanmaktadır. İlk raporlama döneminden bu yana sipariş girişi gerçekleşmemiş olmakla birlikte, önemli kurumlarla (Antalya Kemer Belediyesi, BURSMEK, Balıkesir YDS) yüksek adetli teklifler sunulmuş ve değerlendirme süreçleri devam etmektedir.</p>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-wrap">
+      <div class="chart-title">Raporlama Karşılaştırması</div>
+      <canvas id="muhsin-chart1"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Bayi GY vs Güncel</div>
+      <canvas id="muhsin-chart2"></canvas>
+    </div>
+  </div>
+
+  <div class="tbl-head">
+    <span class="tbl-head-label">Bayi Detayları</span>
+    <span class="scrollnote">← Kaydırın →</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Bayi</th>
+          <th>İl</th>
+          <th>GY BGK</th>
+          <th>1. Rap. BGK</th>
+          <th>2. Rap. BGK</th>
+          <th>10G Δ</th>
+          <th>GY Top</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="muhsin-tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+</div><!-- /main -->
+
+<footer class="footer">
+  Power BI – Ürün Raporu baz alınarak hazırlanmıştır &nbsp;·&nbsp; Çözüm Yayın Grubu &nbsp;·&nbsp; 4K TKT TYT-AYT 2. Raporlama &nbsp;·&nbsp; 19.06.2026
+</footer>
+
+<script>
+// DATA
+const vedat_bayiler = [
+  {bayi:"AY KIRTASIYE KITAP TEK.TEM.INS",il:"AĞRI",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:1180,a1:"4K Yayınları TKT TYT-AYT ürününe yönelik piyasa geri bildirimleri olumlu olup, ürün kurumlar ve kullanıcılar tarafından beğeniyle karşılanmaktadır. Mevcut dönemde bazı kurumların erken anlaşma süreçlerini henüz tamamlamamış olması nedeniyle satışlar sisteme tam olarak yansımamıştır.",a2:"Bazı kurumlarımızın erken anlaşma süreçlerini henüz tamamlamamış olması ve tam okul dijital paket anlaşması yapılan kurumlarımızın satış girişlerinin sisteme henüz yansımamış olması nedeniyle mevcut satış performansı gerçek potansiyeli tam olarak göstermemektedir."},
+  {bayi:"BILIM KITABEVI SEYIT ATES",il:"ŞANLIURFA",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:1699,a1:null,a2:null},
+  {bayi:"HEDEF KIRTASIYE-ZAFER YAVUZER",il:"VAN",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:1884,a1:null,a2:null},
+  {bayi:"IGDIR KULTUR KITAP KIRTASIYE",il:"IĞDIR",gy_bgk:null,r1_bgk:null,r2_bgk:750,gy_top:null,a1:null,a2:null},
+  {bayi:"KOMMAGENE KITAP DEPOSU RAHIME BILGIC",il:"ADIYAMAN",gy_bgk:null,r1_bgk:null,r2_bgk:10,gy_top:null,a1:null,a2:null},
+  {bayi:"NAYIF AYDEMIR (VAROL KIRTASIYE)",il:"BİTLİS",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:1125,a1:null,a2:null},
+  {bayi:"OKURKENT KIRTASIYE GIYASETTIN DEMIR",il:"MUŞ",gy_bgk:null,r1_bgk:null,r2_bgk:80,gy_top:null,a1:null,a2:null},
+  {bayi:"POZITIF BOLGE YAYIN DAGITIM",il:"DİYARBAKIR",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:6830,a1:null,a2:null},
+  {bayi:"SAH KIRTASIYE MINE BENZER",il:"ŞANLIURFA",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:750,a1:null,a2:null},
+  {bayi:"GENC CARSI KITAP KIRTASIYE",il:"ERZİNCAN",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:592,a1:null,a2:null},
+  {bayi:"SIVEREK AKADEMI KITAP KIRTASIYE",il:"ŞANLIURFA",gy_bgk:1400,r1_bgk:null,r2_bgk:null,gy_top:2740,a1:null,a2:null},
+];
+
+const suleyman_bayiler = [
+  {bayi:"ANTAKYA IKRA KIRTASIYECILIK",il:"HATAY",gy_bgk:1800,r1_bgk:910,r2_bgk:910,gy_top:3600,a1:"4K TKT ürünlerimiz olumlu geri bildirimler almış ancak satış adetleri henüz hedeflenen seviyelere ulaşamamıştır. Kurumların ara ürün seçimlerinde daha temkinli hareket etmesi ve kurs merkezlerinde satın alma kararlarının ağustos ayına ertelenmesi temel nedenlerdir.",a2:"İlk raporda da belirtildiği üzere, bu ürün gamımıza yönelik talep müfredat değişikliği nedeniyle kurumların mevcut stoklarını eritme eğiliminde olmaları sebebiyle beklenen düzeyde karşılık görmemektedir. Adana ve Gaziantep illerinde kurum çalışmaları devam etmektedir."},
+  {bayi:"ASEL KITAP KIRTASIYE ASLI CEKEN",il:"AMASYA",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:1760,a1:null,a2:null},
+  {bayi:"BI KITABEVI KIRTASIYE YAYINCILIK",il:"ÇORUM",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:470,a1:null,a2:null},
+  {bayi:"BOGAZICI KIRTASIYE AKIF OZDIL",il:"OSMANİYE",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:2016,a1:null,a2:null},
+  {bayi:"CANSU KITAP KIRTASIYE ADIGUZEL",il:"GAZİANTEP",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:40,a1:null,a2:null},
+  {bayi:"DEVELI YAPRAK DAGITIM KENDIRCI",il:"KAYSERİ",gy_bgk:100,r1_bgk:null,r2_bgk:null,gy_top:100,a1:null,a2:null},
+  {bayi:"ETHEM DEMIRBAG (ERDEM KIRTASIYE)",il:"ADANA",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:155,a1:null,a2:null},
+  {bayi:"GARANTI AKADEMI EGT HIZ SAN TIC LTD STI",il:"KAYSERİ",gy_bgk:5279,r1_bgk:3602,r2_bgk:3764,gy_top:5279,a1:null,a2:null},
+  {bayi:"HASAN ACIKBAS - KULTUR KITABEVI",il:"KARAMAN",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:40,a1:null,a2:null},
+  {bayi:"ISKENDERUN EMEK KITABEVI COZUM SIS.",il:"HATAY",gy_bgk:2340,r1_bgk:null,r2_bgk:null,gy_top:3635,a1:null,a2:null},
+  {bayi:"KARACA YAYIN BASIM DAGITIM",il:"HATAY",gy_bgk:1912,r1_bgk:null,r2_bgk:null,gy_top:1912,a1:null,a2:null},
+  {bayi:"KARANFIL KITAP KIRTASIYE UMUT GOKMEN",il:"OSMANİYE",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:660,a1:null,a2:null},
+  {bayi:"MARTIM KIRTASIYE SAN. VE TIC. LTD.STI.",il:"KAHRAMANMARAŞ",gy_bgk:440,r1_bgk:null,r2_bgk:null,gy_top:630,a1:null,a2:null},
+  {bayi:"MEHMET CETIN - CETIN KITAP KIRTASIYE",il:"HATAY",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:976,a1:null,a2:null},
+  {bayi:"MINI KITAP KIRTASIYE ALPAY ERDAL",il:"KAHRAMANMARAŞ",gy_bgk:405,r1_bgk:null,r2_bgk:null,gy_top:405,a1:null,a2:null},
+  {bayi:"MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI",il:"YOZGAT",gy_bgk:80,r1_bgk:null,r2_bgk:null,gy_top:80,a1:null,a2:null},
+  {bayi:"NEVSEHIR-ATLAS KITAP KIRTASIYE",il:"NEVŞEHİR",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:192,a1:null,a2:null},
+  {bayi:"PARK OZEL EGITIM KIRTASIYE LTD STI",il:"MERSİN",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:950,a1:null,a2:null},
+  {bayi:"VIZYON PLUS KITABEVI OKKES ANIL MART",il:"OSMANİYE",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:285,a1:null,a2:null},
+];
+
+const muhsin_bayiler = [
+  {bayi:"ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI",il:"KÜTAHYA",gy_bgk:2000,r1_bgk:null,r2_bgk:null,gy_top:2655,a1:"TKT ürün grubumuz, içerik kalitesi, kazanım odaklı yapısı ve ölçme-değerlendirme sürecine sağladığı pratik katkı itibarıyla sahada olumlu geri bildirimler almaktadır.",a2:"İlk rapor tarihinden sonraki 10 günlük süreçte sipariş girişi gerçekleşmemiştir. Ancak yüksek öğrenci potansiyeline sahip büyük belediye kursları ve özel öğretim kurumlarıyla görüşmeler yapılmıştır. Özellikle Antalya Kemer Belediyesi, Bursa BURSMEK ve Balıkesir YDS Eğitim Kurumlarına yüksek adetli teklifler sunulmuştur."},
+  {bayi:"ATAK OFIS KITAP KIRTASIYE SAN TIC LTD",il:"ESKİŞEHİR",gy_bgk:1500,r1_bgk:null,r2_bgk:null,gy_top:1500,a1:null,a2:null},
+  {bayi:"CETIN YAYIN DAGITIM A.S",il:"BALIKESİR",gy_bgk:0,r1_bgk:150,r2_bgk:150,gy_top:5485,a1:null,a2:null},
+  {bayi:"SED-KANGURU KITAP MUSAMETTIN KUCAK",il:"MANİSA",gy_bgk:250,r1_bgk:null,r2_bgk:null,gy_top:465,a1:null,a2:null},
+  {bayi:"SEGESTA KITAP KIRTASIYE DAGITIM LTD STI",il:"ANTALYA",gy_bgk:null,r1_bgk:null,r2_bgk:120,gy_top:null,a1:null,a2:null},
+  {bayi:"TERCIH KITABEVI/GUROL SULUHAN",il:"AYDIN",gy_bgk:0,r1_bgk:null,r2_bgk:null,gy_top:900,a1:null,a2:null},
+  {bayi:"YESIL BEYAZ YAYIN DAG (MITHAT APARCI)",il:"KONYA",gy_bgk:0,r1_bgk:560,r2_bgk:560,gy_top:100,a1:null,a2:null},
+  {bayi:"YONCE YAYIN DAGITIM KITABEVI LTD.STI",il:"BURSA",gy_bgk:381,r1_bgk:null,r2_bgk:null,gy_top:1281,a1:null,a2:null},
+];
+
+function fmt(v) {
+  if (v === null || v === undefined) return '–';
+  return v.toLocaleString('tr-TR');
+}
+function deltaCell(r1, r2) {
+  if (r1 === null && r2 === null) return '<span class="delta-zero">–</span>';
+  const a = r1 || 0, b = r2 || 0;
+  const d = b - a;
+  if (d > 0) return `<span class="delta-pos">+${fmt(d)}</span>`;
+  if (d < 0) return `<span class="delta-neg">${fmt(d)}</span>`;
+  if (r1 !== null || r2 !== null) return `<span class="delta-zero">±0</span>`;
+  return '<span class="delta-zero">–</span>';
+}
+
+function buildTable(tbodyId, rows) {
+  const tbody = document.getElementById(tbodyId);
+  let totGy=0, totR1=0, totR2=0, totGyTop=0;
+  rows.forEach((r, i) => {
+    const hasNote = r.a1 || r.a2;
+    // data row
+    const drow = document.createElement('tr');
+    drow.className = 'drow';
+    drow.onclick = () => toggleRow(drow);
+    const d = deltaCell(r.r1_bgk, r.r2_bgk);
+    drow.innerHTML = `
+      <td>${r.bayi}</td>
+      <td>${r.il}</td>
+      <td class="gy-col">${fmt(r.gy_bgk)}</td>
+      <td class="r1-col">${fmt(r.r1_bgk)}</td>
+      <td class="r2-col">${fmt(r.r2_bgk)}</td>
+      <td>${d}</td>
+      <td class="gy-col">${fmt(r.gy_top)}</td>
+      <td class="expand-icon">▶</td>
+    `;
+    tbody.appendChild(drow);
+    // expand row
+    const erow = document.createElement('tr');
+    erow.className = 'erow';
+    erow.style.display = 'none';
+    let content = '';
+    if (r.a1 || r.a2) {
+      if (r.a1) content += `<div style="margin-bottom:8px"><strong style="color:#64748b;font-size:11px">1. RAPORLAMA NOTU:</strong><br>${r.a1}</div>`;
+      if (r.a2) content += `<div><strong style="color:#C8102E;font-size:11px">2. RAPORLAMA NOTU:</strong><br>${r.a2}</div>`;
+    } else {
+      content = `<em style="color:#999">Açıklama yok</em>`;
+    }
+    erow.innerHTML = `<td colspan="8"><div class="erow-content">${content}</div></td>`;
+    tbody.appendChild(erow);
+
+    if (r.gy_bgk) totGy += r.gy_bgk;
+    if (r.r1_bgk) totR1 += r.r1_bgk;
+    if (r.r2_bgk) totR2 += r.r2_bgk;
+    if (r.gy_top) totGyTop += r.gy_top;
+  });
+  // totals row
+  const totr = document.createElement('tr');
+  totr.className = 'totr';
+  const totD = deltaCell(totR1 || null, totR2 || null);
+  totr.innerHTML = `
+    <td colspan="2">TOPLAM</td>
+    <td class="gy-col">${fmt(totGy)}</td>
+    <td class="r1-col">${fmt(totR1 || null)}</td>
+    <td class="r2-col">${fmt(totR2 || null)}</td>
+    <td>${totD}</td>
+    <td class="gy-col">${fmt(totGyTop)}</td>
+    <td></td>
+  `;
+  tbody.appendChild(totr);
+}
+
+function toggleRow(drow) {
+  const erow = drow.nextElementSibling;
+  const icon = drow.querySelector('.expand-icon');
+  if (erow.style.display === 'none') {
+    erow.style.display = 'table-row';
+    icon.textContent = '▼';
+  } else {
+    erow.style.display = 'none';
+    icon.textContent = '▶';
+  }
+}
+
+// Build tables
+buildTable('vedat-tbody', vedat_bayiler);
+buildTable('suleyman-tbody', suleyman_bayiler);
+buildTable('muhsin-tbody', muhsin_bayiler);
+
+// CHARTS
+const chartDefaults = {
+  responsive: true,
+  maintainAspectRatio: true,
+  plugins: { legend: { labels: { font: { family: 'IBM Plex Sans', size: 11 }, boxWidth: 12 } } },
+};
+const red = '#C8102E', slate = '#94a3b8', green = '#1a7a4a', amber = '#b45309';
+
+// VEDAT CHARTS
+new Chart(document.getElementById('vedat-chart1'), {
+  type: 'bar',
+  data: {
+    labels: ['GY BGK', '1. Raporlama (09.06)', '2. Raporlama (19.06)'],
+    datasets: [{
+      label: 'Adet',
+      data: [1400, 0, 840],
+      backgroundColor: ['rgba(148,163,184,.5)', 'rgba(148,163,184,.8)', red],
+      borderColor: ['#94a3b8','#94a3b8', red],
+      borderWidth: 1.5,
+      borderRadius: 4,
+    }]
+  },
+  options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, title: { display: false } } }
+});
+new Chart(document.getElementById('vedat-chart2'), {
+  type: 'doughnut',
+  data: {
+    labels: ['2. Rap. BGK', 'GY BGK Farkı'],
+    datasets: [{ data: [840, 560], backgroundColor: [red, 'rgba(148,163,184,.3)'], borderWidth: 0 }]
+  },
+  options: { ...chartDefaults, cutout: '65%' }
+});
+
+// SÜLEYMAN CHARTS
+new Chart(document.getElementById('suleyman-chart1'), {
+  type: 'bar',
+  data: {
+    labels: ['GY BGK', '1. Raporlama (09.06)', '2. Raporlama (19.06)'],
+    datasets: [{
+      label: 'Adet',
+      data: [12356, 4512, 4674],
+      backgroundColor: ['rgba(148,163,184,.5)', 'rgba(148,163,184,.8)', red],
+      borderColor: ['#94a3b8','#94a3b8', red],
+      borderWidth: 1.5,
+      borderRadius: 4,
+    }]
+  },
+  options: { ...chartDefaults }
+});
+new Chart(document.getElementById('suleyman-chart2'), {
+  type: 'bar',
+  data: {
+    labels: ['IKRA (Hatay)', 'GARANTİ (Kayseri)', 'Diğerleri'],
+    datasets: [
+      { label: '1. Rap.', data: [910, 3602, 0], backgroundColor: 'rgba(148,163,184,.7)', borderRadius: 3 },
+      { label: '2. Rap.', data: [910, 3764, 0], backgroundColor: red, borderRadius: 3 },
+    ]
+  },
+  options: { ...chartDefaults, scales: { x: { stacked: false }, y: { stacked: false } } }
+});
+
+// MUHSİN CHARTS
+new Chart(document.getElementById('muhsin-chart1'), {
+  type: 'bar',
+  data: {
+    labels: ['GY BGK', '1. Raporlama (09.06)', '2. Raporlama (19.06)'],
+    datasets: [{
+      label: 'Adet',
+      data: [4131, 830, 830],
+      backgroundColor: ['rgba(148,163,184,.5)', 'rgba(148,163,184,.8)', red],
+      borderColor: ['#94a3b8','#94a3b8', red],
+      borderWidth: 1.5,
+      borderRadius: 4,
+    }]
+  },
+  options: { ...chartDefaults }
+});
+new Chart(document.getElementById('muhsin-chart2'), {
+  type: 'bar',
+  data: {
+    labels: ['ÇETİN (Balıkesir)', 'SEGESTA (Antalya)', 'YEŞİL BEYAZ (Konya)'],
+    datasets: [
+      { label: '1. Rap.', data: [150, 0, 560], backgroundColor: 'rgba(148,163,184,.7)', borderRadius: 3 },
+      { label: '2. Rap.', data: [150, 120, 560], backgroundColor: red, borderRadius: 3 },
+    ]
+  },
+  options: { ...chartDefaults }
+});
+
+// THEME
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙 Karanlık' : '☀️ Aydınlık';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.getElementById('themeBtn').textContent = savedTheme === 'dark' ? '☀️ Aydınlık' : '🌙 Karanlık';
+}
+</script>
+</body>
+</html>
