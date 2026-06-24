@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D LGS Simülasyon Deneme – 2. Raporlama Haziran 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+  :root {
+    --red: #C8102E; --red-dark: #9b0c22; --red-light: #fde8ec;
+    --ink: #1a1a1a; --ink-mid: #444; --ink-light: #888;
+    --border: #e0e0e0; --bg: #f5f4f0; --white: #ffffff;
+    --green: #1a7a4a; --green-bg: #e8f5ee;
+    --amber: #b45309; --amber-bg: #fef3c7;
+    --blue: #1d4ed8; --blue-bg: #eff6ff;
+  }
+  [data-theme="dark"] {
+    --ink: #f0f0f0; --ink-mid: #ccc; --ink-light: #999;
+    --border: #333; --bg: #111; --white: #1c1c1c;
+    --red-light: #2a0a0e;
+    --green-bg: #0a2016; --amber-bg: #1f1200; --blue-bg: #0a1533;
+  }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family:'IBM Plex Sans',sans-serif; background:var(--bg); color:var(--ink); font-size:13px; line-height:1.6; transition:background 0.2s,color 0.2s; }
+
+  /* HEADER */
+  .header { background:var(--white); border-bottom:4px solid var(--red); }
+  .header-top { display:flex; align-items:center; gap:20px; padding:18px 40px; }
+  .logo-circle { width:48px;height:48px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;letter-spacing:-0.5px;flex-shrink:0; }
+  .logo-text { font-size:11px;color:var(--ink-mid);line-height:1.3; }
+  .logo-text strong { font-size:14px;color:var(--ink);display:block; }
+  .header-title { flex:1;border-left:2px solid var(--border);padding-left:20px; }
+  .header-title h1 { font-size:18px;font-weight:700;letter-spacing:-0.3px; }
+  .header-title p { font-size:12px;color:var(--ink-light);margin-top:2px; }
+  .date-badge { background:var(--red);color:#fff;padding:6px 16px;font-size:12px;font-weight:600;font-family:'IBM Plex Mono',monospace;border-radius:4px;white-space:nowrap; }
+  .header-controls { display:flex;gap:8px;align-items:center; }
+  .ctrl-btn { background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:5px 10px;border-radius:4px;cursor:pointer;font-size:11px;font-family:'IBM Plex Sans',sans-serif; }
+  .ctrl-btn:hover { background:var(--red);color:#fff;border-color:var(--red); }
+
+  /* KPI BAND */
+  .kpi-band { background:var(--red);color:#fff;padding:8px 40px;font-size:11px;display:flex;align-items:center;gap:20px;flex-wrap:wrap; }
+  .kpi-band .label { opacity:0.75; }
+  .kpi-band .value { font-weight:700;font-family:'IBM Plex Mono',monospace; }
+  .kpi-item { display:flex;gap:8px;align-items:center; }
+  .kpi-sep { opacity:0.3; }
+
+  /* LAYOUT */
+  .page { max-width:1100px;margin:0 auto;padding:28px 20px; }
+  .section-title { font-size:11px;font-weight:700;color:var(--red);letter-spacing:1.5px;text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--red);margin-bottom:16px;margin-top:28px; }
+
+  /* SUMMARY CARDS */
+  .summary-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px; }
+  .sum-card { background:var(--white);border:1px solid var(--border);border-top:3px solid var(--red);padding:14px 16px;border-radius:4px; }
+  .sum-card .name { font-size:11px;color:var(--ink-light);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px; }
+  .sum-card .big-num { font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;line-height:1; }
+  .sum-card .sub { font-size:10px;color:var(--ink-light);margin-top:4px; }
+  .growth { display:inline-block;margin-top:6px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;font-family:'IBM Plex Mono',monospace; }
+  .growth.up { background:var(--green-bg);color:var(--green); }
+  .growth.down { background:var(--amber-bg);color:var(--amber); }
+  .growth.neu { background:var(--blue-bg);color:var(--blue); }
+
+  /* REPORT BLOCKS */
+  .report-block { background:var(--white);border:1px solid var(--border);border-radius:4px;margin-bottom:20px;overflow:hidden; }
+  .rb-header { background:var(--ink);color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px; }
+  .rb-name { font-size:13px;font-weight:700; }
+  .rb-product { font-size:11px;opacity:0.65; }
+  .rb-badges { display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end; }
+  .rb-badge { background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);padding:3px 10px;border-radius:20px;font-size:11px;font-family:'IBM Plex Mono',monospace;white-space:nowrap; }
+  .rb-badge.hl { background:var(--red);border-color:var(--red-dark); }
+
+  /* STATS ROW */
+  .stats-row { display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border); }
+  .stat-cell { padding:14px 20px;border-right:1px solid var(--border); }
+  .stat-cell:last-child { border-right:none; }
+  .sc-label { font-size:10px;color:var(--ink-light);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px; }
+  .sc-val { font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600; }
+  .sc-sub { font-size:10px;color:var(--ink-light);margin-top:2px; }
+
+  /* ACIKLAMA BOX */
+  .aciklama-box { border-left:4px solid var(--red);background:var(--red-light);padding:12px 16px;margin:14px 20px;border-radius:0 4px 4px 0; }
+  .aciklama-label { font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px; }
+
+  /* CHART */
+  .chart-wrap { padding:16px 20px;border-bottom:1px solid var(--border); }
+  .chart-wrap h4 { font-size:10px;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px; }
+
+  /* TABLE */
+  .table-wrap { overflow-x:auto;padding:0; }
+  .scrollnote { font-size:10px;color:var(--ink-light);padding:8px 20px 4px;display:none; }
+  .bayi-table { width:100%;border-collapse:collapse;font-size:12px; }
+  .bayi-table thead tr { background:var(--bg);border-bottom:2px solid var(--border); }
+  .bayi-table th { padding:8px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.5px; }
+  .bayi-table th.num, .bayi-table td.num { text-align:right;font-family:'IBM Plex Mono',monospace; }
+  .drow { cursor:pointer;border-bottom:1px solid var(--border); }
+  .drow:hover { background:rgba(200,16,46,0.03); }
+  .drow td { padding:9px 12px;color:var(--ink); }
+  .expand-icon { color:var(--red);font-size:10px;width:24px;text-align:center; }
+  .erow td { padding:0; }
+  .erow-content { padding:10px 16px;background:var(--red-light);font-size:12px;color:var(--ink-mid);border-left:3px solid var(--red); }
+  .totr { background:var(--bg);font-weight:700; }
+  .totr td { padding:8px 12px;border-top:2px solid var(--border); }
+
+  /* PILLS */
+  .pill { padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600; }
+  .pill.ok { background:var(--green-bg);color:var(--green); }
+  .pill.warn { background:var(--amber-bg);color:var(--amber); }
+  .pill.risk { background:#fde8ec;color:var(--red); }
+
+  /* FOOTER */
+  .footer { margin-top:40px;padding:16px 20px;border-top:2px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--ink-light); }
+
+  /* KPI SECTION */
+  .kpi-section { display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:16px 20px 20px;border-top:1px solid var(--border); }
+  .kpi-box h4 { font-size:10px;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px; }
+  .kpi-box p { font-size:12px;line-height:1.65;color:var(--ink-mid); }
+
+  @media(max-width:700px) {
+    .header-top { padding:14px 16px;flex-wrap:wrap; }
+    .stats-row { grid-template-columns:1fr 1fr; }
+    .summary-grid { grid-template-columns:1fr 1fr; }
+    .kpi-section { grid-template-columns:1fr; }
+    .scrollnote { display:block; }
+    .rb-header { flex-direction:column;align-items:flex-start; }
+    .kpi-band { padding:8px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo-circle">ÇYG</div>
+    <div class="logo-text"><strong>Çözüm Yayın Grubu</strong>Satış &amp; Raporlama Birimi</div>
+    <div class="header-title">
+      <h1>3D LGS Simülasyon Deneme</h1>
+      <p>2. Raporlama Dönemi · 3 Bölge Yöneticisi · Haziran 2026</p>
+    </div>
+    <div class="header-controls">
+      <button class="ctrl-btn" onclick="toggleTheme()">🌙 Tema</button>
+    </div>
+    <div class="date-badge">22.06.2026</div>
+  </div>
+  <div class="kpi-band">
+    <div class="kpi-item"><span class="label">Toplam GY BGK</span><span class="value">50.968</span></div>
+    <span class="kpi-sep">|</span>
+    <div class="kpi-item"><span class="label">Toplam BY BGK</span><span class="value">37.672</span></div>
+    <span class="kpi-sep">|</span>
+    <div class="kpi-item"><span class="label">Genel Değişim</span><span class="value">-26.1%</span></div>
+    <span class="kpi-sep">|</span>
+    <div class="kpi-item"><span class="label">Toplam Bayi</span><span class="value">119</span></div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ÖZET KARTLAR -->
+  <div class="section-title">Bölge Yöneticisi Özeti</div>
+  <div class="summary-grid">
+    <div class="sum-card">
+      <div class="name">Vedat Adsan</div>
+      <div class="big-num">14.632</div>
+      <div class="sub">Bu Yıl BGK · GY: 24.034</div>
+      <span class="growth down">-39.1%</span>
+    </div>
+    <div class="sum-card">
+      <div class="name">Süleyman İşpınar</div>
+      <div class="big-num">8.879</div>
+      <div class="sub">Bu Yıl BGK · GY: 13.709</div>
+      <span class="growth down">-35.2%</span>
+    </div>
+    <div class="sum-card">
+      <div class="name">Muhsin Özbalcı</div>
+      <div class="big-num">14.161</div>
+      <div class="sub">Bu Yıl BGK · GY: 13.225</div>
+      <span class="growth up">+7.1%</span>
+    </div>
+  </div>
+
+  <!-- =================== VEDAT ADSAN =================== -->
+  <div class="section-title" style="margin-top:36px">Vedat Adsan — 3D Ortaokul 8. Sınıf Simülasyon Denemeleri</div>
+  <div class="report-block">
+    <div class="rb-header">
+      <div>
+        <div class="rb-name">Vedat Adsan</div>
+        <div class="rb-product">3D Ortaokul 8. Sınıf Simülasyon Denemeleri · 2. Raporlama · 22.06.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">38 Bayi</span>
+        <span class="rb-badge">BY BGK: 14.632</span>
+        <span class="rb-badge hl">GY BGK: 24.034</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">14.632</div><div class="sc-sub">güncel adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">24.034</div><div class="sc-sub">aynı dönem</div></div>
+      <div class="stat-cell"><div class="sc-label">Değişim</div><div class="sc-val" style="color:var(--amber)">−39,1%</div><div class="sc-sub">müfredat etkisi</div></div>
+      <div class="stat-cell"><div class="sc-label">Aktif Bayi</div><div class="sc-val">30</div><div class="sc-sub">sipariş veren</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>3D Ortaokul 8. Sınıf Simülasyon Deneme kapsamında gerçekleştirilen 1. raporlama döneminde toplam 7.226 adet sipariş alınmıştır. İlk raporlama verileri esas alındığında, 2. raporlama döneminde sipariş adetlerinde 90 adetlik ilave artış gerçekleşmiş ve toplam sipariş sayısı 7.316 adede ulaşmıştır.<br>Bu doğrultuda, ilk raporlama dönemine kıyasla siparişlerde yaklaşık %1,25 oranında artış gerçekleştiği görülmektedir.<br>Ayrıca, Simülasyon Denemeleri için asıl talep döneminin mevcut süreçten ziyade eylül-ocak ayları arasında olduğu, özellikle devlet okullarında bu dönemde yoğun talep oluştuğu değerlendirilmektedir. Bu nedenle ürün grubunda önümüzdeki dönemde ilave sipariş potansiyelinin devam ettiği öngörülmektedir.</p>
+    </div>
+    <div class="chart-wrap">
+      <h4>Top 12 Bayi — BGK Karşılaştırması</h4>
+      <canvas id="chartV" height="120"></canvas>
+    </div>
+    <div class="table-wrap">
+      <div class="scrollnote">← Tabloyu kaydırarak görebilirsiniz</div>
+      <table class="bayi-table">
+        <thead><tr><th>Bayi Adı</th><th>İl</th><th class="num">GY BGK</th><th class="num">BY BGK</th><th>Durum</th><th></th></tr></thead>
+        <tbody>
+          
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ADA KIRTASIYE KITABEVI MEHMET CIHAD ELCI</td>
+      <td>BINGÖL</td>
+      <td class="num">285</td>
+      <td class="num">265</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><strong>BY Notu:</strong> 3D Ortaokul 8. Sınıf Simülasyon Deneme kapsamında gerçekleştirilen 1. raporlama döneminde toplam 7.226 adet sipariş alınmıştır. İlk raporlama verileri esas alındığında, 2. raporlama döneminde sipariş adetlerinde 90 adetlik ilave artış gerçekleşmiş ve toplam sipariş sayısı 7.316 adede ulaşmıştır.<br>Bu doğrultuda, ilk raporlama dönemine kıyasla siparişlerde yaklaşık %1,25 oranında artış gerçekleştiği görülmektedir.<br>Ayrıca, Simülasyon Denemeleri için asıl talep döneminin mevcut süreçten ziyade eylül-ocak ayları arasında olduğu, özellikle devlet okullarında bu dönemde yoğun talep oluştuğu değerlendirilmektedir. Bu nedenle ürün grubunda önümüzdeki dönemde ilave sipariş potansiyelinin devam ettiği öngörülmektedir.</div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>AKSU KIRTASIYE - AZIZ AKSU</td>
+      <td>HAKKARI</td>
+      <td class="num">—</td>
+      <td class="num">335</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ARDAHAN BILIM KIRTASIYE ERCAN ERDINC TIRPANCI</td>
+      <td>ARDAHAN</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>AY KIRTASIYE KITAP TEK.TEM.INS.MOB. SAN.TIC.LTD.STI</td>
+      <td>AGRI</td>
+      <td class="num">322</td>
+      <td class="num">358</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BILIM KITABEVI SEYIT ATES</td>
+      <td>SANLIURFA</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BKM BATMAN KITAP MERKEZI KIRTASIYE - MAKBULE NUR GOLGE</td>
+      <td>BATMAN</td>
+      <td class="num">1.000</td>
+      <td class="num">1.110</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>DENAS LOJISTIK PETROL INSAAT OTOMOTIV TURIZM SANAYI VE TICARET LTD.STI</td>
+      <td>SIRNAK</td>
+      <td class="num">—</td>
+      <td class="num">75</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>DOĞAN KİTAP KIRTASİYE</td>
+      <td>SANLIURFA</td>
+      <td class="num">—</td>
+      <td class="num">60</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>DOGUBAYAZIT SERHAT KITAPEVI SERHAT CELIK</td>
+      <td>AGRI</td>
+      <td class="num">—</td>
+      <td class="num">70</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>DORUK SANAYI VE TICARET LIMITED SIRKETI</td>
+      <td>MARDIN</td>
+      <td class="num">352</td>
+      <td class="num">372</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ELAZIG ANKA KITAP KIRTASIYE - CAHIT AYHAN</td>
+      <td>ELAZIG</td>
+      <td class="num">1.300</td>
+      <td class="num">310</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>FINAL BASARI EGITIM HIZ. BAS</td>
+      <td>SIIRT</td>
+      <td class="num">—</td>
+      <td class="num">30</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ</td>
+      <td>GÜMÜSHANE</td>
+      <td class="num">—</td>
+      <td class="num">51</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>GUNEYDOGU TELEKOMUNASYON KAGT PET URUN SAN TIC LTD STI</td>
+      <td>SIRNAK</td>
+      <td class="num">515</td>
+      <td class="num">20</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>GUZEL OZEL EGT KIRT INS SAN TIC LTD STI</td>
+      <td>DIYARBAKIR</td>
+      <td class="num">27</td>
+      <td class="num">70</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>HEDEF KIRTASIYE-ZAFER YAVUZER</td>
+      <td>VAN</td>
+      <td class="num">4.520</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>IGDIR KULTUR KITAP KIRTASIYE-MEHMET NURI YIGIT</td>
+      <td>IGDIR</td>
+      <td class="num">60</td>
+      <td class="num">210</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KOMMAGENE KITAP DEPOSU RAHIME BILGIC</td>
+      <td>ADIYAMAN</td>
+      <td class="num">—</td>
+      <td class="num">1.720</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)</td>
+      <td>BAYBURT</td>
+      <td class="num">75</td>
+      <td class="num">170</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI</td>
+      <td>MARDIN</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MIDYAT BARIS KIRTASIYE BESIR ULUG</td>
+      <td>MARDIN</td>
+      <td class="num">45</td>
+      <td class="num">135</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>NAYIF AYDEMIR (VAROL KIRTASIYE)</td>
+      <td>BITLIS</td>
+      <td class="num">360</td>
+      <td class="num">150</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>NURULLAH OLCAN KITABEVI</td>
+      <td>SIRNAK</td>
+      <td class="num">—</td>
+      <td class="num">10</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>OKURKENT KIRTASIYE GIYASETTIN DEMIR</td>
+      <td>MUS</td>
+      <td class="num">465</td>
+      <td class="num">635</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA LTD STI</td>
+      <td>KARS</td>
+      <td class="num">125</td>
+      <td class="num">110</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>POZITIF BASKI HIZMETLERI KITAP KIRTASIYE</td>
+      <td>ERZURUM</td>
+      <td class="num">300</td>
+      <td class="num">130</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP KIRTASIYE YAZ. ILTS. SAN.TIC.LTD.STI</td>
+      <td>DIYARBAKIR</td>
+      <td class="num">—</td>
+      <td class="num">51</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SAH KIRTASIYE MINE BENZER</td>
+      <td>SANLIURFA</td>
+      <td class="num">200</td>
+      <td class="num">83</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SAMI YILDIRIM VE ORTAKLIGI (GENC CARSI KITAP KIRTASIYE)</td>
+      <td>ERZINCAN</td>
+      <td class="num">454</td>
+      <td class="num">75</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SEBIL KIRTASIYE-UZEYIR AKCELIK</td>
+      <td>BITLIS</td>
+      <td class="num">—</td>
+      <td class="num">—</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SEDAT KIRTASIYE (ABUBEKIR YUCEL)</td>
+      <td>SANLIURFA</td>
+      <td class="num">—</td>
+      <td class="num">20</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SIIRT ARI KITAPEVI  ALI KURT</td>
+      <td>SIIRT</td>
+      <td class="num">70</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SIVEREK AKADEMI KITAP KIRTASIYE BILGISAYAR NUSRET AKYOLCU</td>
+      <td>SANLIURFA</td>
+      <td class="num">346</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.</td>
+      <td>MARDIN</td>
+      <td class="num">855</td>
+      <td class="num">70</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>TEBLIG KIRTASIYE TEKS. TAS. TUR. SAN. VE. TIC. LTD. STI</td>
+      <td>DIYARBAKIR</td>
+      <td class="num">225</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>UCAR DAGITIM PAZARLAMA ITH IHR TIC SAN LTD STI</td>
+      <td>MARDIN</td>
+      <td class="num">60</td>
+      <td class="num">371</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>UMUT KIRTASIYE-MEHMET ALI CEYHAN</td>
+      <td>DIYARBAKIR</td>
+      <td class="num">56</td>
+      <td class="num">250</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>37 BAYİ</td>
+      <td>TOTAL</td>
+      <td class="num">12.017</td>
+      <td class="num">7.316</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+          <tr class="totr"><td colspan="2">TOPLAM</td><td class="num">24.034</td><td class="num">14.632</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-section">
+      <div class="kpi-box"><h4>Rapor Sonuç ve Önerileri</h4><p>3D Ortaokul Simülasyon Deneme ürün grubunda geçen yıl aynı dönemde 12.017 adet satış gerçekleşmişken, bu yıl aynı dönemde satış adedi 7.226 olarak gerçekleşmiştir. Satışlardaki gerilemenin temel nedeni, sipariş vermeyen bayilerin müfredat değişikliği sonrası depolarında bulunan mevcut stoklarını eritme eğiliminde olmalarıdır.<br>Önümüzdeki iki raporlama döneminde sipariş oluşturmayan ve raflarında ürün eksikliği bulunan bayiler özel olarak takip edilecek, bayi ziyaretleri artırılarak stok ve satış planlamaları yeniden yapılandırılacaktır. Özellikle kurum anlaşmaları ve devlet okullarında yürütülecek çalışmalarla ürünün sahadaki görünürlüğü ve talebi artırılarak yeni siparişlerin sisteme kazandırılması hedeflenmektedir.<br>Saha ziyaretlerinde kurum yöneticileri ve öğretmenlerden alınan geri bildirimlerde, 3D Ortaokul Simülasyon Denemelerinin 5, 6 ve 7. sınıf seviyelerinde de yayımlanmasına yönelik yoğun talep olduğu görülmüştür. Mevcut ürünün sahadaki marka gücü ve başarısı dikkate alındığında, ilgili sınıf seviyelerinde ürün çeşitliliğinin artırılmasının hem kurum taleplerini karşılayacağı hem de satış hacmine önemli katkı sağlayacağı değerlendirilmektedir.</p></div>
+      <div class="kpi-box"><h4>2. Raporlama Notu</h4><p>3D Ortaokul 8. Sınıf Simülasyon Deneme kapsamında gerçekleştirilen 1. raporlama döneminde toplam 7.226 adet sipariş alınmıştır. İlk raporlama verileri esas alındığında, 2. raporlama döneminde sipariş adetlerinde 90 adetlik ilave artış gerçekleşmiş ve toplam sipariş sayısı 7.316 adede ulaşmıştır.<br>Bu doğrultuda, ilk raporlama dönemine kıyasla siparişlerde yaklaşık %1,25 oranında artış gerçekleştiği görülmektedir.<br>Ayrıca, Simülasyon Denemeleri için asıl talep döneminin mevcut süreçten ziyade eylül-ocak ayları arasında olduğu, özellikle devlet okullarında bu dönemde yoğun talep oluştuğu değerlendirilmektedir. Bu nedenle ürün grubunda önümüzdeki dönemde ilave sipariş potansiyelinin devam ettiği öngörülmektedir.</p></div>
+    </div>
+  </div>
+
+  <!-- =================== SÜLEYMAN İŞPINAR =================== -->
+  <div class="section-title">Süleyman İşpınar — 3D LGS Simülasyon Deneme</div>
+  <div class="report-block">
+    <div class="rb-header">
+      <div>
+        <div class="rb-name">Süleyman İşpınar</div>
+        <div class="rb-product">3D LGS Simülasyon Deneme · 2. Raporlama · 22.06.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">38 Bayi</span>
+        <span class="rb-badge">BY BGK: 8.879</span>
+        <span class="rb-badge hl">GY BGK: 13.709</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">8.879</div><div class="sc-sub">güncel adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">13.709</div><div class="sc-sub">aynı dönem</div></div>
+      <div class="stat-cell"><div class="sc-label">Değişim</div><div class="sc-val" style="color:var(--amber)">−35,2%</div><div class="sc-sub">stok kontrolü</div></div>
+      <div class="stat-cell"><div class="sc-label">Aktif Bayi</div><div class="sc-val">29</div><div class="sc-sub">sipariş veren</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>İlk raporda da belirtildiği üzere, özellikle geçen yıl yüksek adetli stoklu sipariş veren bazı bayiler bu yıl ihtiyaç odaklı ve kontrollü sipariş politikası izlemektedir. Bu nedenle sahadaki talepte belirgin bir daralmadan ziyade, bayilerin risk yönetimi ve stok kontrolü yaklaşımının satış adetlerine yansıdığı değerlendirilmektedir.<br><br>Bununla birlikte ürünün içerik kalitesi, uygulama yapısı ve sahadaki algısına yönelik olumsuz bir geri bildirim bulunmamaktadır. Aksine yapılan görüşmelerde ürünün beğenildiği ve kurumlar tarafından tercih edilmeye devam ettiği görülmektedir. Özellikle henüz sipariş oluşturmayan veya geçen yılın altında sipariş veren büyük hacimli bayilerden gelecek ilave taleplerin sonraki raporlama dönemlerinde satış adetlerine olumlu katkı sağlaması beklenmektedir.<br><br>Sonuç olarak mevcut tablo, ürün kaynaklı bir talep kaybından ziyade müfredat değişikliğinin oluşturduğu belirsizlik ve bayilerin stok yönetimi tercihleri nedeniyle ortaya çıkan dönemsel bir yavaşlamaya işaret etmektedir. Bayilerle yürütülen takip ve tanıtım çalışmalarına devam edilerek, yeni sipariş fırsatlarının değerlendirilmesi sağlanacaktır.</p>
+    </div>
+    <div class="chart-wrap">
+      <h4>Top 12 Bayi — BGK Karşılaştırması</h4>
+      <canvas id="chartS" height="120"></canvas>
+    </div>
+    <div class="table-wrap">
+      <div class="scrollnote">← Tabloyu kaydırarak görebilirsiniz</div>
+      <table class="bayi-table">
+        <thead><tr><th>Bayi Adı</th><th>İl</th><th class="num">GY BGK</th><th class="num">BY BGK</th><th>Durum</th><th></th></tr></thead>
+        <tbody>
+          
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ABC KIRTASIYE ALI YILDIRIM</td>
+      <td>ÇANKIRI</td>
+      <td class="num">—</td>
+      <td class="num">5</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><strong>BY Notu:</strong> İlk raporda da belirtildiği üzere, özellikle geçen yıl yüksek adetli stoklu sipariş veren bazı bayiler bu yıl ihtiyaç odaklı ve kontrollü sipariş politikası izlemektedir. Bu nedenle sahadaki talepte belirgin bir daralmadan ziyade, bayilerin risk yönetimi ve stok kontrolü yaklaşımının satış adetlerine yansıdığı değerlendirilmektedir.<br><br>Bununla birlikte ürünün içerik kalitesi, uygulama yapısı ve sahadaki algısına yönelik olumsuz bir geri bildirim bulunmamaktadır. Aksine yapılan görüşmelerde ürünün beğenildiği ve kurumlar tarafından tercih edilmeye devam ettiği görülmektedir. Özellikle henüz sipariş oluşturmayan veya geçen yılın altında sipariş veren büyük hacimli bayilerden gelecek ilave taleplerin sonraki raporlama dönemlerinde satış adetlerine olumlu katkı sağlaması beklenmektedir.<br><br>Sonuç olarak mevcut tablo, ürün kaynaklı bir talep kaybından ziyade müfredat değişikliğinin oluşturduğu belirsizlik ve bayilerin stok yönetimi tercihleri nedeniyle ortaya çıkan dönemsel bir yavaşlamaya işaret etmektedir. Bayilerle yürütülen takip ve tanıtım çalışmalarına devam edilerek, yeni sipariş fırsatlarının değerlendirilmesi sağlanacaktır.</div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ADNAN DUMAN - DUMAN KITABEVI</td>
+      <td>KIRSEHIR</td>
+      <td class="num">280</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>AKADEMI KITAP KIRTASIYE - MUSA KAYA</td>
+      <td>AMASYA</td>
+      <td class="num">20</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ALTIN KITAP KIRTASIYE MALZ.INS.TAAH.TARIM HAYV.ZUC.TURZ.PAZ.SAN.VE TIC.LTD.STI.</td>
+      <td>KIRSEHIR</td>
+      <td class="num">160</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZARLAMA LTD. STI.</td>
+      <td>ADANA</td>
+      <td class="num">—</td>
+      <td class="num">2.845</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.</td>
+      <td>HATAY</td>
+      <td class="num">195</td>
+      <td class="num">340</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ASEL KITAP KIRTASIYE HAMDI CEKEN</td>
+      <td>AMASYA</td>
+      <td class="num">10</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BEREN KIRTASIYE-SALIH ERTAN</td>
+      <td>AKSARAY</td>
+      <td class="num">995</td>
+      <td class="num">500</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BEYAZIM KITAP EVI - SERKAN KABAAGIL</td>
+      <td>OSMANIYE</td>
+      <td class="num">—</td>
+      <td class="num">62</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BINDEBIR KITAP KIRTASIYE LTD.STI</td>
+      <td>MERSIN</td>
+      <td class="num">670</td>
+      <td class="num">40</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>CAN KITAP KIRTASIYE ABDULKADIR CAN</td>
+      <td>MERSIN</td>
+      <td class="num">345</td>
+      <td class="num">335</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>CAN KITAP KIRTASIYE-AHMET YILDIRIM</td>
+      <td>YOZGAT</td>
+      <td class="num">—</td>
+      <td class="num">35</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>DEVELI YAPRAK DAGITIM DAVUT KENDIRCI</td>
+      <td>KAYSERI</td>
+      <td class="num">115</td>
+      <td class="num">126</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ETHEM DEMIRBAG (ERDEM KIRTASIYE)</td>
+      <td>ADANA</td>
+      <td class="num">125</td>
+      <td class="num">85</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>EYUP ZAFER ATES - ZAFER KIRTASIYE</td>
+      <td>MERSIN</td>
+      <td class="num">—</td>
+      <td class="num">70</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .</td>
+      <td>KAYSERI</td>
+      <td class="num">948</td>
+      <td class="num">807</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.ZUC.HED.TIC.LTD.STI</td>
+      <td>ADANA</td>
+      <td class="num">850</td>
+      <td class="num">351</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>HILAL KIRTASIYE/SONER DEDE</td>
+      <td>ÇORUM</td>
+      <td class="num">90</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ISKENDERUN EMEK KITABEVI COZUM SISTEMLERI SAN TIC LTD STI</td>
+      <td>HATAY</td>
+      <td class="num">1.661</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ISKENDERUN OZGUN KITAP KIRTASIYE HABIBE OZGUN</td>
+      <td>HATAY</td>
+      <td class="num">—</td>
+      <td class="num">299</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KARANFIL KITAP KIRTASIYE UMUT GOKMEN</td>
+      <td>OSMANIYE</td>
+      <td class="num">590</td>
+      <td class="num">77</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KILAVUZ KIRTASIYE - AYSE HAZIRLAR</td>
+      <td>HATAY</td>
+      <td class="num">—</td>
+      <td class="num">95</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KIYAK YAY. DAG. INS. SAN. TIC. LTD. STI.</td>
+      <td>GAZIANTEP</td>
+      <td class="num">1.400</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KURT YAYIN DAGITIM TICARET LTD STI</td>
+      <td>HATAY</td>
+      <td class="num">—</td>
+      <td class="num">55</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.</td>
+      <td>KAHRAMANMARAS</td>
+      <td class="num">1.460</td>
+      <td class="num">730</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MAVI KITAP KIRTASIYE MEHMET ALI KUH</td>
+      <td>HATAY</td>
+      <td class="num">—</td>
+      <td class="num">43</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MEHMET CETIN - CETIN KITAP KIRTASIYE</td>
+      <td>HATAY</td>
+      <td class="num">805</td>
+      <td class="num">205</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI</td>
+      <td>MERSIN</td>
+      <td class="num">360</td>
+      <td class="num">852</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MINI KITAP KIRTASIYE ALPAY ERDAL</td>
+      <td>KAHRAMANMARAS</td>
+      <td class="num">—</td>
+      <td class="num">118</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTASIYE</td>
+      <td>YOZGAT</td>
+      <td class="num">80</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MUSTAFA DANIS - DANIS KITABEVI</td>
+      <td>KARAMAN</td>
+      <td class="num">30</td>
+      <td class="num">70</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>NEVSEHIR MY VIP - RAMAZAN SINAN OZDEMIR</td>
+      <td>NEVSEHIR</td>
+      <td class="num">715</td>
+      <td class="num">204</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI</td>
+      <td>ÇORUM</td>
+      <td class="num">220</td>
+      <td class="num">190</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>TEBESIR KITABEVI - MEHMET ERHAN KARAHAN</td>
+      <td>GAZIANTEP</td>
+      <td class="num">580</td>
+      <td class="num">50</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>TORE KIRTASIYE TICARET VE SANAYI LTD STI</td>
+      <td>NIGDE</td>
+      <td class="num">560</td>
+      <td class="num">160</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>VIZYON PLUS KITABEVI OKKES ANIL MART</td>
+      <td>OSMANIYE</td>
+      <td class="num">210</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>YENI CAMLIK KITAP KIRTASIYE ORHAN BALLI</td>
+      <td>OSMANIYE</td>
+      <td class="num">150</td>
+      <td class="num">60</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ZAFERCAN KIRTASIYE -TUBA OZUDOGRU</td>
+      <td>AMASYA</td>
+      <td class="num">85</td>
+      <td class="num">70</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+          <tr class="totr"><td colspan="2">TOPLAM</td><td class="num">13.709</td><td class="num">8.879</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-section">
+      <div class="kpi-box"><h4>Rapor Sonuç ve Önerileri</h4><p>3D Lgs simulasyon denemelerin bu yılki toplam satış adetlerindeki düşüşün bayi bazlı adetleri ve sebepleri aşağıdaki gibidir.<br><br><br>Bayi	                              Geçen Yıl	             Bu Yıl	                  Fark<br>Kıyak Yayın Dağıtım	 1.400         	0	              -1.400<br>Martım Kırtasiye	 1.460	              730	                -730<br>Bindebir Kitap Kırtasiye  670	                40	                 -630<br>Mehmet Çetin  Kırtasiye 805	              205	                 -600<br>Tebeşir Kitabevi	  580	               50	                 -530<br>Karanfil Kitap Kırtasiye	  590	                77	                 -513<br>Nevşehir My Vip	  715	             204	                 -511<br>Beren Kırtasiye	                   995	             500	                 -495<br>Töre Kırtasiye	                   560	             160	                 -400<br><br><br>Düşüşün büyük bölümü birkaç büyük bayiden kaynaklanmaktadır. Özellikle  Kıyak Yayın Dağıtım (-1.400 adet), Martım Kırtasiye (-730 adet), Bindebir Kitap Kırtasiye (-630 adet) ve Mehmet Çetin Kitap Kırtasiye (-600 adet) toplam düşüşün önemli kısmını oluşturmaktadır.<br><br>Bununla birlikte mevcut sonuçlar talep daralmasından ziyade, müfredat değişikliği sonrasında bayilerin daha kontrollü ve temkinli sipariş politikası izlemesinden kaynaklanmaktadır. Geçen yıl birçok bayi stoklu giriş yaparken, bu yıl siparişlerin daha çok ihtiyaç bazlı ilerlediği görülmektedir. Özellikle henüz sipariş oluşturmayan büyük bayilerden gelecek ek talepler ve uygulama sonrası olumlu geri bildirimlerle birlikte sonraki raporlama dönemlerinde sipariş miktarlarının artış göstermesi beklenmektedir.</p></div>
+      <div class="kpi-box"><h4>2. Raporlama Notu</h4><p>İlk raporda da belirtildiği üzere, özellikle geçen yıl yüksek adetli stoklu sipariş veren bazı bayiler bu yıl ihtiyaç odaklı ve kontrollü sipariş politikası izlemektedir. Bu nedenle sahadaki talepte belirgin bir daralmadan ziyade, bayilerin risk yönetimi ve stok kontrolü yaklaşımının satış adetlerine yansıdığı değerlendirilmektedir.<br><br>Bununla birlikte ürünün içerik kalitesi, uygulama yapısı ve sahadaki algısına yönelik olumsuz bir geri bildirim bulunmamaktadır. Aksine yapılan görüşmelerde ürünün beğenildiği ve kurumlar tarafından tercih edilmeye devam ettiği görülmektedir. Özellikle henüz sipariş oluşturmayan veya geçen yılın altında sipariş veren büyük hacimli bayilerden gelecek ilave taleplerin sonraki raporlama dönemlerinde satış adetlerine olumlu katkı sağlaması beklenmektedir.<br><br>Sonuç olarak mevcut tablo, ürün kaynaklı bir talep kaybından ziyade müfredat değişikliğinin oluşturduğu belirsizlik ve bayilerin stok yönetimi tercihleri nedeniyle ortaya çıkan dönemsel bir yavaşlamaya işaret etmektedir. Bayilerle yürütülen takip ve tanıtım çalışmalarına devam edilerek, yeni sipariş fırsatlarının değerlendirilmesi sağlanacaktır.</p></div>
+    </div>
+  </div>
+
+  <!-- =================== MUHSİN ÖZBALCI =================== -->
+  <div class="section-title">Muhsin Özbalcı — 3D LGS Simülasyon Deneme</div>
+  <div class="report-block">
+    <div class="rb-header">
+      <div>
+        <div class="rb-name">Muhsin Özbalcı</div>
+        <div class="rb-product">3D LGS Simülasyon Branş Deneme · 2. Raporlama · 22.06.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">43 Bayi</span>
+        <span class="rb-badge">BY BGK: 14.161</span>
+        <span class="rb-badge hl">▲ +7,1% Büyüme</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">14.161</div><div class="sc-sub">güncel adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">13.225</div><div class="sc-sub">aynı dönem</div></div>
+      <div class="stat-cell"><div class="sc-label">Değişim</div><div class="sc-val" style="color:var(--green)">+7,1%</div><div class="sc-sub">büyüme</div></div>
+      <div class="stat-cell"><div class="sc-label">Aktif Bayi</div><div class="sc-val">34</div><div class="sc-sub">sipariş veren</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>İlk raporlama tarihimizden sonra geçen 18 günlük süreçte, 3D LGS Simülasyon Branş Deneme ürünümüzün sipariş adetlerinde sayısal bir değişiklik yaşanmamıştır. Ürünün sezonsal yapısı gereği bu dönemde talebin sınırlı ilerlemesi ve kurumların yeni eğitim dönemi planlamalarını henüz tamamlamamış olması, sipariş hareketliliğinin oluşmamasında etkili olmuştur.<br><br>Ayrıca önümüzdeki eğitim döneminde yaşanacak müfredat değişikliği nedeniyle bayilerimiz ön stok oluşturmaktan kaçınmakta, mevcut talepler doğrultusunda daha kontrollü hareket etmektedir. Bu nedenle yüksek adetli raf ve stok siparişleri yerine, kurum ihtiyaçları netleştikçe sipariş verilmesi tercih edilmektedir.<br><br>Sahada gerçekleştirilen kurum görüşmelerinde ürünümüze yönelik yaklaşım olumlu olmakla birlikte, kursların öğrenci sayıları ile ürün kullanım planlarının henüz kesinleşmemesi siparişlerin ileri tarihe bırakılmasına neden olmaktadır. Önümüzdeki süreçte kurumların yeni dönem öğrenci kayıtlarının ve yayın tercihlerinin netleşmesiyle birlikte sipariş hareketliliğinin artması beklenmektedir.</p>
+    </div>
+    <div class="chart-wrap">
+      <h4>Top 12 Bayi — BGK Karşılaştırması</h4>
+      <canvas id="chartM" height="120"></canvas>
+    </div>
+    <div class="table-wrap">
+      <div class="scrollnote">← Tabloyu kaydırarak görebilirsiniz</div>
+      <table class="bayi-table">
+        <thead><tr><th>Bayi Adı</th><th>İl</th><th class="num">GY BGK</th><th class="num">BY BGK</th><th>Durum</th><th></th></tr></thead>
+        <tbody>
+          
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI</td>
+      <td>KÜTAHYA</td>
+      <td class="num">90</td>
+      <td class="num">40</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><strong>BY Notu:</strong> İlk raporlama tarihimizden sonra geçen 18 günlük süreçte, 3D LGS Simülasyon Branş Deneme ürünümüzün sipariş adetlerinde sayısal bir değişiklik yaşanmamıştır. Ürünün sezonsal yapısı gereği bu dönemde talebin sınırlı ilerlemesi ve kurumların yeni eğitim dönemi planlamalarını henüz tamamlamamış olması, sipariş hareketliliğinin oluşmamasında etkili olmuştur.<br><br>Ayrıca önümüzdeki eğitim döneminde yaşanacak müfredat değişikliği nedeniyle bayilerimiz ön stok oluşturmaktan kaçınmakta, mevcut talepler doğrultusunda daha kontrollü hareket etmektedir. Bu nedenle yüksek adetli raf ve stok siparişleri yerine, kurum ihtiyaçları netleştikçe sipariş verilmesi tercih edilmektedir.<br><br>Sahada gerçekleştirilen kurum görüşmelerinde ürünümüze yönelik yaklaşım olumlu olmakla birlikte, kursların öğrenci sayıları ile ürün kullanım planlarının henüz kesinleşmemesi siparişlerin ileri tarihe bırakılmasına neden olmaktadır. Önümüzdeki süreçte kurumların yeni dönem öğrenci kayıtlarının ve yayın tercihlerinin netleşmesiyle birlikte sipariş hareketliliğinin artması beklenmektedir.</div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ANTALYA ATLAS KITABEVI OZAN ERIPEK</td>
+      <td>ANTALYA</td>
+      <td class="num">602</td>
+      <td class="num">380</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ANTALYA-ATLAS KITABEVI MELEKSAH ERIPEK</td>
+      <td>ANTALYA</td>
+      <td class="num">90</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI</td>
+      <td>ESKISEHIR</td>
+      <td class="num">358</td>
+      <td class="num">185</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BANDIRMA KITAP KIRTASIYE GULBAHAR BAHADIR</td>
+      <td>BALIKESIR</td>
+      <td class="num">—</td>
+      <td class="num">50</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BANDIRMA OGRETMEN KITABEVI UMIT OKTAY</td>
+      <td>BALIKESIR</td>
+      <td class="num">—</td>
+      <td class="num">434</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BARIS KIRTASIYE-HABERAL CAMLIBOGAZ</td>
+      <td>KONYA</td>
+      <td class="num">87</td>
+      <td class="num">14</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BASARIRLAR YAYIN DAGITIM AS</td>
+      <td>DENIZLI</td>
+      <td class="num">500</td>
+      <td class="num">575</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC.LTD.STI</td>
+      <td>ANTALYA</td>
+      <td class="num">—</td>
+      <td class="num">210</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>CAGRI KITABEVI-ERHAN EVRAN</td>
+      <td>MANISA</td>
+      <td class="num">76</td>
+      <td class="num">54</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>CETIN YAYIN DAGITIM A.S</td>
+      <td>BALIKESIR</td>
+      <td class="num">20</td>
+      <td class="num">110</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>DKM YAYIN BASIM DAGITIM REKLAM EGITIM ÖGRETIM SANAYI TICARET LIMITED SIRKETI</td>
+      <td>DENIZLI</td>
+      <td class="num">30</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>EGE KITAP KIRTASIYE-DONDU YILGIN</td>
+      <td>BALIKESIR</td>
+      <td class="num">75</td>
+      <td class="num">130</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>EREN KITAP KIRTASIYE MUHARREM AKMAN</td>
+      <td>BILECIK</td>
+      <td class="num">—</td>
+      <td class="num">50</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>FATMA SERTGOZ - ANA KITAP KIRTASIYE</td>
+      <td>ANTALYA</td>
+      <td class="num">26</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.CIHAZLAR INS. VE TUR.LTD.STI.</td>
+      <td>MUGLA</td>
+      <td class="num">265</td>
+      <td class="num">205</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>GUVEN KIRTASIYE - OZAN TUNCEL</td>
+      <td>KÜTAHYA</td>
+      <td class="num">5</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>HAKAN KITABEVI - M HAKAN YURTTADUR</td>
+      <td>ISPARTA</td>
+      <td class="num">—</td>
+      <td class="num">2</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>HALIT KAYA (ALANYA AKADEMI KIRTASIYE)</td>
+      <td>ANTALYA</td>
+      <td class="num">180</td>
+      <td class="num">150</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)</td>
+      <td>KONYA</td>
+      <td class="num">481</td>
+      <td class="num">140</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>HONDU KITAP KIRTASIYE-MEHMET CELALETTIN HONDU</td>
+      <td>ISPARTA</td>
+      <td class="num">80</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN</td>
+      <td>BURDUR</td>
+      <td class="num">140</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KITAP SAATI EGITM.HIZ.TIC.LTD.STI</td>
+      <td>ANTALYA</td>
+      <td class="num">2.450</td>
+      <td class="num">1.900</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>KUMBET KIRTASIYE YAYINCILIK INS. NAK. HEDIYE ESYA ELK.TIC.LT.STI.</td>
+      <td>AFYONKARAHISAR</td>
+      <td class="num">90</td>
+      <td class="num">75</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>LIDYA KITABEVI - MUSTAFA CANDAN</td>
+      <td>MANISA</td>
+      <td class="num">—</td>
+      <td class="num">45</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MEDRESE KITABEVI- DAVUT GUNDOGAN</td>
+      <td>AFYONKARAHISAR</td>
+      <td class="num">—</td>
+      <td class="num">88</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MELEK KIRTASIYE - ALI CIHAN (BANDA KIRTASIYE)</td>
+      <td>MUGLA</td>
+      <td class="num">4</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MESEKAN BASIM YAYIN DAG.PAZ.KIR.TEK.TEM.SAN.TIC.LTD.STI</td>
+      <td>BURSA</td>
+      <td class="num">1.275</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC. LTD. STI.</td>
+      <td>ÇANAKKALE</td>
+      <td class="num">90</td>
+      <td class="num">456</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MSM KIRTASIYE - BIRGUL TIRAS</td>
+      <td>USAK</td>
+      <td class="num">294</td>
+      <td class="num">42</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI</td>
+      <td>MUGLA</td>
+      <td class="num">12</td>
+      <td class="num">262</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>NEJLA KANSU -KANSU KITABEVI</td>
+      <td>ANTALYA</td>
+      <td class="num">41</td>
+      <td class="num">—</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>ORTACA-ERAY KITAP KIRTASIYE YAYINCILIK LTD.STI</td>
+      <td>MUGLA</td>
+      <td class="num">100</td>
+      <td class="num">30</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE</td>
+      <td>KONYA</td>
+      <td class="num">55</td>
+      <td class="num">103</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SED-KANGURU KITAP MUSAMETTIN KUCAK</td>
+      <td>MANISA</td>
+      <td class="num">1.754</td>
+      <td class="num">730</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>SERKAN ISIK - AYRAC KITABEVI</td>
+      <td>AYDIN</td>
+      <td class="num">99</td>
+      <td class="num">30</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>TERCIH KITABEVI/GUROL SULUHAN</td>
+      <td>AYDIN</td>
+      <td class="num">291</td>
+      <td class="num">127</td>
+      <td><span class="pill risk">Düşük</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>TURKER KIRTASIYE-FATIH BAS</td>
+      <td>MANISA</td>
+      <td class="num">45</td>
+      <td class="num">60</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>UC YILDIZ KITABEVI (IBRAHIM YILDIZ)</td>
+      <td>ISPARTA</td>
+      <td class="num">855</td>
+      <td class="num">1.393</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>UMRAN KITAP KIRTASIYE - ADEM TETIK</td>
+      <td>BURDUR</td>
+      <td class="num">15</td>
+      <td class="num">81</td>
+      <td><span class="pill ok">İyi</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>USAK KITAP MARKET-FATIH DULGER</td>
+      <td>USAK</td>
+      <td class="num">—</td>
+      <td class="num">25</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>YESIL BEYAZ YAYIN DAG(MITHAT APARCI)</td>
+      <td>KONYA</td>
+      <td class="num">2.650</td>
+      <td class="num">2.165</td>
+      <td><span class="pill warn">Orta</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+
+    <tr class="drow" onclick="toggleRow(this)">
+      <td>YONCE YAYIN DAGITIM KITABEVI LTD.STI</td>
+      <td>BURSA</td>
+      <td class="num">—</td>
+      <td class="num">3.820</td>
+      <td></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="6"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td>
+    </tr>
+          <tr class="totr"><td colspan="2">TOPLAM</td><td class="num">13.225</td><td class="num">14.161</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-section">
+      <div class="kpi-box"><h4>Rapor Sonuç ve Önerileri</h4><p>3D LGS Simülasyon Branş Deneme ürününde bölgemizde geçen yıl aynı döneme göre 936 adetlik artış gerçekleşmiştir. Artış oranı sınırlı kalmakla birlikte, önümüzdeki yıl müfredat değişikliği beklentisi ve bayilerin stok riskinden kaçınarak kontrollü ürün çekmesi dikkate alındığında bu büyüme olumlu değerlendirilmektedir.<br>Ürünlerimiz özellikle özel öğretim kursları tarafından tercih edilmekte olup, 3D markamızın lise grubundaki güçlü algısı ortaokul ürünlerine de katkı sağlamaktadır. Devlet okullarında ise daha çok 32 haftalık ürünlerin tercih edilmesi sebebiyle bu ürün grubunda kurs kanalı daha güçlü ilerlemektedir.<br>Rapor Sonuç<br>3D LGS Simülasyon Branş Deneme ürünü, içerik kalitesi ve seviye dengesi bakımından sahada olumlu geri bildirim almaktadır. Müfredat değişikliği beklentisi sebebiyle bayiler stok konusunda temkinli hareket etmesine rağmen geçen yılın aynı dönemine göre büyüme sağlanmıştır. Bu durum, ürünün sahada kabul gördüğünü ve özellikle kurs kanalında gelişim potansiyelinin devam ettiğini göstermektedir.<br>Öneri / Aksiyon<br>Önümüzdeki süreçte ürünün özel öğretim kursları başta olmak üzere LGS hazırlık yapan kurumlarda daha güçlü tanıtılması uygun olacaktır. Devlet okullarında ise ürünün branş bazlı takip, sınav pratiği ve LGS’ye hazırlık sürecindeki katkısı daha net anlatılarak kullanım alanı genişletilebilir. Müfredat değişikliği sürecinde bayilerin stok kaygıları dikkate alınmalı, buna göre kontrollü sipariş ve doğru stok planlaması yapılmalıdır.</p></div>
+      <div class="kpi-box"><h4>2. Raporlama Notu</h4><p>İlk raporlama tarihimizden sonra geçen 18 günlük süreçte, 3D LGS Simülasyon Branş Deneme ürünümüzün sipariş adetlerinde sayısal bir değişiklik yaşanmamıştır. Ürünün sezonsal yapısı gereği bu dönemde talebin sınırlı ilerlemesi ve kurumların yeni eğitim dönemi planlamalarını henüz tamamlamamış olması, sipariş hareketliliğinin oluşmamasında etkili olmuştur.<br><br>Ayrıca önümüzdeki eğitim döneminde yaşanacak müfredat değişikliği nedeniyle bayilerimiz ön stok oluşturmaktan kaçınmakta, mevcut talepler doğrultusunda daha kontrollü hareket etmektedir. Bu nedenle yüksek adetli raf ve stok siparişleri yerine, kurum ihtiyaçları netleştikçe sipariş verilmesi tercih edilmektedir.<br><br>Sahada gerçekleştirilen kurum görüşmelerinde ürünümüze yönelik yaklaşım olumlu olmakla birlikte, kursların öğrenci sayıları ile ürün kullanım planlarının henüz kesinleşmemesi siparişlerin ileri tarihe bırakılmasına neden olmaktadır. Önümüzdeki süreçte kurumların yeni dönem öğrenci kayıtlarının ve yayın tercihlerinin netleşmesiyle birlikte sipariş hareketliliğinin artması beklenmektedir.</p></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div><strong>Çözüm Yayın Grubu</strong> · Satış &amp; Raporlama Birimi · 2. Raporlama Dönemi</div>
+    <div>Power BI – Ürün Raporu baz alınarak hazırlanmıştır · 22.06.2026</div>
+  </div>
+
+</div>
+
+<script>
+function toggleRow(drow) {
+  const erow = drow.nextElementSibling;
+  const icon = drow.querySelector('.expand-icon');
+  if (erow.style.display === 'none') { erow.style.display = 'table-row'; icon.textContent = '▼'; }
+  else { erow.style.display = 'none'; icon.textContent = '▶'; }
+}
+
+function toggleTheme() {
+  const t = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('theme', t);
+  updateChartTheme();
+}
+
+(function() {
+  const t = localStorage.getItem('theme') || '';
+  if (t) document.documentElement.setAttribute('data-theme', t);
+})();
+
+const RED = '#C8102E', GRAY = '#888';
+
+function makeChart(id, labels, gy, by) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const gridColor = isDark ? '#333' : '#e5e5e5';
+  const textColor = isDark ? '#ccc' : '#444';
+  return new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Geçen Yıl BGK', data: gy, backgroundColor: 'rgba(136,136,136,0.5)', borderColor: GRAY, borderWidth: 1 },
+        { label: 'Bu Yıl BGK', data: by, backgroundColor: 'rgba(200,16,46,0.75)', borderColor: RED, borderWidth: 1 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: textColor, font: { family: 'IBM Plex Sans', size: 11 } } } },
+      scales: {
+        x: { ticks: { color: textColor, font: { size: 10 }, maxRotation: 40 }, grid: { color: gridColor } },
+        y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
+      }
+    }
+  });
+}
+
+let charts = {};
+window.addEventListener('load', () => {
+  charts.v = makeChart('chartV', ["37 BAYİ", "HEDEF KIRTASIYE-ZAFER YAVUZER", "KOMMAGENE KITAP DEPOSU RAHIME ", "ELAZIG ANKA KITAP KIRTASIYE - ", "BKM BATMAN KITAP MERKEZI KIRTA", "TAKSAN INS IHR NAK SAN VE TIC.", "OKURKENT KIRTASIYE GIYASETTIN ", "GUNEYDOGU TELEKOMUNASYON KAGT ", "SAMI YILDIRIM VE ORTAKLIGI (GE", "DORUK SANAYI VE TICARET LIMITE", "UCAR DAGITIM PAZARLAMA ITH IHR", "NAYIF AYDEMIR (VAROL KIRTASIYE"], [12017, 4520, 0, 1300, 1000, 855, 465, 515, 454, 352, 60, 360], [7316, 0, 1720, 310, 1110, 70, 635, 20, 75, 372, 371, 150]);
+  charts.s = makeChart('chartS', ["ALYA KITAP KIRTASIYE DAGITIM T", "ISKENDERUN EMEK KITABEVI COZUM", "MARTIM KIRTASIYE SANAYI VE TIC", "KIYAK YAY. DAG. INS. SAN. TIC.", "BEREN KIRTASIYE-SALIH ERTAN", "GARANTI AKADEMI EGT HIZ SAN TI", "MERSIN KAFKAM KITABEVI KIRTASI", "GUNEY AYDIN GRUP BILG.YAZ.DON.", "MEHMET CETIN - CETIN KITAP KIR", "NEVSEHIR MY VIP - RAMAZAN SINA", "BINDEBIR KITAP KIRTASIYE LTD.S", "KARANFIL KITAP KIRTASIYE UMUT "], [0, 1661, 1460, 1400, 995, 948, 360, 850, 805, 715, 670, 590], [2845, 0, 730, 0, 500, 807, 852, 351, 205, 204, 40, 77]);
+  charts.m = makeChart('chartM', ["YONCE YAYIN DAGITIM KITABEVI L", "YESIL BEYAZ YAYIN DAG(MITHAT A", "KITAP SAATI EGITM.HIZ.TIC.LTD.", "SED-KANGURU KITAP MUSAMETTIN K", "UC YILDIZ KITABEVI (IBRAHIM YI", "MESEKAN BASIM YAYIN DAG.PAZ.KI", "ANTALYA ATLAS KITABEVI OZAN ER", "BASARIRLAR YAYIN DAGITIM AS", "HASAN BASRI SAGLAM (SAGLAM KIR", "METOT KITAP KIRTASIYE YAY. TUR", "BANDIRMA OGRETMEN KITABEVI UMI", "ATAK OFIS KITAP KIRTASIYE SAN "], [0, 2650, 2450, 1754, 855, 1275, 602, 500, 481, 90, 0, 358], [3820, 2165, 1900, 730, 1393, 0, 380, 575, 140, 456, 434, 185]);
+});
+
+function updateChartTheme() {
+  Object.values(charts).forEach(c => { if(c) { c.destroy(); } });
+  charts.v = makeChart('chartV', ["37 BAYİ", "HEDEF KIRTASIYE-ZAFER YAVUZER", "KOMMAGENE KITAP DEPOSU RAHIME ", "ELAZIG ANKA KITAP KIRTASIYE - ", "BKM BATMAN KITAP MERKEZI KIRTA", "TAKSAN INS IHR NAK SAN VE TIC.", "OKURKENT KIRTASIYE GIYASETTIN ", "GUNEYDOGU TELEKOMUNASYON KAGT ", "SAMI YILDIRIM VE ORTAKLIGI (GE", "DORUK SANAYI VE TICARET LIMITE", "UCAR DAGITIM PAZARLAMA ITH IHR", "NAYIF AYDEMIR (VAROL KIRTASIYE"], [12017, 4520, 0, 1300, 1000, 855, 465, 515, 454, 352, 60, 360], [7316, 0, 1720, 310, 1110, 70, 635, 20, 75, 372, 371, 150]);
+  charts.s = makeChart('chartS', ["ALYA KITAP KIRTASIYE DAGITIM T", "ISKENDERUN EMEK KITABEVI COZUM", "MARTIM KIRTASIYE SANAYI VE TIC", "KIYAK YAY. DAG. INS. SAN. TIC.", "BEREN KIRTASIYE-SALIH ERTAN", "GARANTI AKADEMI EGT HIZ SAN TI", "MERSIN KAFKAM KITABEVI KIRTASI", "GUNEY AYDIN GRUP BILG.YAZ.DON.", "MEHMET CETIN - CETIN KITAP KIR", "NEVSEHIR MY VIP - RAMAZAN SINA", "BINDEBIR KITAP KIRTASIYE LTD.S", "KARANFIL KITAP KIRTASIYE UMUT "], [0, 1661, 1460, 1400, 995, 948, 360, 850, 805, 715, 670, 590], [2845, 0, 730, 0, 500, 807, 852, 351, 205, 204, 40, 77]);
+  charts.m = makeChart('chartM', ["YONCE YAYIN DAGITIM KITABEVI L", "YESIL BEYAZ YAYIN DAG(MITHAT A", "KITAP SAATI EGITM.HIZ.TIC.LTD.", "SED-KANGURU KITAP MUSAMETTIN K", "UC YILDIZ KITABEVI (IBRAHIM YI", "MESEKAN BASIM YAYIN DAG.PAZ.KI", "ANTALYA ATLAS KITABEVI OZAN ER", "BASARIRLAR YAYIN DAGITIM AS", "HASAN BASRI SAGLAM (SAGLAM KIR", "METOT KITAP KIRTASIYE YAY. TUR", "BANDIRMA OGRETMEN KITABEVI UMI", "ATAK OFIS KITAP KIRTASIYE SAN "], [0, 2650, 2450, 1754, 855, 1275, 602, 500, 481, 90, 0, 358], [3820, 2165, 1900, 730, 1393, 0, 380, 575, 140, 456, 434, 185]);
+}
+</script>
+</body>
+</html>
