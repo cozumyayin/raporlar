@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EĞİTİM VADİSİ TAK-TİK — 2. Raporlama | 25.06.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8102E; --red-dark:#9B0B22; --red-light:#fdecea;
+  --dark:#1A1A2E; --mid:#2C2C54; --text:#1f2937; --sub:#6b7280;
+  --border:#e5e7eb; --bg:#f4f5f7; --white:#ffffff;
+  --green:#16a34a; --green-bg:#dcfce7;
+  --amber:#d97706; --amber-bg:#fef3c7;
+  --blue:#1d4ed8; --blue-bg:#dbeafe;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);}
+
+.header{background:var(--dark);}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:20px 40px 16px;}
+.logo-badge{background:var(--red);color:#fff;font-weight:700;font-size:18px;padding:7px 14px;border-radius:4px;letter-spacing:1px;}
+.logo-right{margin-left:14px;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;}
+.logo-right h1{font-size:15px;font-weight:700;color:#fff;}
+.logo-right p{font-size:11px;color:#94a3b8;margin-top:2px;}
+.meta-date{font-size:24px;font-weight:700;color:#fff;font-family:'IBM Plex Mono',monospace;}
+.meta-lbl{font-size:10px;color:#94a3b8;text-align:right;margin-top:2px;letter-spacing:.5px;}
+.header-band{background:var(--red);padding:10px 40px;display:flex;align-items:center;justify-content:space-between;}
+.header-band span{font-size:13px;font-weight:600;color:#fff;}
+.hb-badge{background:rgba(255,255,255,.2);color:#fff;font-size:10px;padding:3px 10px;border-radius:20px;}
+
+.kpi-band{background:var(--mid);display:grid;grid-template-columns:repeat(4,1fr);}
+.kpi-item{padding:16px 18px;border-right:1px solid rgba(255,255,255,.07);text-align:center;}
+.kpi-item:last-child{border-right:none;}
+.kpi-val{font-size:27px;font-weight:700;color:#fff;font-family:'IBM Plex Mono',monospace;}
+.kpi-lbl{font-size:11px;color:#94a3b8;margin-top:4px;font-weight:500;}
+.kpi-sub{font-size:10px;color:#64748b;margin-top:2px;}
+.kpi-grw{font-size:12px;font-weight:700;margin-top:4px;}
+
+.grand-wrap{padding:24px 32px 0;}
+.grand-box{background:var(--dark);border-radius:10px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;}
+.gb-left h2{font-size:13px;color:#94a3b8;font-weight:500;}
+.gb-left p{font-size:11px;color:#475569;margin-top:2px;}
+.gb-right{display:flex;gap:36px;}
+.gb-stat{text-align:center;}
+.gb-val{font-size:30px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.gb-lbl{font-size:10px;color:#94a3b8;margin-top:3px;letter-spacing:.4px;}
+
+.sec{margin:24px 32px 0;background:var(--white);border-radius:10px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);}
+.sec-num{background:var(--red);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;margin-right:12px;}
+.sec-name{font-size:16px;font-weight:700;color:var(--dark);}
+.sec-sub{font-size:11px;color:var(--sub);margin-top:2px;}
+.bdg{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;margin-left:4px;}
+.bdg-red{background:var(--red-light);color:var(--red);}
+.bdg-green{background:var(--green-bg);color:var(--green);}
+.bdg-blue{background:var(--blue-bg);color:var(--blue);}
+.bdg-amber{background:var(--amber-bg);color:var(--amber);}
+
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--border);}
+.stat{padding:13px 16px;border-right:1px solid var(--border);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-val{font-size:21px;font-weight:700;color:var(--dark);font-family:'IBM Plex Mono',monospace;}
+.stat-lbl{font-size:10px;color:var(--sub);margin-top:3px;font-weight:500;}
+.grw-pos{color:var(--green);font-size:12px;font-weight:700;margin-top:2px;}
+.grw-neg{color:var(--red);font-size:12px;font-weight:700;margin-top:2px;}
+
+.aciklama-box{margin:14px 20px;padding:12px 14px;background:#f9fafb;border-left:3px solid var(--red);border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.7;color:#374151;}
+
+.chart-area{padding:14px 20px 6px;border-bottom:1px solid var(--border);}
+.chart-ttl{font-size:10px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;}
+.bar-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.bar-lbl{width:190px;font-size:10.5px;color:var(--text);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;}
+.bar-track{flex:1;background:#f1f5f9;border-radius:3px;height:16px;}
+.bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:5px;}
+.bar-fill span{font-size:9.5px;font-weight:600;color:#fff;font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
+
+.tbl-toggle{display:flex;align-items:center;gap:6px;margin:12px 20px 8px;cursor:pointer;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--sub);font-family:'IBM Plex Sans',sans-serif;}
+.tbl-toggle:hover{background:#f8fafc;}
+.tbl-wrap{padding:0 20px 16px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:11.5px;}
+thead th{padding:7px 9px;background:#f8fafc;font-weight:600;color:var(--sub);border-bottom:2px solid var(--border);white-space:nowrap;font-size:10.5px;}
+thead th:first-child,thead th:nth-child(2){text-align:left;}
+thead th:not(:first-child):not(:nth-child(2)){text-align:right;}
+tbody td{padding:6px 9px;border-bottom:1px solid #f1f5f9;vertical-align:middle;}
+tbody td:first-child{font-size:11.5px;font-weight:500;color:var(--text);}
+tbody td:nth-child(2){font-size:10.5px;color:var(--sub);}
+tbody td:not(:first-child):not(:nth-child(2)){text-align:right;font-family:'IBM Plex Mono',monospace;}
+tbody tr:hover{background:#fafafa;}
+.zero{color:#cbd5e1;}
+tfoot td{font-weight:700;background:#f8fafc;border-top:2px solid var(--border);padding:7px 9px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+tfoot td:first-child{font-family:'IBM Plex Sans',sans-serif;font-size:11.5px;}
+tfoot td:not(:first-child):not(:nth-child(2)){text-align:right;}
+
+.sonuc-wrap{padding:14px 20px;border-top:1px solid var(--border);}
+.sonuc-ttl{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.sonuc-txt{font-size:12.5px;line-height:1.7;color:var(--text);}
+
+.depo-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:0 0 8px;}
+.depo-tbl th{padding:8px 12px;background:#f8fafc;font-size:10.5px;font-weight:600;color:var(--sub);border-bottom:2px solid var(--border);}
+.depo-tbl th:first-child{text-align:left;}
+.depo-tbl th:not(:first-child){text-align:right;}
+.depo-tbl td{padding:9px 12px;border-bottom:1px solid var(--border);}
+.depo-tbl td:first-child{font-weight:700;}
+.depo-tbl td:not(:first-child){text-align:right;font-family:'IBM Plex Mono',monospace;}
+.depo-tbl .tf td{font-weight:700;background:#f8fafc;border-top:2px solid var(--border);}
+.depo-aciklama{font-size:11.5px;color:var(--sub);font-style:italic;line-height:1.5;margin-top:4px;}
+
+.footer{background:var(--dark);color:#475569;text-align:center;padding:16px;font-size:11px;margin-top:28px;}
+.footer span{color:#94a3b8;}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div style="display:flex;align-items:center;">
+      <div class="logo-badge">ÇÖZÜM</div>
+      <div class="logo-right">
+        <h1>EĞİTİM VADİSİ TAK-TİK</h1>
+        <p>2. Raporlama — Sezonsal Ürün Takip Takvimi</p>
+      </div>
+    </div>
+    <div>
+      <div class="meta-date">25.06.2026</div>
+      <div class="meta-lbl">RAPORLAMA TARİHİ</div>
+    </div>
+  </div>
+  <div class="header-band">
+    <span>KPI: Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+    <span class="hb-badge">4 Bölge Yöneticisi</span>
+  </div>
+</div>
+
+<!-- KPI BAND -->
+<div class="kpi-band">
+  <div class="kpi-item">
+    <div class="kpi-val">18.990</div>
+    <div class="kpi-lbl">VEDAT ADSAN</div>
+    <div class="kpi-sub">9-10-11. Sınıf | 41 Bayi</div>
+    <div class="kpi-grw" style="color:#f87171;">GY: 896 adet → <span style="color:#4ade80;">+%2.019</span></div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">37.923</div>
+    <div class="kpi-lbl">MUHSİN ÖZBALCI</div>
+    <div class="kpi-sub">9-10-11. Sınıf | 38 Bayi</div>
+    <div class="kpi-grw" style="color:#f87171;">GY: 6.018 adet → <span style="color:#4ade80;">+%530</span></div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">29.307</div>
+    <div class="kpi-lbl">SÜLEYMAN İŞPINAR</div>
+    <div class="kpi-sub">Ara Sınıf | 39 Bayi</div>
+    <div class="kpi-grw" style="color:#f87171;">GY: 5.777 adet → <span style="color:#4ade80;">+%407</span></div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">44.839</div>
+    <div class="kpi-lbl">M. YASİN ERDOĞAN</div>
+    <div class="kpi-sub">Kütüphaneleri | 3 Depo</div>
+    <div class="kpi-grw" style="color:#f87171;">GY: 12.950 adet → <span style="color:#4ade80;">+%246</span></div>
+  </div>
+</div>
+
+<!-- GENEL TOPLAM -->
+<div class="grand-wrap">
+  <div class="grand-box">
+    <div class="gb-left">
+      <h2>4 Bölge Yöneticisi — Genel Toplam</h2>
+      <p>EV TAK-TİK 2. Raporlama / 25.06.2026</p>
+    </div>
+    <div class="gb-right">
+      <div class="gb-stat">
+        <div class="gb-val" style="color:#f87171;">131.059</div>
+        <div class="gb-lbl">TOPLAM BY BGK</div>
+      </div>
+      <div class="gb-stat">
+        <div class="gb-val" style="color:#94a3b8;">25.641</div>
+        <div class="gb-lbl">TOPLAM GY BGK</div>
+      </div>
+      <div class="gb-stat">
+        <div class="gb-val" style="color:#4ade80;">+%411</div>
+        <div class="gb-lbl">ORTALAMA BÜYÜME</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sections-root"></div>
+
+<div class="footer">
+  <span>Çözüm Yayın Grubu</span> · EĞİTİM VADİSİ TAK-TİK 2. Raporlama · 25.06.2026 · Power BI entegrasyonlu sezonsal takip
+</div>
+
+<script>
+// ===== VERİ =====
+const vedatBayiler = [["ADA KIRTASIYE KITABEVI MEHMET CIHAD ELCI", "BINGÖL", 10, 5, 80, 0, 95], ["AKSU KIRTASİYE", "HAKKARİ", 42, 48, 48, 0, 138], ["ARDAHAN BILIM KIRTASIYE", "ARDAHAN", 0, 0, 0, 0, 0], ["AY KIRTASIYE KITAP TEK.TEM.INS.MOB.", "AGRI", 39, 157, 168, 0, 364], ["BİLİM KIRTASİYE", "ŞIRNAK", 42, 48, 48, 0, 138], ["BILIM KITABEVI SEYIT ATES", "SANLIURFA", 10, 9, 0, 0, 19], ["BKM BATMAN KITAP MERKEZI KIRTASIYE", "BATMAN", 60, 140, 620, 50, 820], ["DENAS LOJISTIK PETROL INSAAT OTOMOTIV", "SIRNAK", 70, 80, 80, 0, 230], ["DOGUBAYAZIT SERHAT KITAPEVI SERHAT CELIK", "AGRI", 0, 40, 70, 0, 110], ["DORUK SANAYI VE TICARET LIMITED SIRKETI", "MARDIN", 9, 63, 160, 5, 232], ["ELAZIG ANKA KITAP KIRTASIYE - CAHIT AYHAN", "ELAZIG", 236, 451, 320, 352, 1007], ["FİNAL BAŞARI EĞİTİM", "SİİRT", 42, 48, 48, 0, 138], ["GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ", "GÜMÜSHANE", 2, 5, 0, 0, 7], ["GUNEYDOGU TELEKOMUNASYON KAGT", "SIRNAK", 40, 20, 120, 0, 180], ["GUZEL OZEL EGT KIRT INS SAN TIC LTD STI", "DIYARBAKIR", 0, 0, 95, 0, 95], ["HEDEF KIRTASIYE-ZAFER YAVUZER", "VAN", 3280, 3410, 480, 217, 7170], ["IGDIR KULTUR KITAP KIRTASIYE", "IGDIR", 0, 35, 160, 152, 195], ["KIZILDERE KIRTASIYE VE BILG.GIDA.INS.", "VAN", 0, 20, 160, 0, 180], ["KOMMAGENE KITAP DEPOSU RAHIME BILGIC", "ADIYAMAN", 590, 330, 160, 0, 1080], ["KOZLUK KÜLTÜR KIRTASİYE", "BATMAN", 49, 56, 56, 0, 161], ["(DEMIRHAN KITABEVI)", "BAYBURT", 10, 20, 80, 57, 110], ["MANA YAYIN KITAP KIRTASIYE SAN", "MARDİN", 0, 0, 80, 0, 80], ["MIDYAT BARIS KIRTASIYE BESIR ULUG", "MARDIN", 40, 217, 80, 0, 337], ["NAYIF AYDEMIR (VAROL KIRTASIYE)", "BITLIS", 35, 65, 0, 0, 100], ["OLCAN KIRTASİYE", "SIRNAK", 0, 80, 0, 0, 80], ["OKURKENT KIRTASIYE GIYASETTIN DEMIR", "MUS", 70, 80, 160, 23, 310], ["ONCU ACAR KIRTASIYE NAK.INS.", "ADIYAMAN", 0, 0, 160, 5, 160], ["OZCELIK KIRTASIYE MUHAMMED OZCELIK", "SANLIURFA", 120, 120, 80, 0, 320], ["OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA", "KARS", 0, 0, 160, 32, 160], ["POZITIF BASKI HIZMETLERI KITAP KIRTASIYE", "ERZURUM", 736, 1087, 640, 0, 2463], ["POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP", "DIYARBAKIR", 122, 247, 480, 0, 849], ["SAH KIRTASIYE MINE BENZER", "SANLIURFA", 0, 38, 160, 0, 198], ["(GENC CARSI KITAP KIRTASIYE)", "ERZINCAN", 0, 12, 80, 3, 92], ["SEBIL KIRTASIYE-UZEYIR AKCELIK", "BITLIS", 0, 0, 160, 0, 160], ["SEDAT KIRTASIYE (ABUBEKIR YUCEL)", "SANLIURFA", 0, 0, 0, 0, 0], ["SIIRT ARI KITAPEVI  ALI KURT", "SIIRT", 20, 25, 0, 0, 45], ["SIVEREK AKADEMI KITAP KIRTASIYE", "SANLIURFA", 5, 20, 160, 0, 185], ["TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.", "MARDIN", 50, 82, 80, 0, 212], ["TEBLIG KIRTASIYE TEKS. TAS. TUR. SAN.", "DIYARBAKIR", 50, 100, 80, 0, 230], ["UCAR DAGITIM PAZARLAMA ITH IHR TIC", "MARDIN", 40, 90, 320, 0, 450], ["UMUT KIRTASIYE-MEHMET ALI CEYHAN", "DIYARBAKIR", 10, 0, 80, 0, 90]];
+const muhsinBayiler = [["ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI", "KÜTAHYA", 368, 394, 175, 420, 937], ["AKDENIZ LIDER KITAP DAGITIM LTD STI", "ANTALYA", 0, 0, 0, 2056, 0], ["ANTALYA ATLAS KITABEVI OZAN ERIPEK", "ANTALYA", 399, 293, 280, 61, 972], ["ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI", "ESKISEHIR", 555, 628, 890, 220, 2073], ["BANDIRMA KITAP KIRTASIYE GULBAHAR BAHADIR", "BALIKESIR", 70, 58, 0, 0, 128], ["BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC.LTD.STI", "ANTALYA", 195, 196, 0, 0, 391], ["CAGRI KITABEVI-ERHAN EVRAN", "MANISA", 1413, 1445, 0, 0, 2858], ["CETIN YAYIN DAGITIM A.S", "BALIKESIR", 64, 58, 420, 60, 122], ["DKM YAYIN BASIM DAGITIM REKLAM EGITIM ÖGRETIM SANAYI TICARET LIMITED SIRKETI", "DENIZLI", 51, 108, 710, 305, 579], ["EGE KITAP KIRTASIYE-DONDU YILGIN", "BALIKESIR", 250, 770, 0, 44, 1730], ["EREN KITAP KIRTASIYE MUHARREM AKMAN", "BILECIK", 54, 72, 0, 0, 126], ["FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.CIHAZLAR INS. VE TUR.LTD.STI.", "MUGLA", 30, 9, 175, 0, 39], ["GUVEN KIRTASIYE - OZAN TUNCEL", "KÜTAHYA", 64, 63, 0, 0, 302], ["HAKAN KITABEVI - M HAKAN YURTTADUR", "ISPARTA", 0, 0, 0, 26, 0], ["HALIT KAYA (ALANYA AKADEMI KIRTASIYE)", "ANTALYA", 0, 0, 0, 0, 0], ["HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)", "KONYA", 115, 130, 0, 90, 245], ["HILAL KITAP KIRTASIYE-HUMA CELIK", "BURDUR", 60, 55, 0, 0, 115], ["KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN", "BURDUR", 0, 0, 0, 4, 0], ["KUMBET KIRTASIYE YAYINCILIK INS. NAK. HEDIYE ESYA ELK.TIC.LT.STI.", "AFYONKARAHISAR", 29, 41, 0, 0, 70], ["LIDYA KITABEVI - MUSTAFA CANDAN", "MANISA", 20, 25, 0, 0, 45], ["MEDRESE KITABEVI- DAVUT GUNDOGAN", "AFYONKARAHISAR", 0, 0, 0, 0, 0], ["MELEK KIRTASIYE - ALI CIHAN (BANDA KIRTASIYE)", "MUGLA", 145, 221, 0, 17, 366], ["METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC. LTD. STI.", "ÇANAKKALE", 0, 0, 0, 26, 0], ["MSM KIRTASIYE - BIRGUL TIRAS", "USAK", 10, 19, 0, 0, 29], ["MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI", "MUGLA", 20, 30, 0, 0, 50], ["MURAT AYDIN - MKM - MARMARA KULTUR MERKEZI & OKULLAR PAZARI", "BILECIK", 28, 40, 0, 14, 68], ["NEJLA KANSU -KANSU KITABEVI", "ANTALYA", 350, 758, 0, 420, 1108], ["ORTACA-ERAY KITAP KIRTASIYE YAYINCILIK LTD.STI", "MUGLA", 70, 0, 0, 0, 70], ["OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE", "KONYA", 10, 23, 0, 0, 33], ["SED-KANGURU KITAP MUSAMETTIN KUCAK", "MANISA", 102, 151, 0, 0, 253], ["SEMA BOZ (ATILA FOTOKOPI VE KITAP EVI)", "KONYA", 8, 27, 0, 0, 112], ["SERKAN ISIK - AYRAC KITABEVI", "AYDIN", 206, 202, 77, 59, 408], ["TERCIH KITABEVI/GUROL SULUHAN", "AYDIN", 0, 5, 0, 0, 5], ["TURKER KIRTASIYE-FATIH BAS", "MANISA", 68, 21, 0, 0, 229], ["UC YILDIZ KITABEVI (IBRAHIM YILDIZ)", "ISPARTA", 80, 21, 140, 10, 101], ["UMRAN KITAP KIRTASIYE - ADEM TETIK", "BURDUR", 7, 20, 0, 5, 27], ["YESIL BEYAZ YAYIN DAG(MITHAT APARCI)", "KONYA", 2290, 2795, 0, 780, 5085], ["YONCE YAYIN DAGITIM KITABEVI LTD.STI", "BURSA", 8570, 10427, 250, 1401, 19247]];
+const suleymanBayiler = [["ABC KIRTASIYE ALI YILDIRIM", "ÇANKIRI", 0, 0, 0, 0, 0], ["ADNAN DUMAN - DUMAN KITABEVI", "KIRSEHIR", 0, 0, 55, 0, 55], ["ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZARLAMA LTD. STI.", "ADANA", 5285, 7855, 2550, 0, 13140], ["ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.", "HATAY", 0, 0, 90, 0, 90], ["ASEL KITAP KIRTASIYE ASLI CEKEN", "AMASYA", 0, 0, 0, 0, 0], ["CAN KITAP KIRTASIYE ABDULKADIR CAN", "MERSIN", 26, 68, 0, 0, 94], ["CAN KITAP KIRTASIYE-AHMET YILDIRIM", "YOZGAT", 4, 0, 63, 0, 67], ["CETIN KITAP KIRTASIYE SANAYI VE TICARET LIMITED SIRKETI", "HATAY", 245, 230, 0, 0, 475], ["DEVELI YAPRAK DAGITIM DAVUT KENDIRCI", "KAYSERI", 70, 51, 55, 145, 176], ["DUNYA KULTUR MERKEZI IRFAN YESILNAR", "AMASYA", 11, 9, 0, 26, 20], ["ETHEM DEMIRBAG (ERDEM KIRTASIYE)", "ADANA", 0, 32, 80, 160, 112], ["EYUP ZAFER ATES - ZAFER KIRTASIYE", "MERSIN", 0, 0, 0, 0, 0], ["GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .", "KAYSERI", 820, 1021, 0, 867, 1841], ["GOKKUSAGI KIRTASIYE METIN SEYREKBASAN", "KILIS", 0, 0, 0, 0, 0], ["GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.ZUC.HED.TIC.LTD.STI", "ADANA", 0, 120, 0, 0, 120], ["HILAL KIRTASIYE/SONER DEDE", "ÇORUM", 0, 0, 0, 0, 0], ["KAHRAMANMARAS HEDEF KITAP KIRTASIYE MEHMET APAYDIN", "KAHRAMANMARAS", 157, 264, 230, 210, 421], ["KARACA YAYIN BASIM DAGITIM EGITIM KIRT.HIZ.SAN VE TIC.LTD.STI", "HATAY", 10, 20, 99, 0, 129], ["KARANFIL KITAP KIRTASIYE UMUT GOKMEN", "OSMANIYE", 50, 390, 235, 800, 440], ["KILAVUZ KIRTASIYE - AYSE HAZIRLAR", "HATAY", 18, 31, 0, 42, 49], ["KURT YAYIN DAGITIM TICARET LTD STI", "HATAY", 21, 20, 0, 66, 41], ["MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.", "KAHRAMANMARAS", 0, 0, 0, 200, 0], ["MAVI KITAP KIRTASIYE MEHMET ALI KUH", "HATAY", 47, 106, 0, 87, 153], ["MEHMET CETIN - CETIN KITAP KIRTASIYE", "HATAY", 185, 145, 0, 161, 330], ["MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI", "MERSIN", 1020, 3336, 4500, 82, 8856], ["MINI KITAP KIRTASIYE ALPAY ERDAL", "KAHRAMANMARAS", 24, 28, 0, 31, 52], ["MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTASIYE", "YOZGAT", 48, 72, 0, 145, 120], ["MUSTAFA DANIS - DANIS KITABEVI", "KARAMAN", 100, 125, 0, 116, 225], ["NEVSEHIR ATLAS KIRTASIYE-BARIS NAZMI KURTDOGAN", "NEVSEHIR", 5, 10, 0, 0, 15], ["NEVSEHIR-ATLAS KITAP KIRTASIYE-FATMA KURTDOGAN", "NEVSEHIR", 0, 0, 0, 0, 0], ["NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI", "ÇORUM", 50, 145, 0, 180, 195], ["OLUSUM GLOBAL KITAP DAGITIM SANAYI VE TIC.LTD.STI", "GAZIANTEP", 410, 460, 160, 0, 1030], ["OZCAN DAGITIM VE YAYIN KIRTASIYE KITAP", "GAZIANTEP", 0, 0, 0, 1645, 0], ["PARK OZEL EGITIM KIRTASIYE TUR SEY TIC LTD STI", "MERSIN", 90, 176, 165, 153, 266], ["RUZGAR YAYINCILIK KITAP KIRTASIYE TEMIZLIK SAN.TIC.LTD.STI", "AMASYA", 42, 42, 42, 0, 126], ["TORE KIRTASIYE TICARET VE SANAYI LTD STI", "NIGDE", 105, 84, 0, 20, 189], ["VIZYON PLUS KITABEVI OKKES ANIL MART", "OSMANIYE", 95, 155, 0, 435, 250], ["YENI CAMLIK KITAP KIRTASIYE ORHAN BALLI", "OSMANIYE", 100, 130, 0, 206, 230], ["ZAFERCAN KIRTASIYE -TUBA OZUDOGRU", "AMASYA", 0, 0, 0, 0, 0]];
+const kutuphanDepolar = [["ANKARA", 7720, 43354, 30272, "Adetlerde  kısmi da olsa bir artış gerçekleşmiştir. Ankara'nın geçen seneye göre büyük bir atağı var. 11.sınıf siparişlerini şimdiden girişi yapıldı. 1 .raporda da bahsedildiği üzere İstanbul'un siparişleri Sezon başlangıcıyla burada fark yaratacaktır."], ["İSTANBUL", 250, 1120, 42250, "Var olan stoktaki ürünler ile devam edilmektedir.  Bellib branşlarda sipariş girişleri olacaktır. Sezona doğru tüm ürün gruplarında siparişleri girileceği öngörülmektedir."], ["İZMİR", 4980, 365, 7744, "Geçtiğimiz yıl, tek seferde alınan toplu siparişlerle yıllık hedef adetler tamamlanmıştır. Ancak bu yıl henüz kurumlardan ve özel okullardan sipariş alınmamıştır. Ara sınıflarda öğrenci sayısı çok az."]];
+
+// ===== YARDIMCI =====
+function fmt(n){if(!n&&n!==0)return'<span class="zero">—</span>';return Number(n).toLocaleString('tr-TR');}
+function fmtN(n){return n?Number(n).toLocaleString('tr-TR'):'—';}
+
+// ===== BAR CHART =====
+function buildBars(bayiler, maxVal){
+  const topN = [...bayiler].sort((a,b)=>(b[6]||0)-(a[6]||0)).slice(0,20);
+  return topN.map(b=>{
+    const pct = maxVal>0?Math.round(((b[6]||0)/maxVal)*100):0;
+    const color = pct>=70?'#16a34a':pct>=30?'#d97706':'#C8102E';
+    return `<div class="bar-row">
+      <div class="bar-lbl" title="${b[0]}">${b[0]}</div>
+      <div class="bar-track">
+        <div class="bar-fill ${(b[6]||0)===0?'':''}\" style=\"width:${Math.max(pct,1)}%;background:${(b[6]||0)===0?'#e2e8f0':color};\">
+          <span style="${(b[6]||0)===0?'color:#94a3b8;':''}">${fmtN(b[6])}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== BÖLGE BÖLÜMÜ =====
+function buildSection(num, byName, urun, aciklama, bayiler, gyBgk, byBgk, gyTop, sonucHtml){
+  const buyume = gyBgk>0?((byBgk/gyBgk-1)*100).toFixed(1):null;
+  const s9 = bayiler.reduce((a,b)=>a+(b[2]||0),0);
+  const s10 = bayiler.reduce((a,b)=>a+(b[3]||0),0);
+  const s11 = bayiler.reduce((a,b)=>a+(b[4]||0),0);
+  const maxBy = Math.max(...bayiler.map(b=>b[6]||0));
+  const bdgClass = buyume===null?'bdg-blue':parseFloat(buyume)>=100?'bdg-green':parseFloat(buyume)>=0?'bdg-amber':'bdg-red';
+  const bdgTxt = buyume===null?'Yeni Ürün':`+%${parseFloat(buyume).toLocaleString('tr-TR')}`;
+
+  const rows = bayiler.map(b=>`<tr>
+    <td>${b[0]}</td>
+    <td>${b[1]}</td>
+    <td>${(b[2]||0)===0?'<span class="zero">—</span>':fmtN(b[2])}</td>
+    <td>${(b[3]||0)===0?'<span class="zero">—</span>':fmtN(b[3])}</td>
+    <td>${(b[4]||0)===0?'<span class="zero">—</span>':fmtN(b[4])}</td>
+    <td>${(b[5]||0)===0?'<span class="zero">—</span>':fmtN(b[5])}</td>
+    <td style="font-weight:700;color:${(b[6]||0)===0?'#cbd5e1':'var(--dark)'};">${(b[6]||0)===0?'<span class="zero">—</span>':fmtN(b[6])}</td>
+  </tr>`).join('');
+
+  return `<div class="sec">
+  <div class="sec-hdr">
+    <div style="display:flex;align-items:center;">
+      <div class="sec-num">${num}</div>
+      <div>
+        <div class="sec-name">${byName}</div>
+        <div class="sec-sub">${urun}</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+      <span class="bdg ${bdgClass}">${bdgTxt}</span>
+      <span class="bdg bdg-blue">${bayiler.length} Bayi</span>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-val">${fmtN(s9)}</div>
+      <div class="stat-lbl">9. Sınıf TAK-TİK</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">${fmtN(s10)}</div>
+      <div class="stat-lbl">10. Sınıf TAK-TİK</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">${fmtN(s11)}</div>
+      <div class="stat-lbl">11. Sınıf TAK-TİK</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">${fmtN(gyBgk)}</div>
+      <div class="stat-lbl">Geçen Yıl BGK</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" style="color:var(--red);">${fmtN(byBgk)}</div>
+      <div class="stat-lbl">Bu Yıl BGK</div>
+      ${buyume!==null?`<div class="grw-pos">+%${parseFloat(buyume).toLocaleString('tr-TR')}</div>`:'<div class="grw-pos">Yeni Ürün</div>'}
+    </div>
+  </div>
+
+  <div class="aciklama-box">${aciklama}</div>
+
+  <div class="chart-area">
+    <div class="chart-ttl">BY BGK — İlk 20 Bayi (büyükten küçüğe)</div>
+    ${buildBars(bayiler, maxBy)}
+  </div>
+
+  <button class="tbl-toggle" onclick="this.nextElementSibling.classList.toggle('hidden');this.textContent=this.nextElementSibling.classList.contains('hidden')?'▶ Tüm bayileri göster (${bayiler.length})':'▼ Tabloyu gizle';">▶ Tüm bayileri göster (${bayiler.length})</button>
+  <div class="tbl-wrap hidden">
+    <table>
+      <thead><tr>
+        <th>Bayi Adı</th><th>İl</th>
+        <th>9. Sınıf</th><th>10. Sınıf</th><th>11. Sınıf</th>
+        <th>GY BGK</th><th>BY BGK</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr>
+        <td colspan="2"><strong>TOPLAM</strong></td>
+        <td>${fmtN(s9)}</td><td>${fmtN(s10)}</td><td>${fmtN(s11)}</td>
+        <td>${fmtN(gyBgk)}</td><td style="color:var(--red);">${fmtN(byBgk)}</td>
+      </tr></tfoot>
+    </table>
+  </div>
+
+  <div class="sonuc-wrap">
+    <div class="sonuc-ttl">📋 Rapor Sonuç ve Öneriler</div>
+    <div class="sonuc-txt">${sonucHtml}</div>
+  </div>
+</div>`;
+}
+
+// ===== KÜTÜPHANE BÖLÜMÜ =====
+function buildKutuphane(){
+  const depolar = kutuphanDepolar;
+  const totalGy = depolar.reduce((a,d)=>a+(d[1]||0),0);
+  const totalBy = depolar.reduce((a,d)=>a+(d[2]||0),0);
+  const buyume = totalGy>0?((totalBy/totalGy-1)*100).toFixed(1):null;
+
+  const rows = depolar.map(d=>{
+    const b = d[1]>0?((d[2]/d[1]-1)*100).toFixed(1):null;
+    return `<tr>
+      <td>${d[0]}</td>
+      <td>${fmtN(d[1])}</td>
+      <td style="font-weight:700;color:var(--red);">${fmtN(d[2])}</td>
+      <td>${fmtN(d[3])}</td>
+      <td>${b!==null?`+%${parseFloat(b).toLocaleString('tr-TR')}`:'<span class="zero">Yeni</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  const acikRow = depolar.map(d=>`<div style="margin-bottom:10px;"><strong style="color:var(--dark);">${d[0]}:</strong> <span class="depo-aciklama">${d[4]||'Açıklama yok.'}</span></div>`).join('');
+
+  return `<div class="sec">
+  <div class="sec-hdr">
+    <div style="display:flex;align-items:center;">
+      <div class="sec-num">4</div>
+      <div>
+        <div class="sec-name">M. Yasin ERDOĞAN — Kütüphaneleri</div>
+        <div class="sec-sub">EV 9-10-11. Sınıf TAK-TİK | 3 Bölge Deposu</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+      <span class="bdg bdg-green">+%${parseFloat(buyume).toLocaleString('tr-TR')}</span>
+      <span class="bdg bdg-blue">3 Depo</span>
+    </div>
+  </div>
+
+  <div class="stats-row" style="grid-template-columns:repeat(3,1fr);">
+    <div class="stat">
+      <div class="stat-val">${fmtN(totalGy)}</div>
+      <div class="stat-lbl">Geçen Yıl BGK</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" style="color:var(--red);">${fmtN(totalBy)}</div>
+      <div class="stat-lbl">Bu Yıl BGK</div>
+      <div class="grw-pos">+%${parseFloat(buyume).toLocaleString('tr-TR')}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">80.266</div>
+      <div class="stat-lbl">GY Toplam Adet</div>
+    </div>
+  </div>
+
+  <div style="padding:14px 20px 0;">
+    <table class="depo-tbl">
+      <thead><tr>
+        <th style="text-align:left;">Depo / Bölge</th>
+        <th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>Büyüme</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot class="tf"><tr>
+        <td><strong>TOPLAM</strong></td>
+        <td>${fmtN(totalGy)}</td>
+        <td style="color:var(--red);">${fmtN(totalBy)}</td>
+        <td>80.266</td>
+        <td>+%${parseFloat(buyume).toLocaleString('tr-TR')}</td>
+      </tr></tfoot>
+    </table>
+  </div>
+
+  <div style="padding:12px 20px 16px;">${acikRow}</div>
+
+  <div class="sonuc-wrap">
+    <div class="sonuc-ttl">📋 Rapor Sonuç ve Öneriler</div>
+    <div class="sonuc-txt">
+      Kütüphaneleri kanalında geçen yıl aynı döneme göre toplam BGK adetleri 12.950'den 44.839'a yükselmiş ve <strong>%246 büyüme</strong> sağlanmıştır. Ankara deposu bu büyümenin ana motorunu oluşturmakta; 11. sınıf siparişleri de dahil edilmişte olup güçlü bir ivme yakalanmıştır. İstanbul deposunda sezon başıyla birlikte sipariş hacminin artması beklenmektedir. İzmir deposunda mevcut yıl akademik kurumlardan ve özel okullardan henüz sipariş alınmamış olması nedeniyle adetler kısıtlı kalmaktadır; bu bölgede aktif takip önerilmektedir.
+    </div>
+  </div>
+</div>`;
+}
+
+// ===== RENDER =====
+const root = document.getElementById('sections-root');
+
+root.innerHTML = buildSection(
+  1, 'VEDAT ADSAN', 'EĞİTİM VADİSİ 9-10-11. Sınıf TAK-TİK | 2. Raporlama',
+  `Eğitim Vadisi 9-10-11. Sınıf Tak-Tik ürün grubunda, bölgedeki 41 bayinin 34'ü ön sipariş girişlerini tamamlamıştır. 11. sınıflar için yeni çıkacak olan Tak-Tik ürününe yönelik sipariş girişleri de devam etmektedir. 1. raporlamaya kıyasla 2. raporlama döneminde sipariş adetlerinde <strong>5.046 adetlik ilave artış</strong> gerçekleşmiş ve toplam sipariş sayısı <strong>18.990 adede</strong> ulaşmıştır. Bu doğrultuda ilk raporlama dönemine kıyasla siparişlerde yaklaşık <strong>%36,2 oranında artış</strong> gerçekleşmiştir. Henüz sipariş girişi tamamlanmayan bayilerle görüşmeler sürmektedir.`,
+  vedatBayiler, 896, 18990, 17849,
+  `41 bayinin 34'ü ön sipariş girişlerini tamamlamıştır. Geçen yıl aynı dönemde 896 adet olan satış performansı bu yıl 18.990 adede ulaşarak güçlü bir büyüme sağlamıştır. Mevcut sipariş trendi dikkate alındığında ürün grubunda büyümenin devam edeceği öngörülmektedir.<br><br>
+  <strong>Öneriler:</strong><br>
+  • Mevcut satış ivmesinin korunması için kurum görüşmeleri ve erken anlaşmalar hızlandırılmalıdır.<br>
+  • Talep yoğunluğu görülen bölgelerde stok planlaması güçlendirilmelidir.<br>
+  • Bayilere yönelik bilgilendirme ve teşvik çalışmaları artırılarak satış motivasyonu sürdürülebilir hale getirilmelidir.`
+) + buildSection(
+  2, 'MUHSİN ÖZBALCI', 'EĞİTİM VADİSİ 9-10-11. Sınıf TAK-TİK | 2. Raporlama',
+  `1. rapor tarihi olan 05.06.2026'dan 25.06.2026'ya kadar geçen sürede toplam satış adedi 31.108'den 37.923'e yükselmiş ve <strong>6.815 adet ilave sipariş girişi</strong> gerçekleşmiştir. Bu artışın 1.173 adedi 9. sınıf, 3.492 adedi 10. sınıf ve 2.150 adedi 11. sınıf ürünlerinden oluşmuştur. 11. sınıf ürünlerinin B2B'de siparişe açılmasının ardından 9 bayi tarafından toplam 2.150 adet sipariş girişi gerçekleştirilmiştir. Konya, Antalya ve Bursa gibi yüksek hacimli bayilerin toplu sipariş girişleri henüz tamamlanmamış olup, önümüzdeki süreçte sipariş artışının devam etmesi beklenmektedir.`,
+  muhsinBayiler, 6018, 37923, 52526,
+  `9, 10 ve 11. sınıf TAK-TİK ürünlerinde geçen yıl aynı döneme göre 25.090 adetlik artış gerçekleşmiş olup yaklaşık <strong>%530 büyüme</strong> sağlanmıştır. Ürünler özellikle kolejlerde takım olarak tercih edilmekte ve genel olarak beğenilmektedir.<br><br>
+  <strong>Tespit Edilen Sorun:</strong> Müfredat değişikliği beklentisi nedeniyle bayiler ürün alımlarında kontrollü ilerlemekte ve stok riskinden kaçınmaktadır. 11. sınıf ürünleri B2B'de siparişe açılmış olmasına rağmen sürecin henüz netleşmemesi nedeniyle beklenen sipariş girişleri yapılmamıştır.<br><br>
+  <strong>Öneriler:</strong><br>
+  • Haziran ayı içerisinde tüm bayilerle görüşülerek 11. sınıf ürünleri başta olmak üzere sipariş girişleri hızlandırılmalıdır.<br>
+  • TAK ürünlerinde soru sayısı, TİK ürünlerinde etkinlik-soru dengesi yeniden değerlendirilmelidir.`
+) + buildSection(
+  3, 'SÜLEYMAN İŞPINAR', 'EĞİTİM VADİSİ Ara Sınıf TAK-TİK | 2. Raporlama',
+  `Eğitim Vadisi Tak ve Tik ürünlerinin siparişleri incelendiğinde, 1. raporlamaya kıyasla özellikle 11. sınıf ürünlerinin sipariş girişleriyle birlikte <strong>yaklaşık 7.000 adetlik ilave sipariş</strong> oluşturulduğu görülmektedir. Bu yıl ara sınıf ürün grubuna 11. sınıfın da eklenmesiyle ürünler sahaya tam set olarak sunulacaktır. Potansiyeli yüksek bayilerin 11. sınıf sipariş girişleri tamamlanmıştır; potansiyeli düşük bayilerin girişleri Ağustos dönemine bırakılmıştır. Bazı bayilerde limit yetersizliği ve devir süreçlerinden kaynaklanan nedenlerle sipariş girişleri henüz tamamlanamamıştır.`,
+  suleymanBayiler, 5777, 29307, 32505,
+  `Eğitim Vadisi Tak-Tik ürünlerinde bayilerin bu ürün grubuna olan güven ve inancının her geçen gün arttığı gözlemlenmektedir. Bu yıl 11. sınıf ürünlerinin de tamamlanmasıyla birlikte ara sınıflarda tam set ürün yapısına ulaşılacak olması satış grafiğine önemli ölçüde olumlu katkı sağlayacaktır.<br><br>
+  <strong>Öneriler:</strong><br>
+  • 11. sınıf ürünleri en kısa sürede stoklara alınmalı ve saha tanıtımları hızlandırılmalıdır.<br>
+  • Ağustos ayı başındaki saha ziyaretlerinde eksik sipariş girişlerinin tamamlanması hedeflenmektedir.<br>
+  • Sahadan gelen Tak-Tik içeriklerinin tek kitapta birleştirilmesi talebi değerlendirmeye alınmalıdır.`
+) + buildKutuphane();
+</script>
+</body>
+</html>
