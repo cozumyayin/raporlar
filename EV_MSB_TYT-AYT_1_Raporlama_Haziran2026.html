@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EĞİTİM VADİSİ MSB TYT-AYT — 1. Raporlama | 15.06.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8102E;--red-light:#fdecea;
+  --dark:#1A1A2E;--mid:#2C2C54;--text:#1f2937;--sub:#6b7280;
+  --border:#e5e7eb;--bg:#f4f5f7;--white:#ffffff;
+  --green:#16a34a;--green-bg:#dcfce7;
+  --amber:#d97706;--amber-bg:#fef3c7;
+  --blue:#1d4ed8;--blue-bg:#dbeafe;
+  --rose:#e11d48;--rose-bg:#ffe4e6;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);}
+.header{background:var(--dark);}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:20px 40px 16px;}
+.logo-badge{background:var(--red);color:#fff;font-weight:700;font-size:18px;padding:7px 14px;border-radius:4px;letter-spacing:1px;}
+.logo-right{margin-left:14px;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;}
+.logo-right h1{font-size:15px;font-weight:700;color:#fff;}
+.logo-right p{font-size:11px;color:#94a3b8;margin-top:2px;}
+.meta-date{font-size:24px;font-weight:700;color:#fff;font-family:'IBM Plex Mono',monospace;}
+.meta-lbl{font-size:10px;color:#94a3b8;text-align:right;margin-top:2px;letter-spacing:.5px;}
+.header-band{background:var(--red);padding:10px 40px;display:flex;align-items:center;justify-content:space-between;}
+.header-band span{font-size:13px;font-weight:600;color:#fff;}
+.hb-badge{background:rgba(255,255,255,.2);color:#fff;font-size:10px;padding:3px 10px;border-radius:20px;}
+.kpi-band{background:var(--mid);display:grid;grid-template-columns:repeat(3,1fr);}
+.kpi-item{padding:16px 18px;border-right:1px solid rgba(255,255,255,.07);text-align:center;}
+.kpi-item:last-child{border-right:none;}
+.kpi-val{font-size:27px;font-weight:700;color:#fff;font-family:'IBM Plex Mono',monospace;}
+.kpi-lbl{font-size:11px;color:#94a3b8;margin-top:4px;font-weight:500;}
+.kpi-sub{font-size:10px;color:#64748b;margin-top:2px;}
+.kpi-grw{font-size:12px;font-weight:700;margin-top:5px;}
+.grand-wrap{padding:24px 32px 0;}
+.grand-box{background:var(--dark);border-radius:10px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;}
+.gb-left h2{font-size:13px;color:#94a3b8;font-weight:500;}
+.gb-left p{font-size:11px;color:#475569;margin-top:2px;}
+.gb-right{display:flex;gap:36px;}
+.gb-stat{text-align:center;}
+.gb-val{font-size:28px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.gb-lbl{font-size:10px;color:#94a3b8;margin-top:3px;letter-spacing:.4px;}
+.sec{margin:24px 32px 0;background:var(--white);border-radius:10px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);}
+.sec-num{background:var(--red);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;margin-right:12px;}
+.sec-name{font-size:16px;font-weight:700;color:var(--dark);}
+.sec-sub{font-size:11px;color:var(--sub);margin-top:2px;}
+.bdg{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;margin-left:4px;}
+.bdg-red{background:var(--red-light);color:var(--red);}
+.bdg-green{background:var(--green-bg);color:var(--green);}
+.bdg-blue{background:var(--blue-bg);color:var(--blue);}
+.bdg-amber{background:var(--amber-bg);color:var(--amber);}
+.bdg-rose{background:var(--rose-bg);color:var(--rose);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+.stat{padding:13px 16px;border-right:1px solid var(--border);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-val{font-size:22px;font-weight:700;color:var(--dark);font-family:'IBM Plex Mono',monospace;}
+.stat-lbl{font-size:10px;color:var(--sub);margin-top:3px;font-weight:500;}
+.grw-pos{color:var(--green);font-size:12px;font-weight:700;margin-top:2px;}
+.grw-neg{color:var(--rose);font-size:12px;font-weight:700;margin-top:2px;}
+.aciklama-box{margin:14px 20px;padding:12px 14px;background:#f9fafb;border-left:3px solid var(--red);border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.7;color:#374151;}
+.chart-area{padding:14px 20px 6px;border-bottom:1px solid var(--border);}
+.chart-ttl{font-size:10px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;}
+.bar-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.bar-lbl{width:240px;font-size:10.5px;color:var(--text);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;}
+.bar-track{flex:1;background:#f1f5f9;border-radius:3px;height:16px;}
+.bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:5px;}
+.bar-fill span{font-size:9.5px;font-weight:600;color:#fff;font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
+.tbl-toggle{display:flex;align-items:center;gap:6px;margin:12px 20px 8px;cursor:pointer;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--sub);font-family:'IBM Plex Sans',sans-serif;}
+.tbl-toggle:hover{background:#f8fafc;}
+.tbl-wrap{padding:0 20px 16px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:11.5px;}
+thead th{padding:7px 9px;background:#f8fafc;font-weight:600;color:var(--sub);border-bottom:2px solid var(--border);white-space:nowrap;font-size:10.5px;}
+thead th:first-child,thead th:nth-child(2){text-align:left;}
+thead th:not(:first-child):not(:nth-child(2)){text-align:right;}
+tbody td{padding:6px 9px;border-bottom:1px solid #f1f5f9;vertical-align:middle;}
+tbody td:first-child{font-size:11px;font-weight:500;}
+tbody td:nth-child(2){font-size:10.5px;color:var(--sub);}
+tbody td:not(:first-child):not(:nth-child(2)){text-align:right;font-family:'IBM Plex Mono',monospace;}
+tbody tr:hover{background:#fafafa;}
+.zero{color:#cbd5e1;}
+tfoot td{font-weight:700;background:#f8fafc;border-top:2px solid var(--border);padding:7px 9px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+tfoot td:first-child{font-family:'IBM Plex Sans',sans-serif;}
+tfoot td:not(:first-child):not(:nth-child(2)){text-align:right;}
+.sonuc-wrap{padding:14px 20px;border-top:1px solid var(--border);}
+.sonuc-ttl{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.sonuc-txt{font-size:12.5px;line-height:1.7;color:var(--text);}
+.footer{background:var(--dark);color:#475569;text-align:center;padding:16px;font-size:11px;margin-top:28px;}
+.footer span{color:#94a3b8;}
+.hidden{display:none!important;}
+.durum-iyi{color:var(--green);font-weight:600;}
+.durum-orta{color:var(--amber);font-weight:600;}
+.durum-dusuk{color:var(--rose);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <div style="display:flex;align-items:center;">
+      <div class="logo-badge">ÇÖZÜM</div>
+      <div class="logo-right">
+        <h1>EĞİTİM VADİSİ TYT-AYT MULTİ SORU BANKASI</h1>
+        <p>1. Raporlama — Sezonsal Ürün Takip Takvimi</p>
+      </div>
+    </div>
+    <div>
+      <div class="meta-date">15.06.2026</div>
+      <div class="meta-lbl">RAPORLAMA TARİHİ</div>
+    </div>
+  </div>
+  <div class="header-band">
+    <span>KPI: Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+    <span class="hb-badge">3 Bölge Yöneticisi</span>
+  </div>
+</div>
+
+<div class="kpi-band">
+  <div class="kpi-item">
+    <div class="kpi-val">2.423</div>
+    <div class="kpi-lbl">VEDAT ADSAN</div>
+    <div class="kpi-sub">33 Bayi | GY BGK: 1.296</div>
+    <div class="kpi-grw" style="color:#4ade80;">+%87 Büyüme</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">8.053</div>
+    <div class="kpi-lbl">MUHSİN ÖZBALCI</div>
+    <div class="kpi-sub">36 Bayi | GY BGK: 12.273</div>
+    <div class="kpi-grw" style="color:#f87171;">-%34 Düşüş</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">15.086</div>
+    <div class="kpi-lbl">SÜLEYMAN İŞPINAR</div>
+    <div class="kpi-sub">32 Bayi | GY BGK: 7.859</div>
+    <div class="kpi-grw" style="color:#4ade80;">+%92 Büyüme</div>
+  </div>
+</div>
+
+<div class="grand-wrap">
+  <div class="grand-box">
+    <div class="gb-left">
+      <h2>3 Bölge Yöneticisi — Genel Toplam</h2>
+      <p>EV TYT-AYT MSB 1. Raporlama / 15.06.2026</p>
+    </div>
+    <div class="gb-right">
+      <div class="gb-stat">
+        <div class="gb-val" style="color:#f87171;">25.562</div>
+        <div class="gb-lbl">TOPLAM BY BGK</div>
+      </div>
+      <div class="gb-stat">
+        <div class="gb-val" style="color:#94a3b8;">21.428</div>
+        <div class="gb-lbl">TOPLAM GY BGK</div>
+      </div>
+      <div class="gb-stat">
+        <div class="gb-val" style="color:#4ade80;">+%19</div>
+        <div class="gb-lbl">NET BÜYÜME</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="root"></div>
+
+<div class="footer" style="margin-top:28px;">
+  <span>Çözüm Yayın Grubu</span> · EĞİTİM VADİSİ TYT-AYT MSB 1. Raporlama · 15.06.2026
+</div>
+
+<script>
+const vedatData = [["AKSU KIRTASIYE - AZIZ AKSU", "HAKKARI", 0, 36, 0, ""], ["AY KIRTASIYE KITAP TEK.TEM.INS.", "AGRI", 45, 14, 115, ""], ["BILIM KIRTASIYE SELAHET METE", "SIRNAK", 0, 54, 0, ""], ["BILIM KITABEVI SEYIT ATES", "SANLIURFA", 0, 10, 132, ""], ["BKM BATMAN KITAP MERKEZI KIRTASIYE", "BATMAN", 150, 0, 270, ""], ["DORUK SANAYI VE TICARET LIMITED SIRKETI", "MARDIN", 0, 9, 114, ""], ["ELAZIG ANKA KITAP KIRTASIYE - CAHIT AYHAN", "ELAZIG", 0, 0, 185, ""], ["FINAL BASARI EGITIM HIZ. BAS.YAY.", "SIIRT", 0, 54, 0, ""], ["GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ", "GÜMÜSHANE", 0, 0, 23, ""], ["GUNEYDOGU TELEKOMUNASYON KAGT", "SIRNAK", 0, 0, 102, ""], ["GUZEL OZEL EGT KIRT INS SAN TIC LTD STI", "DIYARBAKIR", 58, 0, 159, "Kırmızı (Düşük)"], ["HEDEF KIRTASIYE-ZAFER YAVUZER", "VAN", 320, 0, 350, "Kırmızı (Düşük)"], ["IGDIR KULTUR KITAP KIRTASIYE-MEHMET NURI YIGIT", "IGDIR", 220, 230, 240, "Yeşil (İyi)"], ["KIZILDERE KIRTASIYE VE BILG.GIDA.INS", "VAN", 0, 0, 45, ""], ["KOMMAGENE KITAP DEPOSU RAHIME BILGIC", "ADIYAMAN", 0, 240, 0, ""], ["MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)", "BAYBURT", 10, 0, 10, "Kırmızı (Düşük)"], ["MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI", "MARDIN", 0, 80, 29, ""], ["NAYIF AYDEMIR (VAROL KIRTASIYE)", "BITLIS", 0, 80, 1560, ""], ["OKURKENT KIRTASIYE GIYASETTIN DEMIR", "MUS", 0, 990, 0, ""], ["ONCU ACAR KIRTASIYE NAK.INS.", "ADIYAMAN", 0, 0, 15, ""], ["OZCELIK KIRTASIYE MUHAMMED OZCELIK", "SANLIURFA", 0, 430, 0, ""], ["OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA LTD STI", "KARS", 6, 0, 6, "Kırmızı (Düşük)"], ["POZITIF BASKI HIZMETLERI KITAP KIRTASIYE", "ERZURUM", 0, 170, 30, ""], ["POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP", "DIYARBAKIR", 0, 0, 512, ""], ["SAH KIRTASIYE MINE BENZER", "SANLIURFA", 20, 0, 328, "Kırmızı (Düşük)"], ["GENC CARSI KITAP KIRTASIYE", "ERZINCAN", 0, 0, 134, ""], ["SEBIL KIRTASIYE-UZEYIR AKCELIK", "BITLIS", 0, 0, 66, ""], ["SEDAT KIRTASIYE (ABUBEKIR YUCEL)", "SANLIURFA", 462, 0, 483, "Kırmızı (Düşük)"], ["SIIRT ARI KITAPEVI  ALI KURT", "SIIRT", 0, 2, 30, ""], ["SIVEREK AKADEMI KITAP KIRTASIYE", "SANLIURFA", 5, 0, 1464, ""], ["TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.", "MARDIN", 0, 0, 71, ""], ["UCAR DAGITIM PAZARLAMA ITH IHR TIC SAN LTD STI", "MARDIN", 0, 24, 70, ""], ["UMUT KIRTASIYE-MEHMET ALI CEYHAN", "DIYARBAKIR", 0, 0, 59, ""]];
+const muhsinData = [["ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI", "KÜTAHYA", 1009, 101, 1748, "Kırmızı (Düşük)"], ["AKDENIZ LIDER KITAP DAGITIM LTD STI", "ANTALYA", 2400, 0, 2660, "Kırmızı (Düşük)"], ["ANTALYA ATLAS KITABEVI OZAN ERIPEK", "ANTALYA", 0, 13, 118, ""], ["ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI", "ESKISEHIR", 2772, 110, 3001, "Kırmızı (Düşük)"], ["ATILA FOTOKOPI VE KITAP EVI SEMA BOZ", "KONYA", 0, 0, 30, ""], ["BANDIRMA KITAP KIRTASIYE GULBAHAR BAHADIR", "BALIKESIR", 30, 2140, 223, "Yeşil (İyi)"], ["BARIS KIRTASIYE / ALI-HABERAL CAMLIBOGAZ", "KONYA", 1, 1, 1, "Yeşil (İyi)"], ["BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC.LTD.STI", "ANTALYA", 0, 3084, 0, ""], ["CAGRI KITABEVI-ERHAN EVRAN", "MANISA", 0, 8, 0, ""], ["CETIN YAYIN DAGITIM A.S", "BALIKESIR", 0, 17, 40, ""], ["DKM YAYIN BASIM DAGITIM REKLAM EGITIM ÖGRETIM SANAYI TICARET LIMITED SIRKETI", "DENIZLI", 0, 0, 142, ""], ["EGE KITAP KIRTASIYE-DONDU YILGIN", "BALIKESIR", 162, 1175, 651, "Yeşil (İyi)"], ["EREN KITAP KIRTASIYE MUHARREM AKMAN", "BILECIK", 0, 0, 204, ""], ["FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.CIHAZLAR INS. VE TUR.LTD.STI.", "MUGLA", 30, 90, 415, "Yeşil (İyi)"], ["GUVEN KIRTASIYE - OZAN TUNCEL", "KÜTAHYA", 0, 0, 11, ""], ["HAKAN KITABEVI - M HAKAN YURTTADUR", "ISPARTA", 0, 0, 4, ""], ["HALIT KAYA (ALANYA AKADEMI KIRTASIYE)", "ANTALYA", 0, 0, 45, ""], ["HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)", "KONYA", 2, 20, 132, "Yeşil (İyi)"], ["HILAL KITAP KIRTASIYE-HUMA CELIK", "BURDUR", 0, 0, 6, ""], ["KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN", "BURDUR", 2, 32, 28, "Yeşil (İyi)"], ["KUMBET KIRTASIYE YAYINCILIK INS. NAK. HEDIYE ESYA ELK.TIC.LT.STI.", "AFYONKARAHISAR", 5, 30, 169, "Yeşil (İyi)"], ["MEDRESE KITABEVI- DAVUT GUNDOGAN", "AFYONKARAHISAR", 0, 128, 0, ""], ["METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC. LTD. STI.", "ÇANAKKALE", 0, 160, 1252, ""], ["MSM KIRTASIYE - BIRGUL TIRAS", "USAK", 35, 0, 68, "Kırmızı (Düşük)"], ["MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI", "MUGLA", 801, 1, 877, "Kırmızı (Düşük)"], ["MURAT AYDIN - MKM - MARMARA KULTUR MERKEZI & OKULLAR PAZARI", "BILECIK", 3, 0, 37, "Kırmızı (Düşük)"], ["NEJLA KANSU -KANSU KITABEVI", "ANTALYA", 558, 642, 939, "Yeşil (İyi)"], ["OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE", "KONYA", 0, 0, 35, ""], ["SED-KANGURU KITAP MUSAMETTIN KUCAK", "MANISA", 0, 55, 217, ""], ["SERKAN ISIK - AYRAC KITABEVI", "AYDIN", 5, 11, 64, "Yeşil (İyi)"], ["TERCIH KITABEVI/GUROL SULUHAN", "AYDIN", 0, 230, 75, ""], ["TURKER KIRTASIYE-FATIH BAS", "MANISA", 0, 0, 142, ""], ["UC YILDIZ KITABEVI (IBRAHIM YILDIZ)", "ISPARTA", 33, 5, 233, "Kırmızı (Düşük)"], ["UMRAN KITAP KIRTASIYE - ADEM TETIK", "BURDUR", 0, 0, 26, ""], ["YESIL BEYAZ YAYIN DAG(MITHAT APARCI)", "KONYA", 120, 0, 1325, "Kırmızı (Düşük)"], ["YONCE YAYIN DAGITIM KITABEVI LTD.STI", "BURSA", 4305, 0, 6178, "Kırmızı (Düşük)"]];
+const suleymanData = [["ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZARLAMA LTD. STI.", "ADANA", 0, 12570, 0, "Eğitim Vadisi MSB ürünlerimiz geçen yıl aynı dönemde 7.859 adet satışa ulaşmışken, bu yıl aynı tarihte 15.086 adede ulaşarak yaklaşık %100 büyüme göstermiştir. Ancak bu olumlu tabloya rağmen ürün gamımızın sahada genel anlamda beklenen düzeyde talep görmediği değerlendirilmektedir. Bunun temel sebepleri arasında ürünlerin uzun süredir yenilenmemiş olması ve içerik/yüz tasarımı açısından güncelliğini yitirmesi yer almaktadır.\nÖzellikle Adana bayimiz Alya Kırtasiye'nin kurumlarla yürüttüğü yoğun çalışmalar sonucunda ürünlerimizin kurum listelerine dahil edilmesi ve bu ürün grubuna özel odaklanılması, satış adetlerinin hedeflenen seviyelere ulaşmasında önemli rol oynamıştır.\nMevcut saha gözlemlerine göre kurumlar tarafından daha çok marka değeri yüksek veya fiyat avantajı sunan yayınlar tercih edilmektedir. Eğitim Vadisi MSB ürünleri ise mevcut durumda bu iki kriter açısından rakiplerine göre dezavantajlı kalmakta, ayrıca uzun süredir yenilenmemesi nedeniyle tercih edilme oranı düşmektedir.\nÖnümüzdeki dönemde teklif verilen ve ücretsiz deneme paketi ulaştırılan kurumların geri dönüşleri yakından takip edilecektir. Özellikle YKS grubunda karar sürecindeki kurumlarla yüz yüze görüşmeler gerçekleştirilerek sürecin olumlu sonuçlandırılması hedeflenmektedir.\nBununla birlikte, geçtiğimiz yıl anlaşma sağlanan Kayseri Belediyesi'ne bu yıl da yeniden teklif sunulacak ve iş birliğinin devam ettirilmesi için gerekli çalışmalar yürütülecektir."], ["ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.", "HATAY", 70, 0, 90, ""], ["BASARI KITAP KIRTASIYE-RAMAZAN ALTINSOY", "AKSARAY", 0, 10, 60, ""], ["BILGI KIRTASIYE OMER SIMSEK", "GAZIANTEP", 50, 0, 50, ""], ["CAN KITAP KIRTASIYE ABDULKADIR CAN", "MERSIN", 0, 0, 20, ""], ["CAN KITAP KIRTASIYE-AHMET YILDIRIM", "YOZGAT", 5, 0, 29, ""], ["DEVELI YAPRAK DAGITIM DAVUT KENDIRCI", "KAYSERI", 0, 0, 65, ""], ["DUNYA KULTUR MERKEZI IRFAN YESILNAR", "AMASYA", 0, 9, 80, ""], ["ETHEM DEMIRBAG (ERDEM KIRTASIYE)", "ADANA", 8, 20, 313, ""], ["EYUP ZAFER ATES - ZAFER KIRTASIYE", "MERSIN", 12, 0, 36, ""], ["GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .", "KAYSERI", 0, 300, 5966, ""], ["GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.ZUC.HED.TIC.LTD.STI", "ADANA", 2730, 0, 3230, ""], ["HILAL KIRTASIYE/SONER DEDE", "ÇORUM", 0, 2, 5, ""], ["KAHRAMANMARAS HEDEF KITAP KIRTASIYE MEHMET APAYDIN", "KAHRAMANMARAS", 205, 403, 2916, ""], ["KARACA YAYIN BASIM DAGITIM EGITIM KIRT.HIZ.SAN VE TIC.LTD.STI", "HATAY", 0, 26, 134, ""], ["KARANFIL KITAP KIRTASIYE UMUT GOKMEN", "OSMANIYE", 0, 0, 30, ""], ["KURT YAYIN DAGITIM TICARET LTD STI", "HATAY", 0, 18, 0, ""], ["MAVI KITAP KIRTASIYE MEHMET ALI KUH", "HATAY", 23, 3, 56, ""], ["MEHMET CETIN - CETIN KITAP KIRTASIYE", "HATAY", 0, 0, 75, ""], ["MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI", "MERSIN", 0, 590, 465, ""], ["MINI KITAP KIRTASIYE ALPAY ERDAL", "KAHRAMANMARAS", 5, 0, 8, ""], ["MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTASIYE", "YOZGAT", 0, 5, 0, ""], ["MUSTAFA DANIS - DANIS KITABEVI", "KARAMAN", 0, 0, 110, ""], ["NEVSEHIR-ATLAS KITAP KIRTASIYE-FATMA KURTDOGAN", "NEVSEHIR", 1475, 0, 1475, ""], ["NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI", "ÇORUM", 0, 0, 60, ""], ["OLUSUM GLOBAL KITAP DAGITIM SANAYI VE TIC.LTD.STI", "GAZIANTEP", 0, 1120, 0, ""], ["OZCAN DAGITIM VE YAYIN KIRTASIYE KITAP", "GAZIANTEP", 850, 0, 1030, ""], ["PARK OZEL EGITIM KIRTASIYE TUR SEY TIC LTD STI", "MERSIN", 2386, 10, 2706, ""], ["RAMAZAN HASIL - PAZARCIK-KULTUR KITAP KIRTASIYE", "KAHRAMANMARAS", 0, 0, 20, ""], ["TORE KIRTASIYE TICARET VE SANAYI LTD STI", "NIGDE", 40, 0, 143, ""], ["VIZYON PLUS KITABEVI OKKES ANIL MART", "OSMANIYE", 0, 0, 20, ""], ["ZAFERCAN KIRTASIYE -TUBA OZUDOGRU", "AMASYA", 0, 0, 265, ""]];
+
+function fmtN(n){if(n===null||n===undefined)return'—';return Number(n).toLocaleString('tr-TR');}
+function z(n){return(n===0||!n)?'<span class="zero">—</span>':fmtN(n);}
+
+function durumClass(d){
+  if(!d)return'';
+  if(d.includes('İyi'))return'durum-iyi';
+  if(d.includes('Orta'))return'durum-orta';
+  if(d.includes('Düşük'))return'durum-dusuk';
+  return'';
+}
+function durumKısa(d){
+  if(!d)return'';
+  if(d.includes('İyi'))return'✅ İyi';
+  if(d.includes('Orta'))return'⚠️ Orta';
+  if(d.includes('Düşük'))return'🔴 Düşük';
+  return d;
+}
+
+function buildBars(data){
+  const top20 = [...data].sort((a,b)=>(b[3]||0)-(a[3]||0)).slice(0,20);
+  const maxVal = top20[0]?top20[0][3]||0:1;
+  return top20.map(b=>{
+    const pct = maxVal>0?Math.max(Math.round(((b[3]||0)/maxVal)*100),1):0;
+    const color = (b[3]||0)===0?'#e2e8f0':(pct>=60?'#16a34a':pct>=30?'#d97706':'#C8102E');
+    return `<div class="bar-row">
+      <div class="bar-lbl" title="${b[0]}">${b[0]}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${(b[3]||0)===0?2:pct}%;background:${color};">
+          <span style="${(b[3]||0)===0?'color:#94a3b8;':''}">${fmtN(b[3]||0)}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function buildSection(num, byName, urun, aciklama, data, gyBgk, byBgk, gyTop, sonucHtml, buyumePct, buyumePos){
+  const rows = data.map(b=>`<tr>
+    <td>${b[0]}</td>
+    <td>${b[1]}</td>
+    <td>${z(b[2])}</td>
+    <td style="font-weight:${(b[3]||0)>0?'700':'400'};color:${(b[3]||0)>0?'var(--dark)':'inherit'};">${z(b[3])}</td>
+    <td>${z(b[4])}</td>
+    <td class="${durumClass(b[5])}">${durumKısa(b[5])}</td>
+  </tr>`).join('');
+
+  const buyumeHtml = buyumePos
+    ? `<div class="grw-pos">+%${buyumePct}</div>`
+    : `<div class="grw-neg">-%${buyumePct}</div>`;
+  const bdgClass = buyumePos?'bdg-green':'bdg-rose';
+  const bdgTxt = buyumePos?`+%${buyumePct} Büyüme`:`-%${buyumePct} Düşüş`;
+
+  return `<div class="sec">
+  <div class="sec-hdr">
+    <div style="display:flex;align-items:center;">
+      <div class="sec-num">${num}</div>
+      <div>
+        <div class="sec-name">${byName}</div>
+        <div class="sec-sub">${urun}</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+      <span class="bdg ${bdgClass}">${bdgTxt}</span>
+      <span class="bdg bdg-blue">${data.length} Bayi</span>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-val">${fmtN(gyBgk)}</div>
+      <div class="stat-lbl">Geçen Yıl BGK</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" style="color:var(--red);">${fmtN(byBgk)}</div>
+      <div class="stat-lbl">Bu Yıl BGK</div>
+      ${buyumeHtml}
+    </div>
+    <div class="stat">
+      <div class="stat-val">${fmtN(gyTop)}</div>
+      <div class="stat-lbl">GY Toplam Adet</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">${data.filter(b=>(b[3]||0)>0).length}</div>
+      <div class="stat-lbl">Aktif Bayi</div>
+    </div>
+  </div>
+  <div class="aciklama-box">${aciklama.replace(/\n/g,'<br>')}</div>
+  <div class="chart-area">
+    <div class="chart-ttl">BY BGK — İlk 20 Bayi (büyükten küçüğe)</div>
+    ${buildBars(data)}
+  </div>
+  <button class="tbl-toggle" onclick="this.nextElementSibling.classList.toggle('hidden');this.textContent=this.nextElementSibling.classList.contains('hidden')?'▶ Tüm bayileri göster (${data.length} bayi)':'▼ Tabloyu gizle';">▶ Tüm bayileri göster (${data.length} bayi)</button>
+  <div class="tbl-wrap hidden">
+    <table>
+      <thead><tr>
+        <th>Bayi Adı</th><th>İl</th>
+        <th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>Durum</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr>
+        <td colspan="2"><strong>TOPLAM</strong></td>
+        <td>${fmtN(gyBgk)}</td>
+        <td style="color:var(--red);">${fmtN(byBgk)}</td>
+        <td>${fmtN(gyTop)}</td>
+        <td></td>
+      </tr></tfoot>
+    </table>
+  </div>
+  <div class="sonuc-wrap">
+    <div class="sonuc-ttl">📋 Rapor Sonuç ve Öneriler</div>
+    <div class="sonuc-txt">${sonucHtml}</div>
+  </div>
+</div>`;
+}
+
+document.getElementById('root').innerHTML =
+  buildSection(1,'VEDAT ADSAN','EĞİTİM VADİSİ TYT-AYT MULTİ SORU BANKASI | 1. Raporlama',
+    'Geçen yıl aynı dönemde 1.296 adet olan toplam satış, bu yıl aynı dönemde 2.423 adede ulaşarak 1.127 adetlik artış göstermiştir. Bu sonuç, geçen yılın aynı dönemine kıyasla satışlarda yaklaşık <strong>%87 oranında büyüme</strong> sağlandığını göstermektedir. Haziran, Temmuz ve Ağustos aylarında gerçekleştirilmesi planlanan erken kurum anlaşmaları ile satışların daha da ivme kazanması beklenmektedir. Geçen yıla göre 9 bayimizin henüz sipariş geçmemiş olması dikkate alındığında, ikinci raporlama dönemine kadar satış adetlerinde ilave artış sağlanacağı öngörülmektedir.',
+    vedatData, 1296, 2423, 6602,
+    'Geçen yıl aynı dönemde 1.296 adet olan toplam satış, bu yıl 2.423 adede yükselerek <strong>+%87 büyüme</strong> gerçekleşmiştir. Mevcut satış ivmesi korunmalı ve anlaşma aşamasındaki kurumlarla süreç hızlandırılmalıdır.<br><br><strong>Öneriler:</strong><br>• Artış trendinin devamı için bayilerle iletişim sıklığı artırılmalı ve raf eksikleri tamamlanmalıdır.<br>• Henüz sipariş geçmeyen 9 bayi öncelikli takibe alınmalıdır.<br>• Talep gören ürünlere odaklı kampanya ve hatırlatma çalışmaları yapılmalıdır.',
+    87, true) +
+
+  buildSection(2,'MUHSİN ÖZBALCI','EĞİTİM VADİSİ TYT-AYT MULTİ SORU BANKASI | 1. Raporlama',
+    'Bölgede TYT-AYT Soru Bankası ürünlerinde geçen yıl aynı döneme kadar 12.273 adet satış gerçekleşmişken, bu yıl satış adedi 8.053 seviyesinde kalmıştır. <strong>4.220 adetlik ve yaklaşık %34 oranında düşüş</strong> yaşanmıştır. Düşüşün en önemli nedeni Bursa merkez bayisinin geçen yıl gerçekleştirdiği toplu ürün alımını bu yıl tekrarlamamasıdır. Müfredat değişikliği beklentisi nedeniyle hem bayi hem kurumlar temkinli ilerlemektedir. Eskişehir ve Kütahya bayilerinde de içerik güncelliği eleştirilerinden kaynaklanan kayıplar yaşanmaktadır. Antalya merkezde bayi değişikliği olumlu yansımış; ancak diğer bayilerdeki kaybı henüz karşılayamamıştır.',
+    muhsinData, 12273, 8053, 21096,
+    '<strong>Geçen yılın aynı dönemine göre 4.220 adetlik satış kaybı yaşanmıştır.</strong> Bursa bayisinin toplu alım gerçekleştirmemesi belirleyici olurken, Eskişehir ve Kütahya'daki kurum kayıpları da olumsuz etkilemiştir. Kurumsal satış süreci devam etmekte olup mevcut rakamlar dönem sonu performansını tam yansıtmamaktadır.<br><br><strong>Tespit Edilen Sorun:</strong> Ürün içeriklerinin güncellik açısından yeterince güçlü bulunmaması, müfredat belirsizliği ve marka bilinirliğinin rakiplere göre düşük kalması satış performansını olumsuz etkilemektedir.<br><br><strong>Öneriler:</strong><br>• Ürün içerikleri öğretmen ve kurum geri bildirimleri doğrultusunda güncellenmeli, müfredat uyumu sahaya aktarılmalıdır.<br>• Haziran ayı içinde tüm bayilerle görüşülerek bekleyen kurum sipariş süreçleri tamamlanmalıdır.<br>• TAK ürünlerinde soru sayısı, TİK ürünlerinde etkinlik-soru dengesi yeniden değerlendirilmelidir.',
+    34, false) +
+
+  buildSection(3,'SÜLEYMAN İŞPINAR','EĞİTİM VADİSİ TYT-AYT MSB | 1. Raporlama',
+    'MSB ürünleri geçen yıl aynı dönemde 7.859 adet satışa ulaşmışken, bu yıl aynı tarihte 15.086 adede ulaşarak yaklaşık <strong>%92 büyüme</strong> göstermiştir. Ancak bu olumlu tabloya rağmen ürün gamının sahada genel anlamda beklenen düzeyde talep görmediği değerlendirilmektedir. Bunun temel sebepleri arasında ürünlerin uzun süredir yenilenmemiş olması ve içerik/yüz tasarımı açısından güncelliğini yitirmesi yer almaktadır. Özellikle Adana bayisi Alya Kırtasiye'nin kurumlarla yürüttüğü yoğun çalışmalar sonucunda ürünler kurum listelerine dahil edilmiş ve bu ürün grubuna özel odaklanılması satış adetlerinde belirleyici rol oynamıştır.',
+    suleymanData, 7859, 15086, 19457,
+    'Geçen yıl aynı dönemde 7.859 adet olan satış bu yıl 15.086 adede yükselerek <strong>+%92 büyüme</strong> gerçekleşmiştir. Adana bayisinin odaklı kurum çalışması satışa olumlu yansımıştır.<br><br><strong>Tespit Edilen Sorun:</strong> Kurumlar tarafından marka değeri yüksek veya fiyat avantajlı yayınlar tercih edilmektedir. EV MSB ürünleri mevcut durumda bu iki kriter açısından dezavantajlı kalmakta; uzun süredir yenilenmemesi nedeniyle tercih edilme oranı düşmektedir.<br><br><strong>Öneriler:</strong><br>• Teklif verilen ve ücretsiz deneme paketi ulaştırılan kurumların geri dönüşleri yakından takip edilmelidir.<br>• YKS grubunda karar sürecindeki kurumlarla yüz yüze görüşmeler gerçekleştirilmelidir.<br>• Geçen yıl anlaşma sağlanan Kayseri Belediyesi'ne yeniden teklif sunulmalıdır.',
+    92, true);
+</script>
+</body>
+</html>
