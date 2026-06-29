@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EĞİTİM VADİSİ TYT-AYT PDF — 2. Raporlama | Haziran 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--red:#C8102E;--red-light:#fdecea;--dark:#1A1A2E;--mid:#2C2C54;--text:#1f2937;--sub:#6b7280;--border:#e5e7eb;--bg:#f4f5f7;--white:#fff;--green:#16a34a;--green-bg:#dcfce7;--amber:#d97706;--amber-bg:#fef3c7;--blue:#1d4ed8;--blue-bg:#dbeafe;--rose:#e11d48;--rose-bg:#ffe4e6;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);}
+.hdr{background:var(--dark);}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:20px 40px 16px;}
+.logo{background:var(--red);color:#fff;font-weight:700;font-size:18px;padding:7px 14px;border-radius:4px;letter-spacing:1px;}
+.hdr-info{margin-left:14px;border-left:1px solid rgba(255,255,255,.12);padding-left:14px;}
+.hdr-info h1{font-size:15px;font-weight:700;color:#fff;}
+.hdr-info p{font-size:11px;color:#94a3b8;margin-top:2px;}
+.hdr-date{font-size:24px;font-weight:700;color:#fff;font-family:'IBM Plex Mono',monospace;text-align:right;}
+.hdr-date small{display:block;font-size:10px;color:#94a3b8;font-family:'IBM Plex Sans',sans-serif;margin-top:2px;letter-spacing:.5px;}
+.hdr-band{background:var(--red);padding:10px 40px;display:flex;align-items:center;justify-content:space-between;}
+.hdr-band span{font-size:13px;font-weight:600;color:#fff;}
+.hb-badge{background:rgba(255,255,255,.2);color:#fff;font-size:10px;padding:3px 10px;border-radius:20px;}
+.kpi-band{background:var(--mid);display:grid;grid-template-columns:repeat(4,1fr);}
+.kpi-item{padding:15px 16px;border-right:1px solid rgba(255,255,255,.07);text-align:center;}
+.kpi-item:last-child{border-right:none;}
+.kpi-val{font-size:25px;font-weight:700;color:#fff;font-family:'IBM Plex Mono',monospace;}
+.kpi-lbl{font-size:11px;color:#94a3b8;margin-top:3px;font-weight:500;}
+.kpi-sub{font-size:10px;color:#64748b;margin-top:2px;}
+.kpi-grw{font-size:11px;font-weight:700;margin-top:4px;}
+.grand{padding:22px 32px 0;}
+.grand-box{background:var(--dark);border-radius:10px;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;}
+.gb-l h2{font-size:13px;color:#94a3b8;font-weight:500;}
+.gb-l p{font-size:11px;color:#475569;margin-top:2px;}
+.gb-r{display:flex;gap:32px;}
+.gb-s{text-align:center;}
+.gb-v{font-size:27px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.gb-l2{font-size:10px;color:#94a3b8;margin-top:3px;letter-spacing:.4px;}
+.sec{margin:22px 32px 0;background:var(--white);border-radius:10px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:15px 20px;border-bottom:1px solid var(--border);}
+.sec-num{background:var(--red);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;margin-right:11px;}
+.sec-name{font-size:16px;font-weight:700;color:var(--dark);}
+.sec-sub{font-size:11px;color:var(--sub);margin-top:2px;}
+.bdg{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.bdg-green{background:var(--green-bg);color:var(--green);}
+.bdg-blue{background:var(--blue-bg);color:var(--blue);}
+.bdg-rose{background:var(--rose-bg);color:var(--rose);}
+.bdg-amber{background:var(--amber-bg);color:var(--amber);}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--border);}
+.stat{padding:12px 14px;border-right:1px solid var(--border);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-v{font-size:20px;font-weight:700;color:var(--dark);font-family:'IBM Plex Mono',monospace;}
+.stat-l{font-size:10px;color:var(--sub);margin-top:3px;font-weight:500;}
+.grw-p{color:var(--green);font-size:11px;font-weight:700;margin-top:2px;}
+.grw-n{color:var(--rose);font-size:11px;font-weight:700;margin-top:2px;}
+.grw-s{color:var(--amber);font-size:11px;font-weight:700;margin-top:2px;}
+.aciklama{margin:13px 20px;padding:11px 14px;background:#f9fafb;border-left:3px solid var(--red);border-radius:0 4px 4px 0;font-size:12.5px;line-height:1.7;color:#374151;}
+.chart-area{padding:13px 20px 5px;border-bottom:1px solid var(--border);}
+.chart-ttl{font-size:10px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px;margin-bottom:9px;}
+.bar-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.bar-lbl{width:240px;font-size:10.5px;color:var(--text);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;}
+.bar-track{flex:1;background:#f1f5f9;border-radius:3px;height:15px;}
+.bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:5px;}
+.bar-fill span{font-size:9px;font-weight:600;color:#fff;font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
+.tbl-btn{display:flex;align-items:center;gap:6px;margin:11px 20px 7px;cursor:pointer;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--sub);font-family:'IBM Plex Sans',sans-serif;}
+.tbl-btn:hover{background:#f8fafc;}
+.tbl-wrap{padding:0 20px 14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:11.5px;}
+thead th{padding:7px 8px;background:#f8fafc;font-weight:600;color:var(--sub);border-bottom:2px solid var(--border);white-space:nowrap;font-size:10.5px;}
+thead th:first-child,thead th:nth-child(2){text-align:left;}
+thead th:not(:first-child):not(:nth-child(2)){text-align:right;}
+tbody td{padding:6px 8px;border-bottom:1px solid #f1f5f9;}
+tbody td:first-child{font-size:11px;font-weight:500;}
+tbody td:nth-child(2){font-size:10.5px;color:var(--sub);}
+tbody td:not(:first-child):not(:nth-child(2)){text-align:right;font-family:'IBM Plex Mono',monospace;}
+tbody tr:hover{background:#fafafa;}
+.zero{color:#cbd5e1;}
+tfoot td{font-weight:700;background:#f8fafc;border-top:2px solid var(--border);padding:7px 8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+tfoot td:first-child{font-family:'IBM Plex Sans',sans-serif;}
+tfoot td:not(:first-child):not(:nth-child(2)){text-align:right;}
+.sonuc{padding:13px 20px;border-top:1px solid var(--border);}
+.sonuc-t{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.sonuc-txt{font-size:12.5px;line-height:1.7;color:var(--text);}
+.depo-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0 4px;}
+.depo-tbl th{padding:7px 12px;background:#f8fafc;font-size:10.5px;font-weight:600;color:var(--sub);border-bottom:2px solid var(--border);}
+.depo-tbl th:first-child{text-align:left;}
+.depo-tbl th:not(:first-child){text-align:right;}
+.depo-tbl td{padding:9px 12px;border-bottom:1px solid var(--border);}
+.depo-tbl td:first-child{font-weight:700;}
+.depo-tbl td:not(:first-child){text-align:right;font-family:'IBM Plex Mono',monospace;}
+.depo-tbl .tf td{font-weight:700;background:#f8fafc;border-top:2px solid var(--border);}
+.footer{background:var(--dark);color:#475569;text-align:center;padding:15px;font-size:11px;margin-top:26px;}
+.footer span{color:#94a3b8;}
+.hidden{display:none!important;}
+.d-iyi{color:#16a34a;font-weight:600;}
+.d-orta{color:#d97706;font-weight:600;}
+.d-dusuk{color:#e11d48;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-top">
+    <div style="display:flex;align-items:center;">
+      <div class="logo">ÇÖZÜM</div>
+      <div class="hdr-info">
+        <h1>EĞİTİM VADİSİ TYT-AYT PDF / DEFTER</h1>
+        <p>2. Raporlama — Sezonsal Ürün Takip Takvimi</p>
+      </div>
+    </div>
+    <div class="hdr-date">25–27.06.2026<small>RAPORLAMA TARİHLERİ</small></div>
+  </div>
+  <div class="hdr-band">
+    <span>KPI: Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+    <span class="hb-badge">4 Bölge Yöneticisi</span>
+  </div>
+</div>
+
+<div class="kpi-band">
+  <div class="kpi-item">
+    <div class="kpi-val">3.685</div>
+    <div class="kpi-lbl">VEDAT ADSAN</div>
+    <div class="kpi-sub">31 Bayi | GY BGK: 9.807</div>
+    <div class="kpi-grw" style="color:#f87171;">-%62 Düşüş</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">15.610</div>
+    <div class="kpi-lbl">MUHSİN ÖZBALCI</div>
+    <div class="kpi-sub">35 Bayi | GY BGK: 15.472</div>
+    <div class="kpi-grw" style="color:#4ade80;">+%0.9 Büyüme</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">19.542</div>
+    <div class="kpi-lbl">SÜLEYMAN İŞPINAR</div>
+    <div class="kpi-sub">31 Bayi | GY BGK: 19.577</div>
+    <div class="kpi-grw" style="color:#fbbf24;">-%0.2 Yatay</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val">30.220</div>
+    <div class="kpi-lbl">M. YASİN ERDOĞAN</div>
+    <div class="kpi-sub">3 Depo | GY BGK: 36.337</div>
+    <div class="kpi-grw" style="color:#f87171;">-%16.8 Düşüş</div>
+  </div>
+</div>
+
+<div class="grand">
+  <div class="grand-box">
+    <div class="gb-l">
+      <h2>4 Bölge Yöneticisi — Genel Toplam</h2>
+      <p>EV TYT-AYT PDF 2. Raporlama / Haziran 2026</p>
+    </div>
+    <div class="gb-r">
+      <div class="gb-s"><div class="gb-v" style="color:#f87171;">69.057</div><div class="gb-l2">TOPLAM BY BGK</div></div>
+      <div class="gb-s"><div class="gb-v" style="color:#94a3b8;">81.193</div><div class="gb-l2">TOPLAM GY BGK</div></div>
+      <div class="gb-s"><div class="gb-v" style="color:#fbbf24;">-%15</div><div class="gb-l2">NET DEĞIŞIM</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="root"></div>
+
+<div class="footer" style="margin-top:26px;">
+  <span>Çözüm Yayın Grubu</span> &middot; EĞİTİM VADİSİ TYT-AYT PDF 2. Raporlama &middot; Haziran 2026
+</div>
+
+<script>
+function b64d(s){return JSON.parse(decodeURIComponent(escape(atob(s))));}
+const V=b64d("W1siQURBIEtJUlRBU0lZRSBLSVRBQkVWSSBNRUhNRVQgQ0lIQUQgRUxDSSIsICJCSU5Hw5ZMIiwgODgzLCAwLCAxMDYyLCAiS8Sxcm3EsXrEsSAoRMO8xZ/DvGspIiwgMF0sIFsiQUtTVSBLSVJUQVNJWUUgLSBBWklaIEFLU1UiLCAiSEFLS0FSSSIsIDAsIDM0LCAwLCAiIiwgMzRdLCBbIkFZIEtJUlRBU0lZRSBLSVRBUCBURUsuVEVNLklOUy5NT0IuIFNBTi5USUMuTFRELlNUSSIsICJBR1JJIiwgNiwgMTAsIDEyMCwgIlllxZ9pbCAoxLB5aSkiLCA1NV0sIFsiQklMSU0gS0lSVEFTSVlFIFNFTEFIRVQgTUVURSIsICJTSVJOQUsiLCAwLCA1MSwgMCwgIiIsIDUxXSwgWyJCSUxJTSBLSVRBQkVWSSBTRVlJVCBBVEVTIiwgIlNBTkxJVVJGQSIsIDAsIDAsIDI1OCwgIiIsIDBdLCBbIkRPUlVLIFNBTkFZSSBWRSBUSUNBUkVUIExJTUlURUQgU0lSS0VUSSIsICJNQVJESU4iLCAwLCA2LCAxNjIsICIiLCAxOF0sIFsiRUxBWklHIEFOS0EgS0lUQVAgS0lSVEFTSVlFIC0gQ0FISVQgQVlIQU4iLCAiRUxBWklHIiwgMCwgMCwgMTEwLCAiIiwgMF0sIFsiRklOQUwgQkFTQVJJIEVHSVRJTSBISVouIEJBUy5ZQVkuVFVSWkdJREEgSU5TIFNBTi5MVEQuU1RJIiwgIlNJSVJUIiwgMCwgNTEsIDAsICIiLCA1MV0sIFsiR1VNVVMgS0lSVEFTSVlFLVlBSFlBIEtFTUFMIFlBVlVaIiwgIkfDnE3DnFNIQU5FIiwgMCwgMCwgNywgIiIsIDBdLCBbIkdVTkVZRE9HVSBURUxFS09NVU5BU1lPTiBLQUdUIFBFVCBVUlVOIFNBTiBUSUMgTFREIFNUSSIsICJTSVJOQUsiLCAwLCAwLCA1NywgIiIsIDBdLCBbIkdVWkVMIE9aRUwgRUdUIEtJUlQgSU5TIFNBTiBUSUMgTFREIFNUSSIsICJESVlBUkJBS0lSIiwgMCwgMCwgMTMsICIiLCAwXSwgWyJIRURFRiBLSVJUQVNJWUUtWkFGRVIgWUFWVVpFUiIsICJWQU4iLCAwLCAwLCA2MDAsICIiLCAwXSwgWyJJR0RJUiBLVUxUVVIgS0lUQVAgS0lSVEFTSVlFLU1FSE1FVCBOVVJJIFlJR0lUIiwgIklHRElSIiwgMTI1LCAwLCAyMDUsICJLxLFybcSxesSxIChEw7zFn8O8aykiLCA4MF0sIFsiS09NTUFHRU5FIEtJVEFQIERFUE9TVSBSQUhJTUUgQklMR0lDIiwgIkFESVlBTUFOIiwgMCwgMCwgMCwgIiIsIDBdLCBbIktJWklMREVSRSBLSVJUQVNJWUUgVkUgQklMRy5HSURBLklOUy5UQVMuU0FOLlRJQy5MVEQgU1RJLiIsICJWQU4iLCAwLCAwLCA0MCwgIiIsIDgwXSwgWyJNQUhNVVQgSEFLQU4gS0FSQVBJTkFSIChERU1JUkhBTiBLSVRBQkVWSSkiLCAiQkFZQlVSVCIsIDYsIDAsIDEwNywgIkvEsXJtxLF6xLEgKETDvMWfw7xrKSIsIDBdLCBbIk1BTkEgWUFZSU4gS0lUQVAgS0lSVEFTSVlFIFNBTiBUSUMgTFREIFNUSSIsICJNQVJESU4iLCAwLCAwLCAwLCAiIiwgNzVdLCBbIk1JRFlBVCBUQUtTQU4gSU5TIElIUiBOQUsgU0FOIFZFIFRJQy5MVEQuU1RJLiIsICJNQVJESU4iLCAzMiwgMCwgODEsICJLxLFybcSxesSxIChEw7zFn8O8aykiLCAzMF0sIFsiTkFZSUYgQVlERU1JUiAoVkFST0wgS0lSVEFTSVlFKSIsICJCSVRMSVMiLCAwLCAxOSwgMjA3LCAiIiwgMTldLCBbIk5VUlVMTEFIIE9MQ0FOIEtJVEFCRVZJIiwgIlNJUk5BSyIsIDAsIDIsIDUwLCAiIiwgMl0sIFsiT1pLSVJUQVkgS0lUQVAgS0lSVEFTSVlFIEJJTEdJU0FZQVIgR0lEQSBMVEQgU1RJIiwgIktBUlMiLCAwLCAwLCAzLCAiIiwgMF0sIFsiUE9aSVRJRiBCQVNLSSBISVpNRVRMRVJJIEtJVEFQIEtJUlRBU0lZRSIsICJFUlpVUlVNIiwgMCwgMjIwLCAyMTEsICIiLCAyMjBdLCBbIlBPWklUSUYgQk9MR0UgWUFZSU4gREFHSVRJTSBFR0lUSU0gS0lUQVAgS0lSVEFTSVlFIFlBWi4gSUxUUy4gU0FOLlRJQy5MVEQuU1RJIiwgIkRJWUFSQkFLSVIiLCAwLCAxLCA3NTcsICIiLCAxXSwgWyJTQUggS0lSVEFTSVlFIE1JTkUgQkVOWkVSIiwgIlNBTkxJVVJGQSIsIDAsIDgsIDQxOTIsICIiLCA4XSwgWyJTQU1JIFlJTERJUklNIFZFIE9SVEFLTElHSSAoR0VOQyBDQVJTSSBLSVRBUCBLSVJUQVNJWUUpIiwgIkVSWklOQ0FOIiwgMCwgMCwgNzUsICIiLCAwXSwgWyJTRURBVCBLSVJUQVNJWUUgKEFCVUJFS0lSIFlVQ0VMKSIsICJTQU5MSVVSRkEiLCAwLCAwLCA1NSwgIiIsIDBdLCBbIlNJSVJUIEFSSSBLSVRBUEVWSSAgQUxJIEtVUlQiLCAiU0lJUlQiLCAxNSwgMCwgMTg1LCAiS8Sxcm3EsXrEsSAoRMO8xZ/DvGspIiwgMF0sIFsiU0lWRVJFSyBBS0FERU1JIEtJVEFQIEtJUlRBU0lZRSBCSUxHSVNBWUFSIE5VU1JFVCBBS1lPTENVIiwgIlNBTkxJVVJGQSIsIDAsIDAsIDM1LCAiIiwgMF0sIFsiVEFLU0FOIElOUyBJSFIgTkFLIFNBTiBWRSBUSUMuTFRELlNUSS4iLCAiTUFSRElOIiwgMCwgMSwgMTcwLCAiIiwgMV0sIFsiVEVCTElHIEtJUlRBU0lZRSBURUtTLiBUQVMuIFRVUi4gU0FOLiBWRS4gVElDLiBMVEQuIFNUSSIsICJESVlBUkJBS0lSIiwgODc0MCwgMjkyNSwgODc0MCwgIkvEsXJtxLF6xLEgKETDvMWfw7xrKSIsIDI5MjVdLCBbIlVDQVIgREFHSVRJTSBQQVpBUkxBTUEgSVRIIElIUiBUSUMgU0FOIExURCBTVEkiLCAiTUFSRElOIiwgMCwgMzUsIDM2MCwgIiIsIDM1XV0=");
+const M=b64d("W1siQURSRVMgS0lUQVAgS0lSVEFTSVlFLU1VQ0FISVQgQVpBS0xJIiwgIkvDnFRBSFlBIiwgMCwgMCwgMTEyLCAiIiwgMF0sIFsiQUtERU5JWiBMSURFUiBLSVRBUCBEQUdJVElNIExURCBTVEkiLCAiQU5UQUxZQSIsIDI2NDksIDEsIDM2MzgsICIiLCAxXSwgWyJBTlRBTFlBIEFUTEFTIEtJVEFCRVZJIE9aQU4gRVJJUEVLIiwgIkFOVEFMWUEiLCAzNSwgMTM3OSwgNjI0LCAiIiwgMTQ0MF0sIFsiQVRBSyBPRklTIEtJVEFQIEtJUlRBU0lZRSBTQU4gVElDIExURCBTVEkiLCAiRVNLSVNFSElSIiwgMTEwOCwgMjI0NCwgMTc4NCwgIiIsIDI2OTJdLCBbIkJBTkRJUk1BIEtJVEFQIEtJUlRBU0lZRSBHVUxCQUhBUiBCQUhBRElSIiwgIkJBTElLRVNJUiIsIDQ1LCA2ODksIDM3NiwgIiIsIDBdLCBbIkJBUklTIEtJUlRBU0lZRSAvIEFMSS1IQUJFUkFMIENBTUxJQk9HQVoiLCAiS09OWUEiLCAzLCAzLCAzLCAiIiwgNjg5XSwgWyJCRU5ZQVkgS0lUQVAgS0lSVEFTSVlFIFRVUlpNLklOUy5JVEguSUhSLlRJQy5MVEQuU1RJIiwgIkFOVEFMWUEiLCAwLCAxNjU1LCAwLCAiIiwgMjQ2NV0sIFsiQ0FHUkkgS0lUQUJFVkktRVJIQU4gRVZSQU4iLCAiTUFOSVNBIiwgMCwgMjEsIDU4LCAiIiwgMjFdLCBbIkNFVElOIFlBWUlOIERBR0lUSU0gQS5TIiwgIkJBTElLRVNJUiIsIDAsIDEwOCwgNDIsICIiLCAxMDhdLCBbIkRLTSBZQVlJTiBCQVNJTSBEQUdJVElNIFJFS0xBTSBFR0lUSU0gw5ZHUkVUSU0gU0FOQVlJIFRJQ0FSRVQgTElNSVRFRCBTSVJLRVRJIiwgIkRFTklaTEkiLCAxMTAsIDIwMCwgNTM0LCAiIiwgMjAwXSwgWyJFR0UgS0lUQVAgS0lSVEFTSVlFLURPTkRVIFlJTEdJTiIsICJCQUxJS0VTSVIiLCAxNTQsIDg2NSwgNTcyLCAiIiwgOTI4XSwgWyJFUkVOIEtJVEFQIEtJUlRBU0lZRSBNVUhBUlJFTSBBS01BTiIsICJCSUxFQ0lLIiwgMCwgMCwgMTEyLCAiIiwgMF0sIFsiRkVUSElZRSBFUkFZIEtJVEFQIEtJUlQuTUFUQkFBIFlBWUlNIEVMRUsuQ0lIQVpMQVIgSU5TLiBWRSBUVVIuTFRELlNUSS4iLCAiTVVHTEEiLCAxNSwgMCwgNjYsICIiLCAxNDNdLCBbIkdVVkVOIEtJUlRBU0lZRSAtIE9aQU4gVFVOQ0VMIiwgIkvDnFRBSFlBIiwgMCwgMCwgMjgsICIiLCAwXSwgWyJIQUxJVCBLQVlBIChBTEFOWUEgQUtBREVNSSBLSVJUQVNJWUUpIiwgIkFOVEFMWUEiLCAyMCwgMCwgMTUwLCAiIiwgMF0sIFsiSEFTQU4gQkFTUkkgU0FHTEFNIChTQUdMQU0gS0lSVEFTSVlFIEtPTllBKSIsICJLT05ZQSIsIDUsIDUsIDI4LCAiIiwgMF0sIFsiS0FQTEFOIEtJUlRBU0lZRS1BWUJVS0UgVUdVWiBLQVBMQU4iLCAiQlVSRFVSIiwgNTYsIDEwLCA4MiwgIiIsIDVdLCBbIktVTUJFVCBLSVJUQVNJWUUgWUFZSU5DSUxJSyBJTlMuIE5BSy4gSEVESVlFIEVTWUEgRUxLLlRJQy5MVC5TVEkuIiwgIkFGWU9OS0FSQUhJU0FSIiwgMCwgMCwgMzUsICIiLCAxXSwgWyJMSURZQSBLSVRBQkVWSSAtIE1VU1RBRkEgQ0FOREFOIiwgIk1BTklTQSIsIDM2NiwgMiwgNDQ4LCAiIiwgMTJdLCBbIk1FRFJFU0UgS0lUQUJFVkktIERBVlVUIEdVTkRPR0FOIiwgIkFGWU9OS0FSQUhJU0FSIiwgMCwgMzMsIDAsICIiLCAwXSwgWyJNRVRPVCBLSVRBUCBLSVJUQVNJWUUgWUFZLiBUVVJJWk0gU0FOLiBUSUMuIExURC4gU1RJLiIsICLDh0FOQUtLQUxFIiwgMCwgMjA1MCwgMTMxNSwgIiIsIDI0N10sIFsiTVNNIEtJUlRBU0lZRSAtIEJJUkdVTCBUSVJBUyIsICJVU0FLIiwgMTA5LCAwLCAyOTcsICIiLCAzM10sIFsiTVVHTEEgRVJBWSBLSVRBUCBLSVJUQVNJWUUgTUFUQkFBIFlBWS5MVEQuU1RJIiwgIk1VR0xBIiwgNDIyLCAxLCA1MjksICIiLCAyMjc1XSwgWyJNVVJBVCBBWURJTiAtIE1LTSAtIE1BUk1BUkEgS1VMVFVSIE1FUktFWkkgJiBPS1VMTEFSIFBBWkFSSSIsICJCSUxFQ0lLIiwgNSwgMCwgMjIsICIiLCAwXSwgWyJORUpMQSBLQU5TVSAtS0FOU1UgS0lUQUJFVkkiLCAiQU5UQUxZQSIsIDEzNDksIDUwNSwgMTcxNSwgIiIsIDVdLCBbIk9SVEFDQS1FUkFZIEtJVEFQIEtJUlRBU0lZRSBZQVlJTkNJTElLIExURC5TVEkiLCAiTVVHTEEiLCAwLCAwLCAyMSwgIiIsIDUwOV0sIFsiU0VELUtBTkdVUlUgS0lUQVAgTVVTQU1FVFRJTiBLVUNBSyIsICJNQU5JU0EiLCAyMDIsIDY1LCA2MzUsICIiLCAwXSwgWyJTRU1BIEJPWiAoQVRJTEEgRk9UT0tPUEkgVkUgS0lUQVAgRVZJKSIsICJLT05ZQSIsIDAsIDAsIDE0NSwgIiIsIDY1XSwgWyJTRVJLQU4gSVNJSyAtIEFZUkFDIEtJVEFCRVZJIiwgIkFZRElOIiwgMCwgMSwgMywgIiIsIDFdLCBbIlRFUkNJSCBLSVRBQkVWSS9HVVJPTCBTVUxVSEFOIiwgIkFZRElOIiwgMCwgMCwgODYsICIiLCAwXSwgWyJUVVJLRVIgS0lSVEFTSVlFLUZBVElIIEJBUyIsICJNQU5JU0EiLCAwLCAxMSwgMTIxLCAiIiwgMTFdLCBbIlVDIFlJTERJWiBLSVRBQkVWSSAoSUJSQUhJTSBZSUxESVopIiwgIklTUEFSVEEiLCAxOCwgMTE1LCAxMTQsICIiLCAyNDBdLCBbIlVNUkFOIEtJVEFQIEtJUlRBU0lZRSAtIEFERU0gVEVUSUsiLCAiQlVSRFVSIiwgMTMsIDAsIDQ3LCAiIiwgMF0sIFsiWUVTSUwgQkVZQVogWUFZSU4gREFHKE1JVEhBVCBBUEFSQ0kpIiwgIktPTllBIiwgNjI2LCAxMDIsIDEzNTMsICIiLCAxMDJdLCBbIllPTkNFIFlBWUlOIERBR0lUSU0gS0lUQUJFVkkgTFRELlNUSSIsICJCVVJTQSIsIDgxNjIsIDMzMDYsIDkxMzgsICIiLCAzNDE3XV0=");
+const S=b64d("W1siQUxZQSBLSVRBUCBLSVJUQVNJWUUgREFHSVRJTSBUSUMuIFZFIFBBWkFSTEFNQSBMVEQuIFNUSS4iLCAiQURBTkEiLCAwLCAxNTg4NCwgMCwgIiIsIDE1ODg0XSwgWyJBTlRBS1lBIElLUkEgS0lSVEFTSVlFQ0lMSUsgU0FOLlZFIFRJQy5MVEQuU1RJLiIsICJIQVRBWSIsIDMwLCAxNzgwLCAxNDAsICIiLCAxNzgwXSwgWyJBU0VMIEtJVEFQIEtJUlRBU0lZRSBBU0xJIENFS0VOIiwgIkFNQVNZQSIsIDAsIDAsIDI0MCwgIiIsIDBdLCBbIkJBU0FSSSBLSVRBUCBLSVJUQVNJWUUtUkFNQVpBTiBBTFRJTlNPWSIsICJBS1NBUkFZIiwgNSwgMTYsIDE1MTMsICIiLCAwXSwgWyJCSUxHSSBLSVJUQVNJWUUgT01FUiBTSU1TRUsiLCAiR0FaSUFOVEVQIiwgMzYsIDAsIDM2LCAiIiwgMF0sIFsiQ0FOIEtJVEFQIEtJUlRBU0lZRSBBQkRVTEtBRElSIENBTiIsICJNRVJTSU4iLCAwLCAwLCA2NSwgIiIsIDkwXSwgWyJDQU4gS0lUQVAgS0lSVEFTSVlFLUFITUVUIFlJTERJUklNIiwgIllPWkdBVCIsIDIsIDAsIDc1LCAiIiwgMF0sIFsiREVWRUxJIFlBUFJBSyBEQUdJVElNIERBVlVUIEtFTkRJUkNJIiwgIktBWVNFUkkiLCAwLCAxLCAxNjAsICIiLCAxXSwgWyJFVEhFTSBERU1JUkJBRyAoRVJERU0gS0lSVEFTSVlFKSIsICJBREFOQSIsIDIsIDAsIDIzMywgIiIsIDBdLCBbIkVZVVAgWkFGRVIgQVRFUyAtIFpBRkVSIEtJUlRBU0lZRSIsICJNRVJTSU4iLCAyMCwgMCwgNzYsICIiLCAwXSwgWyJHQVJBTlRJIEFLQURFTUkgRUdUIEhJWiBTQU4gVElDIExURCBTVEkgLiIsICJLQVlTRVJJIiwgOTgsIDQ1LCAzNzQsICIiLCAxMzBdLCBbIkdVTkVZIEFZRElOIEdSVVAgQklMRy5ZQVouRE9OLk9aLkVHLk9HLkdJRC5aVUMuSEVELlRJQy5MVEQuU1RJIiwgIkFEQU5BIiwgMjU5OCwgMCwgMjgwMCwgIiIsIDBdLCBbIkhJTEFMIEtJUlRBU0lZRS9TT05FUiBERURFIiwgIsOHT1JVTSIsIDAsIDksIDE4MCwgIiIsIDldLCBbIktBSFJBTUFOTUFSQVMgSEVERUYgS0lUQVAgS0lSVEFTSVlFIE1FSE1FVCBBUEFZRElOIiwgIktBSFJBTUFOTUFSQVMiLCAxODUsIDE5MCwgMTk0MCwgIiIsIDE5MF0sIFsiS0FSQU5GSUwgS0lUQVAgS0lSVEFTSVlFIFVNVVQgR09LTUVOIiwgIk9TTUFOSVlFIiwgMTUxLCAwLCAzNDcsICIiLCAxMF0sIFsiTUFSVElNIEtJUlRBU0lZRSBTQU5BWUkgVkUgVElDQVJFVCBMVEQuU1RJLiIsICJLQUhSQU1BTk1BUkFTIiwgNDAsIDAsIDQwLCAiIiwgMF0sIFsiTUFWSSBLSVRBUCBLSVJUQVNJWUUgTUVITUVUIEFMSSBLVUgiLCAiSEFUQVkiLCAzMCwgMzcsIDM4NCwgIiIsIDM3XSwgWyJNRUhNRVQgQ0VUSU4gLSBDRVRJTiBLSVRBUCBLSVJUQVNJWUUiLCAiSEFUQVkiLCAwLCAwLCAxMTAsICIiLCAwXSwgWyJNRVJTSU4gS0FGS0FNIEtJVEFCRVZJIEtJUlRBU0lZRSBMVEQgU1RJIiwgIk1FUlNJTiIsIDEzMDk1LCA3NDAsIDEzNDc2LCAiIiwgMTAwM10sIFsiTVVIQU1NRVQgS0VNQUwgU0FZREFNIC0gWUVSS09ZIEFLQURFTUkgS0lSVEFTSVlFIiwgIllPWkdBVCIsIDEsIDEsIDk3LCAiIiwgMV0sIFsiTVVTVEFGQSBEQU5JUyAtIERBTklTIEtJVEFCRVZJIiwgIktBUkFNQU4iLCAwLCAwLCAyMTAsICIiLCAwXSwgWyJORVZTRUhJUi1BVExBUyBLSVRBUCBLSVJUQVNJWUUtRkFUTUEgS1VSVERPR0FOIiwgIk5FVlNFSElSIiwgMCwgMCwgMTAsICIiLCAwXSwgWyJOT0tUQSBLSVRBUCBLSVJUQVNJWUUgRUdJVElNIFRJQy5MVEQuU1RJIiwgIsOHT1JVTSIsIDQsIDQsIDEzNCwgIiIsIDRdLCBbIk9MVVNVTSBHTE9CQUwgS0lUQVAgREFHSVRJTSBTQU5BWUkgVkUgVElDLkxURC5TVEkiLCAiR0FaSUFOVEVQIiwgMCwgMjg3LCAwLCAiIiwgMzMzXSwgWyJPWkNBTiBEQUdJVElNIFZFIFlBWUlOIEtJUlRBU0lZRSBLSVRBUCIsICJHQVpJQU5URVAiLCAyMTYzLCAwLCAyNDc1LCAiIiwgMF0sIFsiUEFSSyBPWkVMIEVHSVRJTSBLSVJUQVNJWUUgVFVSIFNFWSBUSUMgTFREIFNUSSIsICJNRVJTSU4iLCAzMCwgNjAsIDU5NiwgIiIsIDYwXSwgWyJURUtOQVogRUdJVElNIEtVUlVNTEFSSSAoT05BWUxJKSIsICJBREFOQSIsIDEwNDcsIDAsIDEwNDcsICIiLCAwXSwgWyJUT1JFIEtJUlRBU0lZRSBUSUNBUkVUIFZFIFNBTkFZSSBMVEQgU1RJIiwgIk5JR0RFIiwgMCwgMCwgOTEsICIiLCAwXSwgWyJWSVpZT04gUExVUyBLSVRBQkVWSSBPS0tFUyBBTklMIE1BUlQiLCAiT1NNQU5JWUUiLCA0MCwgMCwgMTIwLCAiIiwgMF0sIFsiWUVOSSBDQU1MSUsgS0lUQVAgS0lSVEFTSVlFIE9SSEFOIEJBTExJIiwgIk9TTUFOSVlFIiwgMCwgMTAsIDAsICIiLCAxMF0sIFsiWkFGRVJDQU4gS0lSVEFTSVlFIC1UVUJBIE9aVURPR1JVIiwgIkFNQVNZQSIsIDAsIDAsIDEzNSwgIiIsIDBdXQ==");
+const K=b64d("W1siQU5LQVJBIiwgMjIxOTIsIDk4MzEsIDMzMzMyLCAyMjE5MiwgOTgzMSwgIkdlw6dlbiBoYWZ0YWRhIGJ1Z8O8bmUga2FkYXIgYWRldGxlcmRlICBiaXIgZGXEn2nFn2lrbGlrIG9sbWFtxLHFn3TEsXIuIl0sIFsixLBTVEFOQlVMIiwgMTM1MCwgMjIyMCwgNTA1MjAsIDE0NTAsIDIyMjAsICJHZcOnZW4gc2VuZWRlbiBkZXZyZWRlbiBzdG9rIGlsZSB0YWxlbHBlciBrYXLFn8SxbGFubWFrdGFkxLFyLiBCdSBhbGFuZGEgc2F0xLHFn2xhcsSxbcSxesSxbiDDp2/En3UgZGV2bGV0IG9rdWx1bmEgc2V6b25kYSBnZXLDp2VrbGXFn21la3RlZGlyLiBLdXJ1bSBnw7Zyw7zFn21lbGVyaSBkZXZhbSBldG1la3RlZGlyLiBBxJ91c3RvcyB2ZSBFeWzDvGwgYXnEsW5kYSBzaXBhcmnFn2xlcmltaXogb2x1xZ9hY2FrdMSxci4iXSwgWyLEsFpNxLBSIiwgMTIxOTUsIDE4MTY5LCAxMzM1MSwgMTI2OTUsIDE4MTY5LCAiR2XDp2VuIHNlbmUgdG9wbGFtIGFkZWRpbWl6aW4gw7x6ZXJpbmUgw6fEsWttxLHFnyBkdXJ1bWRhecSxeiBheW7EsSBrdXJ1bWxhcmxhIGRldmFtIGVkaXlvcnV6LiJdXQ==");
+
+function fn(n){if(n===null||n===undefined)return"—";return Number(n).toLocaleString("tr-TR");}
+function z(n){return(n===0||!n)?'<span class="zero">—</span>':fn(n);}
+function dur(d){if(!d)return"";if(d.includes("İyi"))return'<span class="d-iyi">İyi</span>';if(d.includes("Orta"))return'<span class="d-orta">Orta</span>';if(d.includes("Düşük"))return'<span class="d-dusuk">Düşük</span>';return"";}
+
+function bars(data){
+  const top=[...data].sort((a,b)=>(b[6]||0)-(a[6]||0)).slice(0,20);
+  const mx=top.length&&top[0][6]>0?top[0][6]:1;
+  return top.map(b=>{
+    const pct=Math.max(Math.round(((b[6]||0)/mx)*100),1);
+    const zero=(b[6]||0)===0;
+    const col=zero?"#e2e8f0":pct>=60?"#16a34a":pct>=30?"#d97706":"#C8102E";
+    return`<div class="bar-row"><div class="bar-lbl" title="${b[0]}">${b[0]}</div><div class="bar-track"><div class="bar-fill" style="width:${zero?2:pct}%;background:${col};"><span style="${zero?"color:#94a3b8;":""}">${fn(b[6]||0)}</span></div></div></div>`;
+  }).join("");
+}
+
+function sec(num,name,sub,aciklama,data,gy,by1,gy_top,by2,sonuc,grwPct,grwPos){
+  const aktif=data.filter(b=>(b[6]||0)>0).length;
+  const grwAbs=Math.abs(grwPct);
+  const grwHtml=grwPos<0?`<div class="grw-n">-%${grwAbs}</div>`:grwPos===0?`<div class="grw-s">~Yatay</div>`:`<div class="grw-p">+%${grwAbs}</div>`;
+  const bdgCls=grwPos<0?"bdg-rose":grwPos===0?"bdg-amber":"bdg-green";
+  const bdgTxt=grwPos<0?`-%${grwAbs} Düşüş`:grwPos===0?"~Yatay":`+%${grwAbs} Büyüme`;
+  const rows=data.map(b=>`<tr><td>${b[0]}</td><td>${b[1]}</td><td>${z(b[2])}</td><td>${z(b[3])}</td><td>${z(b[4])}</td><td style="font-weight:${(b[6]||0)>0?700:400};color:${(b[6]||0)>0?"var(--red)":"inherit"};">${z(b[6])}</td><td>${dur(b[5])}</td></tr>`).join("");
+  return`<div class="sec">
+<div class="sec-hdr">
+  <div style="display:flex;align-items:center;">
+    <div class="sec-num">${num}</div>
+    <div><div class="sec-name">${name}</div><div class="sec-sub">${sub}</div></div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+    <span class="bdg ${bdgCls}">${bdgTxt}</span>
+    <span class="bdg bdg-blue">${data.length} Bayi</span>
+  </div>
+</div>
+<div class="stats">
+  <div class="stat"><div class="stat-v">${fn(gy)}</div><div class="stat-l">GY BGK</div></div>
+  <div class="stat"><div class="stat-v">${fn(by1)}</div><div class="stat-l">1. Rap BY BGK</div></div>
+  <div class="stat"><div class="stat-v" style="color:var(--red);">${fn(by2)}</div><div class="stat-l">2. Rap BY BGK</div>${grwHtml}</div>
+  <div class="stat"><div class="stat-v">${fn(gy_top)}</div><div class="stat-l">GY Toplam Adet</div></div>
+  <div class="stat"><div class="stat-v">${aktif}</div><div class="stat-l">Aktif Bayi</div></div>
+</div>
+<div class="aciklama">${aciklama}</div>
+<div class="chart-area">
+  <div class="chart-ttl">2. Raporlama BY BGK — İlk 20 Bayi</div>
+  ${bars(data)}
+</div>
+<button class="tbl-btn" onclick="var w=this.nextElementSibling;w.classList.toggle('hidden');this.textContent=w.classList.contains('hidden')?'&#9654; Tüm bayileri göster (${data.length} bayi)':'&#9660; Tabloyu gizle';">&#9654; Tüm bayileri göster (${data.length} bayi)</button>
+<div class="tbl-wrap hidden">
+<table>
+<thead><tr><th>Bayi Adı</th><th>İl</th><th>GY BGK</th><th>1. Rap BY</th><th>GY Toplam</th><th>2. Rap BY</th><th>Durum</th></tr></thead>
+<tbody>${rows}</tbody>
+<tfoot><tr><td colspan="2"><strong>TOPLAM</strong></td><td>${fn(gy)}</td><td>${fn(by1)}</td><td>${fn(gy_top)}</td><td style="color:var(--red);">${fn(by2)}</td><td></td></tr></tfoot>
+</table>
+</div>
+<div class="sonuc"><div class="sonuc-t">&#128203; Rapor Sonuç ve Öneriler</div><div class="sonuc-txt">${sonuc}</div></div>
+</div>`;
+}
+
+function secKutuphane(){
+  const gy2=K.reduce((a,d)=>a+(d[4]||0),0);
+  const by2=K.reduce((a,d)=>a+(d[5]||0),0);
+  const by1=K.reduce((a,d)=>a+(d[2]||0),0);
+  const gy1=K.reduce((a,d)=>a+(d[1]||0),0);
+  const gyt=K.reduce((a,d)=>a+(d[3]||0),0);
+  const buyume=gy2>0?((by2/gy2-1)*100).toFixed(1):0;
+  const pos=parseFloat(buyume)>=0;
+  const rows=K.map(d=>{
+    const b=d[4]>0?((d[5]/d[4]-1)*100).toFixed(1):null;
+    return`<tr><td>${d[0]}</td><td>${fn(d[1])}</td><td>${fn(d[2])}</td><td>${fn(d[4])}</td><td style="font-weight:700;color:var(--red);">${fn(d[5])}</td><td>${fn(d[3])}</td><td>${b!==null?(parseFloat(b)>=0?`<span class="d-iyi">+%${parseFloat(b).toLocaleString("tr-TR")}</span>`:`<span class="d-dusuk">%${parseFloat(b).toLocaleString("tr-TR")}</span>`):"—"}</td></tr>`;
+  }).join("");
+  const acikRows=K.map(d=>`<div style="margin-bottom:9px;"><strong style="color:var(--dark);">${d[0]}:</strong> <span style="font-size:12px;color:var(--sub);font-style:italic;">${d[6]||"Açıklama yok."}</span></div>`).join("");
+  return`<div class="sec">
+<div class="sec-hdr">
+  <div style="display:flex;align-items:center;">
+    <div class="sec-num">4</div>
+    <div><div class="sec-name">M. Yasin ERDOĞAN — Kütüphaneleri</div><div class="sec-sub">EV TYT-AYT PDF | 3 Bölge Deposu | 2. Raporlama</div></div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
+    <span class="bdg ${pos?"bdg-green":"bdg-rose"}">${pos?"+":""}%${parseFloat(buyume).toLocaleString("tr-TR")} ${pos?"Büyüme":"Düşüş"}</span>
+    <span class="bdg bdg-blue">3 Depo</span>
+  </div>
+</div>
+<div class="stats" style="grid-template-columns:repeat(4,1fr);">
+  <div class="stat"><div class="stat-v">${fn(gy2)}</div><div class="stat-l">GY BGK (2. Rap)</div></div>
+  <div class="stat"><div class="stat-v" style="color:var(--red);">${fn(by2)}</div><div class="stat-l">BY BGK (2. Rap)</div><div class="${pos?"grw-p":"grw-n"}">${pos?"+":""}%${Math.abs(parseFloat(buyume)).toLocaleString("tr-TR")}</div></div>
+  <div class="stat"><div class="stat-v">${fn(by1)}</div><div class="stat-l">BY BGK (1. Rap)</div></div>
+  <div class="stat"><div class="stat-v">${fn(gyt)}</div><div class="stat-l">GY Toplam Adet</div></div>
+</div>
+<div style="padding:13px 20px 0;">
+<table class="depo-tbl">
+<thead><tr><th style="text-align:left;">Depo</th><th>GY BGK</th><th>BY BGK 1.Rap</th><th>GY BGK 2.Rap</th><th>BY BGK 2.Rap</th><th>GY Toplam</th><th>Büyüme</th></tr></thead>
+<tbody>${rows}</tbody>
+<tfoot class="tf"><tr><td>TOPLAM</td><td>${fn(gy1)}</td><td>${fn(by1)}</td><td>${fn(gy2)}</td><td style="color:var(--red);">${fn(by2)}</td><td>${fn(gyt)}</td><td>${pos?"<span class='d-iyi'>":"<span class='d-dusuk'>"}${pos?"+":""}%${Math.abs(parseFloat(buyume)).toLocaleString("tr-TR")}</span></td></tr></tfoot>
+</table>
+</div>
+<div style="padding:12px 20px 14px;">${acikRows}</div>
+<div class="sonuc"><div class="sonuc-t">&#128203; Rapor Sonuç ve Öneriler</div><div class="sonuc-txt">Kütüphaneleri kanalında 2. raporlama itibarıyla GY BGK 36.337 iken BY BGK 30.220 olarak gerçekleşmiş, <strong>-%16.8 oranında düşüş</strong> yaşanmıştır. Ankara deposunda değişiklik olmazken İstanbul'da stok kaynaklı satışlar devam etmekte, İzmir'de ise geçen yılın toplam seviyesi aşılmış durumdadır. Ankara için müfredat süreci netleştikten sonra yeni kurum anlaşmalarının devreye girmesiyle toparlanma beklenmektedir.</div></div>
+</div>`;
+}
+
+document.getElementById("root").innerHTML=
+  sec(1,"VEDAT ADSAN","EĞİTİM VADİSİ TYT-AYT PDF | 2. Raporlama (27.06.2026)",
+    "1. ile 2. raporlama dönemi arasında <strong>322 adetlik artış</strong> sağlanmıştır. Bununla birlikte, bölgede birçok eğitim kurumunda kaynak kitap seçim süreçleri devam etmekte, erken dönem anlaşmalarının önemli bir kısmı henüz sonuçlanmamıştır. Temmuz ve Ağustos aylarında kurum ziyaretleri artırılacak, ürün tanıtım faaliyetleri yoğunlaştırılacak ve bekleyen kurum anlaşmalarının siparişe dönüştürülmesi hedeflenecektir.",
+    V,9807,3363,17862,3685,
+    "EV PDF ürün grubunda geçen yılın aynı dönemine göre düşüş yaşanmış olmakla birlikte, henüz sipariş alınmamış bayilerin bulunması ve kurumların kaynak belirleme süreçlerini tamamlamamış olması nedeniyle mevcut tablo ürünün gerçek potansiyelini tam yansıtmamaktadır.<br><br><strong>Öneriler:</strong><br>&#8226; Sipariş girişi bulunmayan bayiler ve karar sürecini tamamlamamış kurumlar yakından takip edilmeli, görüşme sıklığı artırılmalıdır.<br>&#8226; Temmuz-Ağustos döneminde kurum ziyaretleri yoğunlaştırılmalıdır.<br>&#8226; Ön sipariş ve dönemsel kampanyalarla süreç desteklenmelidir.",
+    -62,1) +
+  sec(2,"MUHSİN ÖZBALCI","EĞİTİM VADİSİ TYT-AYT PDF | 2. Raporlama (26.06.2026)",
+    "1. raporlamadan bu yana <strong>2.239 adet ilave satış</strong> gerçekleşmiş ve toplam satış 15.610 adede ulaşmıştır. Böylece 1. raporlamada görülen yaklaşık %13,6 oranındaki düşüş kapatılarak geçen yıl seviyesinin <strong>138 adet üzerine</strong> çıkılmıştır. Bursa bölgesinde yüksek öğrenci sayısına sahip kurumların siparişlerinin netleşmesiyle birlikte satışlarda toparlanma yaşanacağı öngörülmektedir. Diğer illerde ise satışlar artış eğilimini korumaktadır.",
+    M,15472,13371,24233,15610,
+    "1. raporlamada geride olan satışlar 2. raporlamada telafi edilmiş ve geçen yıl seviyesinin üzerine çıkılmıştır. <strong>Bursa özelindeki 4.856 adetlik düşüş</strong> genel düşüşün tek nedenidir; diğer illerde satışlar artmıştır.<br><br><strong>Tespit Edilen Sorun:</strong> Müfredat değişikliği beklentisi kurumların sipariş kararlarını geciktirmekte, geçen yıldan kalan bayi stokları yeni girişleri sınırlandırmaktadır.<br><br><strong>Öneriler:</strong><br>&#8226; Bursa'daki yüksek öğrenci sayısına sahip kurumlar yakından takip edilerek sipariş süreçleri hızlandırılmalıdır.<br>&#8226; Ürün içerikleri yeni müfredata uygun şekilde güncellenmeli, bu yenilikler kurumlara vurgulanmalıdır.",
+    1,1) +
+  sec(3,"SÜLEYMAN İŞPINAR","EĞİTİM VADİSİ TYT-AYT PDF | 2. Raporlama (25.06.2026)",
+    "Geçen yıl aynı dönemde 19.577 adet olan satış bu yıl 19.542 adet olarak gerçekleşmiş; performans <strong>~%97 seviyesinde</strong> korunmuştur. Müfredat değişikliği beklentisi ve stok riskini azaltma eğilimi nedeniyle bayiler ve kurumlar daha seçici hareket etmiş olsa da satışlar geçen yılın çok yakınında seyretmektedir. Ürün, yıllardır değişmeyen içerik ve kapak yapısına rağmen sahada karşılık bulmaya devam etmektedir.",
+    S,19577,19064,27104,19542,
+    "Geçen yıla oranla yalnızca <strong>35 adetlik fark</strong> oluşmuştur. Bu tablo müfredat değişikliği döneminde ürünün pazardaki güçlü konumunu koruduğunu göstermektedir.<br><br><strong>Öneriler:</strong><br>&#8226; Beklenen kurum anlaşmalarının gerçekleşmesiyle satışların geçen yıl seviyesinin üzerine çıkması mümkündür.<br>&#8226; Ücretsiz deneme projesi ürünlerin kurumlar tarafından deneyimlenmesini sağlayarak ek sipariş oluşturabilir.<br>&#8226; Ağustos başındaki saha ziyaretlerinde yeni kurum kazanımları hedeflenmelidir.",
+    0,0) +
+  secKutuphane();
+</script>
+</body>
+</html>
