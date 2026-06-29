@@ -6,15 +6,7 @@
 <title>EĞİTİM VADİSİ MSB TYT-AYT — 1. Raporlama | 15.06.2026</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --red:#C8102E;--red-light:#fdecea;
-  --dark:#1A1A2E;--mid:#2C2C54;--text:#1f2937;--sub:#6b7280;
-  --border:#e5e7eb;--bg:#f4f5f7;--white:#ffffff;
-  --green:#16a34a;--green-bg:#dcfce7;
-  --amber:#d97706;--amber-bg:#fef3c7;
-  --blue:#1d4ed8;--blue-bg:#dbeafe;
-  --rose:#e11d48;--rose-bg:#ffe4e6;
-}
+:root{--red:#C8102E;--red-light:#fdecea;--dark:#1A1A2E;--mid:#2C2C54;--text:#1f2937;--sub:#6b7280;--border:#e5e7eb;--bg:#f4f5f7;--white:#ffffff;--green:#16a34a;--green-bg:#dcfce7;--amber:#d97706;--amber-bg:#fef3c7;--blue:#1d4ed8;--blue-bg:#dbeafe;--rose:#e11d48;--rose-bg:#ffe4e6;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);}
 .header{background:var(--dark);}
@@ -49,10 +41,8 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--tex
 .sec-name{font-size:16px;font-weight:700;color:var(--dark);}
 .sec-sub{font-size:11px;color:var(--sub);margin-top:2px;}
 .bdg{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;margin-left:4px;}
-.bdg-red{background:var(--red-light);color:var(--red);}
 .bdg-green{background:var(--green-bg);color:var(--green);}
 .bdg-blue{background:var(--blue-bg);color:var(--blue);}
-.bdg-amber{background:var(--amber-bg);color:var(--amber);}
 .bdg-rose{background:var(--rose-bg);color:var(--rose);}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
 .stat{padding:13px 16px;border-right:1px solid var(--border);text-align:center;}
@@ -91,12 +81,13 @@ tfoot td:not(:first-child):not(:nth-child(2)){text-align:right;}
 .footer{background:var(--dark);color:#475569;text-align:center;padding:16px;font-size:11px;margin-top:28px;}
 .footer span{color:#94a3b8;}
 .hidden{display:none!important;}
-.durum-iyi{color:var(--green);font-weight:600;}
-.durum-orta{color:var(--amber);font-weight:600;}
-.durum-dusuk{color:var(--rose);font-weight:600;}
+.d-iyi{color:#16a34a;font-weight:600;}
+.d-orta{color:#d97706;font-weight:600;}
+.d-dusuk{color:#e11d48;font-weight:600;}
 </style>
 </head>
 <body>
+
 <div class="header">
   <div class="header-top">
     <div style="display:flex;align-items:center;">
@@ -145,18 +136,9 @@ tfoot td:not(:first-child):not(:nth-child(2)){text-align:right;}
       <p>EV TYT-AYT MSB 1. Raporlama / 15.06.2026</p>
     </div>
     <div class="gb-right">
-      <div class="gb-stat">
-        <div class="gb-val" style="color:#f87171;">25.562</div>
-        <div class="gb-lbl">TOPLAM BY BGK</div>
-      </div>
-      <div class="gb-stat">
-        <div class="gb-val" style="color:#94a3b8;">21.428</div>
-        <div class="gb-lbl">TOPLAM GY BGK</div>
-      </div>
-      <div class="gb-stat">
-        <div class="gb-val" style="color:#4ade80;">+%19</div>
-        <div class="gb-lbl">NET BÜYÜME</div>
-      </div>
+      <div class="gb-stat"><div class="gb-val" style="color:#f87171;">25.562</div><div class="gb-lbl">TOPLAM BY BGK</div></div>
+      <div class="gb-stat"><div class="gb-val" style="color:#94a3b8;">21.428</div><div class="gb-lbl">TOPLAM GY BGK</div></div>
+      <div class="gb-stat"><div class="gb-val" style="color:#4ade80;">+%19</div><div class="gb-lbl">NET BÜYÜME</div></div>
     </div>
   </div>
 </div>
@@ -164,145 +146,117 @@ tfoot td:not(:first-child):not(:nth-child(2)){text-align:right;}
 <div id="root"></div>
 
 <div class="footer" style="margin-top:28px;">
-  <span>Çözüm Yayın Grubu</span> · EĞİTİM VADİSİ TYT-AYT MSB 1. Raporlama · 15.06.2026
+  <span>Çözüm Yayın Grubu</span> &middot; EĞİTİM VADİSİ TYT-AYT MSB 1. Raporlama &middot; 15.06.2026
 </div>
 
 <script>
-const vedatData = [["AKSU KIRTASIYE - AZIZ AKSU", "HAKKARI", 0, 36, 0, ""], ["AY KIRTASIYE KITAP TEK.TEM.INS.", "AGRI", 45, 14, 115, ""], ["BILIM KIRTASIYE SELAHET METE", "SIRNAK", 0, 54, 0, ""], ["BILIM KITABEVI SEYIT ATES", "SANLIURFA", 0, 10, 132, ""], ["BKM BATMAN KITAP MERKEZI KIRTASIYE", "BATMAN", 150, 0, 270, ""], ["DORUK SANAYI VE TICARET LIMITED SIRKETI", "MARDIN", 0, 9, 114, ""], ["ELAZIG ANKA KITAP KIRTASIYE - CAHIT AYHAN", "ELAZIG", 0, 0, 185, ""], ["FINAL BASARI EGITIM HIZ. BAS.YAY.", "SIIRT", 0, 54, 0, ""], ["GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ", "GÜMÜSHANE", 0, 0, 23, ""], ["GUNEYDOGU TELEKOMUNASYON KAGT", "SIRNAK", 0, 0, 102, ""], ["GUZEL OZEL EGT KIRT INS SAN TIC LTD STI", "DIYARBAKIR", 58, 0, 159, "Kırmızı (Düşük)"], ["HEDEF KIRTASIYE-ZAFER YAVUZER", "VAN", 320, 0, 350, "Kırmızı (Düşük)"], ["IGDIR KULTUR KITAP KIRTASIYE-MEHMET NURI YIGIT", "IGDIR", 220, 230, 240, "Yeşil (İyi)"], ["KIZILDERE KIRTASIYE VE BILG.GIDA.INS", "VAN", 0, 0, 45, ""], ["KOMMAGENE KITAP DEPOSU RAHIME BILGIC", "ADIYAMAN", 0, 240, 0, ""], ["MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)", "BAYBURT", 10, 0, 10, "Kırmızı (Düşük)"], ["MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI", "MARDIN", 0, 80, 29, ""], ["NAYIF AYDEMIR (VAROL KIRTASIYE)", "BITLIS", 0, 80, 1560, ""], ["OKURKENT KIRTASIYE GIYASETTIN DEMIR", "MUS", 0, 990, 0, ""], ["ONCU ACAR KIRTASIYE NAK.INS.", "ADIYAMAN", 0, 0, 15, ""], ["OZCELIK KIRTASIYE MUHAMMED OZCELIK", "SANLIURFA", 0, 430, 0, ""], ["OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA LTD STI", "KARS", 6, 0, 6, "Kırmızı (Düşük)"], ["POZITIF BASKI HIZMETLERI KITAP KIRTASIYE", "ERZURUM", 0, 170, 30, ""], ["POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP", "DIYARBAKIR", 0, 0, 512, ""], ["SAH KIRTASIYE MINE BENZER", "SANLIURFA", 20, 0, 328, "Kırmızı (Düşük)"], ["GENC CARSI KITAP KIRTASIYE", "ERZINCAN", 0, 0, 134, ""], ["SEBIL KIRTASIYE-UZEYIR AKCELIK", "BITLIS", 0, 0, 66, ""], ["SEDAT KIRTASIYE (ABUBEKIR YUCEL)", "SANLIURFA", 462, 0, 483, "Kırmızı (Düşük)"], ["SIIRT ARI KITAPEVI  ALI KURT", "SIIRT", 0, 2, 30, ""], ["SIVEREK AKADEMI KITAP KIRTASIYE", "SANLIURFA", 5, 0, 1464, ""], ["TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.", "MARDIN", 0, 0, 71, ""], ["UCAR DAGITIM PAZARLAMA ITH IHR TIC SAN LTD STI", "MARDIN", 0, 24, 70, ""], ["UMUT KIRTASIYE-MEHMET ALI CEYHAN", "DIYARBAKIR", 0, 0, 59, ""]];
-const muhsinData = [["ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI", "KÜTAHYA", 1009, 101, 1748, "Kırmızı (Düşük)"], ["AKDENIZ LIDER KITAP DAGITIM LTD STI", "ANTALYA", 2400, 0, 2660, "Kırmızı (Düşük)"], ["ANTALYA ATLAS KITABEVI OZAN ERIPEK", "ANTALYA", 0, 13, 118, ""], ["ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI", "ESKISEHIR", 2772, 110, 3001, "Kırmızı (Düşük)"], ["ATILA FOTOKOPI VE KITAP EVI SEMA BOZ", "KONYA", 0, 0, 30, ""], ["BANDIRMA KITAP KIRTASIYE GULBAHAR BAHADIR", "BALIKESIR", 30, 2140, 223, "Yeşil (İyi)"], ["BARIS KIRTASIYE / ALI-HABERAL CAMLIBOGAZ", "KONYA", 1, 1, 1, "Yeşil (İyi)"], ["BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC.LTD.STI", "ANTALYA", 0, 3084, 0, ""], ["CAGRI KITABEVI-ERHAN EVRAN", "MANISA", 0, 8, 0, ""], ["CETIN YAYIN DAGITIM A.S", "BALIKESIR", 0, 17, 40, ""], ["DKM YAYIN BASIM DAGITIM REKLAM EGITIM ÖGRETIM SANAYI TICARET LIMITED SIRKETI", "DENIZLI", 0, 0, 142, ""], ["EGE KITAP KIRTASIYE-DONDU YILGIN", "BALIKESIR", 162, 1175, 651, "Yeşil (İyi)"], ["EREN KITAP KIRTASIYE MUHARREM AKMAN", "BILECIK", 0, 0, 204, ""], ["FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.CIHAZLAR INS. VE TUR.LTD.STI.", "MUGLA", 30, 90, 415, "Yeşil (İyi)"], ["GUVEN KIRTASIYE - OZAN TUNCEL", "KÜTAHYA", 0, 0, 11, ""], ["HAKAN KITABEVI - M HAKAN YURTTADUR", "ISPARTA", 0, 0, 4, ""], ["HALIT KAYA (ALANYA AKADEMI KIRTASIYE)", "ANTALYA", 0, 0, 45, ""], ["HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)", "KONYA", 2, 20, 132, "Yeşil (İyi)"], ["HILAL KITAP KIRTASIYE-HUMA CELIK", "BURDUR", 0, 0, 6, ""], ["KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN", "BURDUR", 2, 32, 28, "Yeşil (İyi)"], ["KUMBET KIRTASIYE YAYINCILIK INS. NAK. HEDIYE ESYA ELK.TIC.LT.STI.", "AFYONKARAHISAR", 5, 30, 169, "Yeşil (İyi)"], ["MEDRESE KITABEVI- DAVUT GUNDOGAN", "AFYONKARAHISAR", 0, 128, 0, ""], ["METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC. LTD. STI.", "ÇANAKKALE", 0, 160, 1252, ""], ["MSM KIRTASIYE - BIRGUL TIRAS", "USAK", 35, 0, 68, "Kırmızı (Düşük)"], ["MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI", "MUGLA", 801, 1, 877, "Kırmızı (Düşük)"], ["MURAT AYDIN - MKM - MARMARA KULTUR MERKEZI & OKULLAR PAZARI", "BILECIK", 3, 0, 37, "Kırmızı (Düşük)"], ["NEJLA KANSU -KANSU KITABEVI", "ANTALYA", 558, 642, 939, "Yeşil (İyi)"], ["OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE", "KONYA", 0, 0, 35, ""], ["SED-KANGURU KITAP MUSAMETTIN KUCAK", "MANISA", 0, 55, 217, ""], ["SERKAN ISIK - AYRAC KITABEVI", "AYDIN", 5, 11, 64, "Yeşil (İyi)"], ["TERCIH KITABEVI/GUROL SULUHAN", "AYDIN", 0, 230, 75, ""], ["TURKER KIRTASIYE-FATIH BAS", "MANISA", 0, 0, 142, ""], ["UC YILDIZ KITABEVI (IBRAHIM YILDIZ)", "ISPARTA", 33, 5, 233, "Kırmızı (Düşük)"], ["UMRAN KITAP KIRTASIYE - ADEM TETIK", "BURDUR", 0, 0, 26, ""], ["YESIL BEYAZ YAYIN DAG(MITHAT APARCI)", "KONYA", 120, 0, 1325, "Kırmızı (Düşük)"], ["YONCE YAYIN DAGITIM KITABEVI LTD.STI", "BURSA", 4305, 0, 6178, "Kırmızı (Düşük)"]];
-const suleymanData = [["ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZARLAMA LTD. STI.", "ADANA", 0, 12570, 0, "Eğitim Vadisi MSB ürünlerimiz geçen yıl aynı dönemde 7.859 adet satışa ulaşmışken, bu yıl aynı tarihte 15.086 adede ulaşarak yaklaşık %100 büyüme göstermiştir. Ancak bu olumlu tabloya rağmen ürün gamımızın sahada genel anlamda beklenen düzeyde talep görmediği değerlendirilmektedir. Bunun temel sebepleri arasında ürünlerin uzun süredir yenilenmemiş olması ve içerik/yüz tasarımı açısından güncelliğini yitirmesi yer almaktadır.\nÖzellikle Adana bayimiz Alya Kırtasiye'nin kurumlarla yürüttüğü yoğun çalışmalar sonucunda ürünlerimizin kurum listelerine dahil edilmesi ve bu ürün grubuna özel odaklanılması, satış adetlerinin hedeflenen seviyelere ulaşmasında önemli rol oynamıştır.\nMevcut saha gözlemlerine göre kurumlar tarafından daha çok marka değeri yüksek veya fiyat avantajı sunan yayınlar tercih edilmektedir. Eğitim Vadisi MSB ürünleri ise mevcut durumda bu iki kriter açısından rakiplerine göre dezavantajlı kalmakta, ayrıca uzun süredir yenilenmemesi nedeniyle tercih edilme oranı düşmektedir.\nÖnümüzdeki dönemde teklif verilen ve ücretsiz deneme paketi ulaştırılan kurumların geri dönüşleri yakından takip edilecektir. Özellikle YKS grubunda karar sürecindeki kurumlarla yüz yüze görüşmeler gerçekleştirilerek sürecin olumlu sonuçlandırılması hedeflenmektedir.\nBununla birlikte, geçtiğimiz yıl anlaşma sağlanan Kayseri Belediyesi'ne bu yıl da yeniden teklif sunulacak ve iş birliğinin devam ettirilmesi için gerekli çalışmalar yürütülecektir."], ["ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.", "HATAY", 70, 0, 90, ""], ["BASARI KITAP KIRTASIYE-RAMAZAN ALTINSOY", "AKSARAY", 0, 10, 60, ""], ["BILGI KIRTASIYE OMER SIMSEK", "GAZIANTEP", 50, 0, 50, ""], ["CAN KITAP KIRTASIYE ABDULKADIR CAN", "MERSIN", 0, 0, 20, ""], ["CAN KITAP KIRTASIYE-AHMET YILDIRIM", "YOZGAT", 5, 0, 29, ""], ["DEVELI YAPRAK DAGITIM DAVUT KENDIRCI", "KAYSERI", 0, 0, 65, ""], ["DUNYA KULTUR MERKEZI IRFAN YESILNAR", "AMASYA", 0, 9, 80, ""], ["ETHEM DEMIRBAG (ERDEM KIRTASIYE)", "ADANA", 8, 20, 313, ""], ["EYUP ZAFER ATES - ZAFER KIRTASIYE", "MERSIN", 12, 0, 36, ""], ["GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .", "KAYSERI", 0, 300, 5966, ""], ["GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.ZUC.HED.TIC.LTD.STI", "ADANA", 2730, 0, 3230, ""], ["HILAL KIRTASIYE/SONER DEDE", "ÇORUM", 0, 2, 5, ""], ["KAHRAMANMARAS HEDEF KITAP KIRTASIYE MEHMET APAYDIN", "KAHRAMANMARAS", 205, 403, 2916, ""], ["KARACA YAYIN BASIM DAGITIM EGITIM KIRT.HIZ.SAN VE TIC.LTD.STI", "HATAY", 0, 26, 134, ""], ["KARANFIL KITAP KIRTASIYE UMUT GOKMEN", "OSMANIYE", 0, 0, 30, ""], ["KURT YAYIN DAGITIM TICARET LTD STI", "HATAY", 0, 18, 0, ""], ["MAVI KITAP KIRTASIYE MEHMET ALI KUH", "HATAY", 23, 3, 56, ""], ["MEHMET CETIN - CETIN KITAP KIRTASIYE", "HATAY", 0, 0, 75, ""], ["MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI", "MERSIN", 0, 590, 465, ""], ["MINI KITAP KIRTASIYE ALPAY ERDAL", "KAHRAMANMARAS", 5, 0, 8, ""], ["MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTASIYE", "YOZGAT", 0, 5, 0, ""], ["MUSTAFA DANIS - DANIS KITABEVI", "KARAMAN", 0, 0, 110, ""], ["NEVSEHIR-ATLAS KITAP KIRTASIYE-FATMA KURTDOGAN", "NEVSEHIR", 1475, 0, 1475, ""], ["NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI", "ÇORUM", 0, 0, 60, ""], ["OLUSUM GLOBAL KITAP DAGITIM SANAYI VE TIC.LTD.STI", "GAZIANTEP", 0, 1120, 0, ""], ["OZCAN DAGITIM VE YAYIN KIRTASIYE KITAP", "GAZIANTEP", 850, 0, 1030, ""], ["PARK OZEL EGITIM KIRTASIYE TUR SEY TIC LTD STI", "MERSIN", 2386, 10, 2706, ""], ["RAMAZAN HASIL - PAZARCIK-KULTUR KITAP KIRTASIYE", "KAHRAMANMARAS", 0, 0, 20, ""], ["TORE KIRTASIYE TICARET VE SANAYI LTD STI", "NIGDE", 40, 0, 143, ""], ["VIZYON PLUS KITABEVI OKKES ANIL MART", "OSMANIYE", 0, 0, 20, ""], ["ZAFERCAN KIRTASIYE -TUBA OZUDOGRU", "AMASYA", 0, 0, 265, ""]];
+// Veri — base64 decode ile yükle (özel karakter sorunu yok)
+function b64d(s){return JSON.parse(decodeURIComponent(escape(atob(s))));}
+const vedatData    = b64d("W1siQUtTVSBLSVJUQVNJWUUgLSBBWklaIEFLU1UiLCAiSEFLS0FSSSIsIDAsIDM2LCAwLCAiIl0sIFsiQVkgS0lSVEFTSVlFIEtJVEFQIFRFSy5URU0uSU5TLiIsICJBR1JJIiwgNDUsIDE0LCAxMTUsICIiXSwgWyJCSUxJTSBLSVJUQVNJWUUgU0VMQUhFVCBNRVRFIiwgIlNJUk5BSyIsIDAsIDU0LCAwLCAiIl0sIFsiQklMSU0gS0lUQUJFVkkgU0VZSVQgQVRFUyIsICJTQU5MSVVSRkEiLCAwLCAxMCwgMTMyLCAiIl0sIFsiQktNIEJBVE1BTiBLSVRBUCBNRVJLRVpJIEtJUlRBU0lZRSIsICJCQVRNQU4iLCAxNTAsIDAsIDI3MCwgIiJdLCBbIkRPUlVLIFNBTkFZSSBWRSBUSUNBUkVUIExJTUlURUQgU0lSS0VUSSIsICJNQVJESU4iLCAwLCA5LCAxMTQsICIiXSwgWyJFTEFaSUcgQU5LQSBLSVRBUCBLSVJUQVNJWUUgLSBDQUhJVCBBWUhBTiIsICJFTEFaSUciLCAwLCAwLCAxODUsICIiXSwgWyJGSU5BTCBCQVNBUkkgRUdJVElNIEhJWi4gQkFTLllBWS4iLCAiU0lJUlQiLCAwLCA1NCwgMCwgIiJdLCBbIkdVTVVTIEtJUlRBU0lZRS1ZQUhZQSBLRU1BTCBZQVZVWiIsICJHw5xNw5xTSEFORSIsIDAsIDAsIDIzLCAiIl0sIFsiR1VORVlET0dVIFRFTEVLT01VTkFTWU9OIEtBR1QiLCAiU0lSTkFLIiwgMCwgMCwgMTAyLCAiIl0sIFsiR1VaRUwgT1pFTCBFR1QgS0lSVCBJTlMgU0FOIFRJQyBMVEQgU1RJIiwgIkRJWUFSQkFLSVIiLCA1OCwgMCwgMTU5LCAiS8Sxcm3EsXrEsSAoRMO8xZ/DvGspIl0sIFsiSEVERUYgS0lSVEFTSVlFLVpBRkVSIFlBVlVaRVIiLCAiVkFOIiwgMzIwLCAwLCAzNTAsICJLxLFybcSxesSxIChEw7zFn8O8aykiXSwgWyJJR0RJUiBLVUxUVVIgS0lUQVAgS0lSVEFTSVlFLU1FSE1FVCBOVVJJIFlJR0lUIiwgIklHRElSIiwgMjIwLCAyMzAsIDI0MCwgIlllxZ9pbCAoxLB5aSkiXSwgWyJLSVpJTERFUkUgS0lSVEFTSVlFIFZFIEJJTEcuR0lEQS5JTlMiLCAiVkFOIiwgMCwgMCwgNDUsICIiXSwgWyJLT01NQUdFTkUgS0lUQVAgREVQT1NVIFJBSElNRSBCSUxHSUMiLCAiQURJWUFNQU4iLCAwLCAyNDAsIDAsICIiXSwgWyJNQUhNVVQgSEFLQU4gS0FSQVBJTkFSIChERU1JUkhBTiBLSVRBQkVWSSkiLCAiQkFZQlVSVCIsIDEwLCAwLCAxMCwgIkvEsXJtxLF6xLEgKETDvMWfw7xrKSJdLCBbIk1BTkEgWUFZSU4gS0lUQVAgS0lSVEFTSVlFIFNBTiBUSUMgTFREIFNUSSIsICJNQVJESU4iLCAwLCA4MCwgMjksICIiXSwgWyJOQVlJRiBBWURFTUlSIChWQVJPTCBLSVJUQVNJWUUpIiwgIkJJVExJUyIsIDAsIDgwLCAxNTYwLCAiIl0sIFsiT0tVUktFTlQgS0lSVEFTSVlFIEdJWUFTRVRUSU4gREVNSVIiLCAiTVVTIiwgMCwgOTkwLCAwLCAiIl0sIFsiT05DVSBBQ0FSIEtJUlRBU0lZRSBOQUsuSU5TLiIsICJBRElZQU1BTiIsIDAsIDAsIDE1LCAiIl0sIFsiT1pDRUxJSyBLSVJUQVNJWUUgTVVIQU1NRUQgT1pDRUxJSyIsICJTQU5MSVVSRkEiLCAwLCA0MzAsIDAsICIiXSwgWyJPWktJUlRBWSBLSVRBUCBLSVJUQVNJWUUgQklMR0lTQVlBUiBHSURBIExURCBTVEkiLCAiS0FSUyIsIDYsIDAsIDYsICJLxLFybcSxesSxIChEw7zFn8O8aykiXSwgWyJQT1pJVElGIEJBU0tJIEhJWk1FVExFUkkgS0lUQVAgS0lSVEFTSVlFIiwgIkVSWlVSVU0iLCAwLCAxNzAsIDMwLCAiIl0sIFsiUE9aSVRJRiBCT0xHRSBZQVlJTiBEQUdJVElNIEVHSVRJTSBLSVRBUCIsICJESVlBUkJBS0lSIiwgMCwgMCwgNTEyLCAiIl0sIFsiU0FIIEtJUlRBU0lZRSBNSU5FIEJFTlpFUiIsICJTQU5MSVVSRkEiLCAyMCwgMCwgMzI4LCAiS8Sxcm3EsXrEsSAoRMO8xZ/DvGspIl0sIFsiR0VOQyBDQVJTSSBLSVRBUCBLSVJUQVNJWUUiLCAiRVJaSU5DQU4iLCAwLCAwLCAxMzQsICIiXSwgWyJTRUJJTCBLSVJUQVNJWUUtVVpFWUlSIEFLQ0VMSUsiLCAiQklUTElTIiwgMCwgMCwgNjYsICIiXSwgWyJTRURBVCBLSVJUQVNJWUUgKEFCVUJFS0lSIFlVQ0VMKSIsICJTQU5MSVVSRkEiLCA0NjIsIDAsIDQ4MywgIkvEsXJtxLF6xLEgKETDvMWfw7xrKSJdLCBbIlNJSVJUIEFSSSBLSVRBUEVWSSAgQUxJIEtVUlQiLCAiU0lJUlQiLCAwLCAyLCAzMCwgIiJdLCBbIlNJVkVSRUsgQUtBREVNSSBLSVRBUCBLSVJUQVNJWUUiLCAiU0FOTElVUkZBIiwgNSwgMCwgMTQ2NCwgIiJdLCBbIlRBS1NBTiBJTlMgSUhSIE5BSyBTQU4gVkUgVElDLkxURC5TVEkuIiwgIk1BUkRJTiIsIDAsIDAsIDcxLCAiIl0sIFsiVUNBUiBEQUdJVElNIFBBWkFSTEFNQSBJVEggSUhSIFRJQyBTQU4gTFREIFNUSSIsICJNQVJESU4iLCAwLCAyNCwgNzAsICIiXSwgWyJVTVVUIEtJUlRBU0lZRS1NRUhNRVQgQUxJIENFWUhBTiIsICJESVlBUkJBS0lSIiwgMCwgMCwgNTksICIiXV0=");
+const muhsinData   = b64d("W1siQURSRVMgS0lUQVAgS0lSVEFTSVlFLU1VQ0FISVQgQVpBS0xJIiwgIkvDnFRBSFlBIiwgMTAwOSwgMTAxLCAxNzQ4LCAiS8Sxcm3EsXrEsSAoRMO8xZ/DvGspIl0sIFsiQUtERU5JWiBMSURFUiBLSVRBUCBEQUdJVElNIExURCBTVEkiLCAiQU5UQUxZQSIsIDI0MDAsIDAsIDI2NjAsICJLxLFybcSxesSxIChEw7zFn8O8aykiXSwgWyJBTlRBTFlBIEFUTEFTIEtJVEFCRVZJIE9aQU4gRVJJUEVLIiwgIkFOVEFMWUEiLCAwLCAxMywgMTE4LCAiIl0sIFsiQVRBSyBPRklTIEtJVEFQIEtJUlRBU0lZRSBTQU4gVElDIExURCBTVEkiLCAiRVNLSVNFSElSIiwgMjc3MiwgMTEwLCAzMDAxLCAiS8Sxcm3EsXrEsSAoRMO8xZ/DvGspIl0sIFsiQVRJTEEgRk9UT0tPUEkgVkUgS0lUQVAgRVZJIFNFTUEgQk9aIiwgIktPTllBIiwgMCwgMCwgMzAsICIiXSwgWyJCQU5ESVJNQSBLSVRBUCBLSVJUQVNJWUUgR1VMQkFIQVIgQkFIQURJUiIsICJCQUxJS0VTSVIiLCAzMCwgMjE0MCwgMjIzLCAiWWXFn2lsICjEsHlpKSJdLCBbIkJBUklTIEtJUlRBU0lZRSAvIEFMSS1IQUJFUkFMIENBTUxJQk9HQVoiLCAiS09OWUEiLCAxLCAxLCAxLCAiWWXFn2lsICjEsHlpKSJdLCBbIkJFTllBWSBLSVRBUCBLSVJUQVNJWUUgVFVSWk0uSU5TLklUSC5JSFIuVElDLkxURC5TVEkiLCAiQU5UQUxZQSIsIDAsIDMwODQsIDAsICIiXSwgWyJDQUdSSSBLSVRBQkVWSS1FUkhBTiBFVlJBTiIsICJNQU5JU0EiLCAwLCA4LCAwLCAiIl0sIFsiQ0VUSU4gWUFZSU4gREFHSVRJTSBBLlMiLCAiQkFMSUtFU0lSIiwgMCwgMTcsIDQwLCAiIl0sIFsiREtNIFlBWUlOIEJBU0lNIERBR0lUSU0gUkVLTEFNIEVHSVRJTSDDlkdSRVRJTSBTQU5BWUkgVElDQVJFVCBMSU1JVEVEIFNJUktFVEkiLCAiREVOSVpMSSIsIDAsIDAsIDE0MiwgIiJdLCBbIkVHRSBLSVRBUCBLSVJUQVNJWUUtRE9ORFUgWUlMR0lOIiwgIkJBTElLRVNJUiIsIDE2MiwgMTE3NSwgNjUxLCAiWWXFn2lsICjEsHlpKSJdLCBbIkVSRU4gS0lUQVAgS0lSVEFTSVlFIE1VSEFSUkVNIEFLTUFOIiwgIkJJTEVDSUsiLCAwLCAwLCAyMDQsICIiXSwgWyJGRVRISVlFIEVSQVkgS0lUQVAgS0lSVC5NQVRCQUEgWUFZSU0gRUxFSy5DSUhBWkxBUiBJTlMuIFZFIFRVUi5MVEQuU1RJLiIsICJNVUdMQSIsIDMwLCA5MCwgNDE1LCAiWWXFn2lsICjEsHlpKSJdLCBbIkdVVkVOIEtJUlRBU0lZRSAtIE9aQU4gVFVOQ0VMIiwgIkvDnFRBSFlBIiwgMCwgMCwgMTEsICIiXSwgWyJIQUtBTiBLSVRBQkVWSSAtIE0gSEFLQU4gWVVSVFRBRFVSIiwgIklTUEFSVEEiLCAwLCAwLCA0LCAiIl0sIFsiSEFMSVQgS0FZQSAoQUxBTllBIEFLQURFTUkgS0lSVEFTSVlFKSIsICJBTlRBTFlBIiwgMCwgMCwgNDUsICIiXSwgWyJIQVNBTiBCQVNSSSBTQUdMQU0gKFNBR0xBTSBLSVJUQVNJWUUgS09OWUEpIiwgIktPTllBIiwgMiwgMjAsIDEzMiwgIlllxZ9pbCAoxLB5aSkiXSwgWyJISUxBTCBLSVRBUCBLSVJUQVNJWUUtSFVNQSBDRUxJSyIsICJCVVJEVVIiLCAwLCAwLCA2LCAiIl0sIFsiS0FQTEFOIEtJUlRBU0lZRS1BWUJVS0UgVUdVWiBLQVBMQU4iLCAiQlVSRFVSIiwgMiwgMzIsIDI4LCAiWWXFn2lsICjEsHlpKSJdLCBbIktVTUJFVCBLSVJUQVNJWUUgWUFZSU5DSUxJSyBJTlMuIE5BSy4gSEVESVlFIEVTWUEgRUxLLlRJQy5MVC5TVEkuIiwgIkFGWU9OS0FSQUhJU0FSIiwgNSwgMzAsIDE2OSwgIlllxZ9pbCAoxLB5aSkiXSwgWyJNRURSRVNFIEtJVEFCRVZJLSBEQVZVVCBHVU5ET0dBTiIsICJBRllPTktBUkFISVNBUiIsIDAsIDEyOCwgMCwgIiJdLCBbIk1FVE9UIEtJVEFQIEtJUlRBU0lZRSBZQVkuIFRVUklaTSBTQU4uIFRJQy4gTFRELiBTVEkuIiwgIsOHQU5BS0tBTEUiLCAwLCAxNjAsIDEyNTIsICIiXSwgWyJNU00gS0lSVEFTSVlFIC0gQklSR1VMIFRJUkFTIiwgIlVTQUsiLCAzNSwgMCwgNjgsICJLxLFybcSxesSxIChEw7zFn8O8aykiXSwgWyJNVUdMQSBFUkFZIEtJVEFQIEtJUlRBU0lZRSBNQVRCQUEgWUFZLkxURC5TVEkiLCAiTVVHTEEiLCA4MDEsIDEsIDg3NywgIkvEsXJtxLF6xLEgKETDvMWfw7xrKSJdLCBbIk1VUkFUIEFZRElOIC0gTUtNIC0gTUFSTUFSQSBLVUxUVVIgTUVSS0VaSSAmIE9LVUxMQVIgUEFaQVJJIiwgIkJJTEVDSUsiLCAzLCAwLCAzNywgIkvEsXJtxLF6xLEgKETDvMWfw7xrKSJdLCBbIk5FSkxBIEtBTlNVIC1LQU5TVSBLSVRBQkVWSSIsICJBTlRBTFlBIiwgNTU4LCA2NDIsIDkzOSwgIlllxZ9pbCAoxLB5aSkiXSwgWyJPU01BTiBLQVlMQUsgLSBBS1NFSElSIElLQkFMIEtJVEFQIEtJUlRBU0lZRSIsICJLT05ZQSIsIDAsIDAsIDM1LCAiIl0sIFsiU0VELUtBTkdVUlUgS0lUQVAgTVVTQU1FVFRJTiBLVUNBSyIsICJNQU5JU0EiLCAwLCA1NSwgMjE3LCAiIl0sIFsiU0VSS0FOIElTSUsgLSBBWVJBQyBLSVRBQkVWSSIsICJBWURJTiIsIDUsIDExLCA2NCwgIlllxZ9pbCAoxLB5aSkiXSwgWyJURVJDSUggS0lUQUJFVkkvR1VST0wgU1VMVUhBTiIsICJBWURJTiIsIDAsIDIzMCwgNzUsICIiXSwgWyJUVVJLRVIgS0lSVEFTSVlFLUZBVElIIEJBUyIsICJNQU5JU0EiLCAwLCAwLCAxNDIsICIiXSwgWyJVQyBZSUxESVogS0lUQUJFVkkgKElCUkFISU0gWUlMRElaKSIsICJJU1BBUlRBIiwgMzMsIDUsIDIzMywgIkvEsXJtxLF6xLEgKETDvMWfw7xrKSJdLCBbIlVNUkFOIEtJVEFQIEtJUlRBU0lZRSAtIEFERU0gVEVUSUsiLCAiQlVSRFVSIiwgMCwgMCwgMjYsICIiXSwgWyJZRVNJTCBCRVlBWiBZQVlJTiBEQUcoTUlUSEFUIEFQQVJDSSkiLCAiS09OWUEiLCAxMjAsIDAsIDEzMjUsICJLxLFybcSxesSxIChEw7zFn8O8aykiXSwgWyJZT05DRSBZQVlJTiBEQUdJVElNIEtJVEFCRVZJIExURC5TVEkiLCAiQlVSU0EiLCA0MzA1LCAwLCA2MTc4LCAiS8Sxcm3EsXrEsSAoRMO8xZ/DvGspIl1d");
+const suleymanData = b64d("W1siQUxZQSBLSVRBUCBLSVJUQVNJWUUgREFHSVRJTSBUSUMuIFZFIFBBWkFSTEFNQSBMVEQuIFNUSS4iLCAiQURBTkEiLCAwLCAxMjU3MCwgMCwgIkXEn2l0aW0gVmFkaXNpIE1TQiDDvHLDvG5sZXJpbWl6IGdlw6dlbiB5xLFsIGF5bsSxIGTDtm5lbWRlIDcuODU5IGFkZXQgc2F0xLHFn2EgdWxhxZ9txLHFn2tlbiwgYnUgecSxbCBheW7EsSB0YXJpaHRlIDE1LjA4NiBhZGVkZSB1bGHFn2FyYWsgeWFrbGHFn8SxayAlMTAwIGLDvHnDvG1lIGfDtnN0ZXJtacWfdGlyLiBBbmNhayBidSBvbHVtbHUgdGFibG95YSByYcSfbWVuIMO8csO8biBnYW3EsW3EsXrEsW4gc2FoYWRhIGdlbmVsIGFubGFtZGEgYmVrbGVuZW4gZMO8emV5ZGUgdGFsZXAgZ8O2cm1lZGnEn2kgZGXEn2VybGVuZGlyaWxtZWt0ZWRpci4gQnVudW4gdGVtZWwgc2ViZXBsZXJpIGFyYXPEsW5kYSDDvHLDvG5sZXJpbiB1enVuIHPDvHJlZGlyIHllbmlsZW5tZW1pxZ8gb2xtYXPEsSB2ZSBpw6dlcmlrL3nDvHogdGFzYXLEsW3EsSBhw6fEsXPEsW5kYW4gZ8O8bmNlbGxpxJ9pbmkgeWl0aXJtZXNpIHllciBhbG1ha3RhZMSxci5cbsOWemVsbGlrbGUgQWRhbmEgYmF5aW1peiBBbHlhIEvEsXJ0YXNpeWUnbmluIGt1cnVtbGFybGEgecO8csO8dHTDvMSfw7wgeW/En3VuIMOnYWzEscWfbWFsYXIgc29udWN1bmRhIMO8csO8bmxlcmltaXppbiBrdXJ1bSBsaXN0ZWxlcmluZSBkYWhpbCBlZGlsbWVzaSB2ZSBidSDDvHLDvG4gZ3J1YnVuYSDDtnplbCBvZGFrbGFuxLFsbWFzxLEsIHNhdMSxxZ8gYWRldGxlcmluaW4gaGVkZWZsZW5lbiBzZXZpeWVsZXJlIHVsYcWfbWFzxLFuZGEgw7ZuZW1saSByb2wgb3luYW3EscWfdMSxci5cbk1ldmN1dCBzYWhhIGfDtnpsZW1sZXJpbmUgZ8O2cmUga3VydW1sYXIgdGFyYWbEsW5kYW4gZGFoYSDDp29rIG1hcmthIGRlxJ9lcmkgecO8a3NlayB2ZXlhIGZpeWF0IGF2YW50YWrEsSBzdW5hbiB5YXnEsW5sYXIgdGVyY2loIGVkaWxtZWt0ZWRpci4gRcSfaXRpbSBWYWRpc2kgTVNCIMO8csO8bmxlcmkgaXNlIG1ldmN1dCBkdXJ1bWRhIGJ1IGlraSBrcml0ZXIgYcOnxLFzxLFuZGFuIHJha2lwbGVyaW5lIGfDtnJlIGRlemF2YW50YWpsxLEga2FsbWFrdGEsIGF5csSxY2EgdXp1biBzw7xyZWRpciB5ZW5pbGVubWVtZXNpIG5lZGVuaXlsZSB0ZXJjaWggZWRpbG1lIG9yYW7EsSBkw7zFn21la3RlZGlyLlxuw5Zuw7xtw7x6ZGVraSBkw7ZuZW1kZSB0ZWtsaWYgdmVyaWxlbiB2ZSDDvGNyZXRzaXogZGVuZW1lIHBha2V0aSB1bGHFn3TEsXLEsWxhbiBrdXJ1bWxhcsSxbiBnZXJpIGTDtm7DvMWfbGVyaSB5YWvEsW5kYW4gdGFraXAgZWRpbGVjZWt0aXIuIMOWemVsbGlrbGUgWUtTIGdydWJ1bmRhIGthcmFyIHPDvHJlY2luZGVraSBrdXJ1bWxhcmxhIHnDvHogecO8emUgZ8O2csO8xZ9tZWxlciBnZXLDp2VrbGXFn3RpcmlsZXJlayBzw7xyZWNpbiBvbHVtbHUgc29udcOnbGFuZMSxcsSxbG1hc8SxIGhlZGVmbGVubWVrdGVkaXIuXG5CdW51bmxhIGJpcmxpa3RlLCBnZcOndGnEn2ltaXogecSxbCBhbmxhxZ9tYSBzYcSfbGFuYW4gS2F5c2VyaSBCZWxlZGl5ZXNpJ25lIGJ1IHnEsWwgZGEgeWVuaWRlbiB0ZWtsaWYgc3VudWxhY2FrIHZlIGnFnyBiaXJsacSfaW5pbiBkZXZhbSBldHRpcmlsbWVzaSBpw6dpbiBnZXJla2xpIMOnYWzEscWfbWFsYXIgecO8csO8dMO8bGVjZWt0aXIuIl0sIFsiQU5UQUtZQSBJS1JBIEtJUlRBU0lZRUNJTElLIFNBTi5WRSBUSUMuTFRELlNUSS4iLCAiSEFUQVkiLCA3MCwgMCwgOTAsICIiXSwgWyJCQVNBUkkgS0lUQVAgS0lSVEFTSVlFLVJBTUFaQU4gQUxUSU5TT1kiLCAiQUtTQVJBWSIsIDAsIDEwLCA2MCwgIiJdLCBbIkJJTEdJIEtJUlRBU0lZRSBPTUVSIFNJTVNFSyIsICJHQVpJQU5URVAiLCA1MCwgMCwgNTAsICIiXSwgWyJDQU4gS0lUQVAgS0lSVEFTSVlFIEFCRFVMS0FESVIgQ0FOIiwgIk1FUlNJTiIsIDAsIDAsIDIwLCAiIl0sIFsiQ0FOIEtJVEFQIEtJUlRBU0lZRS1BSE1FVCBZSUxESVJJTSIsICJZT1pHQVQiLCA1LCAwLCAyOSwgIiJdLCBbIkRFVkVMSSBZQVBSQUsgREFHSVRJTSBEQVZVVCBLRU5ESVJDSSIsICJLQVlTRVJJIiwgMCwgMCwgNjUsICIiXSwgWyJEVU5ZQSBLVUxUVVIgTUVSS0VaSSBJUkZBTiBZRVNJTE5BUiIsICJBTUFTWUEiLCAwLCA5LCA4MCwgIiJdLCBbIkVUSEVNIERFTUlSQkFHIChFUkRFTSBLSVJUQVNJWUUpIiwgIkFEQU5BIiwgOCwgMjAsIDMxMywgIiJdLCBbIkVZVVAgWkFGRVIgQVRFUyAtIFpBRkVSIEtJUlRBU0lZRSIsICJNRVJTSU4iLCAxMiwgMCwgMzYsICIiXSwgWyJHQVJBTlRJIEFLQURFTUkgRUdUIEhJWiBTQU4gVElDIExURCBTVEkgLiIsICJLQVlTRVJJIiwgMCwgMzAwLCA1OTY2LCAiIl0sIFsiR1VORVkgQVlESU4gR1JVUCBCSUxHLllBWi5ET04uT1ouRUcuT0cuR0lELlpVQy5IRUQuVElDLkxURC5TVEkiLCAiQURBTkEiLCAyNzMwLCAwLCAzMjMwLCAiIl0sIFsiSElMQUwgS0lSVEFTSVlFL1NPTkVSIERFREUiLCAiw4dPUlVNIiwgMCwgMiwgNSwgIiJdLCBbIktBSFJBTUFOTUFSQVMgSEVERUYgS0lUQVAgS0lSVEFTSVlFIE1FSE1FVCBBUEFZRElOIiwgIktBSFJBTUFOTUFSQVMiLCAyMDUsIDQwMywgMjkxNiwgIiJdLCBbIktBUkFDQSBZQVlJTiBCQVNJTSBEQUdJVElNIEVHSVRJTSBLSVJULkhJWi5TQU4gVkUgVElDLkxURC5TVEkiLCAiSEFUQVkiLCAwLCAyNiwgMTM0LCAiIl0sIFsiS0FSQU5GSUwgS0lUQVAgS0lSVEFTSVlFIFVNVVQgR09LTUVOIiwgIk9TTUFOSVlFIiwgMCwgMCwgMzAsICIiXSwgWyJLVVJUIFlBWUlOIERBR0lUSU0gVElDQVJFVCBMVEQgU1RJIiwgIkhBVEFZIiwgMCwgMTgsIDAsICIiXSwgWyJNQVZJIEtJVEFQIEtJUlRBU0lZRSBNRUhNRVQgQUxJIEtVSCIsICJIQVRBWSIsIDIzLCAzLCA1NiwgIiJdLCBbIk1FSE1FVCBDRVRJTiAtIENFVElOIEtJVEFQIEtJUlRBU0lZRSIsICJIQVRBWSIsIDAsIDAsIDc1LCAiIl0sIFsiTUVSU0lOIEtBRktBTSBLSVRBQkVWSSBLSVJUQVNJWUUgTFREIFNUSSIsICJNRVJTSU4iLCAwLCA1OTAsIDQ2NSwgIiJdLCBbIk1JTkkgS0lUQVAgS0lSVEFTSVlFIEFMUEFZIEVSREFMIiwgIktBSFJBTUFOTUFSQVMiLCA1LCAwLCA4LCAiIl0sIFsiTVVIQU1NRVQgS0VNQUwgU0FZREFNIC0gWUVSS09ZIEFLQURFTUkgS0lSVEFTSVlFIiwgIllPWkdBVCIsIDAsIDUsIDAsICIiXSwgWyJNVVNUQUZBIERBTklTIC0gREFOSVMgS0lUQUJFVkkiLCAiS0FSQU1BTiIsIDAsIDAsIDExMCwgIiJdLCBbIk5FVlNFSElSLUFUTEFTIEtJVEFQIEtJUlRBU0lZRS1GQVRNQSBLVVJURE9HQU4iLCAiTkVWU0VISVIiLCAxNDc1LCAwLCAxNDc1LCAiIl0sIFsiTk9LVEEgS0lUQVAgS0lSVEFTSVlFIEVHSVRJTSBUSUMuTFRELlNUSSIsICLDh09SVU0iLCAwLCAwLCA2MCwgIiJdLCBbIk9MVVNVTSBHTE9CQUwgS0lUQVAgREFHSVRJTSBTQU5BWUkgVkUgVElDLkxURC5TVEkiLCAiR0FaSUFOVEVQIiwgMCwgMTEyMCwgMCwgIiJdLCBbIk9aQ0FOIERBR0lUSU0gVkUgWUFZSU4gS0lSVEFTSVlFIEtJVEFQIiwgIkdBWklBTlRFUCIsIDg1MCwgMCwgMTAzMCwgIiJdLCBbIlBBUksgT1pFTCBFR0lUSU0gS0lSVEFTSVlFIFRVUiBTRVkgVElDIExURCBTVEkiLCAiTUVSU0lOIiwgMjM4NiwgMTAsIDI3MDYsICIiXSwgWyJSQU1BWkFOIEhBU0lMIC0gUEFaQVJDSUstS1VMVFVSIEtJVEFQIEtJUlRBU0lZRSIsICJLQUhSQU1BTk1BUkFTIiwgMCwgMCwgMjAsICIiXSwgWyJUT1JFIEtJUlRBU0lZRSBUSUNBUkVUIFZFIFNBTkFZSSBMVEQgU1RJIiwgIk5JR0RFIiwgNDAsIDAsIDE0MywgIiJdLCBbIlZJWllPTiBQTFVTIEtJVEFCRVZJIE9LS0VTIEFOSUwgTUFSVCIsICJPU01BTklZRSIsIDAsIDAsIDIwLCAiIl0sIFsiWkFGRVJDQU4gS0lSVEFTSVlFIC1UVUJBIE9aVURPR1JVIiwgIkFNQVNZQSIsIDAsIDAsIDI2NSwgIiJdXQ==");
 
-function fmtN(n){if(n===null||n===undefined)return'—';return Number(n).toLocaleString('tr-TR');}
+function fmtN(n){if(n===null||n===undefined||n==="")return"—";return Number(n).toLocaleString("tr-TR");}
 function z(n){return(n===0||!n)?'<span class="zero">—</span>':fmtN(n);}
 
-function durumClass(d){
-  if(!d)return'';
-  if(d.includes('İyi'))return'durum-iyi';
-  if(d.includes('Orta'))return'durum-orta';
-  if(d.includes('Düşük'))return'durum-dusuk';
-  return'';
-}
-function durumKısa(d){
-  if(!d)return'';
-  if(d.includes('İyi'))return'✅ İyi';
-  if(d.includes('Orta'))return'⚠️ Orta';
-  if(d.includes('Düşük'))return'🔴 Düşük';
+function durumHtml(d){
+  if(!d)return"";
+  if(d.includes("İyi"))return'<span class="d-iyi">İyi</span>';
+  if(d.includes("Orta"))return'<span class="d-orta">Orta</span>';
+  if(d.includes("Düşük"))return'<span class="d-dusuk">Düşük</span>';
   return d;
 }
 
 function buildBars(data){
-  const top20 = [...data].sort((a,b)=>(b[3]||0)-(a[3]||0)).slice(0,20);
-  const maxVal = top20[0]?top20[0][3]||0:1;
+  const top20=[...data].sort((a,b)=>(b[3]||0)-(a[3]||0)).slice(0,20);
+  const mx=top20.length&&top20[0][3]>0?top20[0][3]:1;
   return top20.map(b=>{
-    const pct = maxVal>0?Math.max(Math.round(((b[3]||0)/maxVal)*100),1):0;
-    const color = (b[3]||0)===0?'#e2e8f0':(pct>=60?'#16a34a':pct>=30?'#d97706':'#C8102E');
+    const pct=Math.max(Math.round(((b[3]||0)/mx)*100),1);
+    const zero=(b[3]||0)===0;
+    const col=zero?"#e2e8f0":pct>=60?"#16a34a":pct>=30?"#d97706":"#C8102E";
     return `<div class="bar-row">
       <div class="bar-lbl" title="${b[0]}">${b[0]}</div>
       <div class="bar-track">
-        <div class="bar-fill" style="width:${(b[3]||0)===0?2:pct}%;background:${color};">
-          <span style="${(b[3]||0)===0?'color:#94a3b8;':''}">${fmtN(b[3]||0)}</span>
+        <div class="bar-fill" style="width:${zero?2:pct}%;background:${col};">
+          <span style="${zero?"color:#94a3b8;":""}">${fmtN(b[3]||0)}</span>
         </div>
       </div>
     </div>`;
-  }).join('');
+  }).join("");
 }
 
-function buildSection(num, byName, urun, aciklama, data, gyBgk, byBgk, gyTop, sonucHtml, buyumePct, buyumePos){
-  const rows = data.map(b=>`<tr>
-    <td>${b[0]}</td>
-    <td>${b[1]}</td>
-    <td>${z(b[2])}</td>
-    <td style="font-weight:${(b[3]||0)>0?'700':'400'};color:${(b[3]||0)>0?'var(--dark)':'inherit'};">${z(b[3])}</td>
-    <td>${z(b[4])}</td>
-    <td class="${durumClass(b[5])}">${durumKısa(b[5])}</td>
-  </tr>`).join('');
+function buildSection(num,byName,urun,aciklama,data,gyBgk,byBgk,gyTop,sonucHtml,buyumePct,pos){
+  const aktif=data.filter(b=>(b[3]||0)>0).length;
+  const bdgCls=pos?"bdg-green":"bdg-rose";
+  const bdgTxt=pos?"+%"+buyumePct+" Büyüme":"-%"+buyumePct+" Düşüş";
+  const grwHtml=pos?'<div class="grw-pos">+%'+buyumePct+"</div>":'<div class="grw-neg">-%'+buyumePct+"</div>";
 
-  const buyumeHtml = buyumePos
-    ? `<div class="grw-pos">+%${buyumePct}</div>`
-    : `<div class="grw-neg">-%${buyumePct}</div>`;
-  const bdgClass = buyumePos?'bdg-green':'bdg-rose';
-  const bdgTxt = buyumePos?`+%${buyumePct} Büyüme`:`-%${buyumePct} Düşüş`;
+  const rows=data.map(b=>`<tr>
+    <td>${b[0]}</td><td>${b[1]}</td>
+    <td>${z(b[2])}</td>
+    <td style="font-weight:${(b[3]||0)>0?700:400};">${z(b[3])}</td>
+    <td>${z(b[4])}</td>
+    <td>${durumHtml(b[5])}</td>
+  </tr>`).join("");
 
   return `<div class="sec">
   <div class="sec-hdr">
     <div style="display:flex;align-items:center;">
       <div class="sec-num">${num}</div>
-      <div>
-        <div class="sec-name">${byName}</div>
-        <div class="sec-sub">${urun}</div>
-      </div>
+      <div><div class="sec-name">${byName}</div><div class="sec-sub">${urun}</div></div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;">
-      <span class="bdg ${bdgClass}">${bdgTxt}</span>
+      <span class="bdg ${bdgCls}">${bdgTxt}</span>
       <span class="bdg bdg-blue">${data.length} Bayi</span>
     </div>
   </div>
   <div class="stats-row">
-    <div class="stat">
-      <div class="stat-val">${fmtN(gyBgk)}</div>
-      <div class="stat-lbl">Geçen Yıl BGK</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val" style="color:var(--red);">${fmtN(byBgk)}</div>
-      <div class="stat-lbl">Bu Yıl BGK</div>
-      ${buyumeHtml}
-    </div>
-    <div class="stat">
-      <div class="stat-val">${fmtN(gyTop)}</div>
-      <div class="stat-lbl">GY Toplam Adet</div>
-    </div>
-    <div class="stat">
-      <div class="stat-val">${data.filter(b=>(b[3]||0)>0).length}</div>
-      <div class="stat-lbl">Aktif Bayi</div>
-    </div>
+    <div class="stat"><div class="stat-val">${fmtN(gyBgk)}</div><div class="stat-lbl">Geçen Yıl BGK</div></div>
+    <div class="stat"><div class="stat-val" style="color:var(--red);">${fmtN(byBgk)}</div><div class="stat-lbl">Bu Yıl BGK</div>${grwHtml}</div>
+    <div class="stat"><div class="stat-val">${fmtN(gyTop)}</div><div class="stat-lbl">GY Toplam Adet</div></div>
+    <div class="stat"><div class="stat-val">${aktif}</div><div class="stat-lbl">Aktif Bayi</div></div>
   </div>
-  <div class="aciklama-box">${aciklama.replace(/\n/g,'<br>')}</div>
+  <div class="aciklama-box">${aciklama}</div>
   <div class="chart-area">
     <div class="chart-ttl">BY BGK — İlk 20 Bayi (büyükten küçüğe)</div>
     ${buildBars(data)}
   </div>
-  <button class="tbl-toggle" onclick="this.nextElementSibling.classList.toggle('hidden');this.textContent=this.nextElementSibling.classList.contains('hidden')?'▶ Tüm bayileri göster (${data.length} bayi)':'▼ Tabloyu gizle';">▶ Tüm bayileri göster (${data.length} bayi)</button>
+  <button class="tbl-toggle" onclick="var w=this.nextElementSibling;w.classList.toggle('hidden');this.textContent=w.classList.contains('hidden')?'&#9654; Tüm bayileri göster (${data.length} bayi)':'&#9660; Tabloyu gizle';">&#9654; Tüm bayileri göster (${data.length} bayi)</button>
   <div class="tbl-wrap hidden">
     <table>
-      <thead><tr>
-        <th>Bayi Adı</th><th>İl</th>
-        <th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>Durum</th>
-      </tr></thead>
+      <thead><tr><th>Bayi Adı</th><th>İl</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>Durum</th></tr></thead>
       <tbody>${rows}</tbody>
       <tfoot><tr>
         <td colspan="2"><strong>TOPLAM</strong></td>
         <td>${fmtN(gyBgk)}</td>
         <td style="color:var(--red);">${fmtN(byBgk)}</td>
-        <td>${fmtN(gyTop)}</td>
-        <td></td>
+        <td>${fmtN(gyTop)}</td><td></td>
       </tr></tfoot>
     </table>
   </div>
   <div class="sonuc-wrap">
-    <div class="sonuc-ttl">📋 Rapor Sonuç ve Öneriler</div>
+    <div class="sonuc-ttl">&#128203; Rapor Sonuç ve Öneriler</div>
     <div class="sonuc-txt">${sonucHtml}</div>
   </div>
 </div>`;
 }
 
-document.getElementById('root').innerHTML =
-  buildSection(1,'VEDAT ADSAN','EĞİTİM VADİSİ TYT-AYT MULTİ SORU BANKASI | 1. Raporlama',
-    'Geçen yıl aynı dönemde 1.296 adet olan toplam satış, bu yıl aynı dönemde 2.423 adede ulaşarak 1.127 adetlik artış göstermiştir. Bu sonuç, geçen yılın aynı dönemine kıyasla satışlarda yaklaşık <strong>%87 oranında büyüme</strong> sağlandığını göstermektedir. Haziran, Temmuz ve Ağustos aylarında gerçekleştirilmesi planlanan erken kurum anlaşmaları ile satışların daha da ivme kazanması beklenmektedir. Geçen yıla göre 9 bayimizin henüz sipariş geçmemiş olması dikkate alındığında, ikinci raporlama dönemine kadar satış adetlerinde ilave artış sağlanacağı öngörülmektedir.',
-    vedatData, 1296, 2423, 6602,
-    'Geçen yıl aynı dönemde 1.296 adet olan toplam satış, bu yıl 2.423 adede yükselerek <strong>+%87 büyüme</strong> gerçekleşmiştir. Mevcut satış ivmesi korunmalı ve anlaşma aşamasındaki kurumlarla süreç hızlandırılmalıdır.<br><br><strong>Öneriler:</strong><br>• Artış trendinin devamı için bayilerle iletişim sıklığı artırılmalı ve raf eksikleri tamamlanmalıdır.<br>• Henüz sipariş geçmeyen 9 bayi öncelikli takibe alınmalıdır.<br>• Talep gören ürünlere odaklı kampanya ve hatırlatma çalışmaları yapılmalıdır.',
-    87, true) +
-
-  buildSection(2,'MUHSİN ÖZBALCI','EĞİTİM VADİSİ TYT-AYT MULTİ SORU BANKASI | 1. Raporlama',
-    'Bölgede TYT-AYT Soru Bankası ürünlerinde geçen yıl aynı döneme kadar 12.273 adet satış gerçekleşmişken, bu yıl satış adedi 8.053 seviyesinde kalmıştır. <strong>4.220 adetlik ve yaklaşık %34 oranında düşüş</strong> yaşanmıştır. Düşüşün en önemli nedeni Bursa merkez bayisinin geçen yıl gerçekleştirdiği toplu ürün alımını bu yıl tekrarlamamasıdır. Müfredat değişikliği beklentisi nedeniyle hem bayi hem kurumlar temkinli ilerlemektedir. Eskişehir ve Kütahya bayilerinde de içerik güncelliği eleştirilerinden kaynaklanan kayıplar yaşanmaktadır. Antalya merkezde bayi değişikliği olumlu yansımış; ancak diğer bayilerdeki kaybı henüz karşılayamamıştır.',
-    muhsinData, 12273, 8053, 21096,
-    '<strong>Geçen yılın aynı dönemine göre 4.220 adetlik satış kaybı yaşanmıştır.</strong> Bursa bayisinin toplu alım gerçekleştirmemesi belirleyici olurken, Eskişehir ve Kütahya'daki kurum kayıpları da olumsuz etkilemiştir. Kurumsal satış süreci devam etmekte olup mevcut rakamlar dönem sonu performansını tam yansıtmamaktadır.<br><br><strong>Tespit Edilen Sorun:</strong> Ürün içeriklerinin güncellik açısından yeterince güçlü bulunmaması, müfredat belirsizliği ve marka bilinirliğinin rakiplere göre düşük kalması satış performansını olumsuz etkilemektedir.<br><br><strong>Öneriler:</strong><br>• Ürün içerikleri öğretmen ve kurum geri bildirimleri doğrultusunda güncellenmeli, müfredat uyumu sahaya aktarılmalıdır.<br>• Haziran ayı içinde tüm bayilerle görüşülerek bekleyen kurum sipariş süreçleri tamamlanmalıdır.<br>• TAK ürünlerinde soru sayısı, TİK ürünlerinde etkinlik-soru dengesi yeniden değerlendirilmelidir.',
-    34, false) +
-
-  buildSection(3,'SÜLEYMAN İŞPINAR','EĞİTİM VADİSİ TYT-AYT MSB | 1. Raporlama',
-    'MSB ürünleri geçen yıl aynı dönemde 7.859 adet satışa ulaşmışken, bu yıl aynı tarihte 15.086 adede ulaşarak yaklaşık <strong>%92 büyüme</strong> göstermiştir. Ancak bu olumlu tabloya rağmen ürün gamının sahada genel anlamda beklenen düzeyde talep görmediği değerlendirilmektedir. Bunun temel sebepleri arasında ürünlerin uzun süredir yenilenmemiş olması ve içerik/yüz tasarımı açısından güncelliğini yitirmesi yer almaktadır. Özellikle Adana bayisi Alya Kırtasiye'nin kurumlarla yürüttüğü yoğun çalışmalar sonucunda ürünler kurum listelerine dahil edilmiş ve bu ürün grubuna özel odaklanılması satış adetlerinde belirleyici rol oynamıştır.',
-    suleymanData, 7859, 15086, 19457,
-    'Geçen yıl aynı dönemde 7.859 adet olan satış bu yıl 15.086 adede yükselerek <strong>+%92 büyüme</strong> gerçekleşmiştir. Adana bayisinin odaklı kurum çalışması satışa olumlu yansımıştır.<br><br><strong>Tespit Edilen Sorun:</strong> Kurumlar tarafından marka değeri yüksek veya fiyat avantajlı yayınlar tercih edilmektedir. EV MSB ürünleri mevcut durumda bu iki kriter açısından dezavantajlı kalmakta; uzun süredir yenilenmemesi nedeniyle tercih edilme oranı düşmektedir.<br><br><strong>Öneriler:</strong><br>• Teklif verilen ve ücretsiz deneme paketi ulaştırılan kurumların geri dönüşleri yakından takip edilmelidir.<br>• YKS grubunda karar sürecindeki kurumlarla yüz yüze görüşmeler gerçekleştirilmelidir.<br>• Geçen yıl anlaşma sağlanan Kayseri Belediyesi'ne yeniden teklif sunulmalıdır.',
-    92, true);
+document.getElementById("root").innerHTML =
+  buildSection(1,"VEDAT ADSAN","EĞİTİM VADİSİ TYT-AYT MULTİ SORU BANKASI | 1. Raporlama",
+    "Geçen yıl aynı dönemde 1.296 adet olan toplam satış, bu yıl aynı dönemde 2.423 adede ulaşarak 1.127 adetlik artış göstermiştir. Satışlarda yaklaşık <strong>%87 büyüme</strong> gerçekleşmiştir. Haziran, Temmuz ve Ağustos aylarında planlanan erken kurum anlaşmaları ile satışların daha da ivme kazanması beklenmektedir. Geçen yıla göre 9 bayimizin henüz sipariş geçmemiş olması dikkate alındığında, ikinci raporlama dönemine kadar ilave artış sağlanacağı öngörülmektedir.",
+    vedatData,1296,2423,6602,
+    "Geçen yıl aynı dönemde 1.296 adet olan satış bu yıl 2.423 adede yükselerek <strong>+%87 büyüme</strong> gerçekleşmiştir.<br><br><strong>Öneriler:</strong><br>&#8226; Artış trendinin devamı için bayilerle iletişim sıklığı artırılmalı, raf eksikleri tamamlanmalıdır.<br>&#8226; Henüz sipariş geçmeyen 9 bayi öncelikli takibe alınmalıdır.<br>&#8226; Talep gören ürünlere odaklı kampanya çalışmaları yapılmalıdır.",
+    87,true) +
+  buildSection(2,"MUHSİN ÖZBALCI","EĞİTİM VADİSİ TYT-AYT MULTİ SORU BANKASI | 1. Raporlama",
+    "Bölgede geçen yıl aynı döneme kadar 12.273 adet satış gerçekleşmişken, bu yıl satış adedi 8.053 seviyesinde kalmıştır. <strong>4.220 adetlik ve yaklaşık %34 oranında düşüş</strong> yaşanmıştır. Düşüşün temel nedeni Bursa merkez bayisinin geçen yıl gerçekleştirdiği toplu alımı bu yıl tekrarlamamasıdır. Müfredat değişikliği beklentisi nedeniyle bayiler ve kurumlar temkinli ilerlemektedir. Eskişehir ve Kütahya bayilerinde de içerik güncelliği eleştirilerinden kaynaklanan kayıplar yaşanmaktadır. Antalya merkezde bayi değişikliği olumlu yansımış; ancak diğer bayilerdeki kaybı henüz karşılayamamıştır.",
+    muhsinData,12273,8053,21096,
+    "<strong>Geçen yılın aynı dönemine göre 4.220 adetlik satış kaybı yaşanmıştır.</strong> Bursa bayisinin toplu alım gerçekleştirmemesi belirleyici olurken, Eskişehir ve Kütahya kurum kayıpları da olumsuz etkilemiştir.<br><br><strong>Tespit Edilen Sorun:</strong> Ürün içeriklerinin güncellik açısından yeterince güçlü bulunmaması, müfredat belirsizliği ve düşük marka bilinirliği satış performansını olumsuz etkilemektedir.<br><br><strong>Öneriler:</strong><br>&#8226; Ürün içerikleri öğretmen ve kurum geri bildirimleri doğrultusunda güncellenmeli, müfredat uyumu sahaya aktarılmalıdır.<br>&#8226; Haziran ayı içinde tüm bayilerle görüşülerek bekleyen kurum sipariş süreçleri tamamlanmalıdır.",
+    34,false) +
+  buildSection(3,"SÜLEYMAN İŞPINAR","EĞİTİM VADİSİ TYT-AYT MSB | 1. Raporlama",
+    "MSB ürünleri geçen yıl aynı dönemde 7.859 adet satışa ulaşmışken, bu yıl 15.086 adede ulaşarak yaklaşık <strong>%92 büyüme</strong> göstermiştir. Ancak bu olumlu tabloya rağmen ürün gamının sahada genel anlamda beklenen düzeyde talep görmediği değerlendirilmektedir. Ürünlerin uzun süredir yenilenmemiş olması ve içerik/yüz tasarımı açısından güncelliğini yitirmesi temel sorun olarak öne çıkmaktadır. Özellikle Adana bayisi Alya Kırtasiye'nin kurumlarla yürüttüğü yoğun çalışmalar bu bölgedeki satış performansında belirleyici rol oynamıştır.",
+    suleymanData,7859,15086,19457,
+    "Geçen yıl aynı dönemde 7.859 adet olan satış bu yıl 15.086 adede yükselerek <strong>+%92 büyüme</strong> gerçekleşmiştir.<br><br><strong>Tespit Edilen Sorun:</strong> Kurumlar marka değeri yüksek veya fiyat avantajlı yayınları tercih etmekte; ürünlerin uzun süredir yenilenmemesi tercih edilme oranını düşürmektedir.<br><br><strong>Öneriler:</strong><br>&#8226; Teklif verilen ve ücretsiz deneme paketi ulaştırılan kurumların geri dönüşleri yakından takip edilmelidir.<br>&#8226; YKS grubunda karar sürecindeki kurumlarla yüz yüze görüşmeler gerçekleştirilmelidir.<br>&#8226; Geçen yıl anlaşma sağlanan Kayseri Belediyesi'ne yeniden teklif sunulmalıdır.",
+    92,true);
 </script>
 </body>
 </html>
