@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matbaa Durum Raporu</title>
+<style>
+  :root{
+    --ink:#1b1d23;
+    --sub:#5b606b;
+    --line:#e6e3da;
+    --paper:#fbfaf6;
+    --card:#ffffff;
+    --amber-bg:#fff8dd;
+    --amber-border:#f0d878;
+    --amber-text:#8a6d00;
+    --green-bg:#e9f7e2;
+    --green-border:#a9d98d;
+    --green-text:#3a7d1f;
+    --gray-bg:#f4f2ea;
+    --gray-border:#d8d4c6;
+    --gray-text:#6b6a63;
+    --accent:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    padding:40px 24px;
+  }
+  .wrap{max-width:1000px;margin:0 auto;}
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:16px;
+    border-bottom:3px solid var(--accent);
+    padding-bottom:18px;
+    margin-bottom:24px;
+  }
+  h1{
+    font-size:1.55rem;
+    margin:0 0 6px 0;
+    letter-spacing:-0.01em;
+  }
+  .meta{color:var(--sub);font-size:0.92rem;line-height:1.5;}
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 18px;
+    margin-bottom:28px;
+    font-size:0.85rem;
+    color:var(--sub);
+  }
+  .legend-item{display:flex;align-items:center;gap:8px;}
+  .swatch{width:14px;height:14px;border-radius:3px;display:inline-block;flex-shrink:0;}
+  .swatch.green{background:#8fce6a;border:1px solid #5fa83e;}
+  .swatch.yellow{background:#ffe066;border:1px solid #e8c400;}
+  .swatch.white{background:#ffffff;border:1px solid #c9c6bb;}
+  .summary-row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+    gap:14px;
+    margin-bottom:32px;
+  }
+  .stat{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .stat .num{font-size:1.7rem;font-weight:700;color:var(--ink);}
+  .stat .label{font-size:0.8rem;color:var(--sub);margin-top:2px;}
+  h1.series-title{
+    font-size:1.35rem;
+    margin:46px 0 18px 0;
+    padding-bottom:10px;
+    border-bottom:3px solid var(--accent);
+  }
+  h2.group-title{
+    font-size:1.2rem;
+    margin:38px 0 16px 0;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--line);
+  }
+  section{margin-bottom:26px;}
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1.0rem;
+    font-weight:700;
+    margin-bottom:12px;
+    color:var(--ink);
+  }
+  .section-title .tag{
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:0.03em;
+    background:var(--ink);
+    color:#fff;
+    padding:3px 8px;
+    border-radius:5px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  thead th{
+    text-align:left;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--sub);
+    background:#f4f2ea;
+    padding:10px 16px;
+    border-bottom:1px solid var(--line);
+  }
+  tbody td{
+    padding:11px 16px;
+    border-bottom:1px solid var(--line);
+    font-size:0.93rem;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:#faf7ee;}
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-weight:600;
+    font-size:0.8rem;
+    padding:4px 10px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .badge.approved{
+    background:var(--green-bg);
+    border:1px solid var(--green-border);
+    color:var(--green-text);
+  }
+  .badge.approved::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:#5fa83e;
+  }
+  .badge.wait{
+    background:var(--amber-bg);
+    border:1px solid var(--amber-border);
+    color:var(--amber-text);
+  }
+  .badge.wait::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:#e8b400;
+  }
+  .badge.notsent{
+    background:var(--gray-bg);
+    border:1px solid var(--gray-border);
+    color:var(--gray-text);
+  }
+  .badge.notsent::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:#a9a59b;
+  }
+  .code-col{color:var(--sub);font-weight:600;}
+  footer{
+    margin-top:36px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    color:var(--sub);
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>Yayın Üretim — Matbaa Durum Raporu</h1>
+      <div class="meta">Rapor tarihi: 11.08.2026 &nbsp;·&nbsp; Kaynak: üretim takip listeleri (TAK/TİK/Klavuz + DAS)</div>
+    </div>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch green"></span> Yeşil: baskı onayı verildi</div>
+    <div class="legend-item"><span class="swatch yellow"></span> Sarı: matbaaya gönderildi, onay verilecek</div>
+    <div class="legend-item"><span class="swatch white"></span> Beyaz: henüz matbaaya gönderilmedi</div>
+  </div>
+
+  <div class="summary-row">
+    <div class="stat">
+      <div class="num">24</div>
+      <div class="label">Toplam baskı onayı verilen</div>
+    </div>
+    <div class="stat">
+      <div class="num">1</div>
+      <div class="label">Toplam onay bekleyen</div>
+    </div>
+    <div class="stat">
+      <div class="num">22</div>
+      <div class="label">Toplam gönderilmemiş</div>
+    </div>
+    <div class="stat">
+      <div class="num">47</div>
+      <div class="label">Genel toplam ürün</div>
+    </div>
+  </div>
+
+  <h1 class="series-title">11. Sınıf TAK / TİK Serisi</h1>
+
+  <h2 class="group-title">Tam Anlatım Kitabı (TAK)</h2>
+
+  <section>
+    <div class="section-title">Baskı onayı verildi <span class="tag">6 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>11. Sınıf TDE Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Matematik Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Fizik Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Kimya Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Tarih Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Coğrafya Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-title">Matbaaya henüz gönderilmedi <span class="tag">2 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>11. Sınıf Biyoloji Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf Felsefe Tam Anlatım Kitabı (TAK)</td><td class="code-col">TAK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <h2 class="group-title">Tam İzleme Kitabı (TİK)</h2>
+
+  <section>
+    <div class="section-title">Baskı onayı verildi <span class="tag">5 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>11. Sınıf TDE Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Kimya Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Biyoloji Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Tarih Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Coğrafya Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-title">Matbaaya henüz gönderilmedi <span class="tag">3 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>11. Sınıf Matematik Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf Fizik Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf Felsefe Tam İzleme Kitabı (TİK)</td><td class="code-col">TİK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <h2 class="group-title">Tam Anlatım Kitabı — Kılavuz</h2>
+
+  <section>
+    <div class="section-title">Baskı onayı verildi <span class="tag">5 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>11. Sınıf TDE Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Fizik Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Kimya Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Tarih Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>11. Sınıf Coğrafya Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-title">Matbaaya henüz gönderilmedi <span class="tag">3 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>11. Sınıf Matematik Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf Biyoloji Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf Felsefe Tam Anlatım Kitabı (TAK) Klavuz</td><td class="code-col">TAK</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <h1 class="series-title">9-10-11. Sınıf DAS Serisi (26-27)</h1>
+
+  <h2 class="group-title">9. Sınıf DAS</h2>
+
+  <section>
+    <div class="section-title">Baskı onayı verildi <span class="tag">4 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>09. Sınıf DAS TDE (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>09. Sınıf DAS Fizik (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>09. Sınıf DAS Kimya (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>09. Sınıf DAS Biyoloji (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-title">Matbaaya gönderildi — onay bekliyor <span class="tag">1 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>09. Sınıf DAS Coğrafya (26-27)</td><td class="code-col">DAS</td><td><span class="badge wait">Onay bekleniyor</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-title">Matbaaya henüz gönderilmedi <span class="tag">2 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>09. Sınıf DAS Matematik (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>09. Sınıf DAS Tarih (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <h2 class="group-title">10. Sınıf DAS</h2>
+
+  <section>
+    <div class="section-title">Baskı onayı verildi <span class="tag">4 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>10. Sınıf DAS TDE (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>10. Sınıf DAS Fizik (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>10. Sınıf DAS Kimya (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+        <tr><td>10. Sınıf DAS Biyoloji (26-27)</td><td class="code-col">DAS</td><td><span class="badge approved">Baskı onaylandı</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-title">Matbaaya henüz gönderilmedi <span class="tag">4 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>10. Sınıf DAS Matematik (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>10. Sınıf DAS Tarih (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>10. Sınıf DAS Coğrafya (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>10. Sınıf DAS Felsefe (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <h2 class="group-title">11. Sınıf DAS</h2>
+
+  <section>
+    <div class="section-title">Matbaaya henüz gönderilmedi <span class="tag">8 ürün</span></div>
+    <table>
+      <thead><tr><th style="width:70%">Ürün</th><th>Kod</th><th>Durum</th></tr></thead>
+      <tbody>
+        <tr><td>11. Sınıf DAS TDE (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf DAS Matematik (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf DAS Fizik (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf DAS Kimya (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf DAS Biyoloji (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf DAS Tarih (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf DAS Coğrafya (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+        <tr><td>11. Sınıf DAS Felsefe (26-27)</td><td class="code-col">DAS</td><td><span class="badge notsent">Gönderilmedi</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    Rapor iki ayrı üretim takip listesinden derlenmiştir: 11. Sınıf TAK/TİK/Klavuz serisi (24 ürün) ve 9-10-11. Sınıf DAS serisi (23 ürün). Renk kodlaması: yeşil = baskı onayı verildi, sarı = matbaaya gönderildi ve onay bekleniyor, beyaz = henüz matbaaya gönderilmedi. Durum değiştikçe raporun güncellenmesi gerekir.
+  </footer>
+
+</div>
+</body>
+</html>
