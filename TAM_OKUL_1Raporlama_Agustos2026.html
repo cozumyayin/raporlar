@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAM OKUL 1. Raporlama – Ağustos 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --red: #C8102E;
+    --red-dark: #9b0c22;
+    --red-light: #fde8ec;
+    --ink: #1a1a1a;
+    --ink-mid: #444;
+    --ink-light: #888;
+    --border: #e0e0e0;
+    --bg: #f5f4f0;
+    --white: #ffffff;
+    --green: #1a7a4a;
+    --green-bg: #e8f5ee;
+    --amber: #b45309;
+    --amber-bg: #fef3c7;
+    --blue: #1d4ed8;
+    --blue-bg: #eff6ff;
+    --purple: #6d28d9;
+    --purple-bg: #f3e8ff;
+    --gray-bg: #f0f0ee;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .header { background: var(--white); border-bottom: 4px solid var(--red); }
+  .header-top { display: flex; align-items: center; gap: 20px; padding: 18px 40px; flex-wrap: wrap; }
+  .logo-block { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .logo-circle {
+    width: 48px; height: 48px; background: var(--red); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.5px;
+  }
+  .logo-text { font-size: 11px; color: var(--ink-mid); line-height: 1.3; }
+  .logo-text strong { font-size: 14px; color: var(--ink); display: block; }
+  .header-title { flex: 1; border-left: 2px solid var(--border); padding-left: 20px; min-width: 260px; }
+  .header-title h1 { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; }
+  .header-title p { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .date-badge {
+    background: var(--red); color: white; padding: 6px 16px; font-size: 12px;
+    font-weight: 600; font-family: 'IBM Plex Mono', monospace; border-radius: 4px; white-space: nowrap;
+  }
+  .kpi-band {
+    background: var(--red); color: white; padding: 8px 40px; font-size: 11px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .kpi-band .label { opacity: 0.75; font-weight: 400; }
+  .kpi-band .value { font-weight: 700; letter-spacing: 0.2px; }
+
+  .page { max-width: 1100px; margin: 0 auto; padding: 28px 20px; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 1.5px;
+    text-transform: uppercase; padding-bottom: 8px; border-bottom: 2px solid var(--red);
+    margin-bottom: 16px; margin-top: 28px;
+  }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 4px; }
+  .sum-card { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 14px 16px; border-radius: 4px; }
+  .sum-card.grey { border-top-color: var(--ink-light); opacity: 0.85; }
+  .sum-card .name { font-size: 11px; color: var(--ink-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .sum-card .product { font-size: 10px; color: var(--ink-mid); margin-bottom: 8px; min-height: 28px; }
+  .sum-card .big-num { font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; color: var(--ink); line-height: 1; }
+  .sum-card .sub { font-size: 10px; color: var(--ink-light); margin-top: 4px; }
+  .sum-card .growth { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+  .growth.up { background: var(--green-bg); color: var(--green); }
+  .growth.down { background: var(--amber-bg); color: var(--amber); }
+  .growth.neu { background: var(--blue-bg); color: var(--blue); }
+  .growth.wait { background: var(--gray-bg); color: var(--ink-light); }
+
+  .report-block { background: var(--white); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
+  .report-block-header { background: var(--ink); color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .report-block-header .rb-name { font-size: 13px; font-weight: 700; letter-spacing: 0.2px; }
+  .report-block-header .rb-product { font-size: 11px; opacity: 0.65; font-weight: 400; }
+  .report-block-header .rb-badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .rb-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  .rb-badge.highlight { background: var(--red); border-color: var(--red-dark); }
+
+  .stats-row { display: flex; gap: 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .stat-cell { flex: 1; min-width: 120px; padding: 10px 14px; border-right: 1px solid var(--border); text-align: center; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .sc-label { font-size: 9px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  .stat-cell .sc-val { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: var(--ink); }
+  .stat-cell .sc-sub { font-size: 9px; color: var(--ink-light); }
+
+  .aciklama-box { border-left: 4px solid var(--red); background: #fdf5f5; padding: 12px 16px; margin: 16px 20px 0; border-radius: 0 4px 4px 0; }
+  .aciklama-label { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .aciklama-box p { font-size: 12px; color: var(--ink-mid); line-height: 1.65; white-space: pre-line; }
+
+  .table-wrap { padding: 16px 20px 20px; overflow-x: auto; }
+  table.dtable { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.dtable th { text-align: left; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-light); padding: 6px 10px; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  table.dtable td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr.drow { cursor: pointer; }
+  tr.drow:hover { background: #fafafa; }
+  .expand-icon { color: var(--red); font-size: 10px; width: 16px; }
+  tr.erow td { padding: 0; }
+  .erow-content { padding: 12px 16px; background: #f9f9f9; font-size: 12px; color: var(--ink-mid); border-left: 3px solid var(--red); line-height: 1.6; }
+  tr.totr td { font-weight: 700; background: #f5f4f0; border-top: 2px solid var(--ink); }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+  .pill.ok { background: var(--green-bg); color: var(--green); }
+  .pill.warn { background: var(--amber-bg); color: var(--amber); }
+  .pill.risk { background: var(--red-light); color: var(--red); }
+  .scrollnote { font-size: 10px; color: var(--ink-light); padding: 0 20px 10px; display: none; }
+
+  /* SM (Satış Müdürü) card */
+  .sm-block { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--purple); border-radius: 4px; margin-bottom: 24px; overflow: hidden; }
+  .sm-block-header { background: var(--purple); color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .sm-block-header .rb-name { font-size: 13px; font-weight: 700; }
+  .sm-block-header .rb-product { font-size: 11px; opacity: 0.75; }
+  .sm-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--border); }
+  .sm-cell { padding: 14px 16px; border-right: 1px solid var(--border); }
+  .sm-cell:last-child { border-right: none; }
+  .sm-cell .sm-name { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .sm-cell .sm-total { font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600; color: var(--purple); margin-bottom: 8px; }
+  .sm-cell .sm-line { font-size: 10px; color: var(--ink-mid); display: flex; justify-content: space-between; padding: 2px 0; }
+  .sm-cell .sm-line b { font-family: 'IBM Plex Mono', monospace; color: var(--ink); }
+  .sm-total-band { background: var(--purple-bg); padding: 10px 20px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--purple); }
+  .sm-product-band { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 24px; flex-wrap: wrap; }
+  .sm-product-band .spb-item { font-size: 12px; color: var(--ink-mid); }
+  .sm-product-band .spb-item b { font-family: 'IBM Plex Mono', monospace; color: var(--ink); margin-left: 6px; }
+  .sm-note { padding: 14px 20px; border-top: 1px solid var(--border); background: #faf8ff; }
+  .sm-note .aciklama-label { color: var(--purple); }
+  .sm-note p { font-size: 12px; color: var(--ink-mid); margin-bottom: 8px; }
+  .sm-note ul { margin: 6px 0 0 18px; font-size: 12px; color: var(--ink-mid); }
+
+  /* Missing region notice */
+  .notice-block { background: #fffaf0; border: 1px dashed var(--amber); border-radius: 4px; padding: 14px 20px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-start; }
+  .notice-icon { font-size: 18px; }
+  .notice-block .nb-title { font-size: 12px; font-weight: 700; color: var(--amber); margin-bottom: 4px; }
+  .notice-block .nb-text { font-size: 12px; color: var(--ink-mid); }
+
+  .footer { margin-top: 32px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--ink-light); flex-wrap: wrap; gap: 8px; }
+  .footer strong { color: var(--red); }
+  .watermark { position: fixed; bottom: 30px; right: 30px; font-size: 32px; color: rgba(200,16,46,0.12); font-weight: 700; letter-spacing: 4px; text-transform: uppercase; pointer-events: none; transform: rotate(-15deg); }
+
+  @media (max-width: 900px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .sm-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    .sm-grid { grid-template-columns: 1fr; }
+    .header-top { padding: 14px 16px; }
+    .kpi-band { padding: 8px 16px; }
+    .page { padding: 20px 12px; }
+    .scrollnote { display: block; }
+  }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 12px; }
+    .watermark { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watermark">ÇÖZÜM</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-circle">ÇYG</div>
+      <div class="logo-text">
+        <strong>Çözüm Yayın Grubu</strong>
+        Satış &amp; Bölge Raporlaması
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>TAM OKUL — 1. Raporlama</h1>
+      <p>Bölge Yöneticileri Konsolide Durum + Satış Müdürlüğü Ciro Görünümü</p>
+    </div>
+    <div class="date-badge">Ağustos 2026</div>
+  </div>
+  <div class="kpi-band">
+    <span class="label">KPI Maddesi:</span>
+    <span class="value">Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- EKSİK BÖLGE UYARISI -->
+  <div class="notice-block">
+    <div class="notice-icon">⏳</div>
+    <div>
+      <div class="nb-title">Kadir İlhan Bölgesi — Rapor Bekleniyor</div>
+      <div class="nb-text">Kadir İlhan yeni personel olup oryantasyon sürecinde olduğu için bu raporlama dönemine bölge verisi girmemiştir. İlerleyen raporlama dönemlerinde bölge verisiyle birlikte listeye eklenecektir.</div>
+    </div>
+  </div>
+
+  <!-- ÖZET KARTLAR -->
+  <div class="section-title">Bölge Bazlı Özet — TAM OKUL</div>
+
+  <div class="summary-grid">
+
+    <div class="sum-card">
+      <div class="name">Vedat Adsan</div>
+      <div class="product">TAM OKUL — 1. Raporlama (17.08.2026)</div>
+      <div class="big-num">564</div>
+      <div class="sub">Bu yıl bugüne kadar toplam satış adedi</div>
+      <span class="growth down">▼ Geçen yıl BGK: 61 · Geçen yıl toplam: 1.314</span>
+    </div>
+
+    <div class="sum-card">
+      <div class="name">Süleyman İşpınar</div>
+      <div class="product">TAM OKUL — Ağustos 1. Raporlama (16.08.2026)</div>
+      <div class="big-num">2.044</div>
+      <div class="sub">Bu yıl bugüne kadar toplam satış adedi</div>
+      <span class="growth neu">↗ 712.911 TL satış tutarı · 15 bayi</span>
+    </div>
+
+    <div class="sum-card">
+      <div class="name">Muhsin Özbalcı</div>
+      <div class="product">TAM OKUL — 1. Raporlama (16.08.2026)</div>
+      <div class="big-num">629</div>
+      <div class="sub">Bu yıl bugüne kadar toplam satış adedi</div>
+      <span class="growth wait">— Çoğu bayi öğrenci sayısı bekliyor</span>
+    </div>
+
+    <div class="sum-card grey">
+      <div class="name">Kadir İlhan</div>
+      <div class="product">TAM OKUL — Bölge Verisi Yok</div>
+      <div class="big-num">—</div>
+      <div class="sub">Oryantasyon sürecinde, rapor girilmedi</div>
+      <span class="growth wait">⏳ Sonraki raporlamada beklenmektedir</span>
+    </div>
+
+  </div>
+
+  <!-- BLOK 1: VEDAT ADSAN -->
+  <div class="section-title">Bölge Detayları</div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Vedat Adsan — TAM OKUL</div>
+        <div class="rb-product">1. Raporlama · 17.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">7 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 564</span>
+        <span class="rb-badge highlight">Geçen Yıl BGK: 61</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="sc-label">Geçen Yıl BGK</div>
+        <div class="sc-val">61</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Bu Yıl BGK</div>
+        <div class="sc-val">564</div>
+        <div class="sc-sub">adet</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Geçen Yıl Toplam</div>
+        <div class="sc-val">1.314</div>
+        <div class="sc-sub">tüm sezon</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Değişim Oranı</div>
+        <div class="sc-val">9,25×</div>
+        <div class="sc-sub">bu yıl / geçen yıl BGK</div>
+      </div>
+    </div>
+
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>SONUÇ: 17.08.2026 tarihli 1. raporlama verilerine göre toplam satış adedi 564'e ulaşmış ancak bazı bayilerde henüz satış oluşmaması ve bazı bölgelerde geçen yıl satış olup bu yıl henüz sipariş girilmemesi, potansiyelin tam olarak satışa dönüşmediğini ortaya koymaktadır.
+
+ÖNERİLER: Satış olmayan bayilerle birebir temas artırılarak erken kurum anlaşmaları hızlandırılmalıdır. Geçen yıl satış gerçekleşip bu yıl sipariş oluşmayan noktalar öncelikli takip listesine alınmalıdır. Yüksek potansiyelli illerde saha ziyaretleri sıklaştırılmalı, ürün değerlendirme aşamasındaki kurumlara numune ve kampanya desteği sağlanarak karar süreçleri hızlandırılmalıdır.</p>
+    </div>
+
+    <div class="scrollnote">→ Tabloyu görmek için kaydırın</div>
+    <div class="table-wrap">
+      <table class="dtable">
+        <thead>
+          <tr><th></th><th>Bayi</th><th>İl / İlçe</th><th>GY BGK</th><th>BY BGK</th><th>GY Toplam</th><th>Durum</th></tr>
+        </thead>
+        <tbody>
+          <tr class="drow" onclick="toggleRow(this)">
+            <td class="expand-icon">▶</td><td>Nurullah Olcan Kitabevi</td><td>Şırnak / Merkez</td><td>0</td><td>51</td><td>102</td><td><span class="pill ok">Yeni satış</span></td>
+          </tr>
+          <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin kurumlarda gerçekleştirdiği çalışmalar devam etmekte olup, henüz kurumların net öğrenci sayıları kesinleşmemiştir. Öğrenci sayılarının netleşmesinin ardından sipariş miktarlarının da kesinleşmesi beklenmektedir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)">
+            <td class="expand-icon">▶</td><td>Okurkent Kırtasiye Giyasettin Demir</td><td>Muş / Merkez</td><td>—</td><td>200</td><td>—</td><td><span class="pill ok">İyi</span></td>
+          </tr>
+          <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin kurumlarda gerçekleştirdiği tanıtım çalışmaları devam etmektedir. Birkaç kurumda daha Tam Okul dijital programı için tanıtımlar yapılmış olup, kurumların değerlendirme süreçleri devam etmektedir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)">
+            <td class="expand-icon">▶</td><td>Pozitif Baskı Hizmetleri Kitap Kırtasiye</td><td>Erzurum / Yakutiye</td><td>0</td><td>—</td><td>18</td><td><span class="pill warn">Sipariş bekleniyor</span></td>
+          </tr>
+          <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz Fatih Bey'in kurumlarda gerçekleştirdiği Tam Okul tanıtımları devam etmektedir. Yapılan görüşmeler sonucunda, bu yıl birkaç kurumun Tam Okul programını kullanacağı yönünde olumlu geri dönüşler alınmıştır.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)">
+            <td class="expand-icon">▶</td><td>Pozitif Bölge Yayın Dağıtım Eğitim Kitap</td><td>Diyarbakır / Kayapınar</td><td>0</td><td>220</td><td>1.040</td><td><span class="pill ok">Yeni satış</span></td>
+          </tr>
+          <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Fen Bilimleri Çınar Eğitim Kurumları'nda öğrencilerin bir kısmı için sipariş verilmiştir. Geçtiğimiz yıl Tales Eğitim Kurumları, Tam Okul programından memnun kalmadığını ifade etmiş olup bu yıl herhangi bir program kullanmayacağını belirtmiştir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)">
+            <td class="expand-icon">▶</td><td>Şah Kırtasiye Mine Benzer</td><td>Şanlıurfa / Karaköprü</td><td>0</td><td>93</td><td>93</td><td><span class="pill ok">Yeni satış</span></td>
+          </tr>
+          <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz birkaç kurumla iletişim halinde olup Tam Okul programı ile ilgili görüşmelerini sürdürmektedir. Netleşen kurumların Tam Okul girişleri, ilerleyen süreçte bayimiz tarafından sistemden sipariş verilecektir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)">
+            <td class="expand-icon">▶</td><td>Siirt Arı Kitabevi Ali Kurt</td><td>Siirt / Merkez</td><td>61</td><td>—</td><td>61</td><td><span class="pill risk">Durgun</span></td>
+          </tr>
+          <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin kurumlarda gerçekleştirdiği tanıtımlar devam etmektedir. Yapılan görüşmelerde bazı kurumlar bu yıl dijital program kullanmayacaklarını ifade etmiştir. Bu doğrultuda bayimiz özellikle fen liselerine yönelik olarak devlet okullarında tanıtım çalışmalarına devam edecektir.</div></td></tr>
+
+          <tr class="totr"><td></td><td>TOPLAM</td><td>—</td><td>61</td><td>564</td><td>1.314</td><td>×9,25</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BLOK 2: SÜLEYMAN İŞPINAR -->
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Süleyman İşpınar — TAM OKUL</div>
+        <div class="rb-product">Ağustos Ayı 1. Raporlama · 16.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">15 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 2.044 adet</span>
+        <span class="rb-badge highlight">Bu Yıl Satış: 712.911 TL</span>
+      </div>
+    </div>
+
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>Tam Okul dijital platformu ilk kez kullanan kurumların büyük bölümü, platformun genel kullanımının kolay ve anlaşılır olduğunu ifade etmektedir. İlk kullanım aşamasında deneme sınavı okutma ve raporlama süreçlerinde bazı zorluklar yaşanmış, zamanla kullanım kolaylaşmıştır. Kişiye özel kitaplarda ise bazı kurumlar öğrenciler arası akademik farklılıkların içeriğe yeterince yansımadığını belirtmiş; sorunların devam etmesi halinde ürünü bırakmayı düşündüklerini ifade etmiştir.
+
+Genel değerlendirme: sorunların giderilmesi halinde marka güveninin ve sipariş adetlerinin artması beklenmektedir. Şevval Hanım'ın kurumlarla düzenli iletişimi olumlu karşılanmakta olup bu sürecin devam ettirilmesi önerilmektedir.</p>
+    </div>
+
+    <div class="scrollnote">→ Tabloyu görmek için kaydırın</div>
+    <div class="table-wrap">
+      <table class="dtable">
+        <thead>
+          <tr><th></th><th>Bayi</th><th>İl / İlçe</th><th>Bu Yıl BGK</th><th>Bu Yıl Satış (TL)</th><th>Durum</th></tr>
+        </thead>
+        <tbody>
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Adnan Duman - Duman Kitabevi</td><td>Kırşehir / Merkez</td><td>0</td><td>—</td><td><span class="pill risk">Anlaşma yok</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bayimiz, ilde yalnızca iki kurum bulunması nedeniyle henüz herhangi bir anlaşma gerçekleştirememiştir. Kurumlardan biri Edesis programını kullanmaya devam edeceğini belirtirken, diğer kurum dijital platform kullanmak istemediğini ifade etmiştir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Alya Kitap Kırtasiye Dağıtım Tic.</td><td>Adana / Merkez</td><td>0</td><td>—</td><td><span class="pill warn">Süreçte</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> 7-8 kurumla anlaşma sağlanmış, siparişler Ağustos sonuna kadar tamamlanacaktır. Bu bayiden Tam Okul Dijital Premium ve kök kitap siparişleri toplamının yaklaşık 600-700 bin TL bandında gerçekleşmesi beklenmektedir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Bi Kitabevi Ltd Şti</td><td>Çorum / Merkez</td><td>1.708</td><td>601.012</td><td><span class="pill ok">İyi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Değişim Kursları ile anlaşma yenilendi. Kurum kişiye özel kitaplarla ilgili sorunları dile getirse de ürünleri kullanmaya devam edecek. Bir devlet okulu ve iki kurs merkezi ile daha anlaşma sağlanmış, siparişlerin kısa süre içinde girilmesi planlanmaktadır.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Boğaziçi Kırtasiye Akif Özdil</td><td>Osmaniye / Merkez</td><td>0</td><td>—</td><td><span class="pill warn">Süreçte</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bayimiz geçen yıl da devlet okullarına yönelik çalışmalar yürütmüştür; bu yıl da benzer şekilde sipariş girişleri planlanmaktadır.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Can Kitap Kırtasiye Ahmet Yıldırım</td><td>Yozgat / Merkez</td><td>0</td><td>—</td><td><span class="pill warn">Görüşme sürüyor</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Potansiyeli düşük ilde 2 sınav merkezi ile olumlu görüşmeler yürütülmektedir; sürecin kısa sürede netleşmesi beklenmektedir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Çetin Kırtasiye Ltd.</td><td>Hatay / Dörtyol</td><td>35</td><td>5.833</td><td><span class="pill ok">İyi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bir kurumla anlaşma sağlanmış, siparişler sisteme girilmiştir. Devlet okulu sezonunda aktif çalışmalar sürecektir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Garanti Kademi</td><td>Kayseri / Merkez</td><td>0</td><td>—</td><td><span class="pill warn">Sayı bekleniyor</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Kurumlardan henüz kesin sayı alınamadığından geri dönüşler tamamlanamamıştır. Kısa süre içinde sipariş girişleri beklenmektedir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>İkra Kırtasiyecilik</td><td>Hatay / Antakya</td><td>0</td><td>—</td><td><span class="pill warn">Süreçte</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Devlet okullarında aktif faaliyet gösteren bayi, bu yıl da benzer şekilde çalışmalarını sürdürmektedir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Karaca Yayın Dağıtım</td><td>Hatay / İskenderun</td><td>0</td><td>—</td><td><span class="pill risk">Rekabet</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Kurumların kendi dijital platformlarını kullanması nedeniyle anlaşma sürecinde zorluk yaşanmaktadır. Başkent Okulları ve Ninova Kurs Merkezi'nden geri dönüş beklenmektedir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Neta Matbaacılık</td><td>Mersin / Yenişehir</td><td>120</td><td>48.400</td><td><span class="pill ok">İyi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Akdeniz Eğitim Kurumları ile anlaşma sağlanıp siparişler girilmiştir. Toros Koleji ve Altınkupa Okulları ile de anlaşma yapılacak, öğrenci sayıları netleştiğinde siparişler girilecektir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Nokta Kitap Kırtasiye</td><td>Çorum / Merkez</td><td>175</td><td>57.176</td><td><span class="pill ok">İyi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> 2 kurumla anlaşma sağlanmış ve siparişler girilmiştir. Geri dönüşü beklenen 2 kurum daha ay sonuna kadar netleşecektir.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Oluşum Global</td><td>Gaziantep / Şahinbey</td><td>0</td><td>—</td><td><span class="pill risk">Zorlanıyor</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Kurumların büyük bölümünün Edesis kullanmaya devam etmesi ve bazı yayınlarda ücretsiz dijital platform sunulması nedeniyle bu yıl anlaşma sağlamakta zorlanılmaktadır.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Park Özel Kırtasiye</td><td>Mersin / Tarsus</td><td>0</td><td>—</td><td><span class="pill warn">Görüşme sürüyor</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Kurumların büyük bölümü Edesis kullanıyor. Toros Okulları ile anlaşmaya yakın olunup süreç kısa sürede sonuçlandırılacak.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Töre Kırtasiye</td><td>Niğde / Merkez</td><td>6</td><td>500</td><td><span class="pill warn">Süreçte</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="6"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl Karınca Akademi ile anlaşma sağlanmış, öğrenci sayıları netleşince aynı kurumla anlaşma yenilenecek. 2 fen lisesine tanıtım yapılmış, geri dönüş beklenmektedir.</div></td></tr>
+
+          <tr class="totr"><td></td><td>TOPLAM</td><td>—</td><td>2.044</td><td>712.911</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BLOK 3: MUHSİN ÖZBALCI -->
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Muhsin Özbalcı — TAM OKUL</div>
+        <div class="rb-product">1. Raporlama · 16.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">15 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 629 adet</span>
+      </div>
+    </div>
+
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>Genel memnuniyet olumlu olmakla birlikte bir kurum DAS ürünleriyle ilgili memnuniyetsizlik bildirmiştir. Referans kurum sayısı artmakta; lise grubu ve 8. sınıf KÖK ürünleri bölgede olumlu karşılanmaktadır. Net öğrenci sayısı beklenen kurumların girişlerinin Ağustos sonu / Eylül içinde tamamlanması öngörülmektedir.
+
+ÖNERİLER: Anlaşması tamamlanan kurumların öğrenci sayıları hızla netleştirilip girişleri gecikmeden yapılmalı. Bayi ve kurumlarla iletişim sıklığı artırılarak görüşmelerin siparişe dönüşmesi hızlandırılmalı. WhatsApp/YouTube entegrasyonları satış görüşmelerinde daha güçlü vurgulanmalı.</p>
+    </div>
+
+    <div class="scrollnote">→ Tabloyu görmek için kaydırın</div>
+    <div class="table-wrap">
+      <table class="dtable">
+        <thead>
+          <tr><th></th><th>Bayi</th><th>İl / İlçe</th><th>Bu Yıl BGK</th><th>Durum</th></tr>
+        </thead>
+        <tbody>
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Akdeniz Lider Kitap Dağıtım</td><td>Antalya / Muratpaşa</td><td>150</td><td><span class="pill ok">İyi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl dokuz kuruma satış gerçekleştirilmiş; çoğuyla yeniden anlaşma sağlanmış, portföye yeni kurumlar da eklenecek. Net öğrenci sayıları iki hafta içinde alınmaya başlanacak.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Atak Ofis Kitap Kırtasiye</td><td>Eskişehir / Tepebaşı</td><td>181</td><td><span class="pill ok">İyi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl iki kolej ve bir fen lisesiyle anlaşılmış; fen lisesi hariç ikisiyle devam ediyor. Yeni kurumlar için saha çalışmaları sürüyor.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Çetin Yayın Dağıtım A.Ş.</td><td>Balıkesir / Karesi</td><td>—</td><td><span class="pill warn">Sayı bekleniyor</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bir kurumla anlaşılmış, net öğrenci sayısı alınamadığı için girişler yapılmamış. Eylül ayında büyük kurumlara ziyaretler planlanıyor.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>DKM Yayın Basım Dağıtım</td><td>Denizli / Pamukkale</td><td>—</td><td><span class="pill warn">Sayı bekleniyor</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bir okulla anlaşma sağlanmış; öğrenci sayıları netleşmediği için giriş yapılmamış. Büyük bir devlet okuluyla anlaşma aşamasında, beklenti yüksek.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Atlas Kitabevi Ozan Eripek</td><td>Antalya / Manavgat</td><td>—</td><td><span class="pill risk">Fiyat sorunu</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bir kursla anlaşılmış; KÖK ürünlerinin fiyatı nedeniyle süreç netleşmemiş. Kurum bayiyle birlikte yeniden ziyaret edilecek.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Halit Kaya (Alanya Akademi Kırtasiye)</td><td>Antalya / Alanya</td><td>—</td><td><span class="pill warn">Süreçte</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl bir devlet okuluyla anlaşılmıştı; bu yılki durum Eylül'de netleşecek, şimdilik olumlu.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Hasan Basri Sağlam (Sağlam Kırtasiye Konya)</td><td>Konya / Seydişehir</td><td>—</td><td><span class="pill risk">Kayıp kurum</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl ürün verilen kurum bu yıl kullanmama kararı aldı. Bölgede sınırlı özel okul sayısı nedeniyle bir fen lisesiyle görüşülüyor.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Milas-Vera Kitabevi Kırtasiye</td><td>Muğla / Milas</td><td>—</td><td><span class="pill risk">Kayıp bayi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bayinin ekonomik durumu nedeniyle bu yıl çalışılmayacak. Bölgedeki kurumla Antalya bayisi üzerinden devam edilecek.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Tercih Kitabevi - Gürol Suluhan</td><td>Aydın / Efeler</td><td>298</td><td><span class="pill ok">İyi</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Bir kolejle anlaşılmış, girişler tamamlanmış. Bir devlet okuluyla anlaşma üzere, Eylül başında netleşecek.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Nejla Kansu - Kansu Kitabevi</td><td>Antalya / Serik</td><td>—</td><td><span class="pill warn">Sayı bekleniyor</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl anlaşılan iki kolejle bu yıl da devam kararı alındı. Öğrenci sayıları bu hafta netleşince girişler yapılacak.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Vera Kitabevi - Abdullah Ulucay</td><td>Konya / Ereğli</td><td>—</td><td><span class="pill warn">Süreçte</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl ürün verilen devlet okulu bu yıl da devam edecek. Girişler Eylül'de yapılacak.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Yeşil Beyaz Yayın Dağıtım (Mithat Aparcı)</td><td>Konya / Meram</td><td>—</td><td><span class="pill ok">Potansiyel yüksek</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Üç büyük kolejle anlaşma aşamasında. Mahmut Sami Ramazanoğlu İmam Hatip Lisesi ile ~800 öğrenciyi kapsayan görüşmeler sürüyor.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Yıldırım Kitap Kırtasiye</td><td>Antalya / Korkuteli</td><td>—</td><td><span class="pill risk">Kayıp kurum</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> Geçen yıl bir fen lisesine ürün verildi; kurum DAS ürünlerinden memnun kalmayıp bu yıl almayacak.</div></td></tr>
+
+          <tr class="drow" onclick="toggleRow(this)"><td class="expand-icon">▶</td><td>Yonca Yayın Dağıtım Kitabevi</td><td>Bursa / Yıldırım</td><td>—</td><td><span class="pill warn">Rekabet</span></td></tr>
+          <tr class="erow" style="display:none"><td colspan="5"><div class="erow-content"><strong>Aksiyon Planı:</strong> İki devlet okuluyla anlaşma kesinleşti, girişler Eylül'de. Edesis'in bölgede güçlü olması nedeniyle rekabet yaşanıyor.</div></td></tr>
+
+          <tr class="totr"><td></td><td>TOPLAM</td><td>—</td><td>629</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SATIŞ MÜDÜRLÜĞÜ CİRO GÖRÜNÜMÜ -->
+  <div class="section-title">Satış Müdürlüğü — Anlık Ciro Görünümü</div>
+
+  <div class="sm-block">
+    <div class="sm-block-header">
+      <div>
+        <div class="rb-name">Satış Müdürlüğü Ciro Değerlendirmesi</div>
+        <div class="rb-product">19.08.2026 (Anlık) · Bölge Yöneticisi bazlı ciro</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge highlight">Toplam: 1.977.737 TL</span>
+      </div>
+    </div>
+
+    <div class="sm-grid">
+      <div class="sm-cell">
+        <div class="sm-name">Muhsin</div>
+        <div class="sm-total">173.876 TL</div>
+        <div class="sm-line"><span>Dijital Premium</span><b>46.916 TL</b></div>
+        <div class="sm-line"><span>Kişiye Özel Kitap</span><b>126.960 TL</b></div>
+      </div>
+      <div class="sm-cell">
+        <div class="sm-name">Süleyman</div>
+        <div class="sm-total">712.911 TL</div>
+        <div class="sm-line"><span>Dijital Premium</span><b>184.831 TL</b></div>
+        <div class="sm-line"><span>Kişiye Özel Kitap</span><b>528.080 TL</b></div>
+      </div>
+      <div class="sm-cell">
+        <div class="sm-name">Vedat</div>
+        <div class="sm-total">122.066 TL</div>
+        <div class="sm-line"><span>Dijital Premium</span><b>51.666 TL</b></div>
+        <div class="sm-line"><span>Kişiye Özel Kitap</span><b>70.400 TL</b></div>
+      </div>
+      <div class="sm-cell">
+        <div class="sm-name">Kadir</div>
+        <div class="sm-total">968.884 TL</div>
+        <div class="sm-line"><span>Dijital Premium</span><b>223.148 TL</b></div>
+        <div class="sm-line"><span>Kişiye Özel Kitap</span><b>745.736 TL</b></div>
+      </div>
+    </div>
+
+    <div class="sm-total-band">
+      <span>TOPLAM (Tüm Bölgeler)</span>
+      <span>1.977.737 TL</span>
+    </div>
+
+    <div class="sm-product-band">
+      <div class="spb-item">Ürün Bazlı — Kişiye Özel Kitap<b>1.471.176 TL</b></div>
+      <div class="spb-item">Ürün Bazlı — Dijital Premium<b>506.561 TL</b></div>
+    </div>
+
+    <div class="sm-note">
+      <div class="aciklama-label">Toplantı Notu — Satış Müdürlüğü</div>
+      <p>Toplantı yapıldı. Bu konuya bu süreçten itibaren daha fazla odaklanılması ve ciro arttırılması talep edildi. İlgili arkadaşlar gerekli aksiyonları alacaklar.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><strong>Çözüm Yayın Grubu</strong> · Satış &amp; Raporlama Birimi · 1. Raporlama Dönemi</div>
+    <div>Power BI – Ürün Raporu baz alınarak hazırlanmıştır · Ağustos 2026</div>
+  </div>
+
+</div>
+
+<script>
+function toggleRow(drow) {
+  const erow = drow.nextElementSibling;
+  const icon = drow.querySelector('.expand-icon');
+  if (erow.style.display === 'none') {
+    erow.style.display = 'table-row';
+    icon.textContent = '▼';
+  } else {
+    erow.style.display = 'none';
+    icon.textContent = '▶';
+  }
+}
+</script>
+
+</body>
+</html>
