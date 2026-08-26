@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D TYT-AYT Soru Bankası — 1. Raporlama · 24.08.2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+:root {
+  --red:#C8102E; --red-dark:#9b0c22; --red-light:#fde8ec;
+  --ink:#1a1a1a; --ink-mid:#444; --ink-light:#888;
+  --border:#e0e0e0; --bg:#f5f4f0; --white:#fff;
+  --green:#1a7a4a; --green-bg:#e8f5ee;
+  --amber:#b45309; --amber-bg:#fef3c7;
+  --blue:#1d4ed8; --blue-bg:#eff6ff;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'IBM Plex Sans',sans-serif; background:var(--bg); color:var(--ink); font-size:13px; line-height:1.6; }
+.header { background:var(--white); border-bottom:4px solid var(--red); }
+.header-top { display:flex; align-items:center; gap:20px; padding:18px 40px; }
+.logo-block { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.logo-circle { width:48px; height:48px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:15px; letter-spacing:-.5px; }
+.logo-text { font-size:11px; color:var(--ink-mid); line-height:1.3; }
+.logo-text strong { font-size:14px; color:var(--ink); display:block; }
+.header-title { flex:1; border-left:2px solid var(--border); padding-left:20px; }
+.header-title h1 { font-size:18px; font-weight:700; letter-spacing:-.3px; }
+.header-title p { font-size:12px; color:var(--ink-light); margin-top:2px; }
+.date-badge { background:var(--red); color:#fff; padding:6px 16px; font-size:12px; font-weight:600; font-family:'IBM Plex Mono',monospace; border-radius:4px; white-space:nowrap; }
+.kpi-band { background:var(--red); color:#fff; padding:8px 40px; font-size:11px; display:flex; gap:8px; align-items:center; }
+.kpi-band .label { opacity:.75; } .kpi-band .value { font-weight:700; }
+.page { max-width:1180px; margin:0 auto; padding:28px 20px; }
+.section-title { font-size:11px; font-weight:700; color:var(--red); letter-spacing:1.5px; text-transform:uppercase; padding-bottom:8px; border-bottom:2px solid var(--red); margin:28px 0 16px; }
+
+.konsolide { background:var(--ink); color:#fff; border-radius:5px; padding:20px 24px; display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
+.k-lab { font-size:10px; text-transform:uppercase; letter-spacing:1px; opacity:.55; margin-bottom:5px; }
+.k-val { font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:600; line-height:1; }
+.k-sub { font-size:10px; opacity:.6; margin-top:5px; }
+.k-val.neg { color:#ff9a9a; } .k-val.pos { color:#6ee7a8; }
+
+.insight { background:linear-gradient(135deg,#0f3d2a,#1a7a4a); color:#fff; border-radius:5px; padding:20px 26px; margin-top:14px; }
+.insight h3 { font-size:13px; letter-spacing:.5px; margin-bottom:10px; }
+.insight p { font-size:12.5px; opacity:.92; margin-bottom:8px; }
+.insight p:last-child { margin-bottom:0; }
+.insight strong { color:#a7f3d0; }
+.ins-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,.18); }
+.ins-cell .il { font-size:9.5px; text-transform:uppercase; letter-spacing:.8px; opacity:.6; }
+.ins-cell .iv { font-family:'IBM Plex Mono',monospace; font-size:19px; font-weight:600; margin-top:3px; }
+
+.summary-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.sum-card { background:var(--white); border:1px solid var(--border); border-top:3px solid var(--red); padding:14px 16px; border-radius:4px; }
+.sum-card .name { font-size:11px; color:var(--ink-light); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px; }
+.sum-card .product { font-size:10px; color:var(--ink-mid); margin-bottom:8px; min-height:26px; }
+.sum-card .big-num { font-family:'IBM Plex Mono',monospace; font-size:25px; font-weight:600; line-height:1; }
+.sum-card .sub { font-size:10px; color:var(--ink-light); margin-top:4px; }
+.growth { display:inline-block; margin-top:8px; padding:2px 9px; border-radius:20px; font-size:11px; font-weight:700; font-family:'IBM Plex Mono',monospace; }
+.growth.up { background:var(--green-bg); color:var(--green); }
+.growth.down { background:var(--red-light); color:var(--red); }
+.growth.neu { background:var(--blue-bg); color:var(--blue); }
+.sum-card .alt { display:block; font-size:10px; margin-top:6px; color:var(--green); font-weight:600; }
+
+.report-block { background:var(--white); border:1px solid var(--border); border-radius:4px; margin-bottom:20px; overflow:hidden; }
+.report-block-header { background:var(--ink); color:#fff; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.rb-name { font-size:13px; font-weight:700; }
+.rb-product { font-size:11px; opacity:.6; }
+.rb-badges { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+.rb-badge { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); padding:3px 10px; border-radius:20px; font-size:11px; font-family:'IBM Plex Mono',monospace; white-space:nowrap; }
+.rb-badge.highlight { background:var(--red); border-color:var(--red-dark); }
+.rb-badge.good { background:var(--green); border-color:#14603a; }
+
+.stats-row { display:flex; border-top:1px solid var(--border); }
+.stat-cell { flex:1; padding:10px 12px; border-right:1px solid var(--border); text-align:center; }
+.stat-cell:last-child { border-right:none; }
+.sc-label { font-size:9px; color:var(--ink-light); text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px; }
+.sc-val { font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:600; }
+.sc-sub { font-size:9px; color:var(--ink-light); }
+.f-up { color:var(--green); } .f-down { color:var(--red); } .f-flat { color:var(--ink-light); }
+
+.aciklama-box { border-left:4px solid var(--red); background:#fdf5f5; padding:12px 16px; margin:14px 20px; border-radius:0 4px 4px 0; }
+.aciklama-label { font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.aciklama-box p { font-size:12px; color:var(--ink-mid); margin-bottom:7px; }
+.aciklama-box p:last-child { margin-bottom:0; }
+.tag { display:inline-block; background:var(--red); color:#fff; font-size:9px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; padding:1px 7px; border-radius:3px; margin-right:6px; vertical-align:1px; }
+.ipt-note { margin:0 20px 12px; background:var(--green-bg); border:1px solid #b7e3cb; border-left:4px solid var(--green); color:#14532d; font-size:11.5px; padding:10px 14px; border-radius:0 4px 4px 0; }
+.veri-not { margin:0 20px 12px; background:var(--blue-bg); border:1px solid #c7dbff; color:#1e3a8a; font-size:11px; padding:9px 13px; border-radius:4px; }
+
+.breakdown { border-top:1px solid var(--border); padding:14px 20px; }
+.breakdown h4 { font-size:10px; font-weight:700; color:var(--ink-light); text-transform:uppercase; letter-spacing:.8px; margin-bottom:10px; }
+.bar-row { display:flex; align-items:center; gap:10px; margin-bottom:7px; }
+.bar-label { width:150px; font-size:11px; color:var(--ink-mid); flex-shrink:0; }
+.bar-track { flex:1; height:8px; background:#f0f0f0; border-radius:3px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:3px; background:var(--red); }
+.bar-fill.green { background:var(--green); } .bar-fill.amber { background:var(--amber); }
+.bar-fill.red { background:var(--red); } .bar-fill.dark { background:var(--ink); }
+.bar-num { width:72px; text-align:right; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; flex-shrink:0; }
+
+.tablo-wrap { border-top:1px solid var(--border); overflow-x:auto; }
+.bayi-tablo { width:100%; border-collapse:collapse; font-size:11.5px; }
+.bayi-tablo thead th { background:#fafafa; text-align:left; padding:8px 10px; font-size:9.5px; text-transform:uppercase; letter-spacing:.6px; color:var(--ink-light); border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap; }
+.bayi-tablo th.num, .bayi-tablo td.num { text-align:right; }
+.bayi-tablo td { padding:7px 10px; border-bottom:1px solid #f0f0f0; }
+.bayi-tablo td.num { font-family:'IBM Plex Mono',monospace; white-space:nowrap; }
+.bayi-tablo td.dim { color:var(--ink-light); } .bayi-tablo td.strong { font-weight:600; }
+.b-name { font-weight:600; max-width:300px; }
+.b-loc { display:block; font-weight:400; font-size:10px; color:var(--ink-light); }
+.iptal-flag { display:inline-block; background:var(--red); color:#fff; font-size:8px; font-weight:700; letter-spacing:.5px; padding:1px 5px; border-radius:2px; margin-left:6px; vertical-align:1px; }
+.drow { cursor:pointer; } .drow:hover { background:#fafafa; }
+.r-iptal { background:#fff8f8; }
+.expand-icon { color:var(--red); font-size:9px; width:18px; text-align:center; }
+.erow-content { padding:10px 16px; background:#f9f9f9; font-size:12px; color:#444; border-left:3px solid var(--red); }
+.pill { display:inline-block; padding:1px 9px; border-radius:20px; font-size:10px; font-weight:700; white-space:nowrap; }
+.pill-green { background:var(--green-bg); color:var(--green); }
+.pill-amber { background:var(--amber-bg); color:var(--amber); }
+.pill-red { background:var(--red-light); color:var(--red); }
+.pill-grey { background:#f0f0f0; color:#999; }
+
+.uyari-box { background:#fffbeb; border:1px solid #fcd34d; border-left:4px solid #d97706; border-radius:4px; padding:14px 18px; }
+.uyari-box h4 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#92400e; margin-bottom:8px; }
+.uyari-box ul { margin-left:18px; }
+.uyari-box li { font-size:12px; color:#78350f; margin-bottom:5px; }
+
+.mudur-box { background:#fdf9e7; border:1px solid #e8dca0; border-left:4px solid var(--red); border-radius:4px; padding:16px 20px; }
+.mudur-head { display:flex; align-items:baseline; gap:10px; margin-bottom:12px; }
+.mudur-head strong { font-size:13px; } .mudur-head span { font-size:11px; color:var(--ink-light); }
+.karar { margin-bottom:13px; padding-left:14px; border-left:2px solid #e0d5a0; }
+.karar:last-child { margin-bottom:0; }
+.karar .k-t { font-size:10px; font-weight:700; color:var(--red); letter-spacing:.8px; text-transform:uppercase; margin-bottom:3px; }
+.karar p { font-size:12px; color:var(--ink-mid); }
+.karar .eslesme { font-size:11px; color:var(--green); margin-top:5px; font-style:italic; }
+
+.tespit { background:var(--white); border:1px solid var(--border); border-radius:4px; padding:18px 22px; }
+.tespit p { margin-bottom:11px; } .tespit p:last-child { margin-bottom:0; }
+
+.footer { margin-top:32px; border-top:1px solid var(--border); padding-top:14px; display:flex; justify-content:space-between; font-size:10px; color:var(--ink-light); }
+.footer strong { color:var(--red); }
+.watermark { position:fixed; bottom:30px; right:30px; font-size:32px; color:rgba(200,16,46,.10); font-weight:700; letter-spacing:4px; text-transform:uppercase; pointer-events:none; transform:rotate(-15deg); }
+@media print { body { background:#fff; } .page { padding:12px; } .watermark { display:none; } .erow { display:table-row !important; } }
+@media (max-width:900px) {
+  .konsolide,.ins-grid { grid-template-columns:repeat(2,1fr); }
+  .summary-grid { grid-template-columns:1fr; }
+  .header-top { flex-wrap:wrap; padding:14px 18px; }
+  .stats-row { flex-wrap:wrap; } .stat-cell { flex:1 1 33%; }
+}
+</style>
+</head>
+<body>
+<div class="watermark">ÇÖZÜM</div>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-circle">ÇYG</div>
+      <div class="logo-text"><strong>Çözüm Yayın Grubu</strong>Satış &amp; Bölge Raporlaması</div>
+    </div>
+    <div class="header-title">
+      <h1>3D TYT-AYT Soru Bankası — 1. Raporlama</h1>
+      <p>Ağustos Dönemi · Sezonsal Ürün Takip Takvimi · Konsolide Bölge Değerlendirmesi</p>
+    </div>
+    <div class="date-badge">24.08.2026</div>
+  </div>
+  <div class="kpi-band">
+    <span class="label">KPI Maddesi:</span>
+    <span class="value">Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="section-title">Konsolide Durum · 3 Bölge</div>
+  <div class="konsolide">
+    <div><div class="k-lab">Bu Yıl BGK</div><div class="k-val">248.364</div><div class="k-sub">Geçen yıl aynı dönem: 275.268</div></div>
+    <div><div class="k-lab">Net Değişim</div><div class="k-val neg">▼ %9,8</div><div class="k-sub">-26.904 adet</div></div>
+    <div><div class="k-lab">İptal Bayiler Hariç</div><div class="k-val pos">▲ %9,7</div><div class="k-sub">+21.902 adet · 125 aktif bayi</div></div>
+    <div><div class="k-lab">GY Tüm Sezon</div><div class="k-val">351.281</div><div class="k-sub">şimdiden %71'i</div></div>
+    <div><div class="k-lab">Raporlanan Bayi</div><div class="k-val">129</div><div class="k-sub">↑76 artan · ↓51 azalan</div></div>
+  </div>
+
+  <div class="insight">
+    <h3>▸ Öne Çıkan Tespit: Düşüşün tamamı 4 iptal bayiden kaynaklanmaktadır</h3>
+    <p>Konsolide tabloda görülen <strong>%9,8 düşüş</strong> (-26.904 adet), ürün performansının değil <strong>bayilik yapısındaki değişimin</strong> sonucudur. Bayiliği iptal edilen 4 firma geçen yıl bu dönemde 50.035 adet satış yapmışken bu yıl 1.229 adette kalmış, tek başına -48.806 adetlik kayıp oluşturmuştur.</p>
+    <p>Bu 4 bayi hariç tutulduğunda kalan 125 aktif bayide ürün grubu <strong>%9,7 büyümektedir</strong> (+21.902 adet). Yani saha performansı geçen yılın üzerindedir; tabloyu bozan unsur kapanan bayiliklerin devredilememiş cirosudur.</p>
+    <div class="ins-grid">
+      <div class="ins-cell"><div class="il">İptal bayilerin kaybı</div><div class="iv">-48.806</div></div>
+      <div class="ins-cell"><div class="il">Aktif bayilerin kazancı</div><div class="iv">+21.902</div></div>
+      <div class="ins-cell"><div class="il">Net tabloya yansıyan</div><div class="iv">-26.904</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Bölge Bazlı Özet</div>
+  <div class="summary-grid">
+    <div class="sum-card">
+      <div class="name">Muhsin Özbalcı</div>
+      <div class="product">Ege / Batı Akdeniz / İç Anadolu Batı · 38 bayi</div>
+      <div class="big-num">125.185</div>
+      <div class="sub">Geçen yıl aynı dönem: 129.298</div>
+      <span class="growth down">▼ %3,2 düşüş</span>
+      <span class="alt">İptal hariç: +%10,2</span>
+    </div>
+    <div class="sum-card">
+      <div class="name">Süleyman İşpınar</div>
+      <div class="product">Çukurova / Doğu Akdeniz / İç Anadolu · 48 bayi</div>
+      <div class="big-num">82.978</div>
+      <div class="sub">Geçen yıl aynı dönem: 91.608</div>
+      <span class="growth down">▼ %9,4 düşüş</span>
+      <span class="alt">İptal hariç: +%42,8</span>
+    </div>
+    <div class="sum-card">
+      <div class="name">Vedat Adsan</div>
+      <div class="product">Doğu / Güneydoğu Anadolu · 43 bayi</div>
+      <div class="big-num">40.201</div>
+      <div class="sub">Geçen yıl aynı dönem: 54.362</div>
+      <span class="growth down">▼ %26,0 düşüş</span>
+      <span class="alt" style="color:#b45309">İptal bayi yok · düşüş piyasa kaynaklı</span>
+    </div>
+  </div>
+
+  <div class="section-title">Raporlamaya Dahil Olmayan Bölgeler</div>
+  <div class="uyari-box">
+    <h4>Bu dönem raporu alınamayan bölgeler</h4>
+    <ul>
+      <li><strong>Kitaphane</strong> — Bölge yöneticisi <strong>Yasin Erdoğan</strong> yıllık izinde olduğundan raporunu iletememiştir. Dönüşüyle birlikte veri konsolide edilecektir.</li>
+      <li><strong>İsa Aydoğdu'nun bölgesi</strong> — Görevden ayrılmış olup yerine <strong>Kadir İlhan</strong> atanmıştır. Kadir Bey halen oryantasyon sürecinde olduğundan bu dönem raporu bulunmamaktadır.</li>
+    </ul>
+    <p style="font-size:11.5px;color:#78350f;margin-top:8px;"><strong>Not:</strong> Yukarıdaki konsolide rakamlar 3 bölgeyi kapsamaktadır; grup geneli toplam bunun üzerindedir. Ayrıca Vedat Adsan bölgesindeki bir bayi notunda, sahaya giren ürünlerin barkod sorgulamasında <strong>İzmir Kitaphane</strong> kaydına düştüğü belirtilmiştir; bu bulgu Kitaphane raporu geldiğinde çapraz kontrol edilmelidir.</p>
+  </div>
+
+  <div class="section-title">Satış Müdürlüğü — Alınacak Kararlar</div>
+  <div class="mudur-box">
+    <div class="mudur-head"><strong>Osman Selçuk Uğur</strong><span>Satış Müdürü · İcra Kurulu Notu</span></div>
+    <div class="karar">
+      <div class="k-t">Karar 1 — Satış İvmesinin Artırılması</div>
+      <p>3D TYT–AYT Soru Bankalarında mevcut satış ivmesi <strong>artırılacak</strong>; bedelsiz deneme kampanyası etkin şekilde kullanılarak ve bekleyen teklifler siparişe dönüştürülerek <strong>geçen yılın satış adetlerinin üzerine çıkılması</strong> hedeflenecektir.</p>
+      <div class="eslesme">↳ Saha teyidi: Aktif bayilerde ürün grubu zaten %9,7 büyümektedir; hedef ulaşılabilir görünmektedir. Bekleyen teklif potansiyeli birden fazla bayi notunda teyit edilmiştir — öğrenci sayıları netleşmediği için sipariş girmeyen kurumlar üç bölgede de mevcuttur. Deneme kampanyasından yararlanan bayi örneği: Yonce Yayın (Bursa).</div>
+    </div>
+    <div class="karar">
+      <div class="k-t">Karar 2 — Raf, Stok ve Satış Hareketi Takibi</div>
+      <p>Hedeflere ulaşmak adına bayilerde <strong>eksik raf, mevcut stok ve satış hareketleri düzenli takip edilecek</strong>; ihtiyaç doğrultusunda sipariş girişleri artırılacaktır. Devam eden kampanyaların bitiş tarihleri sahada <strong>sipariş kapanış argümanı</strong> olarak aktif şekilde kullanılacaktır.</p>
+      <div class="eslesme">↳ Saha teyidi: Düşüşün en sık gerekçesi devreden depo stoku ve iade imkânının bulunmaması. Zam öncesi giriş yapan bayiler (Kitap Saati, Üç Yıldız, Segesta, Çetin Yayın) bu argümanın işlediğini göstermektedir — kampanya bitiş tarihi argümanı aynı etkiyi yaratabilir.</div>
+    </div>
+    <div class="karar">
+      <div class="k-t">Karar 3 — Kurs, Okul ve Kurum Satışları</div>
+      <p><strong>Kurs, okul ve kurum satışları gündem dışında bırakılmayacak</strong>; BY'ler tarafından bayilere bu kanallarda aktif saha ve satış desteği verilecek, oluşan potansiyellerin <strong>siparişe dönüşümü yakından takip edilecektir.</strong></p>
+      <div class="eslesme">↳ Saha teyidi: Üç BY de büyümenin kurum kanalından geldiğini raporlamaktadır. Bölgedeki en büyük artışların tamamı kurum anlaşması kaynaklıdır (DKM Pamukkale +6.090, Atak Ofis +4.333, Nevşehir MY VIP +4.164). Buna karşılık Süleyman ve Vedat bölgelerinde kurumların dışarıdan doğrudan tedarik etmesi en ciddi kayıp kalemidir — bu kanal savunulmadığında ciro bayiden çıkmaktadır.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Bölge Detayları</div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Muhsin Özbalcı — 3D TYT-AYT Soru Bankası</div>
+        <div class="rb-product">Ege / Batı Akdeniz / İç Anadolu Batı · 1. Raporlama · 24.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">38 Bayi</span>
+        <span class="rb-badge">↑22 ↓16</span>
+        <span class="rb-badge highlight">▼ %3,2</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">125.185</div><div class="sc-sub">bugüne kadar</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">129.298</div><div class="sc-sub">aynı dönem</div></div>
+      <div class="stat-cell"><div class="sc-label">Net Fark</div><div class="sc-val f-down">-4.113</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">İptal Hariç</div><div class="sc-val f-up">+%10,2</div><div class="sc-sub">36 aktif bayi</div></div>
+      <div class="stat-cell"><div class="sc-label">GY Tüm Sezon</div><div class="sc-val">167.982</div><div class="sc-sub">şimdiden %75'i</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>3D TYT–AYT Soru Bankası ürünlerinde geçen yılın aynı dönemine göre belirgin bir düşüş bulunmamaktadır. Geçen yıl aynı dönemde 129.298 adet satış gerçekleşirken bu yıl 125.185 adede ulaşılmıştır; toplam düşüş 4.113 adet (%3,2) seviyesindedir.</p>
+      <p>Yapılan değerlendirmede bu sınırlı düşüşün ürün kalitesi veya marka algısından kaynaklanmadığı; ağırlıklı olarak büyük bayilerin stok politikaları, müfredat değişikliği beklentisi ve mevcut ürünlerde iade imkânının bulunmamasından kaynaklandığı değerlendirilmektedir. Tüm bu etkenlere rağmen satışların geçen yıla oldukça yakın seyretmesi, 3D Yayınları'nın sahadaki güçlü konumunu göstermektedir.</p>
+      <p><span class="tag">Öneri</span> Müfredat değişikliği sürecinde bayilerin stok riskini azaltacak uygulamaların değerlendirilmesi ve kurumsal satış çalışmalarının artırılması. 3D markasının güçlü algısı kullanılarak ürünlerin kurumlarda daha geniş öğrenci gruplarına yayılması ve kurumsal satış hacminin artırılması.</p>
+    </div>
+    <div class="ipt-note"><strong>2 iptal bayi etkisi:</strong> Geçen yıl 15.703 → bu yıl 54 (-15.649 adet). Bu bayiler hariç tutulduğunda bölge <strong class="f-up">+%10,2</strong> (+11.536 adet) seviyesindedir.</div>
+    
+    <div class="breakdown"><h4>Değişimin Kaynağı — İptal Bayi Etkisi Ayrıştırması</h4>      <div class="bar-row">
+        <div class="bar-label">İptal edilen bayiler</div>
+        <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+        <div class="bar-num f-down">-15.649</div>
+      </div>      <div class="bar-row">
+        <div class="bar-label">Aktif bayiler</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:73.7%"></div></div>
+        <div class="bar-num f-up">+11.536</div>
+      </div>      <div class="bar-row">
+        <div class="bar-label">NET DEĞİŞİM</div>
+        <div class="bar-track"><div class="bar-fill dark" style="width:26.3%"></div></div>
+        <div class="bar-num f-down">-4.113</div>
+      </div></div>
+    
+    <div class="tablo-wrap"><table class="bayi-tablo">
+      <thead><tr><th>Bayi</th><th class="num">Geçen Yıl BGK</th><th class="num">Bu Yıl BGK</th>
+      <th class="num">Fark</th><th class="num">GY Tüm Sezon</th><th>Durum</th><th></th></tr></thead>
+      <tbody>
+      <tr class="drow r-iptal" onclick="toggleRow(this)">
+        <td class="b-name">AKDENIZ LIDER KITAP DAGITIM LTD STI<span class="iptal-flag">İPTAL</span><span class="b-loc">ANTALYA · MURATPASA</span></td>
+        <td class="num dim">15.520</td>
+        <td class="num strong">40</td>
+        <td class="num f-down">-15.480</td>
+        <td class="num dim">16.530</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayiliği iptal edilmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">YESIL BEYAZ YAYIN DAG(MITHAT APARCI)<span class="b-loc">KONYA · MERAM</span></td>
+        <td class="num dim">34.390</td>
+        <td class="num strong">22.854</td>
+        <td class="num f-down">-11.536</td>
+        <td class="num dim">45.685</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin geçen yıldan kalan stokları bulunmaktadır. Müfredat değişikliği ve ürünlerde iade imkânının olmaması nedeniyle kontrollü ilerlemektedir. Zam öncesi fırsatını değerlendirmek amacıyla bir miktar ürün girişi yapmış olup stok yönetimini kontrollü sürdürmektedir. Toplam satışın geçen yılın altında kalmayacağı öngörülmektedir. Bölgesine birkaç yeni kurum eklenmiş; sipariş adetleri henüz netleşmeyen kurumlar da bulunmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SED-KANGURU KITAP MUSAMETTIN KUCAK<span class="b-loc">MANISA · SEHZADELER</span></td>
+        <td class="num dim">8.572</td>
+        <td class="num strong">3.870</td>
+        <td class="num f-down">-4.702</td>
+        <td class="num dim">8.862</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, geçen yıldan yüksek miktarda stok kaldığını ve bu yıl kurumlarda öğrenci sayılarının azalması nedeniyle kurumların elinde de ürün bulunduğunu; bu etkenlerin satış rakamlarını düşürdüğünü belirtmiştir. Bununla birlikte, öğrenci sayıları henüz netleşmeyen kurumlar ve teklif aşamasındaki siparişler bulunmaktadır. Bu siparişlerin hafta içinde netleşmesinin ardından ürün girişi yapacağını ifade etmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ANTALYA ATLAS KITABEVI OZAN ERIPEK<span class="b-loc">ANTALYA · MANAVGAT</span></td>
+        <td class="num dim">5.027</td>
+        <td class="num strong">1.841</td>
+        <td class="num f-down">-3.186</td>
+        <td class="num dim">5.168</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, bölgesindeki bir kuruma toplu ürün satışı gerçekleştirmiştir. Ancak müfredat değişikliği nedeniyle öncelikle kendi stoklarından takviye yapmış ve stoğu tükenmiştir. Sipariş geldikçe ürün temin etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BANDIRMA KITAP KIRTASIYE GULBAHAR BAHADIR<span class="b-loc">BALIKESIR · BANDIRMA</span></td>
+        <td class="num dim">1.256</td>
+        <td class="num strong">102</td>
+        <td class="num f-down">-1.154</td>
+        <td class="num dim">1.810</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir ilçede faaliyet gösteren bayimiz, müfredat değişikliği ve ürünlerde iade imkânı bulunmaması nedeniyle stoklu çalışmamaktadır. Öncelikle geçen yıldan kalan mevcut stoklarını eritmek istemektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI<span class="b-loc">KÜTAHYA · MERKEZ</span></td>
+        <td class="num dim">1.025</td>
+        <td class="num strong">122</td>
+        <td class="num f-down">-903</td>
+        <td class="num dim">1.672</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, müfredat değişikliği nedeniyle siparişlerinde temkinli davranmakta ve öncelikle mevcut stoklarını tüketmek istemektedir. Bir kuruma toplu ürün satışı için öğrenci sayısının netleşmesini beklediğini, sonuca göre ilave sipariş gireceğini belirtmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">HALIT KAYA (ALANYA AKADEMI KIRTASIYE)<span class="b-loc">ANTALYA · ALANYA</span></td>
+        <td class="num dim">2.815</td>
+        <td class="num strong">2.050</td>
+        <td class="num f-down">-765</td>
+        <td class="num dim">3.086</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimize zam öncesinde bir miktar ürün girişi yaptırılmıştır. Bayimiz, gelecek yılki müfredat değişikliği nedeniyle kontrollü ilerlemek istemektedir.</div></td></tr>
+      <tr class="drow r-iptal" onclick="toggleRow(this)">
+        <td class="b-name">MSM KIRTASIYE - BIRGUL TIRAS<span class="iptal-flag">İPTAL</span><span class="b-loc">USAK · MERKEZ</span></td>
+        <td class="num dim">183</td>
+        <td class="num strong">14</td>
+        <td class="num f-down">-169</td>
+        <td class="num dim">395</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayiliği iptal edilmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN<span class="b-loc">BURDUR · BUCAK</span></td>
+        <td class="num dim">532</td>
+        <td class="num strong">397</td>
+        <td class="num f-down">-135</td>
+        <td class="num dim">889</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Çok küçük bir ilçede faaliyet gösteren bayimizin toplu kurumsal satış yapabileceği büyük kurumlar bulunmamaktadır. Bu nedenle raf satışları için kontrollü sipariş vermektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.…<span class="b-loc">MUGLA · FETHIYE</span></td>
+        <td class="num dim">220</td>
+        <td class="num strong">91</td>
+        <td class="num f-down">-129</td>
+        <td class="num dim">713</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, bölgesinde öncelikle kurumsal ürünlerimizi; 3D ürünlerimizi ise raf üzerinden satmaktadır. Yaklaşan müfredat değişikliği nedeniyle yeni stok almak istememekte, öncelikle geçen yıldan kalan stoklarını eritmek istemektedir. Bölgedeki diğer kitabevlerinin ürünleri yüksek iskonto ile satması da bayimizin eleştirdiği konular arasındadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EGE KITAP KIRTASIYE-DONDU YILGIN<span class="b-loc">BALIKESIR · EDREMIT</span></td>
+        <td class="num dim">867</td>
+        <td class="num strong">754</td>
+        <td class="num f-down">-113</td>
+        <td class="num dim">1.246</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, gelecek yılki müfredat değişikliği nedeniyle toplu ürün almamaktadır. Depolarında yüksek miktarda stok bulunmadığından, sipariş geldikçe ürün çekmeye devam etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BASARIRLAR YAYIN DAGITIM AS<span class="b-loc">DENIZLI · MERKEZEFENDI</span></td>
+        <td class="num dim">1.590</td>
+        <td class="num strong">1.480</td>
+        <td class="num f-down">-110</td>
+        <td class="num dim">2.890</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Yalnızca Ortaokul ve 4K yayınları bayimiz olan firma, güçlü bir perakende ağına sahiptir. Bu yıl öncelikle elindeki stokları eritmek istemektedir. Depolarında yüksek miktarda stok bulunmadığından, sipariş geldikçe ürün alımına devam etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TURKER KIRTASIYE-FATIH BAS<span class="b-loc">MANISA · SOMA</span></td>
+        <td class="num dim">125</td>
+        <td class="num strong">40</td>
+        <td class="num f-down">-85</td>
+        <td class="num dim">250</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Çok küçük bir ilçede faaliyet gösteren bayimizin bölgesinde özel kurum sayısı sınırlıdır ve yalnızca perakende satış yapmaktadır. Eylül ayında devlet okullarına yönelik çalışmaların başlaması beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SERKAN ISIK - AYRAC KITABEVI<span class="b-loc">AYDIN · NAZILLI</span></td>
+        <td class="num dim">499</td>
+        <td class="num strong">452</td>
+        <td class="num f-down">-47</td>
+        <td class="num dim">1.067</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, gelecek yılki müfredat değişikliği nedeniyle kontrollü ilerlediğini ve öncelikle eski stoklarını bitirmek istediğini ifade etmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UMRAN KITAP KIRTASIYE - ADEM TETIK<span class="b-loc">BURDUR · MERKEZ</span></td>
+        <td class="num dim">49</td>
+        <td class="num strong">15</td>
+        <td class="num f-down">-34</td>
+        <td class="num dim">241</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir bölgede faaliyet gösteren bayimiz, gelecek yılki müfredat değişikliği nedeniyle kontrollü ilerlemek ve öncelikle geçmiş yıllardan kalan stoklarını değerlendirmek istediğini belirtmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BANDIRMA OGRETMEN KITABEVI UMIT OKTAY<span class="b-loc">BALIKESIR · BANDIRMA</span></td>
+        <td class="num dim">66</td>
+        <td class="num strong">58</td>
+        <td class="num f-down">-8</td>
+        <td class="num dim">66</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Çok küçük bir ilçede faaliyet gösteren bayimiz, müfredat değişikliği nedeniyle stok yapmak istememektedir. Bölgenin satış potansiyeli de oldukça sınırlıdır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">USAK KITAP MARKET-FATIH DULGER<span class="b-loc">USAK · MERKEZ</span></td>
+        <td class="num dim">397</td>
+        <td class="num strong">422</td>
+        <td class="num f-up">+25</td>
+        <td class="num dim">502</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bölgesi ve satış potansiyeli sınırlı olan bayimiz, bu yıl fen lisesinin toplu ürün organizasyonu yapacağını ve kurumların 3D ürünlerine öğrenci yönlendirmesinin artacağını belirtmiştir. Elinde yüksek miktarda stok bulunmadığından, siparişlere göre ilerlemektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EREN KITAP KIRTASIYE MUHARREM AKMAN<span class="b-loc">BILECIK · BOZÜYÜK</span></td>
+        <td class="num dim">100</td>
+        <td class="num strong">145</td>
+        <td class="num f-up">+45</td>
+        <td class="num dim">294</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bölgede yalnızca bir özel öğretim kursu bulunmaktadır ve pazar oldukça küçüktür. Bayimiz satışlarını raf üzerinden yapmakta; deposunda stok bulunmadığından, siparişlere göre ürün almaya devam etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BARIS KIRTASIYE-HABERAL CAMLIBOGAZ<span class="b-loc">KONYA · ILGIN</span></td>
+        <td class="num dim">52</td>
+        <td class="num strong">122</td>
+        <td class="num f-up">+70</td>
+        <td class="num dim">161</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Çok küçük bir ilçede faaliyet gösteren bayimizin, toplu kurumsal satış yapabileceği büyük kurumlar bulunmamaktadır. Satışlarını ağırlıklı olarak raf üzerinden gerçekleştirmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE<span class="b-loc">KONYA · AKSEHIR</span></td>
+        <td class="num dim">144</td>
+        <td class="num strong">241</td>
+        <td class="num f-up">+97</td>
+        <td class="num dim">285</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir ilçede faaliyet gösteren bayimizin toplu satış yapabileceği kurum sayısı sınırlıdır. Ürünlerimizi raf üzerinden satmaktadır. Önceki yıllardan kalan stokları bulunduğu için kontrollü ilerlemektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MEDRESE KITABEVI- DAVUT GUNDOGAN<span class="b-loc">AFYONKARAHISAR · MERKEZ</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">105</td>
+        <td class="num f-up">+105</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz unvan değişikliği yaptığı için geçen yılki satışları bu kayıtta görünmemektedir. Müfredat değişikliği nedeniyle öncelikle eski stoklarını eritmek istediğini, bu nedenle toplu ürün girişi yapmayacağını belirtmiştir. Sipariş geldikçe ürün girişi yapmaya devam edecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EDEBALI KIRTASIYE METIN ALKAN<span class="b-loc">BILECIK · MERKEZ</span></td>
+        <td class="num dim">390</td>
+        <td class="num strong">507</td>
+        <td class="num f-up">+117</td>
+        <td class="num dim">710</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Çok küçük bir ilçede faaliyet gösteren bayimizin bölge potansiyeli düşüktür. Satışlarını ağırlıklı olarak raf üzerinden gerçekleştirmektedir. Bölgede özel kurum bulunmamakla birlikte, devlet okullarına da satış yapmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CAGRI KITABEVI-ERHAN EVRAN<span class="b-loc">MANISA · SALIHLI</span></td>
+        <td class="num dim">265</td>
+        <td class="num strong">409</td>
+        <td class="num f-up">+144</td>
+        <td class="num dim">610</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir ilçede faaliyet gösteren bayimizin toplu ürün satabileceği kurum sayısı sınırlıdır. Satışlarını ağırlıklı olarak raf üzerinden gerçekleştirmektedir. Zam öncesinde, kendi ölçeğine uygun miktarda ürün girişi yaptırılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TERCIH KITABEVI/GUROL SULUHAN<span class="b-loc">AYDIN · EFELER</span></td>
+        <td class="num dim">431</td>
+        <td class="num strong">596</td>
+        <td class="num f-up">+165</td>
+        <td class="num dim">589</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz bölgede güçlü bir kurumsal satış yapısına sahiptir. On farklı özel öğretim kursuna kurumsal ürünlerimizi satmış; 3D ürünlerini ise yalnızca perakende olarak raf üzerinden sunmaktadır. Rakiplerinin de 3D bayisi olması nedeniyle, perakendede ürünleri bilinçli olarak yüksek iskonto ile sattıklarını belirtmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.…<span class="b-loc">MUGLA · MENTESE</span></td>
+        <td class="num dim">78</td>
+        <td class="num strong">326</td>
+        <td class="num f-up">+248</td>
+        <td class="num dim">319</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bölgesi çok büyük olmayan bayimiz, raf satışları için bir miktar ürün girişi yapmıştır. Yaklaşan müfredat değişikliği nedeniyle toplu stok tutmak istememekte ve temkinli ilerlemektedir. Deposunda stok bulunmadığından, sipariş geldikçe ürün almaya devam etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC…<span class="b-loc">ÇANAKKALE · MERKEZ</span></td>
+        <td class="num dim">320</td>
+        <td class="num strong">609</td>
+        <td class="num f-up">+289</td>
+        <td class="num dim">699</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, bölgesinde oldukça aktif bir kitabevidir. Kurumlara ağırlıklı olarak kurumsal ürünlerimizi toplu satmakta, 3D ürünlerini ise yalnızca raf üzerinden sunmaktadır. İnternet kanalındaki daha düşük fiyatlar nedeniyle perakende satışların yavaşladığını ifade etmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NEJLA KANSU -KANSU KITABEVI<span class="b-loc">ANTALYA · SERIK</span></td>
+        <td class="num dim">3.748</td>
+        <td class="num strong">4.120</td>
+        <td class="num f-up">+372</td>
+        <td class="num dim">4.208</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, bölgesindeki büyük bir özel öğretim kursuna toplu ürün satışı gerçekleştirmiştir. Devlet okullarında da ürünlerimizin satışını aktif biçimde gerçekleştirmektedir. Elinde yüksek miktarda stok bulunmadığından, sezon siparişlerine devam edecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UC YILDIZ KITABEVI (IBRAHIM YILDIZ)<span class="b-loc">ISPARTA · MERKEZ</span></td>
+        <td class="num dim">886</td>
+        <td class="num strong">1.272</td>
+        <td class="num f-up">+386</td>
+        <td class="num dim">1.886</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, zam öncesinde toplu ürün girişi yaparak bu fırsatı değerlendirmek istemiştir. Ürün girişleri tamamlanmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SEGESTA KITAP KIRTASIYE DAGITIM LIMITED SI…<span class="b-loc">ANTALYA · MURATPASA</span></td>
+        <td class="num dim">1.640</td>
+        <td class="num strong">2.144</td>
+        <td class="num f-up">+504</td>
+        <td class="num dim">2.583</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz yalnızca 4K Yayınları bayiliğimizi yapmakta, 3D ürünlerimizi kurumsal kanalda çalışmamaktadır. Zam öncesi fırsatını değerlendirmek amacıyla toplu ürün girişi yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">LIDYA KITABEVI - MUSTAFA CANDAN<span class="b-loc">MANISA · TURGUTLU</span></td>
+        <td class="num dim">98</td>
+        <td class="num strong">1.131</td>
+        <td class="num f-up">+1.033</td>
+        <td class="num dim">263</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, bu yıl bölgesindeki bir kursa toplu ürün satışı gerçekleştirmiş ve ürün girişlerini yapmıştır. Deposunda stok bulunmadığından, sezon içinde siparişlere göre ürün almaya devam edecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)<span class="b-loc">KONYA · SEYDISEHIR</span></td>
+        <td class="num dim">597</td>
+        <td class="num strong">1.940</td>
+        <td class="num f-up">+1.343</td>
+        <td class="num dim">768</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, bu yıl bölgesindeki bir kurumla anlaşarak toplu ürün girişi yapmıştır. Deposuna stok amaçlı ürün almamış olup raf satışları için sipariş vermeye devam etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ORTACA-ERAY KITAP KIRTASIYE YAYINCILIK LTD…<span class="b-loc">MUGLA · ORTACA</span></td>
+        <td class="num dim">846</td>
+        <td class="num strong">2.216</td>
+        <td class="num f-up">+1.370</td>
+        <td class="num dim">1.026</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, bölgesindeki bir özel öğretim kursuyla anlaşarak toplu ürün teslimatı yapmıştır. Müfredat değişikliği nedeniyle yüksek miktarda stok bulundurmamakta ve sezon siparişlerine devam etmektedir. Geçen yıl satış yapmadığı bir kuruma bu yıl satış yaptığı için satışlarının daha da artması beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CETIN YAYIN DAGITIM A.S<span class="b-loc">BALIKESIR · KARESI</span></td>
+        <td class="num dim">300</td>
+        <td class="num strong">2.081</td>
+        <td class="num f-up">+1.781</td>
+        <td class="num dim">685</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimize zam öncesinde ürün girişi yaptırılmıştır. Gelecek yılki müfredat değişikliğini dikkate alarak kontrollü miktarda giriş yapmış olup sezon içinde sipariş vermeye devam edecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">YONCE YAYIN DAGITIM KITABEVI LTD.STI<span class="b-loc">BURSA · YILDIRIM</span></td>
+        <td class="num dim">28.721</td>
+        <td class="num strong">32.610</td>
+        <td class="num f-up">+3.889</td>
+        <td class="num dim">41.087</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bursa merkez bayimiz, zam öncesi fırsatını değerlendirmek amacıyla bir miktar stok girişi yapmış ve deneme kampanyasından yararlanmıştır. Bölgede kurumsal ürün satışlarını aktif biçimde gerçekleştirmektedir. Bu yılı geçen yılın üzerinde bir satış rakamıyla kapatması beklenmektedir. Müfredat değişikliğini dikkate alarak geçen yıla göre daha kontrollü ilerlemesine rağmen, yeni kurumların eklenmesiyle satışlarımız büyümeye devam etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KITAP SAATI EGITM.HIZ.TIC.LTD.STI<span class="b-loc">ANTALYA · MURATPASA</span></td>
+        <td class="num dim">3.765</td>
+        <td class="num strong">8.010</td>
+        <td class="num f-up">+4.245</td>
+        <td class="num dim">3.885</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, bu yıl bölgesindeki bir kurumla anlaşarak toplu ürün satışı gerçekleştirmiştir. Ayrıca zam öncesi fırsatını değerlendirerek sezon için toplu ürün girişi yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI<span class="b-loc">ESKISEHIR · TEPEBASI</span></td>
+        <td class="num dim">6.429</td>
+        <td class="num strong">10.762</td>
+        <td class="num f-up">+4.333</td>
+        <td class="num dim">6.812</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, bölgesindeki iki büyük kurumla anlaşarak ürün teslimatlarını gerçekleştirmiştir. Depolarında stok kalmadığından, siparişlere göre ürün girişi yapmaya devam etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DKM YAYIN BASIM DAGITIM REKLAM EGITIM ÖGRE…<span class="b-loc">DENIZLI · PAMUKKALE</span></td>
+        <td class="num dim">7.355</td>
+        <td class="num strong">13.445</td>
+        <td class="num f-up">+6.090</td>
+        <td class="num dim">10.040</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, bu yıl özel bir öğretim kursuyla anlaşarak ürün girişlerini yapmıştır. Ayrıca zam öncesinde toplu ürün girişi gerçekleştirmiş ve geçen yılın toplam satışını aşmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.T…<span class="b-loc">ANTALYA · MURATPASA</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">7.792</td>
+        <td class="num f-up">+7.792</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl bayilik verdiğimiz firmaya, zam öncesinde ön sipariş girişi yapılmıştır. Ayrıca anlaşma aşamasında olduğu ve öğrenci sayıları henüz netleşmeyen birkaç kurum bulunmaktadır.</div></td></tr>
+      </tbody></table></div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Süleyman İşpınar — 3D YKS (TYT-AYT) Soru Bankası</div>
+        <div class="rb-product">Çukurova / Doğu Akdeniz / İç Anadolu · 1. Raporlama · 24.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">48 Bayi</span>
+        <span class="rb-badge">↑26 ↓22</span>
+        <span class="rb-badge highlight">▼ %9,4</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">82.978</div><div class="sc-sub">bugüne kadar</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">91.608</div><div class="sc-sub">aynı dönem</div></div>
+      <div class="stat-cell"><div class="sc-label">Net Fark</div><div class="sc-val f-down">-8.630</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">İptal Hariç</div><div class="sc-val f-up">+%42,8</div><div class="sc-sub">46 aktif bayi</div></div>
+      <div class="stat-cell"><div class="sc-label">GY Tüm Sezon</div><div class="sc-val">111.492</div><div class="sc-sub">şimdiden %74'i</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>3D YKS soru bankaları sahada özellikle perakende kanalında güçlü bir satış ağı oluşturmuş olup internet üzerinden de yüksek satış hacmine ulaşan ürün grupları arasında yer almaktadır. Bu yıl birçok bayide artış yaşanırken bazı bayilerde geçen yılın altında sipariş adetleri oluşmuştur.</p>
+      <p>Başlıca nedenler: ürün grubunda <strong>yıl sonunda iade alınmaması</strong> ve müfredat değişikliği nedeniyle bayilerin temkinli sipariş girmesi; 3D YKS ürünlerinin <strong>internet kanalındaki güçlü satış ağı</strong> nedeniyle bayilerin perakende için daha düşük adetlerde sipariş vermesi; kurum çalışmalarında bu yıl <strong>dışarıdan alınan yüksek sayıda teklifin</strong> bazı kurum siparişlerinin bayiler üzerinden gerçekleşmesini engellemesi.</p>
+      <p>Bölgede 3D satışlarının önemli bölümünü kurum siparişleri oluşturmaktadır. Bayilerin alt bayi çalışmaları yeterince aktif yürütülememektedir; temel neden bölgeye dışarıdan ciddi miktarda 3D YKS ürünü girişi yapılmasıdır.</p>
+      <p><span class="tag">Öngörü</span> Önümüzdeki yıl bayilerin depolarında mevcut dönemden kalan ürün bulunmaması ve stokların daha kontrollü seviyeye gelmesiyle birlikte sipariş ve satış adetlerinin bölgede yeniden yükseliş göstereceği değerlendirilmektedir.</p>
+    </div>
+    <div class="ipt-note"><strong>2 iptal bayi etkisi:</strong> Geçen yıl 34.332 → bu yıl 1.175 (-33.157 adet). Bu bayiler hariç tutulduğunda bölge <strong class="f-up">+%42,8</strong> (+24.527 adet) seviyesindedir.</div>
+    <div class="veri-not"><strong>Veri notu:</strong> Dosyanın <em>Total</em> satırı 101.898 / 83.084 / 126.621 değerlerini göstermektedir; bayi satırlarının toplamı ise 91.608 / 82.978 / 111.492'dir. Ayrıca <em>Grafikler</em> sekmesi bu ürüne ait olmayan değerler (998 / 8.708) içermektedir. Raporda denetlenebilirlik açısından bayi satırlarının toplamı esas alınmıştır. Bu tutarsızlık bir önceki raporlamada da aynı dosyada tespit edilmişti; formül aralıklarının kontrol edilmesi önerilir.</div>
+    <div class="breakdown"><h4>Değişimin Kaynağı — İptal Bayi Etkisi Ayrıştırması</h4>      <div class="bar-row">
+        <div class="bar-label">İptal edilen bayiler</div>
+        <div class="bar-track"><div class="bar-fill red" style="width:100.0%"></div></div>
+        <div class="bar-num f-down">-33.157</div>
+      </div>      <div class="bar-row">
+        <div class="bar-label">Aktif bayiler</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:74.0%"></div></div>
+        <div class="bar-num f-up">+24.527</div>
+      </div>      <div class="bar-row">
+        <div class="bar-label">NET DEĞİŞİM</div>
+        <div class="bar-track"><div class="bar-fill dark" style="width:26.0%"></div></div>
+        <div class="bar-num f-down">-8.630</div>
+      </div></div>
+    
+    <div class="tablo-wrap"><table class="bayi-tablo">
+      <thead><tr><th>Bayi</th><th class="num">Geçen Yıl BGK</th><th class="num">Bu Yıl BGK</th>
+      <th class="num">Fark</th><th class="num">GY Tüm Sezon</th><th>Durum</th><th></th></tr></thead>
+      <tbody>
+      <tr class="drow r-iptal" onclick="toggleRow(this)">
+        <td class="b-name">OZCAN DAGITIM VE YAYIN KIRTASIYE KITAP<span class="iptal-flag">İPTAL</span><span class="b-loc">GAZIANTEP · SEHIT KAMIL</span></td>
+        <td class="num dim">18.432</td>
+        <td class="num strong">1.050</td>
+        <td class="num f-down">-17.382</td>
+        <td class="num dim">19.062</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İptal durumundaki bayimiz, mevcut alacağının karşılığı olacak şekilde 3D Soru Bankalarımızdan perakende satış amacıyla sipariş girişi gerçekleştirmiştir.</div></td></tr>
+      <tr class="drow r-iptal" onclick="toggleRow(this)">
+        <td class="b-name">GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID…<span class="iptal-flag">İPTAL</span><span class="b-loc">ADANA · CUKUROVA</span></td>
+        <td class="num dim">15.900</td>
+        <td class="num strong">125</td>
+        <td class="num f-down">-15.775</td>
+        <td class="num dim">17.820</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İptal durumundaki bayimiz, yıl içerisinde ihtiyaç duyduğu 3D Soru Bankalarımızdan perakende satış amacıyla sipariş girişi gerçekleştirmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BOGAZICI KIRTASIYE AKIF OZDIL<span class="b-loc">OSMANIYE · MERKEZ</span></td>
+        <td class="num dim">4.805</td>
+        <td class="num strong">625</td>
+        <td class="num f-down">-4.180</td>
+        <td class="num dim">4.805</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> 4K bayimiz, her iki perakende noktası için sipariş girişlerini gerçekleştirmiştir. Bununla birlikte, geçen yıla kıyasla sipariş adetlerinin düşük olmasının temel nedeni, geçen yıl ürün verilen kuruma bu yıl farklı bir bayimiz aracılığıyla ürün verilmesi ve bayimizin mevcut stoklarında hâlen ürün bulunmasıdır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI<span class="b-loc">ÇORUM · MERKEZ</span></td>
+        <td class="num dim">4.880</td>
+        <td class="num strong">1.697</td>
+        <td class="num f-down">-3.183</td>
+        <td class="num dim">5.045</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Geçen yıl yaklaşık 350 öğrencili bir bireysel eğitim kurumuyla 3D Soru Bankası anlaşması yapılmıştı. Ancak kurumun aynı yayını iki yıl üst üste kullanmak istememesi nedeniyle bu yıl 345 Yayınları tercih edilmiştir. Bununla birlikte bayimiz, öğrenci sayısı daha düşük bir kurumla 3D anlaşması yapmış ve perakende satışları için de belirli miktarda ürün girişi gerçekleştirmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI<span class="b-loc">MERSIN · YENISEHIR</span></td>
+        <td class="num dim">17.029</td>
+        <td class="num strong">15.171</td>
+        <td class="num f-down">-1.858</td>
+        <td class="num dim">18.288</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, geçen yıla kıyasla satış adetlerinde bir miktar düşüş yaşamıştır. Bu durumun temel nedeni, ürünlerin yıl sonunda iade alınmaması nedeniyle bayimizin stok yönetiminde daha temkinli hareket ederek sipariş girişlerini kontrollü gerçekleştirmesidir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NETA MATBAACILIK KITAP KIRT SAN VE TIC LTD…<span class="b-loc">MERSIN · YENISEHIR</span></td>
+        <td class="num dim">3.196</td>
+        <td class="num strong">1.575</td>
+        <td class="num f-down">-1.621</td>
+        <td class="num dim">3.586</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz 4K bayiliğinin yanı sıra perakende satışları için de ürün siparişi gerçekleştirmiştir. Ayrıca, onayımız doğrultusunda bir kurumda branş bazlı sipariş girişi yapılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TORE KIRTASIYE TICARET VE SANAYI LTD STI<span class="b-loc">NIGDE · BOR</span></td>
+        <td class="num dim">1.600</td>
+        <td class="num strong">40</td>
+        <td class="num f-down">-1.560</td>
+        <td class="num dim">1.610</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, geçen yıl ürünlerimizi verdiği bir kurumun bu yıl farklı bir yayını tercih etmesi nedeniyle ilgili kurumdan sipariş alamamıştır. Bunun dışında, perakende satışları için mevcut stoklarının bulunması da yeni sipariş girişlerini sınırlamıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">VIZYON PLUS KITABEVI OKKES ANIL MART<span class="b-loc">OSMANIYE · DÜZIÇI</span></td>
+        <td class="num dim">1.500</td>
+        <td class="num strong">215</td>
+        <td class="num f-down">-1.285</td>
+        <td class="num dim">1.570</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, geçen yıl anlaşma sağladığı kurumdan tahsilat gerçekleştirememesi nedeniyle bu yıl aynı kurumla anlaşma yapmamıştır. Bununla birlikte, mevcut raf ihtiyacı doğrultusunda 3D Soru Bankalarımızdan sipariş girişi gerçekleştirmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">PARK OZEL EGITIM KIRTASIYE TUR SEY TIC LTD…<span class="b-loc">MERSIN · TARSUS</span></td>
+        <td class="num dim">2.610</td>
+        <td class="num strong">1.445</td>
+        <td class="num f-down">-1.165</td>
+        <td class="num dim">3.640</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, ilçedeki güçlü perakende yapısının yanı sıra kurumlarda branş bazlı seçimler gerçekleştirerek sipariş girişleri yapmaktadır. Ancak bu yıl, sezon öncesinde mevcut ürünlerde iade uygulamasının bulunmaması nedeniyle stok riskini azaltmak amacıyla daha temkinli sipariş girişi gerçekleştirmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BI KITABEVI KIRTASIYE YAYINCILIK SANAYI VE…<span class="b-loc">ÇORUM · MERKEZ</span></td>
+        <td class="num dim">1.106</td>
+        <td class="num strong">120</td>
+        <td class="num f-down">-986</td>
+        <td class="num dim">1.106</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> 4K bayiliğimizi yapan bayimiz, perakende satışları için elinde yeterli miktarda stok bulunduğunu belirtmiştir. Bu nedenle mevcut dönemde yeni sipariş ihtiyacı sınırlı kalmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.<span class="b-loc">KAHRAMANMARAS · DULKADIROGLU</span></td>
+        <td class="num dim">920</td>
+        <td class="num strong">30</td>
+        <td class="num f-down">-890</td>
+        <td class="num dim">5.357</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> 4K bayimiz, perakende satış yerine ağırlıklı olarak kurum çalışmaları gerçekleştirmektedir. Yakın zamanda bir kurumla anlaşma sağlanmış olup, yaklaşık 60 öğrencili bu kuruma ilişkin sipariş girişlerinin bir hafta içerisinde yapılması beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KAHRAMANMARAS HEDEF KITAP KIRTASIYE MEHMET…<span class="b-loc">KAHRAMANMARAS · DULKADIROGLU</span></td>
+        <td class="num dim">4.468</td>
+        <td class="num strong">3.890</td>
+        <td class="num f-down">-578</td>
+        <td class="num dim">5.653</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, yılın başında gerek perakende gerekse alt bayileri için yüksek miktarda stok girişi yapmıştır. Ancak alt bayilerden beklenen talebin oluşmaması nedeniyle mevcut stoklarının bir kısmı hâlen bayinin elinde bulunmaktadır. Bu nedenle yeni sipariş girişlerinde daha temkinli hareket edilmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BINDEBIR KITAP KIRTASIYE LTD.STI<span class="b-loc">MERSIN · TARSUS</span></td>
+        <td class="num dim">841</td>
+        <td class="num strong">328</td>
+        <td class="num f-down">-513</td>
+        <td class="num dim">921</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz ilçede ortaokul grubunda faaliyet gösteren bir bayi olup, perakende satışları doğrultusunda sipariş girişleri gerçekleştirmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ADNAN DUMAN - DUMAN KITABEVI<span class="b-loc">KIRSEHIR · MERKEZ</span></td>
+        <td class="num dim">1.205</td>
+        <td class="num strong">740</td>
+        <td class="num f-down">-465</td>
+        <td class="num dim">1.910</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz bu yıl stoklu çalışmadığını ve ürünlerin iade alınmaması nedeniyle ihtiyaç doğrultusunda parça parça sipariş verdiğini belirtmiştir. Özellikle eylül ve ekim aylarında satışların artmasıyla birlikte daha yüksek adetli sipariş girişleri beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EYUP ZAFER ATES - ZAFER KIRTASIYE<span class="b-loc">MERSIN · ANAMUR</span></td>
+        <td class="num dim">714</td>
+        <td class="num strong">335</td>
+        <td class="num f-down">-379</td>
+        <td class="num dim">759</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimizin bu yılki satışlarının düşük gerçekleşmesindeki temel neden, her iki perakende noktasında 3D ürünlerinin satışlarında yaşanan düşüştür. Bayimiz, öğrencilerin özellikle internet üzerinden daha uygun fiyatlı ürünleri tercih ettiğini belirtmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD…<span class="b-loc">HATAY · DEFNE</span></td>
+        <td class="num dim">849</td>
+        <td class="num strong">560</td>
+        <td class="num f-down">-289</td>
+        <td class="num dim">1.504</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin deprem bölgesinde bulunması nedeniyle perakende satışları oldukça sınırlıdır. Sipariş girişleri ağırlıklı olarak gerçekleştirilen kurum anlaşmaları doğrultusunda yapılmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CAN KITAP KIRTASIYE ABDULKADIR CAN<span class="b-loc">MERSIN · SILIFKE</span></td>
+        <td class="num dim">925</td>
+        <td class="num strong">666</td>
+        <td class="num f-down">-259</td>
+        <td class="num dim">975</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, geçen yıl anlaşma sağladığı butik kurumla bu yıl da çalışmaya devam etmiştir. Ancak kurumun elinde mevcut ürünlerimizin bulunması nedeniyle bu yıl yalnızca ihtiyaç duyulan miktarda tamamlayıcı sipariş girişi yapılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OKU KIRTASIYE -BURCU COPUR<span class="b-loc">NIGDE · MERKEZ</span></td>
+        <td class="num dim">275</td>
+        <td class="num strong">90</td>
+        <td class="num f-down">-185</td>
+        <td class="num dim">405</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> 4K bayimiz, perakende satışlarının bu dönemde beklenen seviyede olmadığını ve bu nedenle sınırlı miktarda sipariş girişi gerçekleştirdiğini belirtmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIR…<span class="b-loc">YOZGAT · YERKÖY</span></td>
+        <td class="num dim">220</td>
+        <td class="num strong">62</td>
+        <td class="num f-down">-158</td>
+        <td class="num dim">362</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Potansiyeli sınırlı olan ilçede faaliyet gösteren bayimiz, geçmiş yıllardan elinde mevcut ürün bulunduğunu ve bu nedenle bu yıl daha düşük miktarda sipariş girişi yaptığını belirtmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MUSTAFA DANIS - DANIS KITABEVI<span class="b-loc">KARAMAN · MERKEZ</span></td>
+        <td class="num dim">225</td>
+        <td class="num strong">130</td>
+        <td class="num f-down">-95</td>
+        <td class="num dim">590</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizden bu yıl müşteri çekine ilişkin evrakların geç alınması nedeniyle bazı sipariş girişlerinde aksaklık yaşanmıştır. Sezon içerisinde raf ihtiyacına yönelik yapılacak yeni siparişlerle satış oranının yukarı yönlü artması beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MINI KITAP KIRTASIYE ALPAY ERDAL<span class="b-loc">KAHRAMANMARAS · ELBISTAN</span></td>
+        <td class="num dim">160</td>
+        <td class="num strong">111</td>
+        <td class="num f-down">-49</td>
+        <td class="num dim">278</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimizin perakende satış potansiyeli sınırlı olup, ağırlıklı olarak okullarla branş bazlı anlaşmalar üzerinden çalışmaktadır. Bu nedenle mevcut dönemde sipariş adetleri sınırlı seviyede kalmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BEREN KIRTASIYE-SALIH ERTAN<span class="b-loc">AKSARAY · MERKEZ</span></td>
+        <td class="num dim">33</td>
+        <td class="num strong">4</td>
+        <td class="num f-down">-29</td>
+        <td class="num dim">58</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz ortaokul grubunda faaliyet göstermekte olup, perakende satışlarında lise ürünlerini yeterli düzeyde satamadığını belirtmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KILAVUZ KIRTASIYE - AYSE HAZIRLAR<span class="b-loc">HATAY · REYHANLI</span></td>
+        <td class="num dim">0</td>
+        <td class="num strong">15</td>
+        <td class="num f-up">+15</td>
+        <td class="num dim">155</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ABC KIRTASIYE ALI YILDIRIM<span class="b-loc">ÇANKIRI · MERKEZ</span></td>
+        <td class="num dim">30</td>
+        <td class="num strong">49</td>
+        <td class="num f-up">+19</td>
+        <td class="num dim">30</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">YENI CAMLIK KITAP KIRTASIYE ORHAN BALLI<span class="b-loc">OSMANIYE · KADIRLI</span></td>
+        <td class="num dim">10</td>
+        <td class="num strong">48</td>
+        <td class="num f-up">+38</td>
+        <td class="num dim">55</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CANKIRI ISLER KITABEVI EKREM KIRENLI<span class="b-loc">ÇANKIRI · MERKEZ</span></td>
+        <td class="num dim">283</td>
+        <td class="num strong">326</td>
+        <td class="num f-up">+43</td>
+        <td class="num dim">626</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GOKKUSAGI KIRTASIYE METIN SEYREKBASAN<span class="b-loc">KILIS · MERKEZ</span></td>
+        <td class="num dim">31</td>
+        <td class="num strong">79</td>
+        <td class="num f-up">+48</td>
+        <td class="num dim">148</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">RUZGAR YAYINCILIK KITAP KIRTASIYE TEMIZLIK…<span class="b-loc">AMASYA · MERKEZ</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">50</td>
+        <td class="num f-up">+50</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">HASAN ACIKBAS - KULTUR KITABEVI<span class="b-loc">KARAMAN · ERMENEK</span></td>
+        <td class="num dim">10</td>
+        <td class="num strong">60</td>
+        <td class="num f-up">+50</td>
+        <td class="num dim">141</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ALTIN KITAP KIRTASIYE MALZ.INS.TAAH.TARIM …<span class="b-loc">KIRSEHIR · MERKEZ</span></td>
+        <td class="num dim">325</td>
+        <td class="num strong">390</td>
+        <td class="num f-up">+65</td>
+        <td class="num dim">830</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BEYAZIM KITAP EVI - SERKAN KABAAGIL<span class="b-loc">OSMANIYE · KADIRLI</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">77</td>
+        <td class="num f-up">+77</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DEVELI YAPRAK DAGITIM DAVUT KENDIRCI<span class="b-loc">KAYSERI · DEVELI</span></td>
+        <td class="num dim">140</td>
+        <td class="num strong">263</td>
+        <td class="num f-up">+123</td>
+        <td class="num dim">197</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NEVSEHIR ATLAS KIRTASIYE-BARIS NAZMI KURTD…<span class="b-loc">NEVSEHIR · MERKEZ</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">135</td>
+        <td class="num f-up">+135</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CAN KITAP KIRTASIYE-AHMET YILDIRIM<span class="b-loc">YOZGAT · MERKEZ</span></td>
+        <td class="num dim">639</td>
+        <td class="num strong">806</td>
+        <td class="num f-up">+167</td>
+        <td class="num dim">914</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KARANFIL KITAP KIRTASIYE UMUT GOKMEN<span class="b-loc">OSMANIYE · MERKEZ</span></td>
+        <td class="num dim">2.779</td>
+        <td class="num strong">3.089</td>
+        <td class="num f-up">+310</td>
+        <td class="num dim">3.429</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KARACA YAYIN BASIM DAGITIM EGITIM KIRT.HIZ…<span class="b-loc">HATAY · ISKENDERUN</span></td>
+        <td class="num dim">1.457</td>
+        <td class="num strong">1.807</td>
+        <td class="num f-up">+350</td>
+        <td class="num dim">1.457</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KURT YAYIN DAGITIM TICARET LTD STI<span class="b-loc">HATAY · KIRIKHAN</span></td>
+        <td class="num dim">1.349</td>
+        <td class="num strong">1.729</td>
+        <td class="num f-up">+380</td>
+        <td class="num dim">2.539</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ISLAHIYE SIRIN KITAP KIRTASIYE MEVLUT KARA…<span class="b-loc">GAZIANTEP · ISLAHIYE</span></td>
+        <td class="num dim">0</td>
+        <td class="num strong">455</td>
+        <td class="num f-up">+455</td>
+        <td class="num dim">50</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KITAP ISTANBUL KIRTASIYE SANAYI TIC. LTD.STI<span class="b-loc">AKSARAY · MERKEZ</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">656</td>
+        <td class="num f-up">+656</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MERCAN KIRTASIYE-DOGAN SAVAS<span class="b-loc">HATAY · ARSUZ</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">880</td>
+        <td class="num f-up">+880</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CETIN KITAP KIRTASIYE SANAYI VE TICARET LI…<span class="b-loc">HATAY · DÖRTYOL</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">1.050</td>
+        <td class="num f-up">+1.050</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MAVI KITAP KIRTASIYE MEHMET ALI KUH<span class="b-loc">HATAY · SAMANDAG</span></td>
+        <td class="num dim">55</td>
+        <td class="num strong">1.720</td>
+        <td class="num f-up">+1.665</td>
+        <td class="num dim">1.604</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Listede yer alan bayilerimiz, geçen yılın aynı dönemine kıyasla daha yüksek satış adetlerine ulaşmıştır. Özellikle ilgili bölgelerde anlaşma sağlanan kurs merkezlerinin firmamızı tercih etmesi, satışların beklenen seviyeye ulaşmasında etkili olmuştur. Bununla birlikte, perakende satış potansiyeli veya ilçe potansiyeli sınırlı olan bayilerimizde de geçen yıla kıyasla sipariş adetlerinde artış gerçekleşmiş ve genel olarak olumlu bir süreç geçirilmiştir.Bu bayilerimizin büyük bölümü zam öncesi sipariş girişleri gerçekleştirmiş ve sezon öncesinde stoklarını hazır hale getirmişlerdir. Sayıca diğerlerinden daha düşük bayilerimizin bir kısmı kurumsalda diğer yayınlarımızı satmış olup bir kısmı ise internet satışlarının çok daha aktif olduğu bu dönemde mevcut perakendelerinde ürün satamamaları sebebiyle artış oranları sınırlı kalmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ETHEM DEMIRBAG (ERDEM KIRTASIYE)<span class="b-loc">ADANA · KOZAN</span></td>
+        <td class="num dim">515</td>
+        <td class="num strong">2.260</td>
+        <td class="num f-up">+1.745</td>
+        <td class="num dim">636</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .<span class="b-loc">KAYSERI · KOCASINAN</span></td>
+        <td class="num dim">1.715</td>
+        <td class="num strong">4.000</td>
+        <td class="num f-up">+2.285</td>
+        <td class="num dim">3.000</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CK KITAP DUNYASI KIRTASIYE OYN.HEDY. IHR.S…<span class="b-loc">ADANA · CUKUROVA</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">3.848</td>
+        <td class="num f-up">+3.848</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NEVSEHIR MY VIP - RAMAZAN SINAN OZDEMIR<span class="b-loc">NEVSEHIR · MERKEZ</span></td>
+        <td class="num dim">377</td>
+        <td class="num strong">4.541</td>
+        <td class="num f-up">+4.164</td>
+        <td class="num dim">377</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OLUSUM GLOBAL KITAP DAGITIM SANAYI VE TIC.…<span class="b-loc">GAZIANTEP · SAHINBEY</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">7.540</td>
+        <td class="num f-up">+7.540</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><em style="color:#999">Açıklama yok</em></div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZAR…<span class="b-loc">ADANA · SEYHAN</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">18.096</td>
+        <td class="num f-up">+18.096</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Listede yer alan bayilerimizin tamamı bu yıl yeni sözleşme yaptığımız bayilerden oluşmaktadır. Kurumsal çalışmalar gerçekleştiren ve potansiyeli daha yüksek olan bayilerimiz sipariş girişlerini daha yüksek adetlerde yaparken, perakende ağırlıklı çalışan ve küçük ilçelerde faaliyet gösteren bayilerimizin siparişleri daha düşük seviyede kalmıştır. Her ne kadar yeni bayilikler olsa da tüm bayilerimizin raflarında veya stoklarında önceki dönemlerden kalan soru bankalarımız bulunmaktadır. Adetleri düşük olan Beyazım Kitabevi ortaokul bayisi olup perakende satış hızı oldukça düşüktür. Kılavuz Kırtasiye&#x27;nin adetlerinin düşük kalmasının temel nedeni ise ilçedeki kitap satışlarının düşük olması ve bölgenin sınırlı potansiyele sahip olmasıdır. Adana bayimizin yüksek adetli siparişlerinin büyük bölümü ise kurum çalışmaları kapsamında gerçekleştirilen sipariş girişlerinden oluşmaktadır.</div></td></tr>
+      </tbody></table></div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Vedat Adsan — 3D TYT-AYT Soru Bankası</div>
+        <div class="rb-product">Doğu / Güneydoğu Anadolu · 1. Raporlama · 24.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">43 Bayi</span>
+        <span class="rb-badge">↑28 ↓13</span>
+        <span class="rb-badge highlight">▼ %26,0</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">40.201</div><div class="sc-sub">bugüne kadar</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">54.362</div><div class="sc-sub">aynı dönem</div></div>
+      <div class="stat-cell"><div class="sc-label">Net Fark</div><div class="sc-val f-down">-14.161</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">İptal Hariç</div><div class="sc-val f-down">%26,0</div><div class="sc-sub">43 aktif bayi</div></div>
+      <div class="stat-cell"><div class="sc-label">GY Tüm Sezon</div><div class="sc-val">71.807</div><div class="sc-sub">şimdiden %56'i</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>3D TYT-AYT Soru Bankası ürün grubunda mevcut dönemde geçen yılın aynı dönemine göre 14.161 adetlik gerileme söz konusudur.</p>
+      <p><span class="tag">Temel Neden</span> Piyasada <strong>%60–%80 iskonto ile ürünlerin şehir dışından doğrudan kurumlara satılması.</strong> Bayi notlarında bu durum defalarca teyit edilmektedir: Siverek'te barkod sorgulamasında ürünlerin İzmir Kitaphane'ye ait çıkması, Siirt ve Şanlıurfa'da kurumlara İşler Yayınevi'nden doğrudan satış yapılması, Nusaybin'de bölgeye %70 iskonto ile ürün gelmesi, Erciş'te kurs elinde kalan ürünlerin %65 iskonto ile alınması.</p>
+      <p>İkincil etkenler: geçen yıldan devreden bayi depo stokları, müfredat değişikliği beklentisi ve öğrenci sayıları henüz netleşmediği için bekleyen kurum siparişleri. Ayrıca geçen yıl tüm ilçelerin tek bayiye bağlı olduğu bölgelerde bu yıl ilçe bayilikleri verilmesi tekil bayi rakamlarını düşürmüştür.</p>
+    </div>
+    
+    
+    <div class="breakdown"><h4>Değişimin Kaynağı — İptal Bayi Etkisi Ayrıştırması</h4>      <div class="bar-row">
+        <div class="bar-label">İptal edilen bayiler</div>
+        <div class="bar-track"><div class="bar-fill red" style="width:0.0%"></div></div>
+        <div class="bar-num f-down">0</div>
+      </div>      <div class="bar-row">
+        <div class="bar-label">Aktif bayiler</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:100.0%"></div></div>
+        <div class="bar-num f-down">-14.161</div>
+      </div>      <div class="bar-row">
+        <div class="bar-label">NET DEĞİŞİM</div>
+        <div class="bar-track"><div class="bar-fill dark" style="width:100.0%"></div></div>
+        <div class="bar-num f-down">-14.161</div>
+      </div></div>
+    
+    <div class="tablo-wrap"><table class="bayi-tablo">
+      <thead><tr><th>Bayi</th><th class="num">Geçen Yıl BGK</th><th class="num">Bu Yıl BGK</th>
+      <th class="num">Fark</th><th class="num">GY Tüm Sezon</th><th>Durum</th><th></th></tr></thead>
+      <tbody>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SAH KIRTASIYE MINE BENZER<span class="b-loc">SANLIURFA · KARAKOPRU</span></td>
+        <td class="num dim">19.602</td>
+        <td class="num strong">3.765</td>
+        <td class="num f-down">-15.837</td>
+        <td class="num dim">19.912</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Gecen yıl cogu kurumlara bayimiz tarafından kitap verilmişti bu yıl ise bu yapılan satısları işler yayınevinden kurumlara direk satış yapılmış olup bayimiz 7 kurumun satışını yapamamıştır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BKM BATMAN KITAP MERKEZI KIRTASIYE - MAKBU…<span class="b-loc">BATMAN · MERKEZ</span></td>
+        <td class="num dim">9.700</td>
+        <td class="num strong">3.780</td>
+        <td class="num f-down">-5.920</td>
+        <td class="num dim">10.540</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin bu yıl satışları düşük gitmesinin sebebleri gecen seneden depo stogun fazla oldugundan dolayı ve bir sonraki yıl müfredat degişikliği olucakgından bayimizin  depo stogu bittikten sipariş vermektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">POZITIF BASKI HIZMETLERI KITAP KIRTASIYE<span class="b-loc">ERZURUM · YAKUTIYE</span></td>
+        <td class="num dim">2.500</td>
+        <td class="num strong">0</td>
+        <td class="num f-down">-2.500</td>
+        <td class="num dim">4.460</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin gecen seneden stogu bulundugundan dolayı bayimiz depo stogunu bittiriyor</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUNEYDOGU TELEKOMUNASYON KAGT PET URUN SAN…<span class="b-loc">SIRNAK · IDIL</span></td>
+        <td class="num dim">2.099</td>
+        <td class="num strong">380</td>
+        <td class="num f-down">-1.719</td>
+        <td class="num dim">3.176</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Gecen yıl bütün ilçeler bayimizee bağlı oldugu için satısı yüksekti bu yıl ilçere bayilik verildiginden dolayı önümüzdeki raporlama sürencinde artış olucaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SEDAT KIRTASIYE (ABUBEKIR YUCEL)<span class="b-loc">SANLIURFA · BIRECIK</span></td>
+        <td class="num dim">1.455</td>
+        <td class="num strong">300</td>
+        <td class="num f-down">-1.155</td>
+        <td class="num dim">1.645</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz gecen sene ürün verdigi kurumlar bu sene farklı ürün aldıklarından dolayı satışlarda düşüş gözükmektedir ilerleyen günlerde satışlarda artış olucaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SIVEREK AKADEMI KITAP KIRTASIYE BILGISAYAR…<span class="b-loc">SANLIURFA · SIVEREK</span></td>
+        <td class="num dim">1.125</td>
+        <td class="num strong">660</td>
+        <td class="num f-down">-465</td>
+        <td class="num dim">1.600</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl sehir dısında 3 kuruma dısarıdan 3d yayınları alınmıştır barkod sorgulama da izmir kitaphane ye ait cıkmıştır bu sebebten bayimiz satış yapamamıstır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">HEDEF KIRTASIYE-ZAFER YAVUZER<span class="b-loc">VAN · IPEKYOLU</span></td>
+        <td class="num dim">3.870</td>
+        <td class="num strong">3.415</td>
+        <td class="num f-down">-455</td>
+        <td class="num dim">4.120</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin depo stogu fazlalıgı oldugundan kaynaklı oldugu için gecen sene göre 400 adet eksi yansımıştır 2 raporlama sürecine kadar aradaki fark kapanmış olucaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KIZILDERE KIRTASIYE VE BILG.GIDA.INS.TAS.S…<span class="b-loc">VAN · ERCIS</span></td>
+        <td class="num dim">367</td>
+        <td class="num strong">50</td>
+        <td class="num f-down">-317</td>
+        <td class="num dim">647</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz son 2 senedir çözüm kursun elinde kalan 3d soru bankalarını %65 iskonto ile aldıgı için bu yıl bizden fazla satışı olmamıstır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TEBLIG KIRTASIYE TEKS. TAS. TUR. SAN. VE. …<span class="b-loc">DIYARBAKIR · BISMIL</span></td>
+        <td class="num dim">835</td>
+        <td class="num strong">570</td>
+        <td class="num f-down">-265</td>
+        <td class="num dim">1.332</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> 2 kurumdan bayimiz sipariş beklemektedir öğrenci sayıları henüz netleşmedi</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UMUT KIRTASIYE-MEHMET ALI CEYHAN<span class="b-loc">DIYARBAKIR · SILVAN</span></td>
+        <td class="num dim">287</td>
+        <td class="num strong">135</td>
+        <td class="num f-down">-152</td>
+        <td class="num dim">457</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bölgede henüz kurumlar kitap anlaşması yapılmamıştır bayimizin bekletidig 2 kurum bulunmaktadır kurumun net sayıları belli oldugunda bayimiz tarafından sipariş verilicektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SAMI YILDIRIM VE ORTAKLIGI (GENC CARSI KIT…<span class="b-loc">ERZINCAN · MERKEZ</span></td>
+        <td class="num dim">808</td>
+        <td class="num strong">669</td>
+        <td class="num f-down">-139</td>
+        <td class="num dim">1.195</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizle yapılan görüşmede henüz öğrenci sayıları netleşmemiş kurumların oldugunu ilerleyen günlerde satışların artacagını ifade etmiştir bayimiz</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.<span class="b-loc">MARDIN · NUSAYBIN</span></td>
+        <td class="num dim">212</td>
+        <td class="num strong">95</td>
+        <td class="num f-down">-117</td>
+        <td class="num dim">367</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bölgeye dısarıdan %70 iskonto ile ürün gelmektedir kurumlara bayimiz satış yapamamıştır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DOGUBAYAZIT SERHAT KITAPEVI SERHAT CELIK<span class="b-loc">AGRI · DOGUBAYAZIT</span></td>
+        <td class="num dim">139</td>
+        <td class="num strong">70</td>
+        <td class="num f-down">-69</td>
+        <td class="num dim">374</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayilik bu yıl verildi bayimiz calışmalarına devam etmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SIIRT ARI KITAPEVI  ALI KURT<span class="b-loc">SIIRT · MERKEZ</span></td>
+        <td class="num dim">365</td>
+        <td class="num strong">365</td>
+        <td class="num f-flat">0</td>
+        <td class="num dim">580</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl 6 kuruma işler yayınevinden 3d yayınları verildiginden dolayı bayimiz kurumlara toplu satış yapamamıştır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ARDAHAN BILIM KIRTASIYE ERCAN ERDINC TIRPA…<span class="b-loc">ARDAHAN · MERKEZ</span></td>
+        <td class="num dim">0</td>
+        <td class="num strong">—</td>
+        <td class="num f-flat">0</td>
+        <td class="num dim">39</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Kücük bir il oldugundan dolayı bayimiz ürünleri peşin almaktadır bütün yayın evleri bir noktada bulunmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)<span class="b-loc">BAYBURT · MERKEZ</span></td>
+        <td class="num dim">0</td>
+        <td class="num strong">4</td>
+        <td class="num f-up">+4</td>
+        <td class="num dim">16</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Kücük bir il oldugundan dolayı bayimiz ürünleri peşin almaktadır bütün yayın evleri bir noktada bulunmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ANKA SIMURG KITAP KIRTASIYE EGITIM YAYINCI…<span class="b-loc">ELAZIG · MERKEZ</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">26</td>
+        <td class="num f-up">+26</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz unvan degişikliği yaptıgından dolayı satışlar net yansımamaktadır bayimiz gecen seneden stogu oldugundan dolayı ürünleri peyderbey istemektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SEBIL KIRTASIYE-UZEYIR AKCELIK<span class="b-loc">BITLIS · AHLAT</span></td>
+        <td class="num dim">88</td>
+        <td class="num strong">130</td>
+        <td class="num f-up">+42</td>
+        <td class="num dim">129</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> kücük bir ilçe oldugundan dolayı ilçe de kurum bulunmamaktadır bayimiz ürünleri rafta satış yapmaktadır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DOGAN KITAP KIRTASIYE IBRAHIM DOGAN<span class="b-loc">SANLIURFA · HALILIYE</span></td>
+        <td class="num dim">21</td>
+        <td class="num strong">82</td>
+        <td class="num f-up">+61</td>
+        <td class="num dim">72</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz ortaokul bayisidir 3d soru bankası için bayimiz rafı için ürün çekmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ONCU ACAR KIRTASIYE NAK.INS.SAN TIC LTD ST…<span class="b-loc">ADIYAMAN · KAHTA</span></td>
+        <td class="num dim">376</td>
+        <td class="num strong">440</td>
+        <td class="num f-up">+64</td>
+        <td class="num dim">846</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> sıktı bey kurumlarda calışmaları devam etmektedir ek sipariş girişleri yapılıcaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NURULLAH OLCAN KITABEVI<span class="b-loc">SIRNAK · MERKEZ</span></td>
+        <td class="num dim">0</td>
+        <td class="num strong">75</td>
+        <td class="num f-up">+75</td>
+        <td class="num dim">472</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bölge işler yayın evinden kurumlara direk satış yapıldııgından dolayı bayimiz satış yapamamıştır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OKURKENT KIRTASIYE GIYASETTIN DEMIR<span class="b-loc">MUS · MERKEZ</span></td>
+        <td class="num dim">28</td>
+        <td class="num strong">115</td>
+        <td class="num f-up">+87</td>
+        <td class="num dim">68</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Kurumlarda dönem basında 3d yayınları zor geldiginden dolayı kurumlar basta eğitim vadisi ve 4k yayınlarını tercih ettiler</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KOZLUK KULTUR KITAP KIRTASIYE - NIHAL GUNEY<span class="b-loc">BATMAN · KOZLUK</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">95</td>
+        <td class="num f-up">+95</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Yeni bayilik verildi ilçe de kurum olmadıgı için ürünler rafta satılmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI<span class="b-loc">MARDIN · DERIK</span></td>
+        <td class="num dim">0</td>
+        <td class="num strong">120</td>
+        <td class="num f-up">+120</td>
+        <td class="num dim">305</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> İlçede 1 kolej oldugundan dolayı bayimiz ürünü koleje satmıştır gelecek ek siparişler devlet okullarında yapılıcaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ADA KIRTASIYE KITABEVI MEHMET CIHAD ELCI<span class="b-loc">BINGÖL · MERKEZ</span></td>
+        <td class="num dim">152</td>
+        <td class="num strong">310</td>
+        <td class="num f-up">+158</td>
+        <td class="num dim">352</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin gecen seneden stogu oldugundan dolayı ürünler bittikçe bayimiz sipariş vermektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MIDYAT BARIS KIRTASIYE BESIR ULUG<span class="b-loc">MARDIN · MIDYAT</span></td>
+        <td class="num dim">66</td>
+        <td class="num strong">235</td>
+        <td class="num f-up">+169</td>
+        <td class="num dim">118</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl bayilik verilmiş olup bölge 3 kurum bulunmaktadır bayimizin kurum calışmaları devam etmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ<span class="b-loc">GÜMÜSHANE · MERKEZ</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">225</td>
+        <td class="num f-up">+225</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Kücük bir il oldugundan dolayı bayimiz ürünleri peşin almaktadır bütün yayın evleri bir noktada bulunmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">FINAL BASARI EGITIM HIZ. BAS.YAY.TURZGIDA …<span class="b-loc">SIIRT · KURTALAN</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">248</td>
+        <td class="num f-up">+248</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayilik bu yıl verildi bayimiz calışmalarına devam etmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BILIM KIRTASIYE SELAHET METE<span class="b-loc">SIRNAK · SILOPI</span></td>
+        <td class="num dim">13</td>
+        <td class="num strong">280</td>
+        <td class="num f-up">+267</td>
+        <td class="num dim">253</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Yeni bayilik verildi henüz netleşmeyen kurumlar bulunmaktadır bayimiz netleşen kurumlarla birlikte satışları artıcaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUZEL OZEL EGT KIRT INS SAN TIC LTD STI<span class="b-loc">DIYARBAKIR · ERGANI</span></td>
+        <td class="num dim">172</td>
+        <td class="num strong">448</td>
+        <td class="num f-up">+276</td>
+        <td class="num dim">172</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin henüz kurumların net sayılar belli olmadıgından bayimiz tarafından sipariş girişleri beklenmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DORUK SANAYI VE TICARET LIMITED SIRKETI<span class="b-loc">MARDIN · KIZILTEPE</span></td>
+        <td class="num dim">1.263</td>
+        <td class="num strong">1.618</td>
+        <td class="num f-up">+355</td>
+        <td class="num dim">2.183</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl bayimizin kurumlarda yaptıgı tanıtımlar sonucunda 3 kurum dışarıdan 3d soru bankası getirdiginden dolayı gecen seneye göre bayimiz artışları devam etmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">IGDIR KULTUR KITAP KIRTASIYE-MEHMET NURI Y…<span class="b-loc">IGDIR · MERKEZ</span></td>
+        <td class="num dim">180</td>
+        <td class="num strong">550</td>
+        <td class="num f-up">+370</td>
+        <td class="num dim">280</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin kurumlarda hala calışmaları devam etmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UCAR DAGITIM PAZARLAMA ITH IHR TIC SAN LTD…<span class="b-loc">MARDIN · ARTUKLU</span></td>
+        <td class="num dim">145</td>
+        <td class="num strong">630</td>
+        <td class="num f-up">+485</td>
+        <td class="num dim">470</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl bayimiz tarafından kurumlara yapılan çalışma sonucunda birkaç kuruma ürün verilmiş olup diger kurumlardan dönüş beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">AKSU KIRTASIYE - AZIZ AKSU<span class="b-loc">HAKKARI · MERKEZ</span></td>
+        <td class="num dim">1.977</td>
+        <td class="num strong">2.490</td>
+        <td class="num f-up">+513</td>
+        <td class="num dim">2.180</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Gecen yıl satış noktası olan bayimiz bu yıl bayimiz olup satışların devamı gelicektir hazır da ürün almayan kurumlar bulunmaktadır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUNEYDOGU KIRTASIYE-MUHSIN DEGER<span class="b-loc">SIRNAK · CIZRE</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">576</td>
+        <td class="num f-up">+576</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Yeni bayilik verildi kurumlara ilk satış yapıldı diğer kurumlardan net öğrenci sayıları gelince bayimiz sipariş girişi yapıcaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA L…<span class="b-loc">KARS · MERKEZ</span></td>
+        <td class="num dim">1.068</td>
+        <td class="num strong">1.709</td>
+        <td class="num f-up">+641</td>
+        <td class="num dim">2.710</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin kurum çalışmaları devam etmektedir 2 raporlama sürecine kadar ekstra artışlar yapılıcaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">AY KIRTASIYE KITAP TEK.TEM.INS.MOB. SAN.TI…<span class="b-loc">AGRI · MERKEZ</span></td>
+        <td class="num dim">336</td>
+        <td class="num strong">1.015</td>
+        <td class="num f-up">+679</td>
+        <td class="num dim">958</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin gecen seneye göre bu yıl artışları devam etmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BILIM KITABEVI SEYIT ATES<span class="b-loc">SANLIURFA · VIRANSEHIR</span></td>
+        <td class="num dim">199</td>
+        <td class="num strong">1.012</td>
+        <td class="num f-up">+813</td>
+        <td class="num dim">259</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu sene bayimizle birlikte yapılan tanıtımlarda birkaç kurum ile anlaşma sağlanmış olup kalan diğer kurumlar için 4k yayınlarından verilmiştir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KOMMAGENE KITAP DEPOSU RAHIME BILGIC<span class="b-loc">ADIYAMAN · MERKEZ</span></td>
+        <td class="num dim">1.199</td>
+        <td class="num strong">2.506</td>
+        <td class="num f-up">+1.307</td>
+        <td class="num dim">2.713</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Gecen sene satış noktası olan bayimiz bu yıl bayilik sözleşmesi yapılmış olup bayimizin mevcutta limiti kalmadıgından dolayı bankadan cekler cıkınca bayimiz tarafından ek sipariş girişleri yapılıcaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OZCELIK KIRTASIYE MUHAMMED OZCELIK<span class="b-loc">SANLIURFA · CEYLANPINAR</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">1.555</td>
+        <td class="num f-up">+1.555</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Yeni bayilik verildi henüz netleşmeyen kurumlar bulunmaktadır bayimiz netleşen kurumlarla birlikte satışları artıcaktır</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NAYIF AYDEMIR (VAROL KIRTASIYE)<span class="b-loc">BITLIS · MERKEZ</span></td>
+        <td class="num dim">210</td>
+        <td class="num strong">1.895</td>
+        <td class="num f-up">+1.685</td>
+        <td class="num dim">656</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl bayimizin tatvan bölgesinde toplu satış yapmıştır kurumlara henüz kaynak secimi yapmamış kurumlar mevcut bayimiz tarafından sürec takip edilmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP <span class="b-loc">DIYARBAKIR · KAYAPINAR</span></td>
+        <td class="num dim">3.505</td>
+        <td class="num strong">5.333</td>
+        <td class="num f-up">+1.828</td>
+        <td class="num dim">6.151</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Henüz kaynak secimleri yapılmamış kurumlar mevcut bayimiz tarafından kurumlar her gün ziyaret edilip kontrol edilmektedir</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OVA KITAP KITAP KIRTASIYE- BIRHAT ISIK<span class="b-loc">HAKKARI · YÜKSEKOVA</span></td>
+        <td class="num dim">—</td>
+        <td class="num strong">2.225</td>
+        <td class="num f-up">+2.225</td>
+        <td class="num dim">—</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="7"><div class="erow-content"><strong>BY Notu:</strong> Yeni bayilik verildi henüz netleşmeyen kurumlar bulunmaktadır bayimiz netleşen kurumlarla birlikte satışları artıcaktır</div></td></tr>
+      </tbody></table></div>
+  </div>
+
+  <div class="section-title">Genel Değerlendirme ve Öneriler</div>
+  <div class="tespit">
+    <p><strong>1. Ürün performansı tabloda göründüğünden iyidir.</strong> Konsolide %9,8 düşüşün tamamı bayiliği iptal edilen 4 firmadan kaynaklanmaktadır (-48.806 adet). Aktif 125 bayide ürün grubu %9,7 büyümüştür. Öncelikli aksiyon, kapanan bayiliklerin bölgelerindeki cironun yeni veya komşu bayilere devredilmesidir; aksi halde bu hacim tamamen kaybedilecektir.</p>
+    <p><strong>2. En ciddi yapısal risk kanal disiplinidir.</strong> Vedat Adsan bölgesinde ürünlerin şehir dışından %60–80 iskonto ile doğrudan kurumlara satıldığı, Süleyman İşpınar bölgesinde ise kurumlara dışarıdan yüksek sayıda teklif verildiği raporlanmıştır. Bu, bayinin kurum kanalındaki rekabet gücünü ortadan kaldırmakta ve alt bayi ağını da zayıflatmaktadır. Karar 3'ün etkili olabilmesi için önce iskonto ve sevkiyat disiplininin sağlanması gerekmektedir.</p>
+    <p><strong>3. İade imkânının bulunmaması sipariş girişini doğrudan baskılamaktadır.</strong> Üç bölgede de bayiler bu gerekçeyle temkinli sipariş vermektedir; müfredat değişikliği beklentisi bu etkiyi güçlendirmektedir. Karar 2 kapsamında stok takibi yapılırken, iade koşullarına ilişkin bir esneklik değerlendirmesinin sipariş girişlerini hızlandıracağı öngörülmektedir.</p>
+    <p><strong>4. İnternet kanalı perakende siparişini aşağı çekmektedir.</strong> Süleyman İşpınar ve Muhsin Özbalcı bölgelerinde bayiler, öğrencilerin internetten daha uygun fiyata ulaştığını, bu nedenle raf için düşük adetli sipariş verdiklerini belirtmektedir. Perakende fiyat politikasının gözden geçirilmesi bayi motivasyonu açısından önem taşımaktadır.</p>
+    <p><strong>5. Bekleyen potansiyel kayda değer büyüklüktedir.</strong> Öğrenci sayıları netleşmediği için sipariş girmeyen kurumlar üç bölgede de mevcuttur. Karar 1'deki "bekleyen tekliflerin siparişe dönüştürülmesi" hedefi için bu kurumların BY bazında listelenip 2. raporlama dönemine kadar takip edilmesi önerilir.</p>
+    <p><strong>6. Raporlama kapsamı genişletilmelidir.</strong> Kitaphane ve Kadir İlhan bölgelerinin verileri bu dönem alınamamıştır. 2. raporlamada beş bölgenin tamamının dahil edilmesi, özellikle kanal disiplini bulgusunun doğru değerlendirilmesi açısından gereklidir.</p>
+  </div>
+
+  <div class="footer">
+    <div><strong>Çözüm Yayın Grubu</strong> · Satış &amp; Raporlama Birimi · 1. Raporlama Dönemi (Ağustos 2026)</div>
+    <div>Power BI – Ürün Raporu baz alınarak hazırlanmıştır · 24.08.2026</div>
+  </div>
+</div>
+
+<script>
+function toggleRow(drow) {
+  const erow = drow.nextElementSibling;
+  const icon = drow.querySelector('.expand-icon');
+  if (erow.style.display === 'none') { erow.style.display='table-row'; icon.textContent='▼'; }
+  else { erow.style.display='none'; icon.textContent='▶'; }
+}
+</script>
+</body>
+</html>
