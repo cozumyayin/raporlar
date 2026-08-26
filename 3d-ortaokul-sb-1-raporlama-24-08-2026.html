@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Ortaokul 5-6-7-8. Sınıf Soru Bankası — 1. Raporlama · 24.08.2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+:root {
+  --red:#C8102E; --red-dark:#9b0c22; --red-light:#fde8ec;
+  --ink:#1a1a1a; --ink-mid:#444; --ink-light:#888;
+  --border:#e0e0e0; --bg:#f5f4f0; --white:#fff;
+  --green:#1a7a4a; --green-bg:#e8f5ee;
+  --amber:#b45309; --amber-bg:#fef3c7;
+  --blue:#1d4ed8; --blue-bg:#eff6ff;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'IBM Plex Sans',sans-serif; background:var(--bg); color:var(--ink); font-size:13px; line-height:1.6; }
+
+.header { background:var(--white); border-bottom:4px solid var(--red); }
+.header-top { display:flex; align-items:center; gap:20px; padding:18px 40px; }
+.logo-block { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.logo-circle { width:48px; height:48px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:15px; letter-spacing:-0.5px; }
+.logo-text { font-size:11px; color:var(--ink-mid); line-height:1.3; }
+.logo-text strong { font-size:14px; color:var(--ink); display:block; }
+.header-title { flex:1; border-left:2px solid var(--border); padding-left:20px; }
+.header-title h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; }
+.header-title p { font-size:12px; color:var(--ink-light); margin-top:2px; }
+.date-badge { background:var(--red); color:#fff; padding:6px 16px; font-size:12px; font-weight:600; font-family:'IBM Plex Mono',monospace; border-radius:4px; white-space:nowrap; }
+.kpi-band { background:var(--red); color:#fff; padding:8px 40px; font-size:11px; display:flex; align-items:center; gap:8px; }
+.kpi-band .label { opacity:.75; }
+.kpi-band .value { font-weight:700; letter-spacing:.2px; }
+
+.page { max-width:1180px; margin:0 auto; padding:28px 20px; }
+.section-title { font-size:11px; font-weight:700; color:var(--red); letter-spacing:1.5px; text-transform:uppercase; padding-bottom:8px; border-bottom:2px solid var(--red); margin:28px 0 16px; }
+
+/* KONSOLIDE */
+.konsolide { background:var(--ink); color:#fff; border-radius:5px; padding:20px 24px; display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
+.k-cell .k-lab { font-size:10px; text-transform:uppercase; letter-spacing:1px; opacity:.55; margin-bottom:5px; }
+.k-cell .k-val { font-family:'IBM Plex Mono',monospace; font-size:27px; font-weight:600; line-height:1; }
+.k-cell .k-sub { font-size:10px; opacity:.6; margin-top:5px; }
+.k-cell .k-val.pos { color:#6ee7a8; }
+
+.summary-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.sum-card { background:var(--white); border:1px solid var(--border); border-top:3px solid var(--red); padding:14px 16px; border-radius:4px; }
+.sum-card .name { font-size:11px; color:var(--ink-light); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.sum-card .product { font-size:10px; color:var(--ink-mid); margin-bottom:8px; min-height:26px; }
+.sum-card .big-num { font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:600; line-height:1; }
+.sum-card .sub { font-size:10px; color:var(--ink-light); margin-top:4px; }
+.growth { display:inline-block; margin-top:8px; padding:2px 9px; border-radius:20px; font-size:11px; font-weight:700; font-family:'IBM Plex Mono',monospace; }
+.growth.up { background:var(--green-bg); color:var(--green); }
+.growth.down { background:var(--amber-bg); color:var(--amber); }
+.growth.neu { background:var(--blue-bg); color:var(--blue); }
+
+.report-block { background:var(--white); border:1px solid var(--border); border-radius:4px; margin-bottom:20px; overflow:hidden; }
+.report-block-header { background:var(--ink); color:#fff; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.rb-name { font-size:13px; font-weight:700; }
+.rb-product { font-size:11px; opacity:.6; }
+.rb-badges { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+.rb-badge { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); padding:3px 10px; border-radius:20px; font-size:11px; font-family:'IBM Plex Mono',monospace; white-space:nowrap; }
+.rb-badge.highlight { background:var(--red); border-color:var(--red-dark); }
+
+.stats-row { display:flex; border-top:1px solid var(--border); }
+.stat-cell { flex:1; padding:10px 12px; border-right:1px solid var(--border); text-align:center; }
+.stat-cell:last-child { border-right:none; }
+.sc-label { font-size:9px; color:var(--ink-light); text-transform:uppercase; letter-spacing:.5px; margin-bottom:3px; }
+.sc-val { font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:600; }
+.sc-val.sc-mini { font-size:14px; }
+.sc-sub { font-size:9px; color:var(--ink-light); }
+.dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin:0 3px 0 6px; }
+.dot.g { background:var(--green); } .dot.a { background:#d9a406; } .dot.r { background:var(--red); }
+
+.aciklama-box { border-left:4px solid var(--red); background:#fdf5f5; padding:12px 16px; margin:14px 20px; border-radius:0 4px 4px 0; }
+.aciklama-label { font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.aciklama-box p { font-size:12px; color:var(--ink-mid); margin-bottom:7px; }
+.aciklama-box p:last-child { margin-bottom:0; }
+.tag { display:inline-block; background:var(--red); color:#fff; font-size:9px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; padding:1px 7px; border-radius:3px; margin-right:6px; vertical-align:1px; }
+
+.veri-not { margin:0 20px 12px; background:var(--blue-bg); border:1px solid #c7dbff; color:#1e3a8a; font-size:11px; padding:9px 13px; border-radius:4px; }
+
+.breakdown { border-top:1px solid var(--border); padding:14px 20px; }
+.breakdown h4 { font-size:10px; font-weight:700; color:var(--ink-light); text-transform:uppercase; letter-spacing:.8px; margin-bottom:10px; }
+.bar-row { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.bar-label { width:110px; font-size:11px; color:var(--ink-mid); flex-shrink:0; }
+.bar-track { flex:1; height:7px; background:var(--border); border-radius:3px; overflow:hidden; }
+.bar-fill { height:100%; background:var(--red); border-radius:3px; }
+.bar-fill.green { background:var(--green); } .bar-fill.amber { background:var(--amber); } .bar-fill.dark { background:var(--ink); }
+.bar-num { width:62px; text-align:right; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; flex-shrink:0; }
+
+.tablo-wrap { border-top:1px solid var(--border); overflow-x:auto; }
+.bayi-tablo { width:100%; border-collapse:collapse; font-size:11.5px; }
+.bayi-tablo thead th { background:#fafafa; text-align:left; padding:8px 10px; font-size:9.5px; text-transform:uppercase; letter-spacing:.6px; color:var(--ink-light); border-bottom:1px solid var(--border); font-weight:700; white-space:nowrap; }
+.bayi-tablo td { padding:7px 10px; border-bottom:1px solid #f0f0f0; vertical-align:middle; }
+.bayi-tablo .n { text-align:right; font-family:'IBM Plex Mono',monospace; white-space:nowrap; }
+.bayi-tablo td.dim { color:var(--ink-light); }
+.bayi-tablo td.strong { font-weight:600; }
+.b-name { font-weight:600; max-width:280px; }
+.b-loc { display:block; font-weight:400; font-size:10px; color:var(--ink-light); }
+.drow { cursor:pointer; } .drow:hover { background:#fafafa; }
+.expand-icon { color:var(--red); font-size:9px; width:18px; text-align:center; }
+.erow-content { padding:10px 16px; background:#f9f9f9; font-size:12px; color:#444; border-left:3px solid var(--red); }
+.pill { display:inline-block; padding:1px 9px; border-radius:20px; font-size:10px; font-weight:700; white-space:nowrap; }
+.pill-green { background:var(--green-bg); color:var(--green); }
+.pill-amber { background:var(--amber-bg); color:var(--amber); }
+.pill-red { background:var(--red-light); color:var(--red); }
+.pill-grey { background:#f0f0f0; color:#999; }
+
+/* MISSING / MUDUR NOTU */
+.uyari-box { background:#fffbeb; border:1px solid #fcd34d; border-left:4px solid #d97706; border-radius:4px; padding:14px 18px; }
+.uyari-box h4 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#92400e; margin-bottom:8px; }
+.uyari-box ul { margin-left:18px; }
+.uyari-box li { font-size:12px; color:#78350f; margin-bottom:5px; }
+
+.mudur-box { background:#fdf9e7; border:1px solid #e8dca0; border-left:4px solid var(--red); border-radius:4px; padding:16px 20px; }
+.mudur-head { display:flex; align-items:baseline; gap:10px; margin-bottom:12px; }
+.mudur-head strong { font-size:13px; }
+.mudur-head span { font-size:11px; color:var(--ink-light); }
+.karar { margin-bottom:12px; padding-left:14px; border-left:2px solid #e0d5a0; }
+.karar:last-child { margin-bottom:0; }
+.karar .k-t { font-size:10px; font-weight:700; color:var(--red); letter-spacing:.8px; text-transform:uppercase; margin-bottom:3px; }
+.karar p { font-size:12px; color:var(--ink-mid); }
+.karar .eslesme { font-size:11px; color:var(--green); margin-top:5px; font-style:italic; }
+
+.footer { margin-top:32px; border-top:1px solid var(--border); padding-top:14px; display:flex; justify-content:space-between; font-size:10px; color:var(--ink-light); }
+.footer strong { color:var(--red); }
+.watermark { position:fixed; bottom:30px; right:30px; font-size:32px; color:rgba(200,16,46,.10); font-weight:700; letter-spacing:4px; text-transform:uppercase; pointer-events:none; transform:rotate(-15deg); }
+
+@media print { body { background:#fff; } .page { padding:12px; } .watermark { display:none; } .erow { display:table-row !important; } }
+@media (max-width:900px) {
+  .konsolide { grid-template-columns:repeat(2,1fr); }
+  .summary-grid { grid-template-columns:1fr; }
+  .header-top { flex-wrap:wrap; padding:14px 18px; }
+  .stats-row { flex-wrap:wrap; } .stat-cell { flex:1 1 33%; }
+}
+</style>
+</head>
+<body>
+
+<div class="watermark">ÇÖZÜM</div>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-circle">ÇYG</div>
+      <div class="logo-text"><strong>Çözüm Yayın Grubu</strong>Satış &amp; Bölge Raporlaması</div>
+    </div>
+    <div class="header-title">
+      <h1>3D Ortaokul 5-6-7-8. Sınıf Soru Bankası — 1. Raporlama</h1>
+      <p>Ağustos Dönemi · Sezonsal Ürün Takip Takvimi · Konsolide Bölge Değerlendirmesi</p>
+    </div>
+    <div class="date-badge">24.08.2026</div>
+  </div>
+  <div class="kpi-band">
+    <span class="label">KPI Maddesi:</span>
+    <span class="value">Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="section-title">Konsolide Durum · 3 Bölge</div>
+  <div class="konsolide">
+    <div class="k-cell"><div class="k-lab">Bu Yıl BGK Toplam</div><div class="k-val">132.274</div><div class="k-sub">Geçen yıl aynı dönem: 48.132</div></div>
+    <div class="k-cell"><div class="k-lab">Büyüme</div><div class="k-val pos">%174.8</div><div class="k-sub">2.75x · +84.142 adet</div></div>
+    <div class="k-cell"><div class="k-lab">Ara Sınıf (5+6+7)</div><div class="k-val">51.888</div><div class="k-sub">Yeni ürün grubu · ilk sezon</div></div>
+    <div class="k-cell"><div class="k-lab">8. Sınıf</div><div class="k-val">80.464</div><div class="k-sub">Geçen yıl tüm sezon: 78.093</div></div>
+    <div class="k-cell"><div class="k-lab">Raporlanan Bayi</div><div class="k-val">108</div><div class="k-sub">3 bölge yöneticisi</div></div>
+  </div>
+
+  <div class="section-title">Bölge Bazlı Özet</div>
+  <div class="summary-grid">
+    <div class="sum-card">
+      <div class="name">Muhsin Özbalcı</div>
+      <div class="product">3D 5-6-7-8. Sınıf Soru Bankası · Ege / Batı Akdeniz / İç Anadolu Batı</div>
+      <div class="big-num">61.551</div>
+      <div class="sub">37 bayi · Ara sınıf 21.729 + 8. sınıf 39.900</div>
+      <span class="growth up">▲ %186.3 büyüme</span>
+    </div>
+    <div class="sum-card">
+      <div class="name">Süleyman İşpınar</div>
+      <div class="product">3D Ara Sınıf SB (Ortaokul) · Çukurova / Akdeniz Doğu / İç Anadolu</div>
+      <div class="big-num">43.715</div>
+      <div class="sub">32 bayi · Ara sınıf 16.868 + 8. sınıf 26.847</div>
+      <span class="growth up">▲ %149.4 büyüme</span>
+    </div>
+    <div class="sum-card">
+      <div class="name">Vedat Adsan</div>
+      <div class="product">3D Ortaokul 5-6-7-8 SB · Doğu / Güneydoğu Anadolu</div>
+      <div class="big-num">27.008</div>
+      <div class="sub">39 bayi · Ara sınıf 13.291 + 8. sınıf 13.717</div>
+      <span class="growth up">▲ %196.8 büyüme</span>
+    </div>
+  </div>
+
+  <div class="section-title">Raporlamaya Dahil Olmayan Bölgeler</div>
+  <div class="uyari-box">
+    <h4>Bu dönem raporu alınamayan bölgeler</h4>
+    <ul>
+      <li><strong>Kitaphane</strong> — Bölge yöneticisi <strong>Yasin Erdoğan</strong> yıllık izinde olduğundan raporunu iletememiştir. Dönüşüyle birlikte veri konsolide edilecektir.</li>
+      <li><strong>İsa Aydoğdu'nun bölgesi</strong> — Görevden ayrılmış olup yerine <strong>Kadir İlhan</strong> atanmıştır. Kadir Bey halen oryantasyon sürecinde olduğundan bu dönem raporu bulunmamaktadır.</li>
+    </ul>
+    <p style="font-size:11.5px;color:#78350f;margin-top:8px;"><strong>Not:</strong> Yukarıdaki konsolide rakamlar 3 bölgeyi kapsamaktadır; iki bölgenin verisi dahil edilmediğinden grup geneli toplam bunun üzerindedir.</p>
+  </div>
+
+  <div class="section-title">Satış Müdürlüğü — Alınacak Kararlar</div>
+  <div class="mudur-box">
+    <div class="mudur-head"><strong>Osman Selçuk Uğur</strong><span>Satış Müdürü · İcra Kurulu Notu</span></div>
+
+    <div class="karar">
+      <div class="k-t">Karar 1 — Ara Sınıf Ürün Takvimi</div>
+      <p>5, 6 ve 7. sınıf ara sınıf ürünlerinin, mümkün olan en geniş ürün grubuyla <strong>seminer dönemine (eğitim öğretim başlangıcına) yetiştirilmesi</strong> ve sahada tanıtıma hazır hale getirilmesi önceliklendirilecektir.</p>
+      <div class="eslesme">↳ Saha teyidi: Süleyman İşpınar, örneklerin seminer dönemine yetişmesi halinde sipariş potansiyelinin artacağını raporlamıştır. Ara sınıflarda bu dönem toplam 51.888 adet ön sipariş girilmiştir.</div>
+    </div>
+
+    <div class="karar">
+      <div class="k-t">Karar 2 — BY'lere Ek Örnek Ürün Desteği</div>
+      <p>Yeni ara sınıf ürünlerinin sahada güçlü tanıtılması amacıyla <strong>BY'lere ek örnek ürün desteği sağlanması</strong> değerlendirilecektir. Makul olumlu karşılanmaktadır. <em>(@Hasan, @Emre Erdoğan)</em></p>
+      <div class="eslesme">↳ Saha talebi: Süleyman İşpınar raporunda BY'lere ek örnek hakkı tanımlanması doğrudan talep edilmiştir. Muhsin Özbalcı ise bayilerin öğretmenlere örnek gösterme ihtiyacını belirtmiştir.</div>
+    </div>
+
+    <div class="karar">
+      <div class="k-t">Karar 3 — 8. Sınıf Sipariş-Satış Modeli</div>
+      <p>8. sınıfta gelecek yıl yaşanacak müfredat değişikliği nedeniyle bayilerin stok konusunda kontrollü ilerlediği dikkate alınarak, mevcut ürünlerde <strong>sipariş-satış modeli</strong> izlenecek; büyüme odağı özellikle yeni 5-6-7. sınıf ürünlerin <strong>tam set avantajı ve devlet okulu tanıtımları</strong> dikkatle takip edilip ciddi satış adetleri üzerinden oluşturulacaktır.</p>
+      <div class="eslesme">↳ Saha teyidi: Hem Muhsin Özbalcı hem Süleyman İşpınar, müfredat değişikliği nedeniyle bayilerin 8. sınıfta kontrollü stok politikası izlediğini bağımsız olarak raporlamıştır.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Bölge Detayları</div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Muhsin Özbalcı — 3D 5-6-7-8. Sınıf Soru Bankası</div>
+        <div class="rb-product">1. Raporlama · 24.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">37 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 61.551</span>
+        <span class="rb-badge highlight">▲ %186.3</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Ara Sınıf (5+6+7)</div><div class="sc-val">21.729</div><div class="sc-sub">yeni ürün grubu</div></div>
+      <div class="stat-cell"><div class="sc-label">8. Sınıf</div><div class="sc-val">39.900</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">21.501</div><div class="sc-sub">→ bu yıl 61.551</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl Tüm Sezon</div><div class="sc-val">34.700</div><div class="sc-sub">şimdiden %177'i</div></div>
+      <div class="stat-cell"><div class="sc-label">Bayi Durumu</div><div class="sc-val sc-mini"><span class="dot g"></span>21 <span class="dot a"></span>3 <span class="dot r"></span>4</div><div class="sc-sub">iyi / orta / düşük</div></div>
+    </div>
+
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>3D Ortaokul ürünlerinin sahadaki bilinirliği ve tercih edilme oranı artmaya devam etmektedir. 8. sınıfta geçen sezon toplam 34.700 adet satış gerçekleşmişken, bu yıl sezon tamamlanmadan 39.900 adede ulaşılmıştır. Bayiler, gelecek yıl beklenen müfredat değişikliği nedeniyle stok konusunda kontrollü ilerlemektedir.</p>
+      <p>5, 6 ve 7. sınıf ürünleri B2B'de siparişe açılmış, ön sipariş girişleri başlamıştır. Ara sınıf ürünleri ağırlıklı olarak devlet okullarında tercih edildiğinden asıl satış hareketliliğinin sezon içerisinde oluşması beklenmektedir.</p>
+      <p><span class="tag">Öneri</span> 8. sınıfta mevcut büyümeyi destekleyecek kurum ve örnek çalışmalarına devam edilmesi, özellikle Proje İmam Hatip okullarındaki çalışmaların artırılması. Ara sınıflarda tam set avantajının öne çıkarılması, devlet okullarındaki seçimlerin yakından takip edilmesi ve bayi siparişlerinin kontrollü şekilde artırılması.</p>
+    </div>
+    
+    <div class="breakdown"><h4>Sınıf Bazlı Sipariş Dağılımı</h4>      <div class="bar-row">
+        <div class="bar-label">5. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill " style="width:19.4%"></div></div>
+        <div class="bar-num">7.726</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">6. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:17.1%"></div></div>
+        <div class="bar-num">6.842</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">7. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:17.9%"></div></div>
+        <div class="bar-num">7.161</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">8. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill dark" style="width:100.0%"></div></div>
+        <div class="bar-num">39.900</div>
+      </div></div>
+    
+    <div class="tablo-wrap">
+    <table class="bayi-tablo">
+      <thead><tr>
+        <th>Bayi</th><th class="n">5.Sf</th><th class="n">6.Sf</th><th class="n">7.Sf</th><th class="n">8.Sf</th>
+        <th class="n">GY BGK</th><th class="n">BY BGK</th><th>Durum</th><th></th>
+      </tr></thead>
+      <tbody>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI<span class="b-loc">KÜTAHYA · MERKEZ</span></td>
+        <td class="n">30</td>
+        <td class="n">25</td>
+        <td class="n">40</td>
+        <td class="n">820</td>
+        <td class="n dim">7</td>
+        <td class="n strong">915</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin bölgesi çok büyük değildir. Bir kurum için toplu ürün alımı yapmış olup ayrıca raf stoğu için girişleri bulunmaktadır. Devlet okullarında yoğun çalışma beklentimiz vardır. Bayimiz, devlet okullarında ürünlerimize güvendiğini ifade etmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ANTALYA ATLAS KITABEVI OZAN ERIPEK<span class="b-loc">ANTALYA · MANAVGAT</span></td>
+        <td class="n">120</td>
+        <td class="n">143</td>
+        <td class="n">190</td>
+        <td class="n">360</td>
+        <td class="n dim">100</td>
+        <td class="n strong">813</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz ön sipariş girişlerini yapmıştır. Eylül ayında devlet okullarındaki beklentisi yüksektir; gelecek siparişlere göre ek ürün girişi yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI<span class="b-loc">ESKISEHIR · TEPEBASI</span></td>
+        <td class="n">85</td>
+        <td class="n">135</td>
+        <td class="n">80</td>
+        <td class="n">948</td>
+        <td class="n dim">966</td>
+        <td class="n strong">1.248</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz yalnızca raf stoğu için sipariş girmiştir. Ara sınıf ürünlerimiz için kolejlerden bekleyen siparişleri bulunduğunu, ancak öğretmenlerin örnekleri görmek istediğini belirtmiştir. Kapalı devre çalıştığı kolejlere ürünlerimizi yazacağını; ara sınıflarda ise devlet okullarındaki satışlarının daha yoğun olduğunu ifade etmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BANDIRMA OGRETMEN KITABEVI UMIT OKTAY<span class="b-loc">BALIKESIR · BANDIRMA</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">460</td>
+        <td class="n dim">—</td>
+        <td class="n strong">460</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl yeni anlaşma yaptığımız bayimiz, kargo ücreti oluşmaması için raf siparişini toplu siparişle birlikte gireceğini belirtmiştir. Bu hafta, henüz girişi yapılmayan tüm ürünlerden sipariş geçilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BARIS KIRTASIYE-HABERAL CAMLIBOGAZ<span class="b-loc">KONYA · ILGIN</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">12</td>
+        <td class="n dim">6</td>
+        <td class="n strong">12</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Kredi kartıyla çalıştığımız, küçük ölçekli bir ilçe bayisidir. Ürün girişlerini bu hafta içinde yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BASARIRLAR YAYIN DAGITIM AS<span class="b-loc">DENIZLI · MERKEZEFENDI</span></td>
+        <td class="n">120</td>
+        <td class="n">100</td>
+        <td class="n">100</td>
+        <td class="n">348</td>
+        <td class="n dim">261</td>
+        <td class="n strong">668</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz ön sipariş girişlerini yalnızca raf stoğu için yapmıştır. Eylül ayındaki devlet okulu çalışmaları nedeniyle bu yıl beklentimizin yüksek olduğu kendisine aktarılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC…<span class="b-loc">ANTALYA · MURATPASA</span></td>
+        <td class="n">400</td>
+        <td class="n">80</td>
+        <td class="n">290</td>
+        <td class="n">625</td>
+        <td class="n dim">—</td>
+        <td class="n strong">1.395</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz yalnızca lise bayimizdir; ancak tedarik sağladığı okullara ürünlerimizin satışını yapmasına izin verilmektedir. Henüz büyük kolej siparişlerini girmemiştir. Ortaokul bayisi olmadığı için ürünleri siparişe göre temin etmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CAGRI KITABEVI-ERHAN EVRAN<span class="b-loc">MANISA · SALIHLI</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">13</td>
+        <td class="n dim">0</td>
+        <td class="n strong">13</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Ortaokul bayimiz değildir; yalnızca lise bayiliğimizi yürütmektedir ve raf stoğu için ürün almıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CETIN YAYIN DAGITIM A.S<span class="b-loc">BALIKESIR · KARESI</span></td>
+        <td class="n">120</td>
+        <td class="n">120</td>
+        <td class="n">120</td>
+        <td class="n">210</td>
+        <td class="n dim">60</td>
+        <td class="n strong">570</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, tüm sınıf ve branş ürünlerimiz için ön sipariş girişlerini yapmıştır. Bu yıl bölgesindeki devlet okullarına özel çalışma yapacağına dair söz alınmış olup beklentimiz yüksektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EDEBALI KIRTASIYE METIN ALKAN<span class="b-loc">BILECIK · MERKEZ</span></td>
+        <td class="n">22</td>
+        <td class="n">22</td>
+        <td class="n">22</td>
+        <td class="n">27</td>
+        <td class="n dim">—</td>
+        <td class="n strong">93</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz küçük bir bölgede faaliyet göstermektedir. Raf stoğu için ürün girişlerini yapmış olup eylül ayında devlet okullarından gelecek siparişlere göre ek giriş yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EGE KITAP KIRTASIYE-DONDU YILGIN<span class="b-loc">BALIKESIR · EDREMIT</span></td>
+        <td class="n">85</td>
+        <td class="n">80</td>
+        <td class="n">137</td>
+        <td class="n">78</td>
+        <td class="n dim">80</td>
+        <td class="n strong">302</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz ön sipariş girişlerini yapmıştır. Eylül ayında devlet okullarındaki beklentisi yüksektir; gelecek siparişlere göre ek ürün girişi yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EREN KITAP KIRTASIYE MUHARREM AKMAN<span class="b-loc">BILECIK · BOZÜYÜK</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">80</td>
+        <td class="n dim">130</td>
+        <td class="n strong">80</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Ortaokul bayimiz değildir; yalnızca lise bayiliğimizi yürütmektedir ve raf stoğu için ürün almıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.CI…<span class="b-loc">MUGLA · FETHIYE</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">395</td>
+        <td class="n dim">267</td>
+        <td class="n strong">535</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, raf stoğu için ön sipariş girişlerini yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUVEN KIRTASIYE - OZAN TUNCEL<span class="b-loc">KÜTAHYA · EMET</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">19</td>
+        <td class="n dim">25</td>
+        <td class="n strong">19</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayiliği iptal edilmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">HALIT KAYA (ALANYA AKADEMI KIRTASIYE)<span class="b-loc">ANTALYA · ALANYA</span></td>
+        <td class="n">225</td>
+        <td class="n">200</td>
+        <td class="n">200</td>
+        <td class="n">180</td>
+        <td class="n dim">0</td>
+        <td class="n strong">805</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz ön sipariş girişlerini yapmıştır. Eylül ayında devlet okullarındaki beklentisi yüksektir; gelecek siparişlere göre ek ürün girişi yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)<span class="b-loc">KONYA · SEYDISEHIR</span></td>
+        <td class="n">135</td>
+        <td class="n">135</td>
+        <td class="n">140</td>
+        <td class="n">230</td>
+        <td class="n dim">180</td>
+        <td class="n strong">640</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir ilçe bayimizdir. Tüm ürün gruplarında raf stoğu için ön sipariş girişlerini yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN<span class="b-loc">BURDUR · BUCAK</span></td>
+        <td class="n">65</td>
+        <td class="n">40</td>
+        <td class="n">45</td>
+        <td class="n">400</td>
+        <td class="n dim">384</td>
+        <td class="n strong">550</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir ilçe bayimizdir. Tüm ürün gruplarında ön sipariş girişlerini yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KITAP SAATI EGITM.HIZ.TIC.LTD.STI<span class="b-loc">ANTALYA · MURATPASA</span></td>
+        <td class="n">750</td>
+        <td class="n">750</td>
+        <td class="n">750</td>
+        <td class="n">5.235</td>
+        <td class="n dim">3.530</td>
+        <td class="n strong">7.485</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Antalya merkez bayimiz ön sipariş girişlerini yapmıştır. Beklentimizin yüksek olduğu bu bölgede bayimiz, devlet okullarında aktif çalışmakta ve hedeflerine ulaşmaktadır. Eylül ayında da hedeflerini gerçekleştirmesini bekliyoruz.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KUMBET KIRTASIYE YAYINCILIK INS. NAK. HEDIYE…<span class="b-loc">AFYONKARAHISAR · MERKEZ</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">80</td>
+        <td class="n dim">110</td>
+        <td class="n strong">80</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz unvan değişikliği yapmış olup ürün girişlerini yeni cari unvanıyla gerçekleştirmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">LIDYA KITABEVI - MUSTAFA CANDAN<span class="b-loc">MANISA · TURGUTLU</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">140</td>
+        <td class="n dim">—</td>
+        <td class="n strong">140</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Ortaokul bayimiz değildir; yalnızca lise bayiliğimizi yürütmektedir ve raf stoğu için ürün almıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MEDRESE KITABEVI- DAVUT GUNDOGAN<span class="b-loc">AFYONKARAHISAR · MERKEZ</span></td>
+        <td class="n">10</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">109</td>
+        <td class="n dim">—</td>
+        <td class="n strong">119</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizle görüşülmüştür. Gün içinde, henüz girişi yapılmayan tüm ürün gruplarından sipariş girişi yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MESEKAN BASIM YAYIN DAG.PAZ.KIR.TEK.TEM.SAN.…<span class="b-loc">BURSA · OSMAN GAZI</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">36</td>
+        <td class="n dim">3.080</td>
+        <td class="n strong">36</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayiliği iptal edilmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC. …<span class="b-loc">ÇANAKKALE · MERKEZ</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">1.838</td>
+        <td class="n dim">1.332</td>
+        <td class="n strong">1.838</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin bölgesi çok büyük olmamakla birlikte, kurslara 8. sınıf ürünlerimizden toplu satış yapmış ve elindeki stoğu tüketmiştir. Eylül ayında devlet okullarındaki beklentisi yüksektir. Ara sınıf ürünlerimiz için bugün raf stoğu ön siparişi girilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MSM KIRTASIYE - BIRGUL TIRAS<span class="b-loc">USAK · MERKEZ</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">48</td>
+        <td class="n dim">217</td>
+        <td class="n strong">48</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayiliği iptal edilmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI<span class="b-loc">MUGLA · MENTESE</span></td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">817</td>
+        <td class="n dim">737</td>
+        <td class="n strong">967</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin bulunduğu ilçe çok büyük değildir; ancak 8. sınıf ürünlerinde iyi satış gerçekleştirmiştir. Ara sınıf ürünlerimizde de eylül ayına yönelik beklentimiz vardır. Raf stoğu için ön sipariş girişleri yapılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NEJLA KANSU -KANSU KITABEVI<span class="b-loc">ANTALYA · SERIK</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">60</td>
+        <td class="n dim">159</td>
+        <td class="n strong">60</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Ortaokul bayimiz değildir; yalnızca lise bayiliğimizi yürütmektedir ve raf stoğu için ürün almıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ORTACA-ERAY KITAP KIRTASIYE YAYINCILIK LTD.STI<span class="b-loc">MUGLA · ORTACA</span></td>
+        <td class="n">100</td>
+        <td class="n">90</td>
+        <td class="n">90</td>
+        <td class="n">167</td>
+        <td class="n dim">240</td>
+        <td class="n strong">447</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz ön sipariş girişlerini yapmıştır. Eylül ayında devlet okullarındaki beklentisi yüksektir; gelecek siparişlere göre ek ürün girişi yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE<span class="b-loc">KONYA · AKSEHIR</span></td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">131</td>
+        <td class="n dim">52</td>
+        <td class="n strong">266</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir ilçe bayimizdir. Tüm ürün gruplarında raf stoğu için ön sipariş girişlerini yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SED-KANGURU KITAP MUSAMETTIN KUCAK<span class="b-loc">MANISA · SEHZADELER</span></td>
+        <td class="n">200</td>
+        <td class="n">190</td>
+        <td class="n">250</td>
+        <td class="n">970</td>
+        <td class="n dim">956</td>
+        <td class="n strong">1.610</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin raf stoğu için tüm ürün gruplarından giriş yapılmıştır. Devlet okullarında etkin çalışan bir bayidir. Ara sınıf ürünlerimiz ağırlıklı olarak eylül ayında satıldığından, bu bölgedeki beklentimiz yüksektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SERKAN ISIK - AYRAC KITABEVI<span class="b-loc">AYDIN · NAZILLI</span></td>
+        <td class="n">24</td>
+        <td class="n">22</td>
+        <td class="n">22</td>
+        <td class="n">32</td>
+        <td class="n dim">37</td>
+        <td class="n strong">100</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz ön sipariş girişlerini yapmıştır. Eylül ayında devlet okullarındaki beklentisi yüksektir; gelecek siparişlere göre ek ürün girişi yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TERCIH KITABEVI/GUROL SULUHAN<span class="b-loc">AYDIN · EFELER</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">80</td>
+        <td class="n dim">105</td>
+        <td class="n strong">80</td>
+        <td><span class="pill pill-amber">Orta</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin limit yetersizliği nedeniyle ürün girişi yapılamamıştır. Bu hafta bölge ziyareti gerçekleştirilerek gerekli evraklar alınacak ve ön sipariş girişleri yapılacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TURKER KIRTASIYE-FATIH BAS<span class="b-loc">MANISA · SOMA</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">30</td>
+        <td class="n dim">101</td>
+        <td class="n strong">170</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Küçük bir ilçe bayimizdir. Tüm ürün gruplarında ön sipariş girişlerini yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UC YILDIZ KITABEVI (IBRAHIM YILDIZ)<span class="b-loc">ISPARTA · MERKEZ</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">359</td>
+        <td class="n dim">182</td>
+        <td class="n strong">519</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin bölgesi çok büyük değildir. Bir kurum için toplu ürün alımı yapmış olup ayrıca raf stoğu için girişleri bulunmaktadır. Devlet okullarında yoğun çalışma beklentimiz vardır. Bayimiz, devlet okullarında ürünlerimize güvendiğini ifade etmiştir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UMRAN KITAP KIRTASIYE - ADEM TETIK<span class="b-loc">BURDUR · MERKEZ</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">67</td>
+        <td class="n dim">17</td>
+        <td class="n strong">67</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz ön sipariş girişlerini gün içinde yapacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">USAK KITAP MARKET-FATIH DULGER<span class="b-loc">USAK · MERKEZ</span></td>
+        <td class="n">30</td>
+        <td class="n">25</td>
+        <td class="n">—</td>
+        <td class="n">130</td>
+        <td class="n dim">—</td>
+        <td class="n strong">185</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni bayilik anlaşması yaptığımız bayimiz, ön sipariş girişlerini bu hafta tamamlayacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">YESIL BEYAZ YAYIN DAG(MITHAT APARCI)<span class="b-loc">KONYA · MERAM</span></td>
+        <td class="n">1.500</td>
+        <td class="n">1.500</td>
+        <td class="n">1.500</td>
+        <td class="n">7.141</td>
+        <td class="n dim">8.180</td>
+        <td class="n strong">11.641</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, çalıştığı kurum ve kolejlerin ürünlerini temin etmiş ve bunların büyük bölümünü satmıştır. Devlet okullarında bu satışların üzerinde bir performans beklemekteyiz.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">YONCE YAYIN DAGITIM KITABEVI LTD.STI<span class="b-loc">BURSA · YILDIRIM</span></td>
+        <td class="n">3.450</td>
+        <td class="n">2.950</td>
+        <td class="n">2.950</td>
+        <td class="n">17.225</td>
+        <td class="n dim">—</td>
+        <td class="n strong">26.575</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bursa merkez bayimiz, tüm ürün gruplarından ön sipariş girişlerini yapmış; ayrıca bölgesindeki kurum ve kolejlere güçlü satışlar gerçekleştirmiştir. Elinde çok az 8. sınıf stoğu kalmıştır. Devlet okullarındaki beklentimiz de oldukça yüksektir.</div></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Süleyman İşpınar — 3D Ortaokul Ara Sınıf Soru Bankası</div>
+        <div class="rb-product">1. Raporlama · 24.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">32 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 43.715</span>
+        <span class="rb-badge highlight">▲ %149.4</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Ara Sınıf (5+6+7)</div><div class="sc-val">16.868</div><div class="sc-sub">yeni ürün grubu</div></div>
+      <div class="stat-cell"><div class="sc-label">8. Sınıf</div><div class="sc-val">26.847</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">17.531</div><div class="sc-sub">→ bu yıl 43.715</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl Tüm Sezon</div><div class="sc-val">24.553</div><div class="sc-sub">şimdiden %178'i</div></div>
+      <div class="stat-cell"><div class="sc-label">Bayi Durumu</div><div class="sc-val sc-mini"><span class="dot g"></span>0 <span class="dot a"></span>0 <span class="dot r"></span>0</div><div class="sc-sub">iyi / orta / düşük</div></div>
+    </div>
+
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>3D Ortaokul grubunda, yeni çıkacak ara sınıf soru bankalarının da etkisiyle bu yıl okullarda sipariş girişlerinin oldukça yoğun geçeceği bir dönem yaşanacağı değerlendirilmektedir. Bayilerin genel beklentileri de bu yöndedir.</p>
+      <p>İlk etapta bayilere ara sınıf ürünlerinden sipariş girişleri yaptırılmıştır. Ürünlerin <strong>seminer dönemine örneklerinin yetişmesiyle</strong> birlikte sahada önemli bir karşılık bulacağı ve sipariş potansiyelinin daha da artacağı öngörülmektedir.</p>
+      <p>8. sınıf soru bankalarıyla ilgili sahadan olumsuz geri bildirim alınmamaktadır. Bununla birlikte bu yıl müfredatta yaşanacak değişiklik nedeniyle bayiler mevcut stoklarını dikkate alarak daha kontrollü ilerlemektedir.</p>
+      <p><span class="tag">Talep</span> Bu yıl ilk kez sahaya sunulacak ara sınıf kitapları için <strong>BY'lere ek örnek hakkı tanımlanması</strong> ve bayilere paylaştırılması halinde satış adetlerinin artacağı değerlendirilmektedir.</p>
+    </div>
+    <div class="veri-not"><strong>Veri notu:</strong> Dosyadaki TOPLAM satırında Bu Yıl BGK 44.124 / Geçen Yıl BGK 19.957 / Geçen Yıl Toplam 27.780 görünmektedir. Bayi satırlarının toplamı ise 43.715 / 17.531 / 24.553'tür. Raporda denetlenebilirlik açısından bayi satırlarının toplamı esas alınmıştır; formül aralığının kontrol edilmesi önerilir.</div>
+    <div class="breakdown"><h4>Sınıf Bazlı Sipariş Dağılımı</h4>      <div class="bar-row">
+        <div class="bar-label">5. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill " style="width:22.0%"></div></div>
+        <div class="bar-num">5.903</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">6. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:19.3%"></div></div>
+        <div class="bar-num">5.183</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">7. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:21.5%"></div></div>
+        <div class="bar-num">5.782</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">8. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill dark" style="width:100.0%"></div></div>
+        <div class="bar-num">26.847</div>
+      </div></div>
+    
+    <div class="tablo-wrap">
+    <table class="bayi-tablo">
+      <thead><tr>
+        <th>Bayi</th><th class="n">5.Sf</th><th class="n">6.Sf</th><th class="n">7.Sf</th><th class="n">8.Sf</th>
+        <th class="n">GY BGK</th><th class="n">BY BGK</th><th>Durum</th><th></th>
+      </tr></thead>
+      <tbody>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ADNAN DUMAN - DUMAN KITABEVI<span class="b-loc">KIRSEHIR · MERKEZ</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">20</td>
+        <td class="n dim">120</td>
+        <td class="n strong">160</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz ilk etapta ara sınıflardan raf  için bir miktar ürün girişi yapmıştır. 8. sınıf soru bankalarımız için devlet okulu çalışmalarında aktif olarak yer alınacak ve sipariş girişleri artırılacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ALTIN KITAP KIRTASIYE MALZ.INS.TAAH.TARIM HA…<span class="b-loc">KIRSEHIR · MERKEZ</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">100</td>
+        <td class="n dim">95</td>
+        <td class="n strong">100</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz ortaokul bayisi değildir; yalnızca özel izin dahilinde bir kuruma yönelik sipariş girişi yapılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZARLA…<span class="b-loc">ADANA · SEYHAN</span></td>
+        <td class="n">1.184</td>
+        <td class="n">1.065</td>
+        <td class="n">1.106</td>
+        <td class="n">9.930</td>
+        <td class="n dim">—</td>
+        <td class="n strong">13.285</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin anlaşmalı olduğu kurumların sipariş girişleri tamamlanmış, ayrıca devlet okulu sezonu için ön sipariş girişleri de yapılmıştır. Sezon içerisinde ek sipariş girişleri gerçekleştirilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.S…<span class="b-loc">HATAY · DEFNE</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">75</td>
+        <td class="n">1.225</td>
+        <td class="n dim">1.080</td>
+        <td class="n strong">1.410</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin perakende satışları güçlü değildir; ancak geçen yıl olduğu gibi bu yıl da devlet okulu çalışmalarında aktif olarak yer alacak ve alacağı siparişler için ön sipariş girişi yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BEREN KIRTASIYE-SALIH ERTAN<span class="b-loc">AKSARAY · MERKEZ</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">1.444</td>
+        <td class="n dim">684</td>
+        <td class="n strong">1.444</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin ara sınıflara ilişkin ön sipariş girişleri bu hafta yapılacak ve ikinci raporlamaya kadar tamamlanmış olacaktır. Ayrıca bayimiz, yürüttüğü kurum çalışmaları kapsamında 8. sınıftan yüklü miktarda sipariş girişi yapmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BEYAZIM KITAP EVI - SERKAN KABAAGIL<span class="b-loc">OSMANIYE · KADIRLI</span></td>
+        <td class="n">77</td>
+        <td class="n">54</td>
+        <td class="n">55</td>
+        <td class="n">103</td>
+        <td class="n dim">—</td>
+        <td class="n strong">289</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl yeni anlaşma sağladığımız ilçe bayimiz, ilk etapta belirli miktarda ürün girişi yapmış olup devlet okulu sezonunda yürüteceği çalışmalarla sipariş adetlerini artıracaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BINDEBIR KITAP KIRTASIYE LTD.STI<span class="b-loc">MERSIN · TARSUS</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">1.360</td>
+        <td class="n dim">173</td>
+        <td class="n strong">1.500</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz, devlet okulu sezonu öncesinde ara sınıflardan bir miktar ürün girişi yapmıştır. Bayimizle istişare edilerek devlet okulu sezonunda nitelikli okullarla birlikte çalışma yürütülecektir. 8. sınıf soru bankaları için önceden stok girişi yapılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CAN KITAP KIRTASIYE ABDULKADIR CAN<span class="b-loc">MERSIN · SILIFKE</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">213</td>
+        <td class="n dim">280</td>
+        <td class="n strong">353</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, perakende satışları için az miktarda ürün girişi yapmıştır. Geçen yıl olduğu gibi bu yıl da devlet okulu sezonunda ciddi çalışmalar yürüteceğini ve sipariş girişlerini artıracağını belirtmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CAN KITAP KIRTASIYE-AHMET YILDIRIM<span class="b-loc">YOZGAT · MERKEZ</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">130</td>
+        <td class="n dim">6</td>
+        <td class="n strong">270</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, geçmiş yıllarda olduğu gibi bu yılda da devlet okullarında Millî Eğitim Bakanlığı kaynaklı kısıtlamalar nedeniyle güçlük yaşamıştır. Ancak bu yılki değişiklikler doğrultusunda satışlarının artacağını öngörmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">CETIN KITAP KIRTASIYE SANAYI VE TICARET LIMI…<span class="b-loc">HATAY · DÖRTYOL</span></td>
+        <td class="n">110</td>
+        <td class="n">90</td>
+        <td class="n">90</td>
+        <td class="n">100</td>
+        <td class="n dim">—</td>
+        <td class="n strong">390</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz okullarda aktif olup bu yıl devlet okulu çalışmalarını birlikte yürüterek sipariş adetlerini artıracaktır. Bayimiz, geçen yıl olduğu gibi hedefini tutturacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DEVELI YAPRAK DAGITIM DAVUT KENDIRCI<span class="b-loc">KAYSERI · DEVELI</span></td>
+        <td class="n">34</td>
+        <td class="n">31</td>
+        <td class="n">31</td>
+        <td class="n">15</td>
+        <td class="n dim">—</td>
+        <td class="n strong">111</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Potansiyeli düşük ilçede bulunan bayimiz, ilk etapta ara sınıflardan raflarına ürün girişi yapmıştır. Bayimizle görüşme yapılarak 8. sınıftan da yeni sipariş girişleri alması talep edilmiştir. Bayimiz normal şartlarda lise bayisi olup ortaokul kademesinde de perakende satış amacıyla ürün almaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ETHEM DEMIRBAG (ERDEM KIRTASIYE)<span class="b-loc">ADANA · KOZAN</span></td>
+        <td class="n">40</td>
+        <td class="n">50</td>
+        <td class="n">130</td>
+        <td class="n">267</td>
+        <td class="n dim">425</td>
+        <td class="n strong">487</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz raflarına yönelik sipariş girişlerini yapmıştır. Bayimiz, ilçedeki devlet okullarında da aktif olup geçen yıl olduğu gibi bu yıl da hedefini tutturacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">EYUP ZAFER ATES - ZAFER KIRTASIYE<span class="b-loc">MERSIN · ANAMUR</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">200</td>
+        <td class="n dim">35</td>
+        <td class="n strong">340</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimiz ilk etapta ara sınıflardan belirli miktarda sipariş girişi yapmıştır. Bayimiz ilçede kurumlardan ziyade devlet okullarında aktif şekilde çalışmakta olup bu nedenle sipariş adetleri önümüzdeki dönemde artış gösterecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .<span class="b-loc">KAYSERI · KOCASINAN</span></td>
+        <td class="n">300</td>
+        <td class="n">250</td>
+        <td class="n">250</td>
+        <td class="n">1.284</td>
+        <td class="n dim">140</td>
+        <td class="n strong">2.084</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin stoklarına ilk etapta sipariş girişi yapılmıştır. Devlet okulu çalışmalarında aktif olan bayimizle birlikte nitelikli okul çalışmaları yürütülecek, böylece sipariş adetlerinde ciddi bir artış sağlanacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.Z…<span class="b-loc">ADANA · CUKUROVA</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">783</td>
+        <td class="n dim">3.683</td>
+        <td class="n strong">783</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayiliği sonlandırılan bayimiz, daha önce anlaştığı kurumların sipariş girişlerini tamamlamıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ISKENDERUN OZGUN KITAP KIRTASIYE HABIBE OZGUN<span class="b-loc">HATAY · ISKENDERUN</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">45</td>
+        <td class="n">105</td>
+        <td class="n dim">—</td>
+        <td class="n strong">245</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl yeni anlaştığımız ilçe bayimiz, raflarına az miktarda sipariş girişi yapmıştır. Devlet okulu sezonunda beklentimiz yüksek olup sipariş adetleri yukarı yönlü artış gösterecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KARANFIL KITAP KIRTASIYE UMUT GOKMEN<span class="b-loc">OSMANIYE · MERKEZ</span></td>
+        <td class="n">120</td>
+        <td class="n">100</td>
+        <td class="n">100</td>
+        <td class="n">390</td>
+        <td class="n dim">1.090</td>
+        <td class="n strong">710</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, ara sınıflardan ve 8. sınıf soru bankalarından sipariş girişlerini yapmıştır. Bayimiz nitelikli okullarla aktif şekilde çalışmakta olup geçen yıl olduğu gibi bu yıl da hedeflerini ortaokul grubunda tutturacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KILAVUZ KIRTASIYE - AYSE HAZIRLAR<span class="b-loc">HATAY · REYHANLI</span></td>
+        <td class="n">340</td>
+        <td class="n">260</td>
+        <td class="n">270</td>
+        <td class="n">290</td>
+        <td class="n dim">80</td>
+        <td class="n strong">1.160</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, potansiyeli düşük ilçede Şahika Koleji ile anlaşma sağlamış ve siparişlerini girmiştir. Devlet okulu sezonunda da çalışmalar yürüterek sipariş adetlerini artıracaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KIYAK YAY. DAG. INS. SAN. TIC. LTD. STI.<span class="b-loc">GAZIANTEP · SEHIT KAMIL</span></td>
+        <td class="n">2.000</td>
+        <td class="n">1.800</td>
+        <td class="n">1.800</td>
+        <td class="n">—</td>
+        <td class="n dim">1.240</td>
+        <td class="n strong">5.600</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, önceki yıllarda olduğu gibi bu yıl da ilk etapta yeni çıkan ürünlerden yüklü miktarda sipariş girişi yapmıştır. Devlet okulu sezonundaki çalışmalarıyla birlikte bu yıl da hedeflerini bu alanda tutturacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.<span class="b-loc">KAHRAMANMARAS · DULKADIROGLU</span></td>
+        <td class="n">105</td>
+        <td class="n">110</td>
+        <td class="n">150</td>
+        <td class="n">2.010</td>
+        <td class="n dim">1.360</td>
+        <td class="n strong">2.375</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin perakende satışları çok düşük yoğunluktadır; kurum çalışmaları ve devlet okulu çalışmalarında aktif olarak yer almaktadır. Devlet okulu çalışmalarıyla sipariş adetlerini yukarı yönlü artıracaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MAVI KITAP KIRTASIYE MEHMET ALI KUH<span class="b-loc">HATAY · SAMANDAG</span></td>
+        <td class="n">70</td>
+        <td class="n">70</td>
+        <td class="n">70</td>
+        <td class="n">50</td>
+        <td class="n dim">35</td>
+        <td class="n strong">260</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin perakende satışları düşük olmasına rağmen ilk etapta özellikle ara sınıflardan bir miktar ürün sipariş girişi yapmıştır. Devlet okulu çalışmalarında da aktif olarak yer alarak sipariş adetlerini yukarı yönlü artıracaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MERCAN KIRTASIYE-DOGAN SAVAS<span class="b-loc">HATAY · ARSUZ</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">20</td>
+        <td class="n">110</td>
+        <td class="n dim">—</td>
+        <td class="n strong">130</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizle ortaokul sözleşmesi yapılmamış olmakla birlikte, ilçede oluşan boşluk nedeniyle sipariş aldığı okulların girişlerini yapmıştır. Sezon içerisinde de adımıza çalışmalarını sürdürecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI<span class="b-loc">MERSIN · YENISEHIR</span></td>
+        <td class="n">420</td>
+        <td class="n">390</td>
+        <td class="n">390</td>
+        <td class="n">2.110</td>
+        <td class="n dim">3.690</td>
+        <td class="n strong">3.310</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, devlet okulu sezonu için ön sipariş girişlerini gerek ara sınıflarda gerekse 8. sınıfta gerçekleştirmiştir. Sezon içerisinde okullarda birlikte çalışma yürütülecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MINI KITAP KIRTASIYE ALPAY ERDAL<span class="b-loc">KAHRAMANMARAS · ELBISTAN</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">67</td>
+        <td class="n dim">14</td>
+        <td class="n strong">67</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlçe bayimize ara sınıflar için bir miktar ürün girişi yapılacaktır; ancak bayimizin perakende satışları çok düşük seviyededir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTA…<span class="b-loc">YOZGAT · YERKÖY</span></td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">—</td>
+        <td class="n">10</td>
+        <td class="n dim">114</td>
+        <td class="n strong">10</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Potansiyeli ve perakende satışları düşük olan bayimize ara sınıflardan bir miktar ürün girişi yapılacaktır. Bayimizin elinde 8. sınıf soru bankalarına ait ürün bulunmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MUSTAFA DANIS - DANIS KITABEVI<span class="b-loc">KARAMAN · MERKEZ</span></td>
+        <td class="n">45</td>
+        <td class="n">40</td>
+        <td class="n">40</td>
+        <td class="n">310</td>
+        <td class="n dim">180</td>
+        <td class="n strong">435</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> İlk etapta bayimizin talebi doğrultusunda ürün girişi yapılmıştır. Devlet okulu sezonunda yürütülen çalışmalar yakından takip edilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NEVSEHIR MY VIP - RAMAZAN SINAN OZDEMIR<span class="b-loc">NEVSEHIR · MERKEZ</span></td>
+        <td class="n">150</td>
+        <td class="n">160</td>
+        <td class="n">220</td>
+        <td class="n">825</td>
+        <td class="n dim">1.071</td>
+        <td class="n strong">1.355</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz, Başarı Eğitim Kurumları ile anlaşma sağlamış ve siparişlerini girmiştir. Devlet okulu çalışmalarında da birlikte aksiyon alınacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI<span class="b-loc">ÇORUM · MERKEZ</span></td>
+        <td class="n">350</td>
+        <td class="n">220</td>
+        <td class="n">260</td>
+        <td class="n">2.076</td>
+        <td class="n dim">290</td>
+        <td class="n strong">2.906</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizle yapılan görüşmede ara sınıf ve LGS grubundan sipariş girişleri gerçekleştirilmiştir. Bayimiz şimdiden üç devlet okulu ile anlaşma sağlamış olup sezon içerisinde beklenen kurumlarla görüşmelerini sonuçlandırarak siparişlerini artıracaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">RUZGAR YAYINCILIK KITAP KIRTASIYE TEMIZLIK S…<span class="b-loc">AMASYA · MERKEZ</span></td>
+        <td class="n">80</td>
+        <td class="n">70</td>
+        <td class="n">70</td>
+        <td class="n">220</td>
+        <td class="n dim">—</td>
+        <td class="n strong">440</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bu yıl yeni anlaşma sağladığımız bayimize bir miktar sipariş girişi tanımlanmıştır. Bayimizin devlet okulu çalışmaları da aktif olarak takip edilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TEBESIR KITABEVI - MEHMET ERHAN KARAHAN<span class="b-loc">GAZIANTEP · NIZIP</span></td>
+        <td class="n">36</td>
+        <td class="n">29</td>
+        <td class="n">29</td>
+        <td class="n">210</td>
+        <td class="n dim">870</td>
+        <td class="n strong">304</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin perakende satışları zayıf olmakla birlikte devlet okulu çalışmaları aktiftir. Limitin sınırlı olması nedeniyle sipariş aldığı ürünlerden girişini gerçekleştirecek olup ilk etapta bir miktar giriş yapılmıştır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TORE KIRTASIYE TICARET VE SANAYI LTD STI<span class="b-loc">NIGDE · BOR</span></td>
+        <td class="n">32</td>
+        <td class="n">29</td>
+        <td class="n">31</td>
+        <td class="n">330</td>
+        <td class="n dim">556</td>
+        <td class="n strong">422</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimiz devlet okullarında aktif olup gerek ara sınıflarda gerekse LGS grubunda yürüttüğü çalışmalar doğrultusunda sipariş girişleri artacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">VIZYON PLUS KITABEVI OKKES ANIL MART<span class="b-loc">OSMANIYE · DÜZIÇI</span></td>
+        <td class="n">50</td>
+        <td class="n">45</td>
+        <td class="n">325</td>
+        <td class="n">560</td>
+        <td class="n dim">220</td>
+        <td class="n strong">980</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin limit sorunu bulunmasına rağmen ilk etapta bir kurumla anlaşma sağlayarak sipariş girişlerini gerçekleştirmiştir. Sezon içerisinde de devlet okulu çalışmalarında aktif olarak yer alarak hedeflerini tutturacaktır.</div></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="report-block">
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">Vedat Adsan — 3D Ortaokul 5-6-7-8. Sınıf Soru Bankası</div>
+        <div class="rb-product">1. Raporlama · 24.08.2026</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">39 Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: 27.008</span>
+        <span class="rb-badge highlight">▲ %196.8</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Ara Sınıf (5+6+7)</div><div class="sc-val">13.291</div><div class="sc-sub">yeni ürün grubu</div></div>
+      <div class="stat-cell"><div class="sc-label">8. Sınıf</div><div class="sc-val">13.717</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">9.100</div><div class="sc-sub">→ bu yıl 27.008</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl Tüm Sezon</div><div class="sc-val">18.840</div><div class="sc-sub">şimdiden %143'i</div></div>
+      <div class="stat-cell"><div class="sc-label">Bayi Durumu</div><div class="sc-val sc-mini"><span class="dot g"></span>14 <span class="dot a"></span>0 <span class="dot r"></span>3</div><div class="sc-sub">iyi / orta / düşük</div></div>
+    </div>
+
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>Düşük performans gösteren bayilerle birebir görüşmeler yapılarak satış engelleri analiz edilecek ve sipariş planları netleştirilecektir. Büyüme gösteren bayilerin sevkiyat ve stok süreçleri takip edilerek satış sürekliliği desteklenecektir.</p>
+      <p>Sipariş oluşturmayan bayiler ziyaret edilerek yeni dönem kaynak planlamaları değerlendirilecek ve siparişe dönüşüm çalışmaları yapılacaktır. Ara sınıf ürün grubunda potansiyel görülen bölgelerde saha çalışmaları artırılarak ek satış fırsatları değerlendirilecektir.</p>
+      <p><span class="tag">Aksiyon</span> Kırmızı kategorideki bayiler için performans iyileştirme ve hedef odaklı aksiyonlar uygulanacak; bayi stok kontrolleri yapılarak eksik ürünler için ilave sipariş çalışmaları gerçekleştirilecek; ön sipariş ve tahsilat süreçleri gözden geçirilerek dönem öncesi satış hedeflerinin gerçekleşmesi desteklenecektir.</p>
+    </div>
+    <div class="veri-not"><strong>Veri notu:</strong> Dosyanın 'Grafikler' sekmesi Geçen Yıl BGK 8.032 / Bu Yıl BGK 20.225 değerlerini göstermektedir; ana tablodaki bayi satırları ise 9.100 / 27.008 toplamını vermektedir. Ana tablo esas alınmıştır.</div>
+    <div class="breakdown"><h4>Sınıf Bazlı Sipariş Dağılımı</h4>      <div class="bar-row">
+        <div class="bar-label">5. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill " style="width:31.5%"></div></div>
+        <div class="bar-num">4.318</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">6. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill green" style="width:27.8%"></div></div>
+        <div class="bar-num">3.807</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">7. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:37.7%"></div></div>
+        <div class="bar-num">5.166</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">8. Sınıf SB</div>
+        <div class="bar-track"><div class="bar-fill dark" style="width:100.0%"></div></div>
+        <div class="bar-num">13.717</div>
+      </div></div>
+    
+    <div class="tablo-wrap">
+    <table class="bayi-tablo">
+      <thead><tr>
+        <th>Bayi</th><th class="n">5.Sf</th><th class="n">6.Sf</th><th class="n">7.Sf</th><th class="n">8.Sf</th>
+        <th class="n">GY BGK</th><th class="n">BY BGK</th><th>Durum</th><th></th>
+      </tr></thead>
+      <tbody>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ADA KIRTASIYE KITABEVI MEHMET CIHAD ELCI<span class="b-loc">BINGÖL · MERKEZ</span></td>
+        <td class="n">164</td>
+        <td class="n">168</td>
+        <td class="n">610</td>
+        <td class="n">1.570</td>
+        <td class="n dim">190</td>
+        <td class="n strong">2.512</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Şinasi Bey kurum kanalında 5-6-7-8. sınıf ürünlerimizle toplu satış gerçekleştirmiştir. Yeni eğitim döneminde devlet okullarının açılmasıyla birlikte özellikle 5-6-7. sınıflarda saha tanıtımlarının artırılması ve mevcut satış ivmesinin güçlendirilmesi planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">AKSU KIRTASIYE - AZIZ AKSU<span class="b-loc">HAKKARI · MERKEZ</span></td>
+        <td class="n">30</td>
+        <td class="n">25</td>
+        <td class="n">25</td>
+        <td class="n">230</td>
+        <td class="n dim">70</td>
+        <td class="n strong">310</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizle yeni 5-6-7. sınıf soru bankalarının lansman süreci değerlendirilmiş olup devlet okullarında öğretmen odaklı tanıtımlara ağırlık verilmesi planlanmaktadır. Yeni ürünlerin sahadaki görünürlüğünün artırılmasıyla ek satış fırsatları oluşturulacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">ANKA SIMURG KITAP KIRTASIYE<span class="b-loc">ELAZIG · MERKEZ</span></td>
+        <td class="n">360</td>
+        <td class="n">300</td>
+        <td class="n">300</td>
+        <td class="n">2.793</td>
+        <td class="n dim">—</td>
+        <td class="n strong">3.753</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Nihat Bey bu yıl 8. sınıf seviyesinde kurum kanalında toplu satış çalışmaları yürütmüştür. Önümüzdeki dönemde yeni 5-6-7. sınıf ürünlerinin devlet okullarında tanıtımına yönelerek satış potansiyelinin geliştirilmesi hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">AY KIRTASIYE KITAP TEK.TEM.INS.MOB. SAN.TIC.…<span class="b-loc">AGRI · MERKEZ</span></td>
+        <td class="n">39</td>
+        <td class="n">34</td>
+        <td class="n">45</td>
+        <td class="n">305</td>
+        <td class="n dim">248</td>
+        <td class="n strong">423</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin 5-6-7. sınıf yeni ürünlerine yönelik devlet okullarındaki saha çalışmaları artırılacaktır. Tanıtımların öğretmen ve kurum görüşmeleriyle desteklenmesi, ürünlerin tercih edilme oranına ve satış hacmine katkı sağlaması beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BILIM KIRTASIYE SELAHET METE<span class="b-loc">SIRNAK · SILOPI</span></td>
+        <td class="n">30</td>
+        <td class="n">25</td>
+        <td class="n">25</td>
+        <td class="n">330</td>
+        <td class="n dim">—</td>
+        <td class="n strong">410</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf soru bankaları için devlet okullarındaki tanıtım planlaması bayimizle değerlendirilmiştir. Ürünlerin sahaya çıkarılmasıyla marka görünürlüğünün artırılması ve mevcut satış seviyesinin yukarı taşınması amaçlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BILIM KITABEVI SEYIT ATES<span class="b-loc">SANLIURFA · VIRANSEHIR</span></td>
+        <td class="n">36</td>
+        <td class="n">30</td>
+        <td class="n">30</td>
+        <td class="n">98</td>
+        <td class="n dim">200</td>
+        <td class="n strong">194</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizle yeni dönem 5-6-7. sınıf ürünlerinin devlet okullarındaki tanıtım süreci planlanmıştır. Özellikle öğretmen ziyaretleri ve ürün tanıtımları üzerinden yeni satış kanalları oluşturulması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">BKM BATMAN KITAP MERKEZI KIRTASIYE<span class="b-loc">BATMAN · MERKEZ</span></td>
+        <td class="n">300</td>
+        <td class="n">250</td>
+        <td class="n">280</td>
+        <td class="n">115</td>
+        <td class="n dim">0</td>
+        <td class="n strong">945</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin mevcut satış yapısı değerlendirildiğinde yeni 5-6-7. sınıf ürünlerinde devlet okullarına yönelik saha çalışmasının önemli bir fırsat oluşturduğu görülmektedir. Tanıtımların dönem başlangıcında yoğunlaştırılması planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DOGAN KITAP KIRTASIYE IBRAHIM DOGAN<span class="b-loc">SANLIURFA · HALILIYE</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">90</td>
+        <td class="n dim">—</td>
+        <td class="n strong">250</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf soru bankalarının tanıtımı için bayimizin devlet okullarındaki saha çalışmalarını artırması planlanmıştır. Dönem içerisinde oluşacak kurum ve öğretmen taleplerinin satışa çevrilmesi takip edilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DOGUBAYAZIT SERHAT KITAPEVI SERHAT CELIK<span class="b-loc">AGRI · DOGUBAYAZIT</span></td>
+        <td class="n">0</td>
+        <td class="n">0</td>
+        <td class="n">0</td>
+        <td class="n">70</td>
+        <td class="n dim">—</td>
+        <td class="n strong">70</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf ürünlerinde devlet okulları kanalına odaklanması planlanmaktadır. Ürün tanıtımlarının eğitim dönemi başlangıcında hızlandırılmasıyla yeni sipariş fırsatlarının oluşturulması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">DORUK SANAYI VE TICARET LIMITED SIRKETI<span class="b-loc">MARDIN · KIZILTEPE</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">160</td>
+        <td class="n dim">25</td>
+        <td class="n strong">320</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni ürün grubunun devlet okullarındaki tanıtım süreci bayimizle görüşülmüştür. 5-6-7. sınıf seviyelerinde yapılacak saha ziyaretleriyle ürünlerin bilinirliğinin artırılması ve satışların desteklenmesi planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">FINAL BASARI EGITIM HIZ. BAS.YAY.TURZGIDA<span class="b-loc">SIIRT · KURTALAN</span></td>
+        <td class="n">18</td>
+        <td class="n">15</td>
+        <td class="n">25</td>
+        <td class="n">30</td>
+        <td class="n dim">—</td>
+        <td class="n strong">88</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf soru bankaları için devlet okullarında tanıtım çalışmalarını artırması planlanmaktadır. Özellikle dönem başlangıcında yapılacak ziyaretlerle yeni müşteri ve sipariş fırsatları değerlendirilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ<span class="b-loc">GÜMÜSHANE · MERKEZ</span></td>
+        <td class="n">39</td>
+        <td class="n">36</td>
+        <td class="n">36</td>
+        <td class="n">114</td>
+        <td class="n dim">0</td>
+        <td class="n strong">225</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf ürünleri için devlet okullarında daha aktif bir tanıtım sürecine geçilmesi planlanmaktadır. Bayimizin saha çalışmalarıyla ürünlerin öğretmenlere ulaştırılması ve satışa dönüşümün sağlanması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUNEYDOGU KIRTASIYE-MUHSIN DEGER<span class="b-loc">SIRNAK · CIZRE</span></td>
+        <td class="n">36</td>
+        <td class="n">30</td>
+        <td class="n">30</td>
+        <td class="n">0</td>
+        <td class="n dim">—</td>
+        <td class="n strong">96</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni ürün grubunda devlet okullarına yönelik tanıtım faaliyetlerini önümüzdeki dönemde artırması beklenmektedir. 5-6-7. sınıf seviyelerinde oluşabilecek yeni talepler yakından takip edilerek satış fırsatları değerlendirilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUNEYDOGU TELEKOMUNASYON KAGT<span class="b-loc">SIRNAK · IDIL</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">0</td>
+        <td class="n dim">92</td>
+        <td class="n strong">160</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf soru bankalarının devlet okullarında tanıtımı için saha planlaması yapılacaktır. Mevcut ürün hareketliliğinin yeni ürün grubuna da taşınması ve satış hacminin geliştirilmesi amaçlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">GUZEL OZEL EGT KIRT INS SAN TIC LTD STI<span class="b-loc">DIYARBAKIR · ERGANI</span></td>
+        <td class="n">395</td>
+        <td class="n">365</td>
+        <td class="n">390</td>
+        <td class="n">700</td>
+        <td class="n dim">34</td>
+        <td class="n strong">1.850</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Mehmet Bey bu yıl 5-6-7-8. sınıf seviyelerinde kurum kanalında toplu satış gerçekleştirmiştir. Yeni dönemde bu satış deneyiminin devlet okullarına taşınması ve yeni 5-6-7. sınıf ürünlerinin yoğun tanıtımla desteklenmesi planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">HEDEF KIRTASIYE-ZAFER YAVUZER<span class="b-loc">VAN · IPEKYOLU</span></td>
+        <td class="n">300</td>
+        <td class="n">250</td>
+        <td class="n">250</td>
+        <td class="n">320</td>
+        <td class="n dim">5.930</td>
+        <td class="n strong">1.120</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin geçen dönemden kalan 8. sınıf stoklarını eritmeye yönelik çalışması devam etmektedir. Stok seviyesinin dengelenmesinin ardından devlet okullarında 5-6-7. sınıf ürünlerine yönelik yoğun saha tanıtımları başlatılarak satışların artırılması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">IGDIR KULTUR KITAP KIRTASIYE-MEHMET NURI YIGIT<span class="b-loc">IGDIR · MERKEZ</span></td>
+        <td class="n">120</td>
+        <td class="n">100</td>
+        <td class="n">100</td>
+        <td class="n">210</td>
+        <td class="n dim">60</td>
+        <td class="n strong">530</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf ürünlerinin devlet okullarında tanıtılması bayimizle gündeme alınmıştır. Dönem başlangıcında yapılacak saha çalışmalarıyla ürünlerin yeni kaynak olarak konumlandırılması ve satış potansiyelinin geliştirilmesi planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KOMMAGENE KITAP DEPOSU RAHIME BILGIC<span class="b-loc">ADIYAMAN · MERKEZ</span></td>
+        <td class="n">120</td>
+        <td class="n">100</td>
+        <td class="n">100</td>
+        <td class="n">360</td>
+        <td class="n dim">—</td>
+        <td class="n strong">680</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin mevcut ürün hareketliliği dikkate alınarak yeni 5-6-7. sınıf soru bankaları için devlet okulları kanalında tanıtım fırsatlarının değerlendirilmesi planlanmaktadır. Özellikle dönem başındaki öğretmen temasları satışa dönüştürülecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">KOZLUK KULTUR KITAP KIRTASIYE - NIHAL GUNEY<span class="b-loc">BATMAN · KOZLUK</span></td>
+        <td class="n">21</td>
+        <td class="n">19</td>
+        <td class="n">19</td>
+        <td class="n">21</td>
+        <td class="n dim">—</td>
+        <td class="n strong">80</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf ürün grubunda bayimizin devlet okullarındaki tanıtım faaliyetlerini artırması planlanmaktadır. Saha ziyaretleriyle ürünlerin bilinirliği yükseltilerek mevcut satış hacmine ilave katkı sağlanması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)<span class="b-loc">BAYBURT · MERKEZ</span></td>
+        <td class="n">30</td>
+        <td class="n">25</td>
+        <td class="n">50</td>
+        <td class="n">0</td>
+        <td class="n dim">0</td>
+        <td class="n strong">105</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf soru bankaları için devlet okullarında tanıtım yapması planlanmaktadır. Önümüzdeki dönemde oluşacak öğretmen ve öğrenci kaynak talepleri takip edilerek siparişe dönüşüm fırsatları değerlendirilecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI<span class="b-loc">MARDIN · DERIK</span></td>
+        <td class="n">36</td>
+        <td class="n">30</td>
+        <td class="n">30</td>
+        <td class="n">0</td>
+        <td class="n dim">0</td>
+        <td class="n strong">96</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf ürünleri için devlet okullarında tanıtım çalışmaları önceliklendirilecektir. Bayimizin saha temaslarını artırmasıyla ürünlerin yeni kaynak olarak konumlandırılması ve satış hacminin geliştirilmesi amaçlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">MIDYAT BARIS KIRTASIYE BESIR ULUG<span class="b-loc">MARDIN · MIDYAT</span></td>
+        <td class="n">18</td>
+        <td class="n">15</td>
+        <td class="n">15</td>
+        <td class="n">78</td>
+        <td class="n dim">27</td>
+        <td class="n strong">126</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin 5-6-7. sınıf yeni ürünlerinde devlet okullarına yönelik tanıtım çalışmalarını güçlendirmesi planlanmaktadır. Eğitim dönemiyle birlikte yapılacak saha ziyaretleri üzerinden yeni sipariş potansiyeli oluşturulacaktır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NAYIF AYDEMIR (VAROL KIRTASIYE)<span class="b-loc">BITLIS · MERKEZ</span></td>
+        <td class="n">300</td>
+        <td class="n">300</td>
+        <td class="n">350</td>
+        <td class="n">1.010</td>
+        <td class="n dim">85</td>
+        <td class="n strong">1.960</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin mevcut satış performansı güçlü olmakla birlikte yeni 5-6-7. sınıf ürünlerinde devlet okulu kanalının daha etkin kullanılması hedeflenmektedir. Yoğun tanıtım çalışmalarıyla mevcut satış seviyesinin daha da yukarı taşınması planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">NURULLAH OLCAN KITABEVI<span class="b-loc">SIRNAK · MERKEZ</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">31</td>
+        <td class="n dim">0</td>
+        <td class="n strong">191</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf soru bankalarının devlet okullarında tanıtımına yönelik saha planı oluşturulacaktır. Bayimizin öğretmen ve okul ziyaretlerini artırmasıyla ürünlerin satışa dönüşümünün hızlandırılması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OKURKENT KIRTASIYE GIYASETTIN DEMIR<span class="b-loc">MUS · MERKEZ</span></td>
+        <td class="n">150</td>
+        <td class="n">150</td>
+        <td class="n">210</td>
+        <td class="n">240</td>
+        <td class="n dim">4</td>
+        <td class="n strong">750</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf ürünlerinde devlet okullarına yönelik tanıtım çalışmalarını dönem başlangıcında yoğunlaştırması planlanmaktadır. Saha görünürlüğünün artırılmasıyla yeni satış fırsatlarının oluşturulması beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OVA KITAP KITAP KIRTASIYE- BIRHAT ISIK<span class="b-loc">HAKKARI · YÜKSEKOVA</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">60</td>
+        <td class="n dim">—</td>
+        <td class="n strong">220</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf soru bankaları için devlet okullarındaki tanıtım süreci bayimizle planlanacaktır. Ürünlerin öğretmenlere doğrudan ulaştırılması ve oluşan taleplerin siparişe çevrilmesi üzerine çalışma yürütülecektir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OZCELIK KIRTASIYE MUHAMMED OZCELIK<span class="b-loc">SANLIURFA · CEYLANPINAR</span></td>
+        <td class="n">150</td>
+        <td class="n">125</td>
+        <td class="n">216</td>
+        <td class="n">390</td>
+        <td class="n dim">—</td>
+        <td class="n strong">881</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf ürünlerinde devlet okullarına yönelik tanıtım faaliyetlerini artırması planlanmaktadır. Özellikle eğitim dönemi başlangıcında gerçekleştirilecek ziyaretlerle ürünlerin kullanım alanının genişletilmesi hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA LTD…<span class="b-loc">KARS · MERKEZ</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">285</td>
+        <td class="n dim">110</td>
+        <td class="n strong">445</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf ürün grubunun devlet okullarındaki tanıtımı önümüzdeki dönemin öncelikli çalışmalarından biri olacaktır. Bayimizin saha temasları artırılarak ürün bilinirliği ve satış performansının geliştirilmesi planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">POZITIF BASKI HIZMETLERI KITAP KIRTASIYE<span class="b-loc">ERZURUM · YAKUTIYE</span></td>
+        <td class="n">180</td>
+        <td class="n">150</td>
+        <td class="n">250</td>
+        <td class="n">356</td>
+        <td class="n dim">255</td>
+        <td class="n strong">936</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin mevcut satış hacmi ve saha gücü dikkate alınarak yeni 5-6-7. sınıf ürünlerinde devlet okullarına yönelik tanıtımların artırılması planlanmaktadır. Yeni ürünlerin mevcut müşteri ağı üzerinden hızlı şekilde yaygınlaştırılması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP <span class="b-loc">DIYARBAKIR · KAYAPINAR</span></td>
+        <td class="n">230</td>
+        <td class="n">250</td>
+        <td class="n">465</td>
+        <td class="n">1.687</td>
+        <td class="n dim">540</td>
+        <td class="n strong">2.632</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin güçlü saha ve dağıtım yapısı yeni 5-6-7. sınıf ürünlerinin devlet okullarında yaygınlaştırılması açısından önemli bir fırsat sunmaktadır. Dönem başında yoğun tanıtım ve satış çalışmalarıyla mevcut hacmin daha da büyütülmesi planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SAMI YILDIRIM VE ORTAKLIGI (GENC CARSI KITAP…<span class="b-loc">ERZINCAN · MERKEZ</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">77</td>
+        <td class="n dim">115</td>
+        <td class="n strong">237</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf soru bankalarının devlet okullarındaki tanıtımına yönelik çalışma planlanmıştır. Bayimizin mevcut müşteri ilişkileri kullanılarak öğretmen ve okul bazlı satış fırsatlarının artırılması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SEBIL KIRTASIYE-UZEYIR AKCELIK<span class="b-loc">BITLIS · AHLAT</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">30</td>
+        <td class="n dim">70</td>
+        <td class="n strong">190</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf ürünlerini devlet okullarında tanıtması planlanmaktadır. Özellikle dönem başlangıcında yapılacak saha ziyaretleriyle ürünlerin tercih edilme oranının yükseltilmesi ve satışların desteklenmesi amaçlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SEDAT KIRTASIYE (ABUBEKIR YUCEL)<span class="b-loc">SANLIURFA · BIRECIK</span></td>
+        <td class="n">120</td>
+        <td class="n">100</td>
+        <td class="n">100</td>
+        <td class="n">234</td>
+        <td class="n dim">20</td>
+        <td class="n strong">554</td>
+        <td><span class="pill pill-grey">—</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf ürün grubunda devlet okullarına yönelik tanıtım faaliyetleri artırılacaktır. Bayimizin saha çalışmalarını düzenli şekilde takip ederek oluşacak talepleri siparişe dönüştürmesi planlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SIIRT ARI KITAPEVI  ALI KURT<span class="b-loc">SIIRT · MERKEZ</span></td>
+        <td class="n">70</td>
+        <td class="n">60</td>
+        <td class="n">335</td>
+        <td class="n">170</td>
+        <td class="n dim">80</td>
+        <td class="n strong">635</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin mevcut ürün satışları doğrultusunda yeni 5-6-7. sınıf soru bankalarında devlet okulu kanalının daha etkin kullanılması planlanmaktadır. Tanıtım çalışmalarıyla yeni ürünlerin satış performansına katkı sağlanması hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">SIVEREK AKADEMI KITAP KIRTASIYE BILGISAYAR<span class="b-loc">SANLIURFA · SIVEREK</span></td>
+        <td class="n">60</td>
+        <td class="n">50</td>
+        <td class="n">50</td>
+        <td class="n">25</td>
+        <td class="n dim">375</td>
+        <td class="n strong">185</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf ürünlerinde devlet okullarındaki tanıtım faaliyetlerini artırması planlanmaktadır. Özellikle dönem başlangıcında gerçekleştirilecek yoğun saha çalışmalarıyla yeni ürünlerin satışa dönüşmesi hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.<span class="b-loc">MARDIN · NUSAYBIN</span></td>
+        <td class="n">30</td>
+        <td class="n">25</td>
+        <td class="n">50</td>
+        <td class="n">920</td>
+        <td class="n dim">160</td>
+        <td class="n strong">1.025</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf soru bankaları için devlet okullarında tanıtım faaliyetleri planlanmıştır. Bayimizin mevcut saha bağlantıları üzerinden ürünlerin öğretmenlere tanıtılması ve yeni siparişlerin oluşturulması amaçlanmaktadır.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">TEBLIG KIRTASIYE TEKS. TAS. TUR. SAN. VE. TI…<span class="b-loc">DIYARBAKIR · BISMIL</span></td>
+        <td class="n">36</td>
+        <td class="n">30</td>
+        <td class="n">30</td>
+        <td class="n">0</td>
+        <td class="n dim">195</td>
+        <td class="n strong">96</td>
+        <td><span class="pill pill-red">Düşük</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni ürün grubunda devlet okullarına yönelik tanıtım çalışmalarını artırması planlanmaktadır. 5-6-7. sınıf seviyelerinde yapılacak ürün sunumlarıyla yeni dönem satışlarının desteklenmesi hedeflenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UCAR DAGITIM PAZARLAMA ITH IHR TIC SAN LTD STI<span class="b-loc">MARDIN · ARTUKLU</span></td>
+        <td class="n">300</td>
+        <td class="n">250</td>
+        <td class="n">250</td>
+        <td class="n">488</td>
+        <td class="n dim">140</td>
+        <td class="n strong">1.288</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Yeni 5-6-7. sınıf ürünlerinin devlet okullarında tanıtımı bayimizin önümüzdeki dönem çalışma planına alınmıştır. Yoğun saha çalışmalarıyla ürünlerin bilinirliğinin artırılması ve satış potansiyelinin geliştirilmesi beklenmektedir.</div></td></tr>
+      <tr class="drow" onclick="toggleRow(this)">
+        <td class="b-name">UMUT KIRTASIYE-MEHMET ALI CEYHAN<span class="b-loc">DIYARBAKIR · SILVAN</span></td>
+        <td class="n">120</td>
+        <td class="n">100</td>
+        <td class="n">100</td>
+        <td class="n">120</td>
+        <td class="n dim">75</td>
+        <td class="n strong">440</td>
+        <td><span class="pill pill-green">İyi</span></td>
+        <td class="expand-icon">▶</td>
+      </tr>
+      <tr class="erow" style="display:none"><td colspan="9"><div class="erow-content"><strong>BY Notu:</strong> Bayimizin yeni 5-6-7. sınıf soru bankalarında devlet okulları kanalına ağırlık vermesi planlanmaktadır. Eğitim dönemi başlangıcında gerçekleştirilecek tanıtımlarla mevcut müşteri portföyünden ilave satış fırsatları oluşturulacaktır.</div></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section-title">Genel Değerlendirme ve Öneriler</div>
+  <div class="report-block">
+    <div style="padding:18px 22px;">
+      <p style="margin-bottom:10px;"><strong>1. 8. sınıf, geçen yılın tüm sezon toplamını şimdiden aşmıştır.</strong> Üç bölgede 8. sınıf ön sipariş adedi 80.464 olup, aynı bölgelerin geçen yıl <em>tüm sezon</em> toplamı 78.093 adettir. Sezon henüz başlamadan bu seviyeye ulaşılması, ürün grubundaki marka algısının güçlendiğini göstermektedir.</p>
+      <p style="margin-bottom:10px;"><strong>2. Ara sınıf ürünleri ilk sezonunda 51.888 adetlik ön sipariş üretmiştir.</strong> Bu rakam tamamen raf stoğu ve erken kurum anlaşmalarından oluşmaktadır; üç BY de asıl hareketliliğin devlet okullarının açılmasıyla eylül ayında oluşacağını belirtmektedir. Ürün tam set olarak ilk kez sahada olacağından, satış potansiyeli mevcut rakamın belirgin üzerindedir.</p>
+      <p style="margin-bottom:10px;"><strong>3. Kritik darboğaz örnek ürün tedarikidir.</strong> Üç bölgeden de gelen ortak geri bildirim, öğretmenlerin ürünü görmeden tercih etmediği yönündedir. Karar 2 kapsamındaki ek örnek desteğinin seminer dönemi öncesinde sonuçlandırılması, ara sınıf satış hedefleri açısından belirleyici olacaktır.</p>
+      <p style="margin-bottom:10px;"><strong>4. Bayi bazında müdahale gerektiren durumlar mevcuttur.</strong> Muhsin Özbalcı bölgesinde üç bayinin bayiliği iptal edilmiş, bir bayide limit yetersizliği nedeniyle giriş yapılamamıştır. Vedat Adsan bölgesinde üç bayi kırmızı kategoridedir; Van Hedef Kırtasiye'de geçen dönemden devreden 8. sınıf stoğu satış önünde engel oluşturmaktadır. Süleyman İşpınar bölgesinde bir bayilik sonlandırılmıştır.</p>
+      <p><strong>5. Raporlama kapsamı genişletilmelidir.</strong> Kitaphane ve Kadir İlhan bölgelerinin verileri bu dönem alınamamıştır. 2. raporlama döneminde beş bölgenin tamamının dahil edilmesi, grup geneli trend takibi açısından gereklidir.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div><strong>Çözüm Yayın Grubu</strong> · Satış &amp; Raporlama Birimi · 1. Raporlama Dönemi (Ağustos 2026)</div>
+    <div>Power BI – Ürün Raporu baz alınarak hazırlanmıştır · 24.08.2026</div>
+  </div>
+</div>
+
+<script>
+function toggleRow(drow) {
+  const erow = drow.nextElementSibling;
+  const icon = drow.querySelector('.expand-icon');
+  if (erow.style.display === 'none') { erow.style.display = 'table-row'; icon.textContent = '▼'; }
+  else { erow.style.display = 'none'; icon.textContent = '▶'; }
+}
+</script>
+</body>
+</html>
