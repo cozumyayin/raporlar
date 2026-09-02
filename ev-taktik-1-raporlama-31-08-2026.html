@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV 9-10-11.Sınıf TAK-TİK — 1. Raporlama · 31.08.2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --red: #C8102E;
+    --red-dark: #9b0c22;
+    --red-light: #fde8ec;
+    --ink: #1a1a1a;
+    --ink-mid: #444;
+    --ink-light: #888;
+    --border: #e0e0e0;
+    --bg: #f5f4f0;
+    --white: #ffffff;
+    --green: #1a7a4a;
+    --green-bg: #e8f5ee;
+    --amber: #b45309;
+    --amber-bg: #fef3c7;
+    --blue: #1d4ed8;
+    --blue-bg: #eff6ff;
+    --grey: #666;
+    --grey-bg: #eee;
+    --kritik: #d64545;
+    --karar-bg: #fdf6e3;
+    --karar-border: #e8dcae;
+    --hl-bg: #fff1a8;
+  }
+
+  [data-theme="dark"] {
+    --ink: #eee;
+    --ink-mid: #c7c7c7;
+    --ink-light: #999;
+    --border: #333;
+    --bg: #161616;
+    --white: #202020;
+    --red-light: #3a1418;
+    --green-bg: #123425;
+    --amber-bg: #3a2c0d;
+    --blue-bg: #0f2440;
+    --grey-bg: #2a2a2a;
+    --karar-bg: #2a2510;
+    --karar-border: #4a4020;
+    --hl-bg: #6b5c12;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header { background: var(--white); border-bottom: 4px solid var(--red); }
+  .header-top {
+    display: flex; align-items: center; gap: 20px; padding: 18px 40px; flex-wrap: wrap;
+  }
+  .logo-block { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .logo-circle {
+    width: 48px; height: 48px; background: var(--red); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.5px;
+  }
+  .logo-text { font-size: 11px; color: var(--ink-mid); line-height: 1.3; }
+  .logo-text strong { font-size: 14px; color: var(--ink); display: block; }
+  .header-title { flex: 1; min-width: 260px; border-left: 2px solid var(--border); padding-left: 20px; }
+  .header-title h1 { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; }
+  .header-title p { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .date-badge {
+    background: var(--red); color: white; padding: 6px 16px; font-size: 12px; font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace; border-radius: 4px; white-space: nowrap;
+  }
+  .toggle-btn {
+    background: var(--white); border: 1px solid var(--border); color: var(--ink-mid);
+    padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .toggle-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── KPI BAND ── */
+  .kpi-band {
+    background: var(--red); color: white; padding: 8px 40px; font-size: 11px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .kpi-band .label { opacity: 0.75; font-weight: 400; }
+  .kpi-band .value { font-weight: 700; letter-spacing: 0.2px; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1160px; margin: 0 auto; padding: 28px 20px; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 1.5px;
+    text-transform: uppercase; padding-bottom: 8px; border-bottom: 2px solid var(--red);
+    margin-bottom: 16px; margin-top: 28px;
+  }
+
+  /* ── MISSING BY BANNER ── */
+  .missing-banner {
+    background: var(--amber-bg); border: 1px solid var(--amber); color: var(--amber);
+    border-radius: 4px; padding: 10px 16px; font-size: 12px; font-weight: 600;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── KARAR BOX ── */
+  .karar-box {
+    background: var(--karar-bg); border: 1px solid var(--karar-border); border-radius: 6px;
+    padding: 18px 22px; margin-bottom: 8px;
+  }
+  .karar-box ul { list-style: none; }
+  .karar-box li { position: relative; padding-left: 18px; margin-bottom: 10px; font-size: 12.5px; color: var(--ink-mid); line-height: 1.75; }
+  .karar-box li:last-child { margin-bottom: 0; }
+  .karar-box li::before { content: "•"; position: absolute; left: 2px; color: var(--red); font-weight: 700; }
+  .karar-box b { color: var(--ink); }
+  .karar-box .sub { display: block; padding-left: 14px; margin-top: 2px; }
+  mark.hl { background: var(--hl-bg); color: var(--ink); padding: 0 2px; border-radius: 2px; }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 4px; }
+  .sum-card {
+    background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--red);
+    padding: 14px 16px; border-radius: 4px;
+  }
+  .sum-card .name { font-size: 11px; color: var(--ink-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .sum-card .product { font-size: 10px; color: var(--ink-mid); margin-bottom: 8px; min-height: 28px; }
+  .sum-card .big-num { font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; color: var(--ink); line-height: 1; }
+  .sum-card .sub { font-size: 10px; color: var(--ink-light); margin-top: 4px; }
+  .sum-card .growth { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+  .growth.up { background: var(--green-bg); color: var(--green); }
+  .growth.down { background: var(--amber-bg); color: var(--amber); }
+  .growth.neu { background: var(--blue-bg); color: var(--blue); }
+
+  /* ── CHARTS ── */
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 16px; }
+  .chart-card h4 { font-size: 10px; font-weight: 700; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .chart-card canvas { max-height: 240px; }
+
+  /* ── REPORT BLOCKS ── */
+  .report-block { background: var(--white); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
+  .report-block-header {
+    background: var(--ink); color: white; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  [data-theme="dark"] .report-block-header { background: #000; }
+  .report-block-header .rb-name { font-size: 13px; font-weight: 700; letter-spacing: 0.2px; }
+  .report-block-header .rb-product { font-size: 11px; opacity: 0.65; font-weight: 400; }
+  .report-block-header .rb-badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .rb-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; color: #fff; }
+  .rb-badge.highlight { background: var(--red); border-color: var(--red-dark); }
+
+  .stats-row { display: flex; gap: 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .stat-cell { flex: 1; min-width: 100px; padding: 10px 14px; border-right: 1px solid var(--border); text-align: center; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .sc-label { font-size: 9px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  .stat-cell .sc-val { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: var(--ink); }
+  .stat-cell .sc-sub { font-size: 9px; color: var(--ink-light); }
+
+  /* ── ACIKLAMA BOX ── */
+  .aciklama-box { border-left: 4px solid var(--red); background: var(--red-light); padding: 12px 16px; margin: 14px 20px 0; border-radius: 0 4px 4px 0; }
+  .aciklama-label { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .aciklama-box p { font-size: 12px; color: var(--ink-mid); line-height: 1.65; }
+
+  /* ── BREAKDOWN BARS ── */
+  .breakdown { padding: 16px 20px 6px; }
+  .breakdown h4 { font-size: 10px; font-weight: 700; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .bar-label { width: 150px; font-size: 11px; color: var(--ink-mid); flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--red); border-radius: 3px; }
+  .bar-fill.green { background: var(--green); }
+  .bar-fill.amber { background: var(--amber); }
+  .bar-num { width: 60px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+
+  /* ── SCROLLNOTE ── */
+  .scrollnote { display: none; font-size: 10px; color: var(--ink-light); padding: 10px 20px 0; font-style: italic; }
+
+  /* ── TABLE ── */
+  .table-wrap { padding: 16px 20px 20px; overflow-x: auto; }
+  table.dtable { width: 100%; border-collapse: collapse; min-width: 860px; }
+  table.dtable th {
+    text-align: left; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-light); border-bottom: 2px solid var(--border); padding: 8px 8px; white-space: nowrap;
+  }
+  table.dtable td { padding: 8px 8px; font-size: 12px; color: var(--ink-mid); border-bottom: 1px solid var(--border); }
+  table.dtable td.num, table.dtable th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  tr.drow { cursor: pointer; }
+  tr.drow:hover { background: var(--bg); }
+  tr.drow td.bayi-cell { font-weight: 600; color: var(--ink); }
+  td.expand-icon { color: var(--red); font-size: 10px; width: 18px; text-align: center; }
+  tr.erow td { padding: 0; border-bottom: 1px solid var(--border); }
+  .erow-content { padding: 10px 16px; background: var(--bg); font-size: 12px; color: var(--ink-mid); border-left: 3px solid var(--red); }
+  .erow-content em { color: var(--ink-light); }
+
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 10.5px; font-weight: 700; white-space: nowrap; }
+  .pill.ok { background: var(--green-bg); color: var(--green); }
+  .pill.warn { background: var(--amber-bg); color: var(--amber); }
+  .pill.risk { background: #fbe4e4; color: var(--kritik); }
+  [data-theme="dark"] .pill.risk { background: #401414; }
+  .pill.blue { background: var(--blue-bg); color: var(--blue); }
+  .pill.muted { background: var(--grey-bg); color: var(--grey); }
+
+  tr.totr td { font-weight: 700; color: var(--ink); border-top: 2px solid var(--ink); border-bottom: none; background: var(--bg); }
+  tr.totr td.num { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 32px; border-top: 1px solid var(--border); padding-top: 14px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--ink-light); flex-wrap: wrap; gap: 6px;
+  }
+  .footer strong { color: var(--red); }
+  .watermark {
+    position: fixed; bottom: 30px; right: 30px; font-size: 32px; color: rgba(200,16,46,0.10);
+    font-weight: 700; letter-spacing: 4px; text-transform: uppercase; pointer-events: none; transform: rotate(-15deg); z-index: 0;
+  }
+
+  /* ── MOBILE VIEW TOGGLE (body.mview) ── */
+  body.mview .summary-grid { grid-template-columns: 1fr; }
+  body.mview .chart-grid { grid-template-columns: 1fr; }
+  body.mview .header-top { padding: 14px 16px; }
+  body.mview .header-title { border-left: none; padding-left: 0; flex-basis: 100%; order: 3; }
+  body.mview .kpi-band { padding: 8px 16px; }
+  body.mview .page { padding: 20px 12px; }
+  body.mview .report-block-body,
+  body.mview .report-block-header { flex-direction: column; align-items: flex-start; }
+  body.mview .rb-badges { justify-content: flex-start; }
+  body.mview .stats-row { flex-direction: column; }
+  body.mview .stat-cell { border-right: none; border-bottom: 1px solid var(--border); text-align: left; display: flex; justify-content: space-between; align-items: center; }
+  body.mview .stat-cell:last-child { border-bottom: none; }
+  body.mview .scrollnote { display: block; }
+  body.mview table.dtable thead { display: none; }
+  body.mview table.dtable, body.mview table.dtable tbody, body.mview table.dtable tr, body.mview table.dtable td { display: block; width: 100%; }
+  body.mview table.dtable td { min-width: 0; }
+  body.mview tr.drow { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; padding: 8px 10px; position: relative; }
+  body.mview tr.drow td { border-bottom: none; padding: 3px 0; display: flex; justify-content: space-between; gap: 10px; }
+  body.mview tr.drow td::before { content: attr(data-label); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-light); font-weight: 600; }
+  body.mview tr.drow td.bayi-cell { font-size: 13px; }
+  body.mview tr.drow td.bayi-cell::before { content: ''; }
+  body.mview td.expand-icon { position: absolute; top: 8px; right: 10px; }
+  body.mview tr.erow td { padding: 0; }
+  body.mview tr.totr { border: 2px solid var(--ink); border-radius: 6px; margin-top: 6px; }
+  body.mview tr.totr td { display: flex; justify-content: space-between; padding: 4px 10px; }
+  body.mview tr.totr td::before { content: attr(data-label); font-size: 9.5px; text-transform: uppercase; color: var(--ink-light); }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 12px; }
+    .watermark, .header-actions { display: none; }
+  }
+
+  @media (max-width: 700px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .chart-grid { grid-template-columns: 1fr; }
+    .scrollnote { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watermark">ÇÖZÜM</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-circle">ÇYG</div>
+      <div class="logo-text">
+        <strong>Çözüm Yayın Grubu</strong>
+        Satış &amp; Bölge Raporlaması
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>Eğitim Vadisi 9-10-11.Sınıf TAK-TİK — 1. Raporlama</h1>
+      <p>Bölge Yöneticileri · Sezonsal Ürün Takip Takvimi · Konsolide Durum</p>
+    </div>
+    <div class="header-actions">
+      <button class="toggle-btn" id="themeBtn" onclick="toggleTheme()">🌓 Tema</button>
+      <button class="toggle-btn" id="viewBtn" onclick="toggleView()">📱 Mobil Görünüm</button>
+      <div class="date-badge">31.08.2026</div>
+    </div>
+  </div>
+  <div class="kpi-band">
+    <span class="label">KPI Maddesi:</span>
+    <span class="value">Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="missing-banner">⚠️ Kadir İlhan'ın bu döneme ait raporu iletilmemiştir — aşağıdaki rapor Vedat Adsan, Süleyman İşpınar, Muhsin Özbalcı ve M.Yasin Erdoğan (Kitaphane) verileriyle hazırlanmıştır.</div>
+
+  <!-- SATIŞ MÜDÜRÜ KARARLARI -->
+  <div class="section-title">Alınacak Kararlar — Satış Müdürü</div>
+  <div class="karar-box">
+    <ul>
+      <li><b>Karar 1:</b> 11.Sınıf ürünlerinin de eklenmesiyle oluşan <b>tam set avantajı sahada daha güçlü kullanılacak</b>; özellikle kolej, kurum ve devlet okullarında tam set satışları artırılarak mevcut olumlu ürün algısı siparişe dönüştürülecektir.</li>
+      <li><b>Karar 2:</b> Örnek ihtiyacı bulunan bayiler için <b>BY'lere ek örnek hakkı tanımlanması BY taleplerine göre değerlendirilecek.</b></li>
+      <li><b>Karar 3:</b> <mark class="hl">Sezonsal toplantıda bugün konuşulduğu üzere</mark><span class="sub"><mark class="hl">· TAK ve TİK ürünlerinin <b>birbirini tamamlayan entegre yapısı</b>, tam set örnekler, <b>kılavuz vb.</b> üzerinden sahada BY'ler tarafından daha net anlatılacak.</mark></span></li>
+    </ul>
+  </div>
+
+  <!-- ÖZET KARTLAR -->
+  <div class="section-title">Bölge Bazlı Özet</div>
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <!-- GRAFİKLER -->
+  <div class="section-title">Genel Karşılaştırma</div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h4>BGK Karşılaştırma (Geçen Yıl vs Bu Yıl)</h4>
+      <canvas id="bgkChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Büyüme Oranı (%)</h4>
+      <canvas id="growthChart"></canvas>
+    </div>
+  </div>
+
+  <!-- BÖLGE DETAYLARI -->
+  <div class="section-title">Bölge Detayları</div>
+  <div id="blocksContainer"></div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><strong>Çözüm Yayın Grubu</strong> · Satış &amp; Raporlama Birimi · 1. Raporlama Dönemi</div>
+    <div>Power BI – Ürün Raporu baz alınarak hazırlanmıştır · 31.08.2026</div>
+  </div>
+
+</div>
+
+<script id="reportData" type="application/json">
+[{"id": "vedat", "by": "Vedat Adsan", "urun": "Eğitim Vadisi 9-10-11.Sınıf TAK-TİK", "raporlama": "1. Raporlama · 31.08.2026", "toplam": {"gy": 5598, "by": 28518, "gt": 15697, "s9": 7138, "s10": 9528, "s11": 11852, "degisim": 5.094319399785638, "durum": "Yeşil (İyi)", "growth": 409.4}, "ozet": "Toplam 42 bayi bazında değerlendirildiğinde, geçen yıla göre genel satış adetlerinde yaklaşık 5 kat artış sağlanmış olup (Yeşil/İyi), bu olumlu tablonun sezon sonuna kadar korunması hedeflenmektedir. Yeni lansmanı gerçekleştirilen 11. Sınıf Tak-Tik ürününe ve 9-10. sınıflar içinde alınan siparişlerle toplam adet 28.518 seviyesine yükselmiştir. Henüz sipariş girişi gerçekleştirmeyen bayilerle görüşmeler planlı şekilde devam etmekte olup, bir sonraki raporlama dönemine kadar tüm bayilerin sipariş sürecine dahil edilmesi hedeflenmektedir. Mevcut satış ivmesinin korunması için kurum görüşmeleri ve erken anlaşmalar hızlandırılmalı, talep yoğunluğu görülen bölgelerde stok planlaması güçlendirilmelidir.", "dealers": [{"bayi": "ADA KIRTASIYE KITABEVI MEHMET CIHAD ELCI", "il": "BINGÖL", "ilce": "MERKEZ", "s9": 10, "s10": 7, "s11": 80, "gy": 218, "by": 97, "gt": 458, "durum": "Kırmızı (Düşük)", "aciklama": "Geçen yıla göre satış performansı gerileyen bayimiz yerinde ziyaret edilerek raf eksiklikleri giderilecek ve sezona yönelik sipariş girişleri hızlandırılacaktır."}, {"bayi": "AKSU KIRTASIYE - AZIZ AKSU", "il": "HAKKARI", "ilce": "MERKEZ", "s9": 42, "s10": 48, "s11": 48, "gy": null, "by": 138, "gt": null, "durum": null, "aciklama": "Bu yıl bayilik verilen işletmemizde, devlet okullarında gerçekleştirilecek tanıtım faaliyetleriyle satış grafiğinin yukarı yönlü ivme kazanması hedeflenmektedir."}, {"bayi": "ANKA SIMURG KITAP KIRTASIYE EGITIM", "il": "ELAZIG", "ilce": "MERKEZ", "s9": 669, "s10": 1394, "s11": 320, "gy": null, "by": 2383, "gt": null, "durum": null, "aciklama": "Unvan değişikliği gerçekleştirilen bayimizde geçen yıla kıyasla satış adetleri artış eğilimindedir; devlet okullarında planlanan tanıtımlarla ek sipariş girişleri sağlanacaktır."}, {"bayi": "ARDAHAN BILIM KIRTASIYE ERCAN ERDINC TIRPANCI", "il": "ARDAHAN", "ilce": "MERKEZ", "s9": 0, "s10": 0, "s11": 0, "gy": 0, "by": null, "gt": 54, "durum": null, "aciklama": "İlin küçük ölçekli yapısı nedeniyle bölgedeki bayilikler tek noktada yoğunlaşmış olup, bayimiz nakit esaslı çalışma modeliyle faaliyetini sürdürmektedir."}, {"bayi": "AY KIRTASIYE KITAP TEK.TEM.INS.", "il": "AGRI", "ilce": "MERKEZ", "s9": 39, "s10": 225, "s11": 168, "gy": 0, "by": 432, "gt": 51, "durum": null, "aciklama": "Yeni çıkacak ürünler için ön sipariş girişleri tamamlanmış olup, seminer döneminde devlet okulu toplantılarında yapılacak tanıtımlarla ek sipariş girişleri sağlanacaktır."}, {"bayi": "BILIM KIRTASIYE SELAHET METE", "il": "SIRNAK", "ilce": "SILOPI", "s9": 42, "s10": 49, "s11": 48, "gy": null, "by": 138, "gt": null, "durum": null, "aciklama": "Bölgemize bu yıl kazandırılan bayimiz, seminer döneminde devlet okullarında gerçekleştireceği tanıtım faaliyetleriyle ek sipariş girişi oluşturacaktır."}, {"bayi": "BILIM KITABEVI SEYIT ATES", "il": "SANLIURFA", "ilce": "VIRANSEHIR", "s9": 10, "s10": 9, "s11": 70, "gy": 0, "by": 89, "gt": 260, "durum": null, "aciklama": "Geçen yıl bu döneme kadar satış girişi bulunmayan bayimizde, geçmiş yıl toplam satış adedinin (260) yüksekliği dikkate alınarak sezon başında bayi ziyareti gerçekleştirilecek ve sipariş planlaması hızlandırılacaktır."}, {"bayi": "BKM BATMAN KITAP MERKEZI KIRTASIYE", "il": "BATMAN", "ilce": "MERKEZ", "s9": 60, "s10": 140, "s11": 620, "gy": 1285, "by": 820, "gt": 1545, "durum": "Kırmızı (Düşük)", "aciklama": "Geçen yıla göre satış adetlerinde gerileme gözlenen bayimizde (%64 seviyesinde), bölge ziyareti gerçekleştirilerek raf düzeni ve sipariş süreçleri yeniden değerlendirilecek, kayıp adetlerin telafisi için ek aksiyon alınacaktır."}, {"bayi": "DOGUBAYAZIT SERHAT KITAPEVI SERHAT CELIK", "il": "AGRI", "ilce": "DOGUBAYAZIT", "s9": 70, "s10": 40, "s11": 70, "gy": null, "by": 180, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde, devlet okullarında yapılacak tanıtımlarla satış adedinin yukarı yönlü seyretmesi beklenmektedir."}, {"bayi": "DORUK SANAYI VE TICARET LIMITED SIRKETI", "il": "MARDIN", "ilce": "KIZILTEPE", "s9": 9, "s10": 143, "s11": 320, "gy": 40, "by": 472, "gt": 423, "durum": "Yeşil (İyi)", "aciklama": "Geçen yıla göre satış adetlerini yaklaşık 12 katına çıkaran bayimizin performansı örnek gösterilebilir düzeydedir; bu ivmenin korunması amacıyla stok ve sipariş planlaması düzenli olarak takip edilecektir."}, {"bayi": "FINAL BASARI EGITIM HIZ. BAS.YAY.", "il": "SIIRT", "ilce": "KURTALAN", "s9": 42, "s10": 48, "s11": 48, "gy": null, "by": 138, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde, devlet okullarında yapılacak tanıtımlarla satış adedinin yukarı yönlü seyretmesi beklenmektedir."}, {"bayi": "GUMUS KIRTASIYE-YAHYA KEMAL YAVUZ", "il": "GÜMÜSHANE", "ilce": "MERKEZ", "s9": 2, "s10": 5, "s11": 69, "gy": 0, "by": 76, "gt": 33, "durum": null, "aciklama": "Geçen yıl bu döneme kadar satışı bulunmayan, ancak yıl genelinde 33 adet satış gerçekleştiren bayimizde, bu yılki 76 adetlik erken sipariş girişiyle olumlu bir ivme yakalanmış olup takip sürdürülecektir."}, {"bayi": "GUNEYDOGU KIRTASIYE-MUHSIN DEGER", "il": "SIRNAK", "ilce": "CIZRE", "s9": 51, "s10": 69, "s11": 80, "gy": null, "by": 200, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde, devlet okullarında yapılacak tanıtımlarla satış adedinin yukarı yönlü seyretmesi beklenmektedir."}, {"bayi": "GUNEYDOGU TELEKOMUNASYON KAGT", "il": "SIRNAK", "ilce": "IDIL", "s9": 40, "s10": 20, "s11": 120, "gy": 89, "by": 180, "gt": 169, "durum": "Yeşil (İyi)", "aciklama": "Geçen yıla göre satış adetlerini iki katına çıkaran bayimizin performansı olumlu seyretmekte olup, devlet okullarında yapılacak tanıtımlarla bu yükseliş trendinin sürdürülmesi hedeflenmektedir."}, {"bayi": "GUZEL OZEL EGT KIRT INS SAN TIC LTD STI", "il": "DIYARBAKIR", "ilce": "ERGANI", "s9": 70, "s10": 75, "s11": 95, "gy": 0, "by": 240, "gt": 93, "durum": null, "aciklama": "Geçen yıl bu döneme kadar satışı bulunmayan bayimizde, bu yıl gerçekleştirilen 240 adetlik sipariş girişiyle güçlü bir başlangıç yapılmıştır; sezon boyunca bu performansın korunması takip edilecektir."}, {"bayi": "HEDEF KIRTASIYE-ZAFER YAVUZER", "il": "VAN", "ilce": "IPEKYOLU", "s9": 3280, "s10": 3410, "s11": 4330, "gy": 1547, "by": 11020, "gt": 3357, "durum": null, "aciklama": "Bayimiz bu yıl üç kreşe 9-10-11. sınıflar için toplu ürün teslimatı gerçekleştirmiştir; devlet okullarında yapılacak tanıtımlarla satış adedinin iki katına çıkarılması hedeflenmektedir."}, {"bayi": "IGDIR KULTUR KITAP KIRTASIYE", "il": "IGDIR", "ilce": "MERKEZ", "s9": 0, "s10": 35, "s11": 160, "gy": 332, "by": 195, "gt": 662, "durum": null, "aciklama": "Geçen yıla göre satış adetlerinde gerileme yaşanan bayimizde (%59 seviyesinde), bölge ziyareti planlanarak eksik raf ve sipariş kalemleri yerinde tespit edilecektir."}, {"bayi": "KIZILDERE KIRTASIYE VE BILG.GIDA.INS.", "il": "VAN", "ilce": "ERCIS", "s9": 0, "s10": 20, "s11": 160, "gy": 0, "by": 180, "gt": 90, "durum": null, "aciklama": "Bayimize gerekli ziyaret gerçekleştirilerek stok ve raf kontrolü yapılacak, bu doğrultuda ek sipariş girişleri oluşturulacaktır."}, {"bayi": "KOMMAGENE KITAP DEPOSU RAHIME BILGIC", "il": "ADIYAMAN", "ilce": "MERKEZ", "s9": 590, "s10": 330, "s11": 160, "gy": null, "by": 1080, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde ön sipariş girişleri tamamlanmış olup, asıl siparişler seminer sonrasında devlet okullarında yapılacak tanıtımlarla ek girişlerle tamamlanacaktır."}, {"bayi": "KOZLUK KULTUR KITAP KIRTASIYE - NIHAL GUNEY", "il": "BATMAN", "ilce": "KOZLUK", "s9": 49, "s10": 56, "s11": 56, "gy": null, "by": 161, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde ön sipariş girişleri tamamlanmış olup, asıl siparişler seminer sonrasında devlet okullarında yapılacak tanıtımlarla ek girişlerle tamamlanacaktır."}, {"bayi": "MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)", "il": "BAYBURT", "ilce": "MERKEZ", "s9": 10, "s10": 36, "s11": 80, "gy": 57, "by": 126, "gt": 87, "durum": null, "aciklama": "Küçük ölçekli bir işletme olması nedeniyle bayimiz, seminer döneminde gerçekleştireceği tanıtımlar ve alınacak gerekli aksiyonlarla ek sipariş oluşturacaktır."}, {"bayi": "MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI", "il": "MARDIN", "ilce": "DERIK", "s9": 35, "s10": 35, "s11": 80, "gy": null, "by": 150, "gt": null, "durum": null, "aciklama": "Bölgede kurum bulunmaması nedeniyle bayimiz, bu yıl devre toplantılarında yapılacak tanıtımlarla ek sipariş girişleri oluşturacaktır."}, {"bayi": "MIDYAT BARIS KIRTASIYE BESIR ULUG", "il": "MARDIN", "ilce": "MIDYAT", "s9": 40, "s10": 217, "s11": 80, "gy": null, "by": 337, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde ön sipariş girişleri tamamlanmış olup, asıl siparişler seminer sonrasında devlet okullarında yapılacak tanıtımlarla ek girişlerle tamamlanacaktır."}, {"bayi": "NAYIF AYDEMIR (VAROL KIRTASIYE)", "il": "BITLIS", "ilce": "MERKEZ", "s9": 50, "s10": 85, "s11": 120, "gy": 310, "by": 255, "gt": 845, "durum": null, "aciklama": "Geçen yıla göre satış adetlerinde hafif bir gerileme yaşanan bayimizde (%82 seviyesinde), bölge ziyareti gerçekleştirilerek eksik sipariş kalemleri tamamlanacaktır."}, {"bayi": "NURULLAH OLCAN KITABEVI", "il": "SIRNAK", "ilce": "MERKEZ", "s9": 35, "s10": 40, "s11": 80, "gy": null, "by": 155, "gt": null, "durum": null, "aciklama": "Bayimizde bu yıl 155 adetlik sipariş girişi sağlanmış olup, devlet okullarında yapılacak tanıtımlarla ek satış potansiyeli değerlendirilecektir."}, {"bayi": "OKURKENT KIRTASIYE GIYASETTIN DEMIR", "il": "MUS", "ilce": "MERKEZ", "s9": 595, "s10": 600, "s11": 480, "gy": 50, "by": 1675, "gt": 50, "durum": null, "aciklama": "Bayimiz bu yıl özel eğitim kurumlarına toplu ürün teslimatı gerçekleştirmiştir. Seminer döneminde yoğun tanıtım faaliyetleri planlanarak bayi ziyareti gerçekleştirilecek ve gerekli aksiyonlar alınacaktır."}, {"bayi": "ONCU ACAR KIRTASIYE NAK.INS.SAN", "il": "ADIYAMAN", "ilce": "KAHTA", "s9": 0, "s10": 0, "s11": 160, "gy": 5, "by": 160, "gt": 5, "durum": null, "aciklama": "Bayimize gerekli ziyaret gerçekleştirilerek uygun aksiyonların alınmasına yönelik planlama yapılacaktır."}, {"bayi": "OVA KITAP KITAP KIRTASIYE- BIRHAT ISIK", "il": "HAKKARI", "ilce": "YÜKSEKOVA", "s9": 70, "s10": 40, "s11": 40, "gy": null, "by": 150, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde ön sipariş girişleri tamamlanmış olup, asıl siparişler seminer sonrasında devlet okullarında yapılacak tanıtımlarla ek girişlerle tamamlanacaktır."}, {"bayi": "OZCELIK KIRTASIYE MUHAMMED OZCELIK", "il": "SANLIURFA", "ilce": "CEYLANPINAR", "s9": 120, "s10": 120, "s11": 80, "gy": null, "by": 320, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verilen işletmemizde ön sipariş girişleri tamamlanmış olup, asıl siparişler seminer sonrasında devlet okullarında yapılacak tanıtımlarla ek girişlerle tamamlanacaktır."}, {"bayi": "OZKIRTAY KITAP KIRTASIYE BILGISAYAR", "il": "KARS", "ilce": "MERKEZ", "s9": 0, "s10": 0, "s11": 300, "gy": 32, "by": 300, "gt": 327, "durum": "Yeşil (İyi)", "aciklama": "Bayimizin bu sene 9. ve 10. sınıflarda sipariş girişi bulunmamaktadır; gerekli ziyaret gerçekleştirilerek ek sipariş oluşturulacaktır."}, {"bayi": "POZITIF BASKI HIZMETLERI KITAP KIRTASIYE", "il": "ERZURUM", "ilce": "YAKUTIYE", "s9": 736, "s10": 1167, "s11": 790, "gy": 806, "by": 2694, "gt": 1801, "durum": "Yeşil (İyi)", "aciklama": "Geçen yıla göre satış adetlerini yaklaşık 3 katına çıkaran bayimizin performansı olumlu seyretmekte olup, mevcut ivmenin korunması amacıyla düzenli takip sürdürülecektir."}, {"bayi": "POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP", "il": "DIYARBAKIR", "ilce": "KAYAPINAR", "s9": 122, "s10": 647, "s11": 1280, "gy": 90, "by": 2049, "gt": 1434, "durum": "Yeşil (İyi)", "aciklama": "Bu yıl bayimizle birlikte kurumlarda gerçekleştirilen tanıtımlar sonucunda, üç şubesi bulunan Final Eğitim Kurumları'na toplu ürün teslimatı sağlanmıştır; devlet okullarında yapılacak tanıtımlarla satış trendinin yukarı yönlü seyretmesi beklenmektedir."}, {"bayi": "SAH KIRTASIYE MINE BENZER", "il": "SANLIURFA", "ilce": "KARAKOPRU", "s9": 0, "s10": 38, "s11": 160, "gy": 0, "by": 198, "gt": 1717, "durum": null, "aciklama": "Bölgedeki kurumlarda ara sınıf öğrenci sayısının az olması nedeniyle bayimiz, seminer döneminde devlet okullarına yoğunlaşarak ek sipariş oluşturacaktır."}, {"bayi": "GENC CARSI KITAP KIRTASIYE", "il": "ERZINCAN", "ilce": "MERKEZ", "s9": 0, "s10": 12, "s11": 80, "gy": 99, "by": 92, "gt": 126, "durum": "Yeşil (İyi)", "aciklama": "9. ve 10. sınıflarda bu sene satış gerçekleşmediğinden, yeni çıkacak kitaplar için raf siparişi oluşturulmuştur; bayimiz yeniden ziyaret edilerek stok kontrolü yapılacak ve gerekli aksiyon alınacaktır."}, {"bayi": "SEBIL KIRTASIYE-UZEYIR AKCELIK", "il": "BITLIS", "ilce": "AHLAT", "s9": 0, "s10": 0, "s11": 160, "gy": 0, "by": 160, "gt": 115, "durum": null, "aciklama": "Bölgede kurum bulunmaması nedeniyle devlet okullarında tanıtım faaliyetleri gerçekleştirilerek gerekli aksiyon alınacaktır."}, {"bayi": "SEDAT KIRTASIYE (ABUBEKIR YUCEL)", "il": "SANLIURFA", "ilce": "BIRECIK", "s9": 0, "s10": 0, "s11": 0, "gy": 0, "by": null, "gt": 205, "durum": null, "aciklama": "Bayimiz bu hafta içinde ziyaret edilecek ve 9-10-11. sınıflar için sipariş girişi oluşturulacaktır."}, {"bayi": "SIIRT ARI KITAPEVI  ALI KURT", "il": "SIIRT", "ilce": "MERKEZ", "s9": 20, "s10": 25, "s11": 140, "gy": 56, "by": 185, "gt": 743, "durum": "Yeşil (İyi)", "aciklama": "Bayimizin seminer döneminde ve sonrasında devlet okullarında gerçekleştireceği tanıtımlarla ek sipariş alınması hedeflenmektedir."}, {"bayi": "SIVEREK AKADEMI KITAP KIRTASIYE", "il": "SANLIURFA", "ilce": "SIVEREK", "s9": 80, "s10": 71, "s11": 160, "gy": 116, "by": 311, "gt": 256, "durum": "Yeşil (İyi)", "aciklama": "Geçen yıla göre satış adetlerini yaklaşık 2,7 katına çıkaran bayimizin performansı olumlu seyretmekte olup, sezon boyunca bu artışın desteklenmesi hedeflenmektedir."}, {"bayi": "TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.", "il": "MARDIN", "ilce": "NUSAYBIN", "s9": 50, "s10": 82, "s11": 80, "gy": 124, "by": 212, "gt": 424, "durum": null, "aciklama": "Bayimize gerekli ziyaretler gerçekleştirilerek ek sipariş girişleri oluşturulacaktır."}, {"bayi": "TEBLIG KIRTASIYE TEKS. TAS. TUR. SAN.", "il": "DIYARBAKIR", "ilce": "BISMIL", "s9": 50, "s10": 100, "s11": 80, "gy": 66, "by": 230, "gt": 66, "durum": "Yeşil (İyi)", "aciklama": "Bayimize gerekli ziyaretler gerçekleştirilerek ek sipariş girişleri oluşturulacaktır."}, {"bayi": "UCAR DAGITIM PAZARLAMA ITH IHR", "il": "MARDIN", "ilce": "ARTUKLU", "s9": 40, "s10": 90, "s11": 320, "gy": 66, "by": 450, "gt": 91, "durum": "Yeşil (İyi)", "aciklama": "Bayimize gerekli ziyaretler gerçekleştirilerek ek sipariş girişleri oluşturulacaktır."}, {"bayi": "UMUT KIRTASIYE-MEHMET ALI CEYHAN", "il": "DIYARBAKIR", "ilce": "SILVAN", "s9": 10, "s10": 0, "s11": 80, "gy": 210, "by": 90, "gt": 210, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimizin ailevi nedenlerden kaynaklanan sorunları doğrultusunda bayiliği iptal edilmiştir."}], "dealer_count": 42}, {"id": "suleyman", "by": "Süleyman İşpınar", "urun": "Eğitim Vadisi Ara Sınıf TAK-TİK", "raporlama": "1. Raporlama · 31.08.2026", "toplam": {"gy": 18718, "by": 38147, "gt": 32505, "s9": 10403, "s10": 15427, "s11": 12297, "degisim": null, "durum": null, "growth": 103.8}, "ozet": "Eğitim Vadisi Tak-Tik ürünlerimizde, geçen yıl aynı dönemde 11. sınıf ürünlerimizin henüz stoklarda bulunmaması nedeniyle sağlıklı bir dönemsel kıyaslama yapmak mümkün olmamakla birlikte, bayilerimizin bu ürün grubuna olan güven ve inancının her geçen gün arttığı gözlemlenmektedir. Bu yıl 11. sınıf ürünlerimizin de tamamlanmasıyla birlikte ara sınıflarda tam set ürün yapısına ulaşılacak olması, satış grafiğine önemli ölçüde olumlu katkı sağlayacaktır. Saha ziyaretlerinde bazı bayilerimiz, Tak ve Tik içeriklerinin tek kitapta birleştirilmesine yönelik taleplerini iletmiştir; önümüzdeki yıl TYT-AYT grubunda yayımlanacak ürünlerde kapsamlı ve hacimli içeriklerin tercih edilmesi satış başarısı için kritik bir kriter olarak değerlendirilmektedir.", "dealers": [{"bayi": "ADNAN DUMAN - DUMAN KITABEVI", "il": "KIRSEHIR", "ilce": "MERKEZ", "s9": null, "s10": null, "s11": 55, "gy": 300, "by": 55, "gt": 475, "durum": null, "aciklama": "Bayimizin geçen yıldan 9. ve 10. sınıflardan elinde bir miktar ürün bulunmaktadır. Bununla birlikte 11. sınıftan ilk etapta rafına az sayıda ürün girişi yapılmıştır. Devlet okulu çalışmalarıyla birlikte sipariş adetlerinin artması beklenmektedir."}, {"bayi": "ALYA KITAP KIRTASIYE DAGITIM TIC. VE PAZARLAMA LTD. STI.", "il": "ADANA", "ilce": "SEYHAN", "s9": 3485, "s10": 4995, "s11": 2550, "gy": null, "by": 11030, "gt": null, "durum": null, "aciklama": "Bayimiz, gerek kurum anlaşmaları gerekse devlet okulu sezonu için ön sipariş girişini gerçekleştirmiştir. Bundan sonraki süreçte alacağı siparişlerle satış oranlarının artması beklenmektedir."}, {"bayi": "ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.", "il": "HATAY", "ilce": "DEFNE", "s9": 35, "s10": 70, "s11": 210, "gy": 200, "by": 315, "gt": 354, "durum": null, "aciklama": "Bayimizin perakende satış gücü oldukça zayıf olmakla birlikte devlet okullarında çok aktif bir şekilde çalışmaktadır. Bu sebeple yaptığı tanıtımlar sonrasında alacağı siparişlerin girişlerini önümüzdeki haftalarda gerçekleştirecektir."}, {"bayi": "CAN KITAP KIRTASIYE ABDULKADIR CAN", "il": "MERSIN", "ilce": "SILIFKE", "s9": 26, "s10": 68, "s11": 106, "gy": 215, "by": 200, "gt": 593, "durum": null, "aciklama": "İlçe bayimiz, ara sınıf ürünlerimizi devlet okulu çalışmalarında aktif şekilde tanıtmaktadır. Örnekleri hazır olan ürünlerimizle sahada yürüteceği çalışmalar sonucunda sipariş girişlerinin artması beklenmektedir."}, {"bayi": "CAN KITAP KIRTASIYE-AHMET YILDIRIM", "il": "YOZGAT", "ilce": "MERKEZ", "s9": 4, "s10": null, "s11": 63, "gy": 62, "by": 67, "gt": 62, "durum": null, "aciklama": "Bayimiz, geçen yıldan bu yana İl Millî Eğitim Müdürlüğü'nün aldığı kısıtlama kararları sebebiyle ciddi sıkıntılar yaşamakta ve satış gerçekleştirememektedir. Geçen yıl neredeyse hiçbir nitelikli okulun kitap aldırmadığını belirtmektedir. Bu yıl yeniden çalışmalar yürütecek olup bu sorunun çözülmesi durumunda geçen yıla oranla sipariş girişlerinin artması beklenmektedir."}, {"bayi": "CETIN KITAP KIRTASIYE SANAYI VE TICARET LIMITED SIRKETI", "il": "HATAY", "ilce": "DÖRTYOL", "s9": 245, "s10": 230, "s11": null, "gy": null, "by": 475, "gt": null, "durum": null, "aciklama": "Bayimizin cari isim değişikliği sebebiyle 11. sınıf girişleri henüz yapılmamış olup bu hafta içerisinde tarafımca tamamlanacaktır. Ayrıca devlet okullarında aktif olan bayimizin sezon içerisindeki sipariş adetlerinin yukarı yönlü artması beklenmektedir."}, {"bayi": "DEVELI YAPRAK DAGITIM DAVUT KENDIRCI", "il": "KAYSERI", "ilce": "DEVELI", "s9": 70, "s10": 51, "s11": 205, "gy": 145, "by": 326, "gt": 250, "durum": null, "aciklama": "Küçük ilçe bayimiz, ilk etapta az sayıda TAK ve TİK ürünlerimizden sipariş girişi yapmıştır. İlçede devlet okulu çalışmalarıyla birlikte alacağı siparişlerle satış adetlerinin artması beklenmektedir."}, {"bayi": "ETHEM DEMIRBAG (ERDEM KIRTASIYE)", "il": "ADANA", "ilce": "KOZAN", "s9": null, "s10": 32, "s11": 80, "gy": 160, "by": 112, "gt": 190, "durum": null, "aciklama": "Bayimiz, ilçede iki fen lisesinin alım yaptığını belirtmektedir. Bu sebeple önümüzdeki haftalarda bu iki okula yoğun tanıtım çalışması yaparak sipariş almayı hedeflemektedir. Raflarında yeterli miktarda ürün bulunmaktadır."}, {"bayi": "EYUP ZAFER ATES - ZAFER KIRTASIYE", "il": "MERSIN", "ilce": "ANAMUR", "s9": null, "s10": null, "s11": null, "gy": 5, "by": null, "gt": 15, "durum": null, "aciklama": "Geçmiş dönemlerde ciddi satışlar gerçekleştirdiğimiz bayimiz, son 1-2 yıldır ilçede ürün satışında ciddi zorluklar yaşadığını belirtmektedir. Kitap alımı yapan birkaç okulun da son yıllarda özellikle ara sınıflarda ürün alımı yapmadığını ifade etmektedir. Bayimize bu hafta içerisinde ilk etapta rafları için ara sınıf sipariş girişi yapılacak olup süreç tarafımızca yakından takip edilecektir."}, {"bayi": "GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .", "il": "KAYSERI", "ilce": "KOCASINAN", "s9": 820, "s10": 1021, "s11": 560, "gy": 2372, "by": 2401, "gt": 5395, "durum": null, "aciklama": "Bayimiz, hem kurumlarda hem de devlet okullarında oldukça aktif şekilde çalışmaktadır. Gerek kurum anlaşmaları gerekse devlet okulu sezonu için ön sipariş girişleri tamamlanmıştır. Önümüzdeki hafta bayimizle birlikte saha çalışmaları gerçekleştirilecektir."}, {"bayi": "GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.ZUC.HED.TIC.LTD.STI", "il": "ADANA", "ilce": "CUKUROVA", "s9": null, "s10": 140, "s11": null, "gy": 5509, "by": 140, "gt": 5559, "durum": null, "aciklama": "Bayilik iptal edilmiştir."}, {"bayi": "HASAN ACIKBAS - KULTUR KITABEVI", "il": "KARAMAN", "ilce": "ERMENEK", "s9": null, "s10": null, "s11": null, "gy": 24, "by": null, "gt": 24, "durum": null, "aciklama": "İldeki diğer bayimizin evraklarının alınamaması sebebiyle bayimizle yaklaşık bir ay önce anlaşma yapılmıştır. Hızla çalışmalara başlayan bayimizin ön sipariş girişleri, bu hafta içerisinde tarafımca tamamlanacaktır."}, {"bayi": "KAHRAMANMARAS HEDEF KITAP KIRTASIYE MEHMET APAYDIN", "il": "KAHRAMANMARAS", "ilce": "DULKADIROGLU", "s9": 222, "s10": 309, "s11": 390, "gy": 490, "by": 921, "gt": 2012, "durum": null, "aciklama": "Bayimiz, bir kuruma branş bazlı ürünlerimizi tercih ettirmiş, bunun dışında bir miktar da perakende satışları için sipariş çekmiştir. Bayimizle devlet okulu sezonunda birlikte çalışmalar yürütülecek ve anlaşma yapılan okulların siparişleri sisteme girilecektir."}, {"bayi": "KARACA YAYIN BASIM DAGITIM EGITIM KIRT.HIZ.SAN VE TIC.LTD.STI", "il": "HATAY", "ilce": "ISKENDERUN", "s9": 837, "s10": 597, "s11": 919, "gy": 337, "by": 2353, "gt": 337, "durum": null, "aciklama": "İlçe bayimiz, Teknokent Koleji ile anlaşma yaparak siparişlerini sisteme girmiştir. Önümüzdeki hafta seminer döneminde bayimizle birlikte okul ziyaretleri gerçekleştirilerek yeni siparişler alınacak ve sipariş girişleri tamamlanacaktır."}, {"bayi": "KARANFIL KITAP KIRTASIYE UMUT GOKMEN", "il": "OSMANIYE", "ilce": "MERKEZ", "s9": 50, "s10": 390, "s11": 235, "gy": 1001, "by": 675, "gt": 1983, "durum": null, "aciklama": "Bayimiz, geçen yıl anlaşma yaptığı kurumların bu yıl henüz ara sınıf öğrenci sayısını netleştirmediğini belirtmiştir. Bu sebeple ilk etapta rafına ürün çekmiştir. 9. sınıfta geçen seneden elinde ürün bulunması nedeniyle sipariş adetleri bu sebeple az sayıdadır."}, {"bayi": "KILAVUZ KIRTASIYE - AYSE HAZIRLAR", "il": "HATAY", "ilce": "REYHANLI", "s9": 53, "s10": 36, "s11": 45, "gy": 42, "by": 134, "gt": 148, "durum": null, "aciklama": "Potansiyeli ve perakende gücü oldukça zayıf olan bayimiz, ilçede kitap alımı konusunda ciddi sorunlar yaşandığını belirtmektedir. Buna rağmen devlet okulu sezonunda ciddi çalışmalar yürüterek sipariş almaya çalışacaklarını ve sipariş adetlerini yukarı yönlü artıracaklarını ifade etmektedir."}, {"bayi": "KITAP ISTANBUL KIRTASIYE SANAYI TIC. LTD.STI", "il": "AKSARAY", "ilce": "MERKEZ", "s9": 1400, "s10": 1600, "s11": 1075, "gy": null, "by": 4075, "gt": null, "durum": null, "aciklama": "Bu yıl yeni anlaşma yaptığımız bayimiz, ilk etapta Via Fen Koleji ile TAK ve TİK ürünlerimizin tamamı için anlaşma yaparak siparişlerini sisteme girmiştir. Ayrıca önümüzdeki süreçte devlet okulu çalışmalarıyla sipariş adetlerinin artması beklenmektedir."}, {"bayi": "KURT YAYIN DAGITIM TICARET LTD STI", "il": "HATAY", "ilce": "KIRIKHAN", "s9": 21, "s10": 20, "s11": null, "gy": 66, "by": 41, "gt": 86, "durum": null, "aciklama": "Bayimiz konteynerde hizmet vermektedir. İlçede kitap alımı konusunda ciddi sorunlar yaşanmaktadır; buna rağmen branş bazlı ürün satmaya çalışan bayimiz, bu yıl da devlet okulu sezonunda özellikle mevcut ürünlerimizle ilgili çalışmalara devam edecektir."}, {"bayi": "MAVI KITAP KIRTASIYE MEHMET ALI KUH", "il": "HATAY", "ilce": "SAMANDAG", "s9": 209, "s10": 181, "s11": 170, "gy": 154, "by": 560, "gt": 768, "durum": null, "aciklama": "Bayimiz, perakende satışından ziyade ilçede az sayıda öğrencisi bulunan butik kurumlara branş bazlı ürün tercihleri yaptırmıştır. Bundan sonraki süreçte devlet okulu sezonunda yürütülecek saha çalışmalarıyla sipariş adetlerini artırması beklenmektedir."}, {"bayi": "MEHMET CETIN - CETIN KITAP KIRTASIYE", "il": "HATAY", "ilce": "DÖRTYOL", "s9": 185, "s10": 145, "s11": null, "gy": 687, "by": 330, "gt": 1072, "durum": null, "aciklama": "Bayimizin cari isim değişikliği sebebiyle sipariş adetleri bu şekilde görünmektedir. Yeni cari üzerinden sipariş girişleri artırılmış olup 11. sınıf girişleri de bu hafta içerisinde tamamlanacaktır."}, {"bayi": "MERSIN KAFKAM KITABEVI KIRTASIYE LTD STI", "il": "MERSIN", "ilce": "YENISEHIR", "s9": 1240, "s10": 3386, "s11": 4520, "gy": 2752, "by": 9146, "gt": 4858, "durum": null, "aciklama": "Bayimizin ildeki en büyük kurumlardan biri olan İz Eğitim Kurumları ile anlaşması gereği siparişleri sisteme girilmiştir. Bunun dışında önümüzdeki süreçte devlet okulu çalışmalarında da birlikte sahada çalışılarak sipariş toplanmaya devam edilecektir."}, {"bayi": "MINI KITAP KIRTASIYE ALPAY ERDAL", "il": "KAHRAMANMARAS", "ilce": "ELBISTAN", "s9": 458, "s10": 757, "s11": 364, "gy": 75, "by": 1579, "gt": 75, "durum": null, "aciklama": "Bayimiz, ilçedeki tek kurumla anlaşma yaparak ara sınıfta TAK ve TİK ürünlerimizi tercih ettirmiştir. Önümüzdeki dönemde devlet okulu çalışmalarında yeni siparişler alacak olup yıl sonunda hedeflerini tutturmasında bu ürün gamının ciddi katkısı olacaktır."}, {"bayi": "MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTASIYE", "il": "YOZGAT", "ilce": "YERKÖY", "s9": 48, "s10": 72, "s11": null, "gy": 145, "by": 120, "gt": 163, "durum": null, "aciklama": "Bayimiz, ilde olduğu gibi ilçedeki Millî Eğitim Müdürlüğü kaynaklı kısıtlamalar sebebiyle satış yapmakta ciddi anlamda zorlanmaktadır. Küçük ilçede yalnızca iki kurum ürün alımı yapmaktadır. Bayimiz, bu iki devlet okulunda bu yıl da yoğun çalışmalar gerçekleştirecektir."}, {"bayi": "MUSTAFA DANIS - DANIS KITABEVI", "il": "KARAMAN", "ilce": "MERKEZ", "s9": 80, "s10": 125, "s11": null, "gy": 126, "by": 205, "gt": 856, "durum": null, "aciklama": "Bayimizle yeni dönemde çalışılmayacaktır."}, {"bayi": "NEVSEHIR ATLAS KIRTASIYE-BARIS NAZMI KURTDOGAN", "il": "NEVSEHIR", "ilce": "MERKEZ", "s9": 5, "s10": 10, "s11": null, "gy": null, "by": 15, "gt": null, "durum": null, "aciklama": "Bayimizin cari isim değişikliği sebebiyle sipariş adetleri düşük görünmektedir. Özellikle 11. sınıf TAK ve TİK ürünlerimizin siparişleri sisteme girilecektir."}, {"bayi": "NOKTA KITAP KIRTASIYE EGITIM TIC.LTD.STI", "il": "ÇORUM", "ilce": "MERKEZ", "s9": 50, "s10": 145, "s11": null, "gy": 180, "by": 195, "gt": 975, "durum": null, "aciklama": "Bayimizin 11. sınıf sipariş girişleri bu hafta içerisinde tamamlanacaktır. Bununla birlikte devlet okulu çalışmalarında da yoğun şekilde faaliyet gösteren bayimizin siparişlerinin Eylül ayı içerisinde artması beklenmektedir."}, {"bayi": "OLUSUM GLOBAL KITAP DAGITIM SANAYI VE TIC.LTD.STI", "il": "GAZIANTEP", "ilce": "SAHINBEY", "s9": 420, "s10": 460, "s11": 160, "gy": null, "by": 1040, "gt": null, "durum": null, "aciklama": "Bayimiz, anlaştığı bazı kurumlarla branş bazlı siparişlerini sisteme girmiştir. Sezon için ön sipariş girişi, bu hafta gerçekleştirilecek görüşmeler neticesinde tamamlanacaktır."}, {"bayi": "OZCAN DAGITIM VE YAYIN KIRTASIYE KITAP", "il": "GAZIANTEP", "ilce": "SEHIT KAMIL", "s9": null, "s10": null, "s11": null, "gy": 1645, "by": null, "gt": 1695, "durum": null, "aciklama": "Bayilik iptal edilmiştir."}, {"bayi": "PARK OZEL EGITIM KIRTASIYE TUR SEY TIC LTD STI", "il": "MERSIN", "ilce": "TARSUS", "s9": 90, "s10": 176, "s11": 165, "gy": 193, "by": 431, "gt": 1189, "durum": null, "aciklama": "İlçe bayimiz, kurumlardaki ara sınıf adetlerinin oldukça düşük olduğunu ve bazı kurumların henüz karar vermediğini belirtmektedir. Devlet okulları için ise iki fen lisesiyle ciddi çalışmalar yürüttüklerini ve sezon içerisinde siparişlerin sisteme gireceğini ifade etmektedir."}, {"bayi": "RUZGAR YAYINCILIK KITAP KIRTASIYE TEMIZLIK SAN.TIC.LTD.STI", "il": "AMASYA", "ilce": "MERKEZ", "s9": 42, "s10": 42, "s11": 42, "gy": null, "by": 126, "gt": null, "durum": null, "aciklama": "Bu yıl yeni anlaşma yaptığımız bayimiz, perakendede ara sınıf satışlarının oldukça düşük olduğunu belirtmekte, bu sebeple az miktarda ürün girişi yapmaktadır. Önümüzdeki hafta gerçekleştirilecek devlet okulu çalışmalarıyla siparişlerinin artması beklenmektedir."}, {"bayi": "TEBESIR KITABEVI - MEHMET ERHAN KARAHAN", "il": "GAZIANTEP", "ilce": "NIZIP", "s9": 8, "s10": null, "s11": 94, "gy": null, "by": 102, "gt": null, "durum": null, "aciklama": "Bayimizle bu yıl anlaşma yapılmış olup ilk etapta rafına ürün çekmiştir. Ancak 10. sınıf girişinin yapılmadığı fark edilmiş olup bu hafta içerisinde tarafımca tamamlanacaktır."}, {"bayi": "TORE KIRTASIYE TICARET VE SANAYI LTD STI", "il": "NIGDE", "ilce": "BOR", "s9": 105, "s10": 84, "s11": 115, "gy": 240, "by": 304, "gt": 441, "durum": null, "aciklama": "Bayimiz, ara sınıf ürünlerimizin özel kurumlardan ziyade devlet okullarında talep gördüğünü belirtmektedir. Birlikte belirlediğimiz iki okulda ortak çalışmalar yürütülecektir."}, {"bayi": "VIZYON PLUS KITABEVI OKKES ANIL MART", "il": "OSMANIYE", "ilce": "DÜZIÇI", "s9": 95, "s10": 155, "s11": 96, "gy": 435, "by": 346, "gt": 705, "durum": null, "aciklama": "Bayimiz, geçen yıl butik bir kuruma ara sınıf ürünlerimizi tercih ettirmiştir. Bu yıl da henüz okullar açılmadan bazı branş öğretmenleriyle ön anlaşma yapmış olup siparişlerini önümüzdeki haftalarda sisteme girecektir."}, {"bayi": "YENI CAMLIK KITAP KIRTASIYE ORHAN BALLI", "il": "OSMANIYE", "ilce": "KADIRLI", "s9": 100, "s10": 130, "s11": 78, "gy": 206, "by": 308, "gt": 339, "durum": null, "aciklama": "İlçe bayimiz, geçen yıl devlet okulu çalışmalarında branş bazlı ürün tercihleri yaptırmıştır. Bu yıl da ilk etapta rafına ürün çekmiş olup önümüzdeki süreçte devlet okulu çalışmalarıyla birlikte sipariş girişlerinin artması beklenmektedir."}], "dealer_count": 34}, {"id": "muhsin", "by": "Muhsin Özbalcı", "urun": "Eğitim Vadisi TAK-TİK (Tüm Sınıflar)", "raporlama": "1. Raporlama · 31.08.2026", "toplam": {"gy": 28432, "by": 52043, "gt": 51064, "s9": 17949, "s10": 22510, "s11": 11584, "degisim": null, "durum": null, "growth": 83.0}, "ozet": "TAK TİK ürünlerimiz genel olarak beğenilmekte ve satış rakamlarımız geçen yılın aynı dönemine göre artış göstermektedir. Bu yıl 11. sınıf ürünlerinin de yayımlanmasıyla ürün grubunun tam set hâline gelmesi, satış rakamlarının daha da yükselmesinde etkili olacaktır. Bazı kurum ve okullardan, TAK veya TİK ürünlerinden yalnızca biri kullanıldığında ürünün hacminin ve soru sayısının yetersiz kaldığı yönünde geri bildirimler alınmakta; ancak ürünler birlikte kullanıldığında oldukça verimli sonuçlar elde edilmekte ve beğenilmektedir. ÖNERİ: TAK ve TİK ürünlerinin birbirini tamamlayan entegre yapısı öğretmenlere ve kurumlara daha açık şekilde anlatılmalı, ürünler mümkün olduğunca birlikte ve tam set olarak sunulmalıdır; devlet okullarındaki öğretmen ziyaretlerinde tam takım örnekler kullanılmalıdır.", "dealers": [{"bayi": "ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI", "il": "KÜTAHYA", "ilce": "MERKEZ", "s9": 378, "s10": 429, "s11": 246, "gy": 686, "by": 1053, "gt": 2145, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz, bölgesinde bulunan bir kolejle anlaşarak toplu sipariş girişi yapmıştır. Ayrıca devlet okullarında da ara sınıf ürünlerimizin satışı güçlüdür. Bu yıl 11. sınıf ürünlerimizin de tam set olmasıyla birlikte beklentimiz artmıştır."}, {"bayi": "AKDENIZ LIDER KITAP DAGITIM LTD STI", "il": "ANTALYA", "ilce": "MURATPASA", "s9": null, "s10": null, "s11": null, "gy": 6936, "by": null, "gt": 7076, "durum": "Kırmızı (Düşük)", "aciklama": "Bayiliği iptal edilmiştir. Geçen yıl verileri bulunduğu için kayıt buradan silinmemiştir."}, {"bayi": "ANTALYA ATLAS KITABEVI OZAN ERIPEK", "il": "ANTALYA", "ilce": "MANAVGAT", "s9": 419, "s10": 323, "s11": 280, "gy": 76, "by": 1022, "gt": 558, "durum": "Yeşil (İyi)", "aciklama": "İlçe bayimiz ön sipariş girişlerini yapmıştır. Bölgede ara sınıf ürünler ağırlıklı olarak devlet okullarına eylül ayında satılmaktadır."}, {"bayi": "ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI", "il": "ESKISEHIR", "ilce": "TEPEBASI", "s9": 555, "s10": 678, "s11": 970, "gy": 667, "by": 2203, "gt": 1704, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz, bölgesinde bulunan üç farklı kolejde ürünlerimizi seçtirmiş ve ön sipariş girişlerini yapmıştır. Devlet okullarında da aktiftir; özellikle 11. sınıf ürünlerinden beklentimiz yüksektir."}, {"bayi": "BANDIRMA KITAP KIRTASIYE GULBAHAR BAHADIR", "il": "BALIKESIR", "ilce": "BANDIRMA", "s9": 195, "s10": 196, "s11": null, "gy": 462, "by": 391, "gt": 1209, "durum": "Sarı (Orta)", "aciklama": "Küçük bir ilçe bayimizdir. Bayimizin sipariş limiti dolduğu için 11. sınıf ürün girişi yapılamamıştır. Bayimiz bugün evraklarını merkezimize göndermiştir; 11. sınıf ürün girişleri bu hafta yapılacaktır."}, {"bayi": "BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC.LTD.STI", "il": "ANTALYA", "ilce": "MURATPASA", "s9": 2308, "s10": 3465, "s11": 2800, "gy": null, "by": 8573, "gt": null, "durum": null, "aciklama": "Bayimiz, tedarik sağladığı yedi farklı kolejde tam set ürünlerimizi seçtirerek sipariş girişlerini yapmıştır. Bölgesi büyük olup devlet okullarında da bu yıl yüksek satış beklenmektedir."}, {"bayi": "CAGRI KITABEVI-ERHAN EVRAN", "il": "MANISA", "ilce": "SALIHLI", "s9": 64, "s10": 58, "s11": null, "gy": 284, "by": 122, "gt": 322, "durum": "Kırmızı (Düşük)", "aciklama": "Çok küçük bir ilçe bayimizdir. Henüz 11. sınıf ürün girişi yapmamıştır ve kendisine ulaşılamamıştır. Girişler bu hafta yaptırılacaktır."}, {"bayi": "CETIN YAYIN DAGITIM A.S", "il": "BALIKESIR", "ilce": "KARESI", "s9": 556, "s10": 593, "s11": 855, "gy": 255, "by": 2004, "gt": 785, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz, bölgesinde bulunan büyük bir kolejde ürünlerimizi seçtirmiştir. Elinde fazla stok kalmamıştır; eylül ayında yüksek miktarda ürün girişi yapılmasını bekliyoruz."}, {"bayi": "DKM YAYIN BASIM DAGITIM REKLAM EGITIM ÖGRETIM SANAYI TICARET LIMITED SIRKETI", "il": "DENIZLI", "ilce": "PAMUKKALE", "s9": 450, "s10": 820, "s11": 1060, "gy": 4239, "by": 2330, "gt": 5779, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz, bölgesinde bulunan bir koleje ürün satışı yapabilmiştir. Bölgedeki kolejler müfredat değişikliği nedeniyle henüz ürün seçimi yapmamıştır. Bayimiz bu alandaki fırsatlar için çalışmalarını sürdürmektedir. Ürünlerin devlet okullarında da tam set olması nedeniyle bu yıl daha yoğun satış beklenmektedir."}, {"bayi": "EDEBALI KIRTASIYE METIN ALKAN", "il": "BILECIK", "ilce": "MERKEZ", "s9": 42, "s10": 44, "s11": 48, "gy": null, "by": 134, "gt": null, "durum": null, "aciklama": "Çok küçük bir ilçe bayimizdir. Raf stoğu için tüm ürün gruplarında giriş yapılmıştır; eylül ayında satışlara göre yeni girişler yapılacaktır."}, {"bayi": "EGE KITAP KIRTASIYE-DONDU YILGIN", "il": "BALIKESIR", "ilce": "EDREMIT", "s9": 95, "s10": 72, "s11": 570, "gy": 331, "by": 737, "gt": 636, "durum": "Yeşil (İyi)", "aciklama": "İlçe bayimiz ön sipariş girişlerini yapmıştır. Bölgede ara sınıf ürünler ağırlıklı olarak devlet okullarına eylül ayında satılmaktadır."}, {"bayi": "EREN KITAP KIRTASIYE MUHARREM AKMAN", "il": "BILECIK", "ilce": "BOZÜYÜK", "s9": 75, "s10": 14, "s11": 32, "gy": 90, "by": 121, "gt": 176, "durum": "Yeşil (İyi)", "aciklama": "Çok küçük bir ilçe bayimizdir. Raf stoğu için tüm ürün gruplarında giriş yapılmıştır; eylül ayında satışlara göre yeni girişler yapılacaktır."}, {"bayi": "FETHIYE ERAY KITAP KIRT.MATBAA YAYIM ELEK.CIHAZLAR INS. VE TUR.LTD.STI.", "il": "MUGLA", "ilce": "FETHIYE", "s9": 64, "s10": 63, "s11": 175, "gy": 600, "by": 302, "gt": 1915, "durum": "Kırmızı (Düşük)", "aciklama": "İlçe bayimiz, tüm ürün grupları için giriş yapmış olup ağırlıklı olarak devlet okullarına yönelik çalışmalar yürütmektedir."}, {"bayi": "HALIT KAYA (ALANYA AKADEMI KIRTASIYE)", "il": "ANTALYA", "ilce": "ALANYA", "s9": 115, "s10": 130, "s11": 290, "gy": 215, "by": 535, "gt": 1010, "durum": "Yeşil (İyi)", "aciklama": "İlçe bayimiz ön sipariş girişlerini yapmıştır. Bölgede ara sınıf ürünler ağırlıklı olarak devlet okullarına eylül ayında satılmaktadır."}, {"bayi": "HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)", "il": "KONYA", "ilce": "SEYDISEHIR", "s9": 60, "s10": 55, "s11": null, "gy": 340, "by": 115, "gt": 890, "durum": "Kırmızı (Düşük)", "aciklama": "İlçe bayimizin 11. sınıf ürün girişleri henüz yapılmamıştır. Bayimizin ağabeyi geçen hafta vefat ettiği için kendisinden giriş işlemlerini hızlandırması istenmemiştir. Girişler bu hafta yapılacaktır."}, {"bayi": "KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN", "il": "BURDUR", "ilce": "BUCAK", "s9": 29, "s10": 41, "s11": null, "gy": 73, "by": 70, "gt": 813, "durum": "Yeşil (İyi)", "aciklama": "Çok küçük bir ilçe bayimizdir. Henüz 11. sınıf ürün girişi yapmamıştır. Bu ürünleri sezonluk toplu siparişiyle birlikte alacağını belirtmiştir. Süreç takip edilerek girişler bu hafta yaptırılacaktır."}, {"bayi": "MEDRESE KITABEVI- DAVUT GUNDOGAN", "il": "AFYONKARAHISAR", "ilce": "MERKEZ", "s9": 145, "s10": 221, "s11": 20, "gy": null, "by": 386, "gt": null, "durum": null, "aciklama": "Bayimizin bölgesi çok büyük değildir. Ara sınıf ürünlerimiz için bölgede eylül ayında satış beklentimiz bulunmaktadır. Bayimize bu hafta bir miktar daha ön sipariş girişi yaptırılacaktır."}, {"bayi": "METOT KITAP KIRTASIYE YAY. TURIZM SAN. TIC. LTD. STI.", "il": "ÇANAKKALE", "ilce": "MERKEZ", "s9": 10, "s10": 19, "s11": 62, "gy": 222, "by": 91, "gt": 1083, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz, sipariş limiti kısıtlı olduğu için yüksek miktarda ön sipariş girişi yapmak istememiştir. Eylül ayında okulların ürün seçimlerine göre ilerlemek istemektedir. Ürünlerimizle çalışan ve hedeflerini tutturan bir bayimizdir."}, {"bayi": "MSM KIRTASIYE - BIRGUL TIRAS", "il": "USAK", "ilce": "MERKEZ", "s9": 20, "s10": 30, "s11": null, "gy": 144, "by": 50, "gt": 2549, "durum": "Kırmızı (Düşük)", "aciklama": "Bayiliği iptal edilmiştir. Geçen yıl verileri bulunduğu için kayıt buradan silinmemiştir."}, {"bayi": "MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI", "il": "MUGLA", "ilce": "MENTESE", "s9": 28, "s10": 40, "s11": 126, "gy": 59, "by": 194, "gt": 717, "durum": "Yeşil (İyi)", "aciklama": "Bayimizin bölgesi çok büyük değildir. Raf stoğu için ön sipariş girişleri yapılmıştır; eylül ayında sipariş girişlerine devam edilecektir."}, {"bayi": "NEJLA KANSU -KANSU KITABEVI", "il": "ANTALYA", "ilce": "SERIK", "s9": 599, "s10": 1037, "s11": 989, "gy": 1555, "by": 2625, "gt": 2574, "durum": "Yeşil (İyi)", "aciklama": "İlçe bayimiz, bölgesinde bulunan üç farklı koleje ürünlerimizi tam set olarak satmıştır. Ayrıca bir miktar ön sipariş girişi yapılmıştır."}, {"bayi": "ORTACA-ERAY KITAP KIRTASIYE YAYINCILIK LTD.STI", "il": "MUGLA", "ilce": "ORTACA", "s9": 70, "s10": null, "s11": 150, "gy": 146, "by": 220, "gt": 481, "durum": "Yeşil (İyi)", "aciklama": "Küçük ilçe bayimizin raf stoğu için ön sipariş girişleri yapılmıştır."}, {"bayi": "OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE", "il": "KONYA", "ilce": "AKSEHIR", "s9": 10, "s10": 23, "s11": 69, "gy": 48, "by": 102, "gt": 454, "durum": "Yeşil (İyi)", "aciklama": "İlçe bayimiz, tüm ürün grupları için giriş yapmış olup ağırlıklı olarak devlet okullarına yönelik çalışmalar yürütmektedir."}, {"bayi": "SED-KANGURU KITAP MUSAMETTIN KUCAK", "il": "MANISA", "ilce": "SEHZADELER", "s9": 452, "s10": 584, "s11": 510, "gy": 1390, "by": 1546, "gt": 2270, "durum": "Yeşil (İyi)", "aciklama": "Ara sınıf ürünlerimiz ağırlıklı olarak eylül ayında devlet okullarına satılmaktadır. Bayimize tüm ürün gruplarımız için sezonluk ön sipariş girişleri yaptırılmıştır."}, {"bayi": "SERKAN ISIK - AYRAC KITABEVI", "il": "AYDIN", "ilce": "NAZILLI", "s9": 80, "s10": 103, "s11": 117, "gy": 77, "by": 300, "gt": 282, "durum": "Yeşil (İyi)", "aciklama": "Küçük ilçe bayimizin raf stoğu için ön sipariş girişleri yapılmıştır."}, {"bayi": "TERCIH KITABEVI/GUROL SULUHAN", "il": "AYDIN", "ilce": "EFELER", "s9": 206, "s10": 202, "s11": null, "gy": 140, "by": 408, "gt": 525, "durum": "Yeşil (İyi)", "aciklama": "Bayimizin sipariş limiti bulunmadığı için 11. sınıf ürün girişleri yapılamamıştır. Evrakları bugün kargoya verilmiştir. Süreç takip edilerek girişler bu hafta yapılacaktır."}, {"bayi": "TURKER KIRTASIYE-FATIH BAS", "il": "MANISA", "ilce": "SOMA", "s9": 42, "s10": 52, "s11": 71, "gy": 145, "by": 165, "gt": 625, "durum": "Yeşil (İyi)", "aciklama": "Çok küçük bir ilçe bayimizdir. Raf stoğu için tüm ürün gruplarında giriş yapılmıştır; eylül ayında satışlara göre yeni girişler yapılacaktır."}, {"bayi": "UC YILDIZ KITABEVI (IBRAHIM YILDIZ)", "il": "ISPARTA", "ilce": "MERKEZ", "s9": 98, "s10": 41, "s11": 140, "gy": 75, "by": 279, "gt": 344, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz, tüm ürün grupları için giriş yapmış olup ağırlıklı olarak devlet okullarına yönelik çalışmalar yürütmektedir."}, {"bayi": "UMRAN KITAP KIRTASIYE - ADEM TETIK", "il": "BURDUR", "ilce": "MERKEZ", "s9": 87, "s10": 31, "s11": null, "gy": 47, "by": 118, "gt": 182, "durum": "Yeşil (İyi)", "aciklama": "Bayimizle ön sipariş konusunda birkaç kez görüşülmüştür. Diğer sezonluk ön siparişleriyle birlikte bu hafta giriş yapacağını belirtmiştir. Süreç takip edilerek sipariş girişi yaptırılacaktır."}, {"bayi": "USAK KITAP MARKET-FATIH DULGER", "il": "USAK", "ilce": "MERKEZ", "s9": 77, "s10": 94, "s11": 74, "gy": null, "by": 245, "gt": null, "durum": null, "aciklama": "Bu yıl yeni bayilik verdiğimiz bayimizin bölgesi çok büyük değildir. Raf stoğu için ön sipariş girişleri yaptırılmıştır."}, {"bayi": "YESIL BEYAZ YAYIN DAG(MITHAT APARCI)", "il": "KONYA", "ilce": "MERAM", "s9": 2050, "s10": 2615, "s11": 1080, "gy": 4780, "by": 5745, "gt": 6125, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz, bölgesindeki kolejlere ürün satışı yapmış olup eylül ayı için elinde yüksek miktarda stok bulunmamaktadır. Ürünlerin bu yıl tam set olması nedeniyle devlet okullarındaki satış beklentimiz daha yüksektir. Henüz 11. sınıf ürün seçimi yapmamış kolejler de bulunmaktadır; bu nedenle bu yıl daha iyi sonuçlar beklenmektedir."}, {"bayi": "YONCE YAYIN DAGITIM KITABEVI LTD.STI", "il": "BURSA", "ilce": "YILDIRIM", "s9": 8570, "s10": 10437, "s11": 850, "gy": 4350, "by": 19857, "gt": 7835, "durum": "Yeşil (İyi)", "aciklama": "Bayimize 9. ve 10. sınıf ürünlerimizden yüksek miktarda ön sipariş girişi yaptırılmış; kolejlerde güçlü satışlar gerçekleştirilmiştir. 11. sınıf ürünlerimiz için de benzer adetlerde giriş yapılacaktır. Bayimizin sipariş limiti kalmadığından evrakların merkeze ulaşması beklenmektedir."}], "dealer_count": 32}, {"id": "kitaphane", "by": "M.Yasin Erdoğan", "urun": "Eğitim Vadisi 9-10-11 TAK-TİK (Kitaphane)", "raporlama": "3. Raporlama · 02.09.2026", "toplam": {"gy": 52432, "by": 109603, "gt": 80266, "s9": 31882, "s10": 37301, "s11": 40410, "degisim": 2.0903837351235888, "durum": null, "growth": 109.0}, "ozet": "Kitaphane zincirinde (Ankara, İstanbul, İzmir) satışlar geçen yılın bu dönemine göre 52.432 adetten 109.603 adede yükselmiştir. Ankara'da portföydeki tüm kurumların siparişleri girilmiş, ürün artık tanınıp seçilir hale gelmiştir. İstanbul'da kurs ve özel okul satışları tamamlanmış, devlet okulu siparişleri beklenmektedir; TAK ürünlerinin Matematik branşında gelen eleştiriler Yayın Müdürlüğü'ne iletilmiştir. İzmir'de devlet okullarında yaşanan kısıtlamalar nedeniyle ara sınıf potansiyeli düşük olsa da diğer kurumların siparişleri girilmiştir.", "dealers": [{"bayi": "KİTAPHANE", "il": "ANKARA", "ilce": null, "s9": 13112, "s10": 14932, "s11": 18080, "gy": 17832, "by": 46134, "gt": 30272, "durum": null, "aciklama": "Portföyümüzde ki tüm kurumların siparişleri girilmiştir. Ürün artık tanınıyor ve seçiliyor. Serininde tamamlanması ile pazarlama süreçleri devam etmektedir."}, {"bayi": "KİTAPHANE", "il": "İSTANBUL", "ilce": null, "s9": 17910, "s10": 20270, "s11": 16730, "gy": 27250, "by": 54910, "gt": 42250, "durum": null, "aciklama": "Kurs ve Özel Okul satışlarımız tamamlanmış olup devlet okullarında gelecek siparişilerimiz beklemekteyiz. Buna istinadeden sipariş girişleri yapılmıştır. Tak'larda Matematik branşında gelen eleştiriler olmuştur. Yayın Müdürüne iletilmiştir. Geçen seneni üstüne koyarak adetlerimizde artmıştır."}, {"bayi": "KİTAPHANE", "il": "İZMİR", "ilce": null, "s9": 860, "s10": 2099, "s11": 5600, "gy": 7350, "by": 8559, "gt": 7744, "durum": null, "aciklama": "Devlet okullarında yaşanan yasaklardan dolayı oradaki ara sınıf potansiyelimiz düşüktür. Diğer kurumların siparişleri girilmiştir."}], "dealer_count": 3}]
+</script>
+
+<script>
+const BLOCKS = JSON.parse(document.getElementById('reportData').textContent);
+
+function fmt(n){
+  if(n === null || n === undefined) return '—';
+  return Math.round(n).toLocaleString('tr-TR');
+}
+function pct(n){
+  if(n === null || n === undefined) return '—';
+  const s = n > 0 ? '+' : '';
+  return s + n.toLocaleString('tr-TR', {maximumFractionDigits:1}) + '%';
+}
+function growthClass(g){
+  if(g === null || g === undefined) return 'neu';
+  return g >= 0 ? 'up' : 'down';
+}
+function growthArrow(g){
+  if(g === null || g === undefined) return '↗';
+  return g >= 0 ? '▲' : '▼';
+}
+
+function getStatus(d){
+  if(d.aciklama && /iptal edil/i.test(d.aciklama)) return {label:'İptal', cls:'muted'};
+  if(d.durum){
+    const t = d.durum.toLowerCase();
+    if(t.indexOf('iyi') >= 0) return {label: d.durum, cls:'ok'};
+    if(t.indexOf('orta') >= 0) return {label: d.durum, cls:'warn'};
+    if(t.indexOf('düşük') >= 0 || t.indexOf('dusuk') >= 0) return {label: d.durum, cls:'risk'};
+  }
+  const gy = d.gy, by = d.by;
+  if((gy === null || gy === 0) && by){ return {label:'Yeni', cls:'blue'}; }
+  if(!by){ return gy ? {label:'Sipariş Yok', cls:'risk'} : {label:'Veri Yok', cls:'muted'}; }
+  if(!gy){ return {label:'Yeni', cls:'blue'}; }
+  const g = by/gy - 1;
+  if(g >= 0) return {label:'İyi', cls:'ok'};
+  if(g >= -0.4) return {label:'Orta', cls:'warn'};
+  return {label:'Düşük', cls:'risk'};
+}
+
+function degisimPct(d){
+  if(d.gy){ return Math.round((d.by||0)/d.gy*1000 - 1000)/10; }
+  return null;
+}
+
+// ── SUMMARY CARDS ──
+const grid = document.getElementById('summaryGrid');
+BLOCKS.forEach(b => {
+  const t = b.toplam;
+  const card = document.createElement('div');
+  card.className = 'sum-card';
+  card.innerHTML = `
+    <div class="name">${b.by}</div>
+    <div class="product">${b.urun}</div>
+    <div class="big-num">${fmt(t.by)}</div>
+    <div class="sub">${b.dealer_count} bayi · Geçen yıl BGK: ${fmt(t.gy)}</div>
+    <span class="growth ${growthClass(t.growth)}">${growthArrow(t.growth)} ${t.growth === null ? 'Yeni ürün · geçen yıl yok' : pct(t.growth) + ' büyüme'}</span>
+  `;
+  grid.appendChild(card);
+});
+
+// ── CHARTS ──
+const chartColors = { red: '#C8102E', ink: '#1a1a1a', green:'#1a7a4a', amber:'#b45309' };
+
+new Chart(document.getElementById('bgkChart'), {
+  type: 'bar',
+  data: {
+    labels: BLOCKS.map(b => b.by),
+    datasets: [
+      { label: 'Geçen Yıl BGK', data: BLOCKS.map(b => b.toplam.gy), backgroundColor: '#c9c9c9' },
+      { label: 'Bu Yıl BGK', data: BLOCKS.map(b => b.toplam.by), backgroundColor: chartColors.red }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 9 } } } }
+  }
+});
+
+new Chart(document.getElementById('growthChart'), {
+  type: 'bar',
+  data: {
+    labels: BLOCKS.map(b => b.by),
+    datasets: [{
+      label: 'Büyüme %',
+      data: BLOCKS.map(b => b.toplam.growth),
+      backgroundColor: BLOCKS.map(b => b.toplam.growth >= 0 ? chartColors.green : chartColors.amber)
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: { y: { ticks: { font: { size: 9 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 9 } } } }
+  }
+});
+
+// ── BLOCKS ──
+const container = document.getElementById('blocksContainer');
+
+function toggleRow(tr){
+  const erow = tr.nextElementSibling;
+  const icon = tr.querySelector('.expand-icon');
+  const open = erow.style.display !== 'none';
+  erow.style.display = open ? 'none' : 'table-row';
+  icon.textContent = open ? '▶' : '▼';
+}
+
+BLOCKS.forEach(b => {
+  const t = b.toplam;
+  const hasIlce = b.dealers.some(d => d.ilce);
+
+  const block = document.createElement('div');
+  block.className = 'report-block';
+
+  const classTotal = (t.s9||0) + (t.s10||0) + (t.s11||0);
+  function classBar(label, val, cls){
+    const width = classTotal ? Math.round((val/classTotal)*100) : 0;
+    return `<div class="bar-row">
+      <div class="bar-label">${label}</div>
+      <div class="bar-track"><div class="bar-fill ${cls}" style="width:${width}%"></div></div>
+      <div class="bar-num">${fmt(val)}</div>
+    </div>`;
+  }
+  const barsHtml = classBar('9. Sınıf TAK-TİK', t.s9, '') + classBar('10. Sınıf TAK-TİK', t.s10, 'green') + classBar('11. Sınıf TAK-TİK', t.s11, 'amber');
+
+  let rowsHtml = b.dealers.map(d => {
+    const st = getStatus(d);
+    const g = degisimPct(d);
+    const aciklama = d.aciklama ? d.aciklama.replace(/</g,'&lt;') : null;
+    return `
+    <tr class="drow" onclick="toggleRow(this)">
+      <td class="bayi-cell" data-label="Bayi">${d.bayi || '—'}</td>
+      <td data-label="İl">${d.il || '—'}</td>
+      ${hasIlce ? `<td data-label="İlçe">${d.ilce || '—'}</td>` : ''}
+      <td class="num" data-label="9.Sınıf">${fmt(d.s9)}</td>
+      <td class="num" data-label="10.Sınıf">${fmt(d.s10)}</td>
+      <td class="num" data-label="11.Sınıf">${fmt(d.s11)}</td>
+      <td class="num" data-label="Geçen Yıl BGK">${fmt(d.gy)}</td>
+      <td class="num" data-label="Bu Yıl BGK">${fmt(d.by)}</td>
+      <td class="num" data-label="Geçen Yıl Toplam">${fmt(d.gt)}</td>
+      <td class="num" data-label="Değişim">${g === null ? '—' : pct(g)}</td>
+      <td data-label="Durum"><span class="pill ${st.cls}">${st.label}</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="${hasIlce ? 12 : 11}">
+        <div class="erow-content">
+          <strong>BY Notu:</strong> ${aciklama ? aciklama : '<em>Açıklama yok</em>'}
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  block.innerHTML = `
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">${b.by} — ${b.urun}</div>
+        <div class="rb-product">${b.raporlama}</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">${b.dealer_count} Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: ${fmt(t.by)}</span>
+        <span class="rb-badge highlight">Geçen Yıl BGK: ${fmt(t.gy)}</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">9. Sınıf</div><div class="sc-val">${fmt(t.s9)}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">10. Sınıf</div><div class="sc-val">${fmt(t.s10)}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">11. Sınıf</div><div class="sc-val">${fmt(t.s11)}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl Toplam</div><div class="sc-val">${fmt(t.gt)}</div><div class="sc-sub">tüm sezon</div></div>
+      <div class="stat-cell"><div class="sc-label">Büyüme</div><div class="sc-val">${t.growth === null ? '—' : pct(t.growth)}</div><div class="sc-sub">${t.growth === null ? 'geçen yıl yok' : 'BGK bazlı'}</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>${b.ozet}</p>
+    </div>
+    <div class="breakdown">
+      <h4>Sınıf Dağılımı (Sipariş Oranı)</h4>
+      ${barsHtml}
+    </div>
+    <div class="scrollnote">☞ Tabloyu görmek için yatay kaydırabilirsiniz.</div>
+    <div class="table-wrap">
+      <table class="dtable">
+        <thead>
+          <tr>
+            <th>Bayi</th>
+            <th>İl</th>
+            ${hasIlce ? '<th>İlçe</th>' : ''}
+            <th class="num">9.Sınıf</th>
+            <th class="num">10.Sınıf</th>
+            <th class="num">11.Sınıf</th>
+            <th class="num">Geçen Yıl BGK</th>
+            <th class="num">Bu Yıl BGK</th>
+            <th class="num">Geçen Yıl Toplam</th>
+            <th class="num">Değişim</th>
+            <th>Durum</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+          <tr class="totr">
+            <td data-label="Bayi">TOPLAM</td>
+            <td data-label="İl"></td>
+            ${hasIlce ? '<td data-label="İlçe"></td>' : ''}
+            <td class="num" data-label="9.Sınıf">${fmt(t.s9)}</td>
+            <td class="num" data-label="10.Sınıf">${fmt(t.s10)}</td>
+            <td class="num" data-label="11.Sınıf">${fmt(t.s11)}</td>
+            <td class="num" data-label="Geçen Yıl BGK">${fmt(t.gy)}</td>
+            <td class="num" data-label="Bu Yıl BGK">${fmt(t.by)}</td>
+            <td class="num" data-label="Geçen Yıl Toplam">${fmt(t.gt)}</td>
+            <td class="num" data-label="Değişim">${t.growth === null ? '—' : pct(t.growth)}</td>
+            <td data-label="Durum"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  container.appendChild(block);
+});
+
+// ── THEME / VIEW TOGGLES ──
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  try{ localStorage.setItem('cyg-theme', t); }catch(e){}
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+function applyView(v){
+  document.body.classList.toggle('mview', v === 'mobile');
+  try{ localStorage.setItem('cyg-view', v); }catch(e){}
+}
+function toggleView(){
+  const cur = document.body.classList.contains('mview') ? 'mobile' : 'web';
+  applyView(cur === 'mobile' ? 'web' : 'mobile');
+}
+(function init(){
+  let theme = 'light', view = 'web';
+  try{ theme = localStorage.getItem('cyg-theme') || 'light'; }catch(e){}
+  try{ view = localStorage.getItem('cyg-view') || 'web'; }catch(e){}
+  applyTheme(theme);
+  applyView(view);
+})();
+</script>
+
+</body>
+</html>
