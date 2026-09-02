@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4K TYT-AYT KOSB — 1. Raporlama · 27.08.2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --red: #C8102E;
+    --red-dark: #9b0c22;
+    --red-light: #fde8ec;
+    --ink: #1a1a1a;
+    --ink-mid: #444;
+    --ink-light: #888;
+    --border: #e0e0e0;
+    --bg: #f5f4f0;
+    --white: #ffffff;
+    --green: #1a7a4a;
+    --green-bg: #e8f5ee;
+    --amber: #b45309;
+    --amber-bg: #fef3c7;
+    --blue: #1d4ed8;
+    --blue-bg: #eff6ff;
+    --grey: #666;
+    --grey-bg: #eee;
+    --kritik: #d64545;
+    --karar-bg: #fdf6e3;
+    --karar-border: #e8dcae;
+  }
+
+  [data-theme="dark"] {
+    --ink: #eee;
+    --ink-mid: #c7c7c7;
+    --ink-light: #999;
+    --border: #333;
+    --bg: #161616;
+    --white: #202020;
+    --red-light: #3a1418;
+    --green-bg: #123425;
+    --amber-bg: #3a2c0d;
+    --blue-bg: #0f2440;
+    --grey-bg: #2a2a2a;
+    --karar-bg: #2a2510;
+    --karar-border: #4a4020;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header { background: var(--white); border-bottom: 4px solid var(--red); }
+  .header-top {
+    display: flex; align-items: center; gap: 20px; padding: 18px 40px; flex-wrap: wrap;
+  }
+  .logo-block { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .logo-circle {
+    width: 48px; height: 48px; background: var(--red); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.5px;
+  }
+  .logo-text { font-size: 11px; color: var(--ink-mid); line-height: 1.3; }
+  .logo-text strong { font-size: 14px; color: var(--ink); display: block; }
+  .header-title { flex: 1; min-width: 260px; border-left: 2px solid var(--border); padding-left: 20px; }
+  .header-title h1 { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; }
+  .header-title p { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .date-badge {
+    background: var(--red); color: white; padding: 6px 16px; font-size: 12px; font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace; border-radius: 4px; white-space: nowrap;
+  }
+  .toggle-btn {
+    background: var(--white); border: 1px solid var(--border); color: var(--ink-mid);
+    padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .toggle-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── KPI BAND ── */
+  .kpi-band {
+    background: var(--red); color: white; padding: 8px 40px; font-size: 11px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .kpi-band .label { opacity: 0.75; font-weight: 400; }
+  .kpi-band .value { font-weight: 700; letter-spacing: 0.2px; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1160px; margin: 0 auto; padding: 28px 20px; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 1.5px;
+    text-transform: uppercase; padding-bottom: 8px; border-bottom: 2px solid var(--red);
+    margin-bottom: 16px; margin-top: 28px;
+  }
+
+  /* ── MISSING BY BANNER ── */
+  .missing-banner {
+    background: var(--amber-bg); border: 1px solid var(--amber); color: var(--amber);
+    border-radius: 4px; padding: 10px 16px; font-size: 12px; font-weight: 600;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── KARAR BOX ── */
+  .karar-box {
+    background: var(--karar-bg); border: 1px solid var(--karar-border); border-radius: 6px;
+    padding: 18px 22px; margin-bottom: 8px;
+  }
+  .karar-box h3 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+  .karar-box ul { list-style: none; }
+  .karar-box li { position: relative; padding-left: 18px; margin-bottom: 10px; font-size: 12.5px; color: var(--ink-mid); line-height: 1.65; }
+  .karar-box li:last-child { margin-bottom: 0; }
+  .karar-box li::before { content: "•"; position: absolute; left: 2px; color: var(--red); font-weight: 700; }
+  .karar-box b { color: var(--ink); }
+  .karar-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .karar-tags .tag { background: var(--blue-bg); color: var(--blue); font-size: 10.5px; font-weight: 600; padding: 2px 9px; border-radius: 20px; }
+  .karar-tags .tag.muted { background: var(--grey-bg); color: var(--grey); }
+  .karar-note { color: var(--kritik); }
+  .karar-meta { font-size: 10.5px; color: var(--ink-light); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--karar-border); }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 4px; }
+  .sum-card {
+    background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--red);
+    padding: 14px 16px; border-radius: 4px;
+  }
+  .sum-card .name { font-size: 11px; color: var(--ink-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .sum-card .product { font-size: 10px; color: var(--ink-mid); margin-bottom: 8px; min-height: 28px; }
+  .sum-card .big-num { font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; color: var(--ink); line-height: 1; }
+  .sum-card .sub { font-size: 10px; color: var(--ink-light); margin-top: 4px; }
+  .sum-card .growth { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+  .growth.up { background: var(--green-bg); color: var(--green); }
+  .growth.down { background: var(--amber-bg); color: var(--amber); }
+  .growth.neu { background: var(--blue-bg); color: var(--blue); }
+
+  /* ── CHARTS ── */
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 16px; }
+  .chart-card h4 { font-size: 10px; font-weight: 700; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .chart-card canvas { max-height: 240px; }
+
+  /* ── REPORT BLOCKS ── */
+  .report-block { background: var(--white); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
+  .report-block-header {
+    background: var(--ink); color: white; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  [data-theme="dark"] .report-block-header { background: #000; }
+  .report-block-header .rb-name { font-size: 13px; font-weight: 700; letter-spacing: 0.2px; }
+  .report-block-header .rb-product { font-size: 11px; opacity: 0.65; font-weight: 400; }
+  .report-block-header .rb-badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .rb-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; color: #fff; }
+  .rb-badge.highlight { background: var(--red); border-color: var(--red-dark); }
+
+  .stats-row { display: flex; gap: 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .stat-cell { flex: 1; min-width: 110px; padding: 10px 14px; border-right: 1px solid var(--border); text-align: center; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .sc-label { font-size: 9px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  .stat-cell .sc-val { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: var(--ink); }
+  .stat-cell .sc-sub { font-size: 9px; color: var(--ink-light); }
+
+  /* ── ACIKLAMA BOX ── */
+  .aciklama-box { border-left: 4px solid var(--red); background: var(--red-light); padding: 12px 16px; margin: 14px 20px 0; border-radius: 0 4px 4px 0; }
+  .aciklama-label { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .aciklama-box p { font-size: 12px; color: var(--ink-mid); line-height: 1.65; }
+
+  /* ── BREAKDOWN BARS ── */
+  .breakdown { padding: 16px 20px 6px; }
+  .breakdown h4 { font-size: 10px; font-weight: 700; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .bar-label { width: 150px; font-size: 11px; color: var(--ink-mid); flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--red); border-radius: 3px; }
+  .bar-fill.green { background: var(--green); }
+  .bar-fill.amber { background: var(--amber); }
+  .bar-num { width: 60px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+
+  /* ── SCROLLNOTE ── */
+  .scrollnote { display: none; font-size: 10px; color: var(--ink-light); padding: 10px 20px 0; font-style: italic; }
+
+  /* ── TABLE ── */
+  .table-wrap { padding: 16px 20px 20px; overflow-x: auto; }
+  table.dtable { width: 100%; border-collapse: collapse; min-width: 720px; }
+  table.dtable th {
+    text-align: left; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-light); border-bottom: 2px solid var(--border); padding: 8px 8px; white-space: nowrap;
+  }
+  table.dtable td { padding: 8px 8px; font-size: 12px; color: var(--ink-mid); border-bottom: 1px solid var(--border); }
+  table.dtable td.num, table.dtable th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  tr.drow { cursor: pointer; }
+  tr.drow:hover { background: var(--bg); }
+  tr.drow td.bayi-cell { font-weight: 600; color: var(--ink); }
+  td.expand-icon { color: var(--red); font-size: 10px; width: 18px; text-align: center; }
+  tr.erow td { padding: 0; border-bottom: 1px solid var(--border); }
+  .erow-content { padding: 10px 16px; background: var(--bg); font-size: 12px; color: var(--ink-mid); border-left: 3px solid var(--red); }
+  .erow-content em { color: var(--ink-light); }
+
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 10.5px; font-weight: 700; white-space: nowrap; }
+  .pill.ok { background: var(--green-bg); color: var(--green); }
+  .pill.warn { background: var(--amber-bg); color: var(--amber); }
+  .pill.risk { background: #fbe4e4; color: var(--kritik); }
+  [data-theme="dark"] .pill.risk { background: #401414; }
+  .pill.blue { background: var(--blue-bg); color: var(--blue); }
+  .pill.muted { background: var(--grey-bg); color: var(--grey); }
+
+  tr.totr td { font-weight: 700; color: var(--ink); border-top: 2px solid var(--ink); border-bottom: none; background: var(--bg); }
+  tr.totr td.num { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 32px; border-top: 1px solid var(--border); padding-top: 14px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--ink-light); flex-wrap: wrap; gap: 6px;
+  }
+  .footer strong { color: var(--red); }
+  .watermark {
+    position: fixed; bottom: 30px; right: 30px; font-size: 32px; color: rgba(200,16,46,0.10);
+    font-weight: 700; letter-spacing: 4px; text-transform: uppercase; pointer-events: none; transform: rotate(-15deg); z-index: 0;
+  }
+
+  /* ── MOBILE VIEW TOGGLE (body.mview) ── */
+  body.mview .summary-grid { grid-template-columns: 1fr; }
+  body.mview .chart-grid { grid-template-columns: 1fr; }
+  body.mview .header-top { padding: 14px 16px; }
+  body.mview .header-title { border-left: none; padding-left: 0; flex-basis: 100%; order: 3; }
+  body.mview .kpi-band { padding: 8px 16px; }
+  body.mview .page { padding: 20px 12px; }
+  body.mview .report-block-body,
+  body.mview .report-block-header { flex-direction: column; align-items: flex-start; }
+  body.mview .rb-badges { justify-content: flex-start; }
+  body.mview .stats-row { flex-direction: column; }
+  body.mview .stat-cell { border-right: none; border-bottom: 1px solid var(--border); text-align: left; display: flex; justify-content: space-between; align-items: center; }
+  body.mview .stat-cell:last-child { border-bottom: none; }
+  body.mview .scrollnote { display: block; }
+  body.mview table.dtable thead { display: none; }
+  body.mview table.dtable, body.mview table.dtable tbody, body.mview table.dtable tr, body.mview table.dtable td { display: block; width: 100%; }
+  body.mview table.dtable td { min-width: 0; }
+  body.mview tr.drow { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; padding: 8px 10px; position: relative; }
+  body.mview tr.drow td { border-bottom: none; padding: 3px 0; display: flex; justify-content: space-between; gap: 10px; }
+  body.mview tr.drow td::before { content: attr(data-label); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-light); font-weight: 600; }
+  body.mview tr.drow td.bayi-cell { font-size: 13px; }
+  body.mview tr.drow td.bayi-cell::before { content: ''; }
+  body.mview td.expand-icon { position: absolute; top: 8px; right: 10px; }
+  body.mview tr.erow td { padding: 0; }
+  body.mview tr.totr { border: 2px solid var(--ink); border-radius: 6px; margin-top: 6px; }
+  body.mview tr.totr td { display: flex; justify-content: space-between; padding: 4px 10px; }
+  body.mview tr.totr td::before { content: attr(data-label); font-size: 9.5px; text-transform: uppercase; color: var(--ink-light); }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 12px; }
+    .watermark, .header-actions { display: none; }
+  }
+
+  @media (max-width: 700px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .chart-grid { grid-template-columns: 1fr; }
+    .scrollnote { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watermark">ÇÖZÜM</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-circle">ÇYG</div>
+      <div class="logo-text">
+        <strong>Çözüm Yayın Grubu</strong>
+        Satış &amp; Bölge Raporlaması
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>4K TYT-AYT KOSB — 1. Raporlama</h1>
+      <p>Bölge Yöneticileri · Sezonsal Ürün Takip Takvimi · Konsolide Durum</p>
+    </div>
+    <div class="header-actions">
+      <button class="toggle-btn" id="themeBtn" onclick="toggleTheme()">🌓 Tema</button>
+      <button class="toggle-btn" id="viewBtn" onclick="toggleView()">📱 Mobil Görünüm</button>
+      <div class="date-badge">27.08.2026</div>
+    </div>
+  </div>
+  <div class="kpi-band">
+    <span class="label">KPI Maddesi:</span>
+    <span class="value">Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="missing-banner">⚠️ Kadir İlhan'ın bu döneme ait raporu iletilmemiştir — aşağıdaki rapor Vedat Adsan, Süleyman İşpınar, Muhsin Özbalcı ve M.Yasin Erdoğan (Kitaphane) verileriyle hazırlanmıştır.</div>
+
+  <!-- SATIŞ MÜDÜRÜ KARARLARI -->
+  <div class="section-title">Alınacak Kararlar — Satış Müdürü</div>
+  <div class="karar-box">
+    <ul>
+      <li><b>Karar 1:</b> 4K KOSB ürünlerinde satışlara ağırlık verilecek; tercihini henüz netleştirmemiş kurumlar ve <b>yeni satış alanları BY'ler tarafından sürekli gündemde tutularak</b> yakından takip edilecektir.</li>
+      <li><b>Karar 2:</b> 4K'nın <b>marka bilinirliği ve 3D gücüyle olan bağı sahada vurgulanmaya devam edilecek</b>; kurumlardaki kullanım oranını artıracak çalışmalar <b>ücretsiz deneme paketi ve Tam Okul TJT desteğiyle</b> güçlendirilecektir.</li>
+      <li><b>Karar 3:</b> Yeni müfredata uygun ürünlerin örneklendirilmesi ve seminer dönemiyle birlikte güçlü şekilde sahaya çıkarılması <b>bayiler nezdinde sürekli gündemde tutularak önceliklendirilecektir.</b> KOSB ürünlerinde BY'lerden gelecek özel talepler gündemde tutulacak; <b>özel satış talepleri ve kurum çalışmalarıyla mevcut stokların eritilmesine yönelik aksiyon BY'ler tarafından alınacaktır.</b>
+        <div class="karar-tags"><span class="tag">@Süleyman İşpınar</span><span class="tag">@Muhsin Özbalcı</span><span class="tag muted">@Kadir İlhan</span><span class="tag">@Vedat Adsan</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ÖZET KARTLAR -->
+  <div class="section-title">Bölge Bazlı Özet</div>
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <!-- GRAFİKLER -->
+  <div class="section-title">Genel Karşılaştırma</div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h4>BGK Karşılaştırma (Geçen Yıl vs Bu Yıl)</h4>
+      <canvas id="bgkChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Büyüme Oranı (%)</h4>
+      <canvas id="growthChart"></canvas>
+    </div>
+  </div>
+
+  <!-- BÖLGE DETAYLARI -->
+  <div class="section-title">Bölge Detayları</div>
+  <div id="blocksContainer"></div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><strong>Çözüm Yayın Grubu</strong> · Satış &amp; Raporlama Birimi · 1. Raporlama Dönemi</div>
+    <div>Power BI – Ürün Raporu baz alınarak hazırlanmıştır · 27.08.2026</div>
+  </div>
+
+</div>
+
+<script id="reportData" type="application/json">
+[{"id": "vedat", "by": "Vedat Adsan", "urun": "4K TYT-AYT KOSB", "raporlama": "1. Raporlama · 27.08.2026", "toplam": {"gy": 3989, "by": 19101, "gt": 11712, "degisim": 4.788418149912259, "durum": "Yeşil (İyi)", "growth": 378.8}, "ozet": "Mevcut dönem itibarıyla 4K KOSB TYT-AYT ürün grubunda toplam 19.101 adet sipariş girişi gerçekleşmiş olup, geçen yılın aynı döneminde kaydedilen 3.989 adetlik siparişe kıyasla 15.112 adetlik önemli bir artış sağlanmıştır. Yeni müfredat uygulamasına geçiş süreci nedeniyle bayiler stok yönetimini daha kontrollü yürütmekte, birçok kurum kaynak seçimini Eylül-Ekim aylarında netleştirecektir. Bayi saha çalışmalarının kurumsal anlaşmalara odaklanması ve devam eden kurum görüşmelerinin düzenli takip edilerek hızlı şekilde siparişe dönüştürülmesi planlanmaktadır.", "dealers": [{"bayi": "ADA KIRTASIYE KITABEVI MEHMET CIHAD ELCI", "il": "BINGÖL", "ilce": "MERKEZ", "gy": 60, "by": null, "gt": 372, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz ziyaret edilerek raf kontrolleri gerçekleştirilecek, tespit edilen ürün eksikleri tamamlanacak ve ihtiyaç doğrultusunda sipariş girişi sağlanacaktır."}, {"bayi": "AKSU KIRTASIYE - AZIZ AKSU", "il": "HAKKARI", "ilce": "MERKEZ", "gy": null, "by": 51, "gt": null, "durum": null, "aciklama": "Bayiliğin bu yıl yeni verilmesi ve iş yeri değişikliği nedeniyle satış süreci henüz istenen seviyeye ulaşmamıştır. Raf düzenlemesi tamamlanarak beklenen kurumlarla yapılacak görüşmeler sonrasında ek siparişler alınacaktır."}, {"bayi": "ANKA SIMURG KITAP KIRTASIYE", "il": "ELAZIG", "ilce": "MERKEZ", "gy": null, "by": 665, "gt": null, "durum": null, "aciklama": "Unvan değişikliği nedeniyle önceki yıl satış verileri sağlıklı şekilde karşılaştırılamamaktadır. Bu yıl mevcut kurum çalışmaları devam etmekte olup devlet okullarında sezonun başlamasıyla birlikte ilave siparişlerin alınması hedeflenmektedir."}, {"bayi": "AY KIRTASIYE KITAP TEK.TEM.INS", "il": "AGRI", "ilce": "MERKEZ", "gy": 20, "by": 16, "gt": 20, "durum": "Sarı (Orta)", "aciklama": "Bayimizin geçmiş dönemlerden kalan stokları bulunmaktadır. Öncelikle mevcut stokların eritilmesine odaklanılacak, stok seviyeleri azaldıkça ihtiyaç doğrultusunda yeni sipariş girişleri gerçekleştirilecektir."}, {"bayi": "BILIM KIRTASIYE SELAHET METE", "il": "SIRNAK", "ilce": "SILOPI", "gy": null, "by": 51, "gt": null, "durum": null, "aciklama": "Bayiliğin bu yıl yeni verilmesi nedeniyle kurum çalışmaları devam etmektedir. Devlet okullarında gerçekleştirilecek tanıtım faaliyetleriyle ürün bilinirliği artırılarak satış adetlerinin yukarı taşınması hedeflenmektedir."}, {"bayi": "BILIM KITABEVI SEYIT ATES", "il": "SANLIURFA", "ilce": "VIRANSEHIR", "gy": 80, "by": 3382, "gt": 185, "durum": "Yeşil (İyi)", "aciklama": "Bu yıl kurum çalışmalarında 4K ürün grubuna daha fazla ağırlık verilmiş ve mevcut kurumlara ürün teslimatları gerçekleştirilmiştir. Devlet okullarında yapılacak tanıtımlarla yeni kurumların kazanılması ve ek siparişlerin oluşturulması planlanmaktadır."}, {"bayi": "BKM BATMAN KITAP MERKEZI KIRTASIYE", "il": "BATMAN", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 800, "durum": null, "aciklama": "Bayimizin deposunda geçmiş dönemlerden kalan stok bulunmaktadır. Mevcut stokların eritilmesine öncelik verilmekte olup, stokların azalması ve yeni kurum çalışmalarının sonuçlanmasıyla birlikte satış rakamının yukarı taşınması beklenmektedir."}, {"bayi": "DORUK SANAYI VE TICARET LIMITED SIRKETI", "il": "MARDIN", "ilce": "KIZILTEPE", "gy": 0, "by": 7368, "gt": 20, "durum": null, "aciklama": "Bayimiz bu yıl 4K ürün grubuna ağırlık vererek dört kuruma ürün vermiş, iki kurumdan da şehir dışı tedarik gerçekleşmiştir. Devlet okullarının açılmasıyla yapılacak yeni tanıtımlar sonucunda ilave siparişlerin alınması hedeflenmektedir."}, {"bayi": "FINAL BASARI EGITIM HIZ. BAS.YAY.", "il": "SIIRT", "ilce": "KURTALAN", "gy": null, "by": 51, "gt": null, "durum": null, "aciklama": "İlçede bayiliğin kısa süre önce verilmiş olması nedeniyle kurum yapılanması devam etmektedir. Devlet okullarında gerçekleştirilecek tanıtım çalışmalarıyla yeni kurumların kazanılması ve satış adetlerinin artırılması planlanmaktadır."}, {"bayi": "GUNEYDOGU KIRTASIYE-MUHSIN DEGER", "il": "SIRNAK", "ilce": "CIZRE", "gy": null, "by": 5, "gt": null, "durum": null, "aciklama": "Bayiliğin yeni verilmesi nedeniyle saha çalışmaları devam etmektedir. Bayimiz yeniden ziyaret edilerek raf ihtiyaçları değerlendirilecek ve ürün eksikleri doğrultusunda sipariş girişi sağlanacaktır."}, {"bayi": "GUNEYDOGU TELEKOMUNASYON", "il": "SIRNAK", "ilce": "IDIL", "gy": 39, "by": 800, "gt": 1607, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz bu yıl özel eğitim kurumlarında 4K ürün grubuyla çalışma gerçekleştirmiştir. Beklenen ilave kurumun eylül ayında kaynak seçimini yapmasıyla birlikte ürün çalışmasının sonuçlandırılması ve satış adetlerinin artırılması hedeflenmektedir."}, {"bayi": "GUZEL OZEL EGT KIRT INS SAN TIC LTD STI", "il": "DIYARBAKIR", "ilce": "ERGANI", "gy": 0, "by": 632, "gt": 166, "durum": null, "aciklama": "Bayimiz bu yıl yeni bir kurum kazanarak satış adetlerini geçen yıla göre yukarı taşımıştır. Devlet okullarında yapılacak tanıtım ve ürün çalışmalarının katkısıyla ilave satışların oluşturulması beklenmektedir."}, {"bayi": "HEDEF KIRTASIYE-ZAFER YAVUZER", "il": "VAN", "ilce": "IPEKYOLU", "gy": 1404, "by": 290, "gt": 1754, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimizin geçmiş yıllardan kalan yüksek miktarda stoğu bulunduğundan mevcut stoklar öncelikli olarak eritilmektedir. Eksilen ürünler için siparişler devam etmekte olup devlet okullarındaki tanıtım çalışmalarıyla ek sipariş hacminin artırılması planlanmaktadır."}, {"bayi": "IGDIR KULTUR KITAP KIRTASIYE-MEHMET NURI YIGIT", "il": "IGDIR", "ilce": "MERKEZ", "gy": 145, "by": 40, "gt": 145, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz ziyaret edilerek raf ve stok durumu kontrol edilecek, tespit edilen eksikler doğrultusunda ürün takviyesi yapılarak sipariş girişi gerçekleştirilecektir."}, {"bayi": "KIZILDERE KIRTASIYE VE BILG.GIDA.INS.", "il": "VAN", "ilce": "ERCIS", "gy": 0, "by": null, "gt": 123, "durum": null, "aciklama": "Bayimizle birebir görüşme gerçekleştirilerek mevcut satış durumu değerlendirilecek ve satışları destekleyecek gerekli aksiyonlar birlikte planlanacaktır."}, {"bayi": "MAHMUT HAKAN KARAPINAR (DEMIRHAN KITABEVI)", "il": "BAYBURT", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 2, "durum": null, "aciklama": "Bayimiz yerinde ziyaret edilerek mevcut satış potansiyeli değerlendirilecek, ihtiyaç ve beklentiler doğrultusunda gerekli aksiyonlar belirlenerek sipariş süreci hızlandırılacaktır."}, {"bayi": "MANA YAYIN KITAP KIRTASIYE SAN TIC LTD STI", "il": "MARDIN", "ilce": "DERIK", "gy": 0, "by": 140, "gt": 14, "durum": null, "aciklama": "İlçenin kurum potansiyelinin sınırlı olması nedeniyle satışlar ağırlıklı olarak raf ve devlet okulu çalışmalarından oluşmaktadır. Yapılacak tanıtımların artırılmasıyla mevcut satış kanalının güçlendirilmesi hedeflenmektedir."}, {"bayi": "MIDYAT BARIS KIRTASIYE BESIR ULUG", "il": "MARDIN", "ilce": "MIDYAT", "gy": null, "by": 36, "gt": null, "durum": null, "aciklama": "Bayimiz ziyaret edilerek mevcut stok, raf ve kurum çalışmaları değerlendirilecek; satış performansını artırmak amacıyla gerekli aksiyonlar ve sipariş planlaması görüşülecektir."}, {"bayi": "NAYIF AYDEMIR (VAROL KIRTASIYE)", "il": "BITLIS", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 15, "durum": null, "aciklama": "Bayimizle sahada birebir görüşme yapılarak mevcut satış durumu değerlendirilecek ve önümüzdeki dönemde satış adetlerini artırmaya yönelik aksiyon planı oluşturulacaktır."}, {"bayi": "NURULLAH OLCAN KITABEVI", "il": "SIRNAK", "ilce": "MERKEZ", "gy": 29, "by": null, "gt": 59, "durum": null, "aciklama": "Bayimiz ziyaret edilerek ürün grubu ve kurum çalışmaları hakkında değerlendirme yapılacak, mevcut potansiyelin satışa dönüştürülmesi için gerekli çalışmalar planlanacaktır."}, {"bayi": "OKURKENT KIRTASIYE GIYASETTIN DEMIR", "il": "MUS", "ilce": "MERKEZ", "gy": 945, "by": 520, "gt": 945, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz üzerinden Final Eğitim Kurumlarına KOSB ürünü verilmiştir. Kesin öğrenci sayılarının netleşmesiyle birlikte ilave takım ihtiyacı oluşması ve ek sipariş girişlerinin yapılarak satış adetlerinin artırılması beklenmektedir."}, {"bayi": "ONCU ACAR KIRTASIYE NAK.INS.", "il": "ADIYAMAN", "ilce": "KAHTA", "gy": 8, "by": 24, "gt": 68, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz ziyaret edilerek mevcut satış ve stok durumu hakkında değerlendirme yapılacak, ihtiyaçlar doğrultusunda gerekli bilgilendirme ve aksiyon planlaması gerçekleştirilecektir."}, {"bayi": "OVA KITAP KITAP KIRTASIYE- BIRHAT ISIK", "il": "HAKKARI", "ilce": "YÜKSEKOVA", "gy": null, "by": 285, "gt": null, "durum": null, "aciklama": "Bayiliğin yeni verilmesiyle birlikte kurum çalışmaları devam etmektedir. Bayimizin görüşme yaptığı kurumlarda öğrenci adetlerinin netleşmesiyle birlikte ek sipariş girişlerinin önümüzdeki haftalarda gerçekleştirilmesi beklenmektedir."}, {"bayi": "OZCELIK KIRTASIYE MUHAMMED OZCELIK", "il": "SANLIURFA", "ilce": "CEYLANPINAR", "gy": null, "by": 40, "gt": null, "durum": null, "aciklama": "Bayiliğin yeni verilmesi nedeniyle saha yapılanması devam etmektedir. Devlet okullarında gerçekleştirilecek tanıtımlarla ürün bilinirliğinin artırılması ve buna bağlı olarak ek siparişlerin oluşturulması hedeflenmektedir."}, {"bayi": "OZKIRTAY KITAP KIRTASIYE BILGISAYAR GIDA LTD STI", "il": "KARS", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 200, "durum": null, "aciklama": "Kars bölgesinde yayınevi yoğunluğunun yüksek olması ve kurum sayısının sınırlı kalması nedeniyle satış potansiyeli ağırlıklı olarak raf kanalına dayanmaktadır. Ürünlerin raf görünürlüğü artırılarak mevcut potansiyelin satışa dönüştürülmesi planlanmaktadır."}, {"bayi": "POZITIF BASKI HIZMETLERI KITAP KIRTASIYE", "il": "ERZURUM", "ilce": "YAKUTIYE", "gy": 155, "by": null, "gt": 525, "durum": null, "aciklama": "Bayimizin geçmiş dönemlerden kalan stokları bulunmaktadır. Bayimizle yeniden görüşme yapılarak mevcut stok durumu ve satış potansiyeli değerlendirilecek, stokların eritilmesi ve yeni siparişlerin oluşturulmasına yönelik gerekli aksiyonlar alınacaktır."}, {"bayi": "POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP", "il": "DIYARBAKIR", "ilce": "KAYAPINAR", "gy": 203, "by": null, "gt": 2870, "durum": null, "aciklama": "Geçen yıl ürün verdiğimiz bazı kurumların bu yıl Eğitim Vadisi ürün grubuna yönelmesi nedeniyle ürün tercihi değişmiştir. Bunun yanında birkaç kurumdan geri dönüş beklenmekte olup, gelecek hafta sonuçlanacak görüşmelerle birlikte ilave siparişlerin alınması hedeflenmektedir."}, {"bayi": "SAH KIRTASIYE MINE BENZER", "il": "SANLIURFA", "ilce": "KARAKOPRU", "gy": 362, "by": 4600, "gt": 362, "durum": "Yeşil (İyi)", "aciklama": "Geçen yıl Eğitim Vadisi ürün grubuyla çalışan bazı kurumlar bu yıl 4K ürününü tercih etmiştir. Bunun yanında görüşmeleri devam eden bir-iki kurum daha bulunmakta olup, gelecek siparişlerle birlikte satış adetlerinin yukarı taşınması beklenmektedir."}, {"bayi": "GENC CARSI KITAP KIRTASIYE", "il": "ERZINCAN", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 18, "durum": null, "aciklama": "Bayimizle birebir görüşme gerçekleştirilerek mevcut satış performansı ve saha çalışmaları değerlendirilecek, eksik kalan noktalar için gerekli aksiyonlar belirlenerek satışın artırılmasına yönelik çalışma yapılacaktır."}, {"bayi": "SEBIL KIRTASIYE-UZEYIR AKCELIK", "il": "BITLIS", "ilce": "AHLAT", "gy": 0, "by": 5, "gt": 110, "durum": null, "aciklama": "İlçedeki kurum sayısının sınırlı olması nedeniyle satış potansiyeli ağırlıklı olarak raf ve devlet okulu çalışmalarından oluşmaktadır. Yapılacak tanıtımların artırılmasıyla ürünlerin daha geniş kitlelere ulaştırılması ve satış adetlerinin geliştirilmesi hedeflenmektedir."}, {"bayi": "SEDAT KIRTASIYE (ABUBEKIR YUCEL)", "il": "SANLIURFA", "ilce": "BIRECIK", "gy": 433, "by": null, "gt": 441, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimizin geçen yıl ürün verdiği kurum bu yıl aynı ürünü tercih etmeyerek farklı bir ürün grubuna yönelmiştir. Kurum tercihlerindeki değişimin etkisi satış adetlerine yansımış olup, yeni kurum kazanımlarına yönelik çalışmalar sürdürülecektir."}, {"bayi": "SIIRT ARI KITAPEVI  ALI KURT", "il": "SIIRT", "ilce": "MERKEZ", "gy": 38, "by": 30, "gt": 63, "durum": "Sarı (Orta)", "aciklama": "Bayimizin bölgede gerçekleştirdiği tanıtımlar sonucunda kurumlarda marka bilinirliği yüksek olan 3D ürünlerine yönelim oluşmuştur. Tanıtım faaliyetleri devlet okullarında da yoğunlaştırılarak 4K ürün grubunun kurum bazlı satışlarının artırılması hedeflenmektedir."}, {"bayi": "SIVEREK AKADEMI KITAP KIRTASIYE", "il": "SANLIURFA", "ilce": "SIVEREK", "gy": 0, "by": null, "gt": 489, "durum": null, "aciklama": "Bayimizin kurumlarda gerçekleştirdiği tanıtım çalışmaları sonucunda ürün satışları gerçekleşmiştir. 4K tercih eden bir kurumun şehir dışından tedarik sağlaması satış adetlerini sınırlamış olup, yeni kurum görüşmeleriyle bu kaybın telafi edilmesi planlanmaktadır."}, {"bayi": "TAKSAN INS IHR NAK SAN VE TIC.LTD.STI.", "il": "MARDIN", "ilce": "NUSAYBIN", "gy": 68, "by": null, "gt": 68, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz ziyaret edilerek mevcut satış durumu, stok seviyesi ve kurum çalışmaları değerlendirilecek; satış performansını geliştirmek amacıyla gerekli aksiyonlar planlanacaktır."}, {"bayi": "TEBLIG KIRTASIYE TEKS. TAS. TUR", "il": "DIYARBAKIR", "ilce": "BISMIL", "gy": null, "by": 30, "gt": null, "durum": null, "aciklama": "Bayimizle görüşme gerçekleştirilerek mevcut satış potansiyeli değerlendirilecek, kurum ve raf çalışmalarına yönelik ihtiyaçlar belirlenerek gerekli aksiyonlar alınacaktır."}, {"bayi": "UCAR DAGITIM PAZARLAMA ITH IHR", "il": "MARDIN", "ilce": "ARTUKLU", "gy": 0, "by": 40, "gt": 125, "durum": null, "aciklama": "Kurumlarda gerçekleştirilen tanıtım çalışmaları sonucunda ürün satışları sağlanmıştır. Devlet okullarında yapılacak tanıtım faaliyetlerinin artırılmasıyla yeni kurum kazanımları ve ek sipariş girişleri hedeflenmektedir."}, {"bayi": "UMUT KIRTASIYE-MEHMET ALI CEYHAN", "il": "DIYARBAKIR", "ilce": "SILVAN", "gy": 0, "by": null, "gt": 146, "durum": null, "aciklama": "Bayiliği iptal edilen Umut Kırtasiye'nin satış ve iade süreçleri sonlandırılacak; mevcut stok ve sistem işlemleri ilgili prosedürler doğrultusunda tamamlanacaktır."}], "dealer_count": 37}, {"id": "suleyman", "by": "Süleyman İşpınar", "urun": "4K TYT-AYT KOSB", "raporlama": "1. Raporlama · 27.08.2026", "toplam": {"gy": 30917, "by": 24730, "gt": 41981, "degisim": null, "durum": null, "growth": -20.0}, "ozet": "4K Konu Özetli Soru Bankalarımızın geçen yıla kıyasla bir miktar düşüş yaşamasının başlıca sebepleri arasında, kurumların önümüzdeki yıl gerçekleşecek müfredat değişikliği nedeniyle yayınevlerinin elinde kalan ürünleri yüksek iskontolarla temin edebilme avantajını kullanmaları yer almaktadır. Bazı kurumların ürün seçimi yapmayarak öğrenci ve velileri farklı alternatiflere yönlendirdiği, ayrıca birçok kurumda öğrenci sayılarında ciddi düşüşler yaşandığı gözlemlenmiştir. Önümüzdeki yıl müfredat değişikliğine uygun olarak yenilenecek ürün gamının sahada daha güçlü bir karşılık bulacağı öngörülmektedir.", "dealers": [{"bayi": "ALTIN KITAP KIRTASIYE MALZ.INS.TAAH.TARIM HAYV.ZUC.TURZ.PAZ.SAN.VE TIC.LTD.STI.", "il": "KIRSEHIR", "ilce": "MERKEZ", "gy": 95, "by": null, "gt": 155, "durum": null, "aciklama": "İlde yayın alan yalnızca iki kurum bulunmaktadır ve bu kurumlardan biri Ankara merkezli bir firmadan tedarik sağlamaktadır. Bu sebeple bayimizin sipariş adetleri düşük kalmıştır."}, {"bayi": "ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.", "il": "HATAY", "ilce": "DEFNE", "gy": 475, "by": 565, "gt": 648, "durum": null, "aciklama": "Bayimiz kurumsal alanda aktif şekilde çalışmakta olup geçen yıl bu yayın grubunda hedeflerini tutturmuştur. Bu yıl da bir kurumla anlaşma yapmıştır; ancak ildeki kurumların öğrenci sayıları düşük seviyededir."}, {"bayi": "BI KITABEVI KIRTASIYE YAYINCILIK SANAYI VE TICARET LIMITED STI.", "il": "ÇORUM", "ilce": "MERKEZ", "gy": 499, "by": null, "gt": 1302, "durum": null, "aciklama": "Bayimiz, geçen yıl anlaşma yaptığı kurumla bu yıl yeniden görüşme yapmıştır. Kurum iki yıl üst üste aynı yayını kullanmak istediğinden ilgili kuruma ara sınıf ürünlerimiz verilmiştir."}, {"bayi": "BOGAZICI KIRTASIYE AKIF OZDIL", "il": "OSMANIYE", "ilce": "MERKEZ", "gy": 410, "by": 3370, "gt": 410, "durum": null, "aciklama": "Bayimiz, geçmiş yıllarda olduğu gibi bu yıl da gerek yaz kursu gerekse sezon için bazı kurumlarla anlaşma yapmış ve siparişlerini sisteme girmiştir."}, {"bayi": "CAN KITAP KIRTASIYE ABDULKADIR CAN", "il": "MERSIN", "ilce": "SILIFKE", "gy": 891, "by": null, "gt": 891, "durum": null, "aciklama": "İlçe bayimiz geçen yıl bir kurumla anlaşma yaparak siparişlerini girmiştir. Bu yıl ilgili kurum branş bazlı seçim yaparak farklı yayınları tercih etmiştir. İlçede potansiyel kurum sayısı düşüktür."}, {"bayi": "CAN KITAP KIRTASIYE-AHMET YILDIRIM", "il": "YOZGAT", "ilce": "MERKEZ", "gy": 10, "by": null, "gt": 1026, "durum": null, "aciklama": "Bayimiz, geçen yıl anlaşma yaptığı kurumdan ödeme konusunda sorun yaşamıştır. Bununla birlikte ildeki yayın tercihi yapan üç kuruma teklif götürmüş; ancak iki kurum farklı yayın tercih etmiş, diğer kurum ise henüz karar vermemiştir."}, {"bayi": "CETIN KITAP KIRTASIYE SANAYI VE TICARET LIMITED SIRKETI", "il": "HATAY", "ilce": "DÖRTYOL", "gy": null, "by": 50, "gt": null, "durum": null, "aciklama": "Bayimizin cari değişikliği sebebiyle sipariş adetleri düşük görünmektedir. İlçede geçen yıl olduğu gibi bu yıl da bir butik kurumla anlaşma yaparak siparişlerini girmiştir."}, {"bayi": "CK KITAP DUNYASI KIRTASIYE OYN.HEDY. IHR.SAN.TIC.LTD.STI", "il": "ADANA", "ilce": "CUKUROVA", "gy": null, "by": 10450, "gt": null, "durum": null, "aciklama": "Bu yıl yeni anlaşma yaptığımız bayimiz, ilk etapta konu özetli soru bankalarımızdan 1.000'er takım ürün girişi yapmıştır. Bayimiz bunların bir kısmını satmış; ancak özellikle Adana'da şehir dışından gelen teklifler sebebiyle bazı kurumlarla yapılan anlaşmalar iptal olmuş, bu nedenle ek sipariş girişi gerçekleştirilememiştir."}, {"bayi": "DUNYA KULTUR MERKEZI IRFAN YESILNAR", "il": "AMASYA", "ilce": "MERZIFON", "gy": 2405, "by": null, "gt": 2405, "durum": null, "aciklama": "Bayimiz, ilçedeki tek kurum olan Hedef Eğitim Kurumları'na iki yıldır 4K ürünlerimizi vermekteydi. Kurum, üçüncü yılda aynı ürünü kullanmak istemediğini belirtmiştir. İlçede başka kurum bulunmamaktadır."}, {"bayi": "ETHEM DEMIRBAG (ERDEM KIRTASIYE)", "il": "ADANA", "ilce": "KOZAN", "gy": 25, "by": null, "gt": 47, "durum": null, "aciklama": "İlçe bayimiz, tedarik anlaşması yaptığı iki kuruma özellikle 4K ürünlerimizi vermek istemiş; ancak kurumlar bu yıl yüksek iskontolu farklı iki yayını tercih etmiştir."}, {"bayi": "GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .", "il": "KAYSERI", "ilce": "KOCASINAN", "gy": 1245, "by": 2260, "gt": 2685, "durum": null, "aciklama": "Bayimiz kurumsal anlamda aktif şekilde çalışmaktadır. Her yıl belirli kurumlara 4K konu özeti soru bankalarımız verilmekte olup gerek branş bazlı gerek set olarak sipariş girişleri gerçekleştirilmiştir."}, {"bayi": "GUNEY AYDIN GRUP BILG.YAZ.DON.OZ.EG.OG.GID.ZUC.HED.TIC.LTD.STI", "il": "ADANA", "ilce": "CUKUROVA", "gy": 10830, "by": null, "gt": 10980, "durum": null, "aciklama": "Bayilik iptal edilmiştir."}, {"bayi": "HASAN ACIKBAS - KULTUR KITABEVI", "il": "KARAMAN", "ilce": "ERMENEK", "gy": 30, "by": null, "gt": 40, "durum": null, "aciklama": "Küçük ilçede tek bir kurum bulunmakta olup söz konusu kurum bu yıl düşük fiyatlı (kampanyalı) bir yayını tercih etmiştir."}, {"bayi": "ISKENDERUN EMEK KITABEVI COZUM SISTEMLERI SAN TIC LTD STI", "il": "HATAY", "ilce": "ISKENDERUN", "gy": 4724, "by": null, "gt": 5701, "durum": null, "aciklama": "Bayimizin geçen yıl evrakları düzenlenmiş ve bayiliği iptal edilmiştir."}, {"bayi": "KILAVUZ KIRTASIYE - AYSE HAZIRLAR", "il": "HATAY", "ilce": "REYHANLI", "gy": null, "by": 42, "gt": null, "durum": null, "aciklama": "Potansiyeli çok düşük olan ilçede tek bir kurum bulunmakta olup söz konusu kurum farklı bir yayın tercih etmiştir."}, {"bayi": "KITAP ISTANBUL KIRTASIYE SANAYI TIC. LTD.STI", "il": "AKSARAY", "ilce": "MERKEZ", "gy": null, "by": 1080, "gt": null, "durum": null, "aciklama": "Bayimiz, ildeki tedarikçi firma olarak çalıştığı Via Fen Koleji'ne 4K TYT konu özeti soru bankalarımızı tercih ettirmiş ve siparişlerini sisteme girmiştir."}, {"bayi": "MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.", "il": "KAHRAMANMARAS", "ilce": "DULKADIROGLU", "gy": 1650, "by": 1180, "gt": 6127, "durum": null, "aciklama": "Bayimiz kurumsal alanda aktif olup geçen yıldan anlaşmalı olduğu iki kurumun ürün girişlerini 2025 yılı Kasım ayında tamamlamıştır. Bu yıl ayrıca bir kurumla daha anlaşma yaparak siparişlerini girmiştir."}, {"bayi": "MEHMET CETIN - CETIN KITAP KIRTASIYE", "il": "HATAY", "ilce": "DÖRTYOL", "gy": 50, "by": 840, "gt": 105, "durum": null, "aciklama": "Bayimiz, ilçede bir kurumla anlaşma yaparak siparişlerini girmiştir. İlçedeki bir başka kurumdan ise henüz dönüş beklenmektedir."}, {"bayi": "NETA MATBAACILIK KITAP KIRT SAN VE TIC LTD.STI", "il": "MERSIN", "ilce": "YENISEHIR", "gy": 1516, "by": 480, "gt": 1694, "durum": null, "aciklama": "Bayimiz, ilde belirli kurumlara yayın tanıtımı yapmış ve teklifler sunmuştur; ancak yalnızca bazı kurumlarda branş bazlı olarak ürünlerimiz tercih edilmiştir. Geçen yıl olduğu gibi bu yıl da ara sınıflarda yoğun satış gerçekleştirilmesi beklenmektedir."}, {"bayi": "OLUSUM GLOBAL KITAP DAGITIM SANAYI VE TIC.LTD.STI", "il": "GAZIANTEP", "ilce": "SAHINBEY", "gy": null, "by": 3774, "gt": null, "durum": null, "aciklama": "Bayimiz, Antep genelinde çalışmalar yürütmüş ve anlaşma yaptığı kurumların siparişlerini girmiştir. İldeki birçok kurumun bu yıl geçmiş yılda kullandığı ürünlere devam ederek elindeki stoğu eritmeye çalışması sebebiyle bazı kurumlarla anlaşma sağlanamamıştır."}, {"bayi": "PARK OZEL EGITIM KIRTASIYE TUR SEY TIC LTD STI", "il": "MERSIN", "ilce": "TARSUS", "gy": 2683, "by": 292, "gt": 2873, "durum": null, "aciklama": "İlçe bayimiz kurumsal alanda aktif olup geçen yıl anlaştığı kurumların birçoğunun ödeme noktasında ciddi sorunlar yaşatması sebebiyle bu yıl daha temkinli anlaşmalar yaptığını belirtmiştir. Geçen yıl bir kurumdan yüklü miktarda 4K konu özeti soru bankası iadesi almış olup bu yıl sahada farklı kurumlarla anlaşarak bu kaybı telafi etmeye çalışmaktadır."}, {"bayi": "RUZGAR YAYINCILIK KITAP KIRTASIYE TEMIZLIK SAN.TIC.LTD.STI", "il": "AMASYA", "ilce": "MERKEZ", "gy": null, "by": 347, "gt": null, "durum": null, "aciklama": "İlde Amasya içinden tedarik anlaşması yapan yalnızca iki kurum bulunmaktadır. Bayimiz bu kurumlardan biri ile anlaşma yaparak siparişlerini girmiştir; ancak kurumun öğrenci sayısı çok düşüktür."}, {"bayi": "VIZYON PLUS KITABEVI OKKES ANIL MART", "il": "OSMANIYE", "ilce": "DÜZIÇI", "gy": 825, "by": null, "gt": 840, "durum": null, "aciklama": "İlçe bayimiz, geçen yıl anlaşma yaptığı kurumun ödeme konusunda sorun yaşattığını, bu sebeple yeniden anlaşma sağlayamadığını belirtmiştir. İlçede kurum sayısı çok düşüktür."}, {"bayi": "YENI CAMLIK KITAP KIRTASIYE ORHAN BALLI", "il": "OSMANIYE", "ilce": "KADIRLI", "gy": 923, "by": null, "gt": 1304, "durum": null, "aciklama": "İlçede geçen yıl bir kurumla anlaşan bayimiz, bu yıl da aynı kuruma teklifte bulunmuş; ancak kurum farklı bir yayın tercih etmiştir. Bunun dışında ilçedeki diğer iki kuruma da teklif verilmiş olup bir kurum henüz dönüş yapmamıştır. Bayimiz süreci takip etmektedir."}, {"bayi": "ZAFERCAN KIRTASIYE -TUBA OZUDOGRU", "il": "AMASYA", "ilce": "MERKEZ", "gy": 160, "by": null, "gt": 160, "durum": null, "aciklama": "Bayilik iptal edilmiştir."}], "dealer_count": 25}, {"id": "muhsin", "by": "Muhsin Özbalcı", "urun": "4K TYT-AYT KOSB", "raporlama": "1. Raporlama · 27.08.2026", "toplam": {"gy": 45814, "by": 31035, "gt": 51666, "degisim": null, "durum": null, "growth": -32.3}, "ozet": "Bölgede 4K TYT-AYT KOSB ürünlerinde geçen yıl aynı dönemde 45.814 adet satış gerçekleşmişken, bu yıl satışlar 31.035 adet seviyesinde kalmış ve toplamda 14.779 adetlik düşüş yaşanmıştır. Düşüşün önemli bölümü Bursa Yönce Dağıtım ve Manisa Sed Kanguru Kitap bayilerinden kaynaklanmaktadır; özellikle Yönce Dağıtım'da geçen yıla göre 15.002 adetlik fark oluşmuştur (geçen yıl yeni bayilik nedeniyle yüksek ilk stok alımı yapılmıştı). Bu genel bir ürün/marka performans sorunu değildir — kurumsal satış görüşmeleri geçen yıla göre daha olumlu ilerlemektedir. ÖNERİ: Yüksek stok alımından ziyade kurumsal satışlara odaklanılmalı, henüz yayın seçimini netleştirmemiş kurumlar yakından takip edilmelidir.", "dealers": [{"bayi": "ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI", "il": "KÜTAHYA", "ilce": "MERKEZ", "gy": 7, "by": null, "gt": 129, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimizin bölgesi büyük olmayıp özel öğretim kursu sayısı sınırlıdır; kurumların çoğu zincir yapıdadır. Bu yıl ürün almamasının temel nedeni, önceki yıllardan kalan stokları müfredat değişikliği öncesinde eritmek istemesidir."}, {"bayi": "ANTALYA ATLAS KITABEVI OZAN ERIPEK", "il": "ANTALYA", "ilce": "MANAVGAT", "gy": 120, "by": 1195, "gt": 215, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz bu yıl bölgesindeki bir özel öğretim kursuyla anlaşarak toplu ürün teslimatı gerçekleştirmiştir. İlçe potansiyeli çok yüksek olmamakla birlikte devlet okullarından da ek satış beklenmektedir."}, {"bayi": "ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI", "il": "ESKISEHIR", "ilce": "TEPEBASI", "gy": 1077, "by": 859, "gt": 1413, "durum": "Sarı (Orta)", "aciklama": "Bayimiz geçen yıl çalıştığı kurumla bu yıl da devam etmiştir. Kurumdaki öğrenci sayısının azalması ve bayinin mevcut stokları satışın bir miktar gerilemesine neden olmuştur; eylül ayında devlet okullarından gelecek siparişlerle rakamın yükselmesi beklenmektedir."}, {"bayi": "BANDIRMA OGRETMEN KITABEVI UMIT OKTAY", "il": "BALIKESIR", "ilce": "BANDIRMA", "gy": null, "by": 1755, "gt": null, "durum": null, "aciklama": "Bu yıl yeni çalışmaya başladığımız bayimiz, bölgesindeki bir özel öğretim kursuna toplu ürün teslim etmiştir. Müfredat değişikliği nedeniyle temkinli ilerleyip fazla stok çekmemiştir; ek öğrenci kayıtları ve eylül ayı devlet okulu siparişleriyle satışın artması beklenmektedir."}, {"bayi": "BASARIRLAR YAYIN DAGITIM AS", "il": "DENIZLI", "ilce": "MERKEZEFENDI", "gy": 1210, "by": 100, "gt": 2350, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz geçen yıl çalıştığı özel öğretim kursuyla bu yıl anlaşamamıştır. Kurumların aynı yayını iki yıl üst üste kullanmak istememesi düşüşte etkili olmuş; henüz karar vermeyen kurumların siparişlerinin kısa süre içinde netleşmesi beklenmektedir."}, {"bayi": "CETIN YAYIN DAGITIM A.S", "il": "BALIKESIR", "ilce": "KARESI", "gy": 4994, "by": 10787, "gt": 6449, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz geçen yıl ürün verdiği YDS kurumlarıyla bu yıl da anlaşmış, ayrıca bölgede yeni ve büyük bir kurum kazanmıştır. Ek sipariş girişleri devam etmekte olup bayinin elinde yüksek stok bulunmamaktadır."}, {"bayi": "EGE KITAP KIRTASIYE-DONDU YILGIN", "il": "BALIKESIR", "ilce": "EDREMIT", "gy": 14, "by": null, "gt": 14, "durum": "Kırmızı (Düşük)", "aciklama": "Küçük bir ilçe bayisi olan bayimizin bölgesinde özel öğretim kursu sayısı sınırlıdır. Bu yıl bir kurum 3D, diğer kurum Eğitim Vadisi ürünlerini tercih etmiş; kurumlar konu özetli ürünlerden çok soru bankalarına yönelmiştir. Bayimiz ara sınıf gruplarında ise 4K ürünlerine yoğunlaşmaktadır."}, {"bayi": "EREN KITAP KIRTASIYE MUHARREM AKMAN", "il": "BILECIK", "ilce": "BOZÜYÜK", "gy": 34, "by": null, "gt": 47, "durum": "Kırmızı (Düşük)", "aciklama": "Küçük bir ilçe bayisi olan bayimizin bölgesinde, bir zincir kurum dışında özel öğretim kursu bulunmamaktadır. Bayimiz ağırlıklı olarak devlet okullarına ve raftan satış kanalına çalışmaktadır."}, {"bayi": "HALIT KAYA (ALANYA AKADEMI KIRTASIYE)", "il": "ANTALYA", "ilce": "ALANYA", "gy": 120, "by": 20, "gt": 320, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz geçmiş yıllarda 4K kurumsal ürünlerinde güçlü satış yapan bir bayidir. Ancak bu yıl kurumlar marka bilinirliği daha yüksek yayınlara yöneldiği için ürün seçimi yaptıramamış; bölgedeki büyük devlet okullarıyla toplu paket ürün görüşmelerine devam etmektedir."}, {"bayi": "HASAN BASRI SAGLAM (SAGLAM KIRTASIYE KONYA)", "il": "KONYA", "ilce": "SEYDISEHIR", "gy": 23, "by": 78, "gt": 48, "durum": "Yeşil (İyi)", "aciklama": "Küçük bir ilçede faaliyet gösteren bayimizin bölgesinde özel kurum sayısı sınırlıdır. Bayimiz özellikle devlet okullarında yaptığı çalışmalarla geçen yılın aynı döneminin üzerine çıkmıştır."}, {"bayi": "KAPLAN KIRTASIYE-AYBUKE UGUZ KAPLAN", "il": "BURDUR", "ilce": "BUCAK", "gy": 41, "by": null, "gt": 73, "durum": "Kırmızı (Düşük)", "aciklama": "Küçük bir ilçe bayisi olan bayimizin bölgesinde birkaç zincir kurum dışında toplu satış yapılabilecek büyük kurum bulunmamaktadır. Bayimiz ağırlıklı olarak devlet okulları ve raftan satış kanalında çalışmaktadır."}, {"bayi": "MEDRESE KITABEVI- DAVUT GUNDOGAN", "il": "AFYONKARAHISAR", "ilce": "MERKEZ", "gy": null, "by": 14, "gt": null, "durum": null, "aciklama": "Bayimiz bu yıl unvan değişikliği yaptığı için geçen yılki satışlar eski cari hesapta kalmış ve burada görünmemektedir. Bu yıl henüz toplu kurum satışı yapamamış, çalışmalarını ağırlıklı olarak devlet okullarında sürdürmüştür."}, {"bayi": "MUGLA ERAY KITAP KIRTASIYE MATBAA YAY.LTD.STI", "il": "MUGLA", "ilce": "MENTESE", "gy": 74, "by": null, "gt": 89, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimizin bölgesi çok büyük değildir ve kurumların çoğu zincir yapıdadır. Bölgedeki iki kurum bu yıl farklı markalarımızı tercih etmiş, 4K ürünlerini seçmemiştir. Bayimiz devlet okullarındaki çalışmalarını yoğunlaştıracağını belirtmiştir."}, {"bayi": "NEJLA KANSU -KANSU KITABEVI", "il": "ANTALYA", "ilce": "SERIK", "gy": null, "by": 80, "gt": null, "durum": null, "aciklama": "Bayimiz normalde 4K bayisi değildir. Tedarik anlaşması yaptığı bir kolej için sınırlı miktarda ürün almıştır."}, {"bayi": "ORTACA-ERAY KITAP KIRTASIYE YAYINCILIK LTD.STI", "il": "MUGLA", "ilce": "ORTACA", "gy": 231, "by": null, "gt": 231, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimizin bölgesindeki en büyük özel öğretim kursu zincir yapıda faaliyet göstermektedir. Diğer kursa ise bünyemizdeki farklı bir markadan ürün verilmiş; bu nedenle bu yıl 4K satışı gerçekleşmemiştir."}, {"bayi": "OSMAN KAYLAK - AKSEHIR IKBAL KITAP KIRTASIYE", "il": "KONYA", "ilce": "AKSEHIR", "gy": 25, "by": 4, "gt": 568, "durum": "Kırmızı (Düşük)", "aciklama": "İlçe bayimizin bölgesinde özel öğretim kursu sayısı sınırlıdır. Bayimiz nitelikli devlet okullarında ürün seçimi yaparak satış gerçekleştirmekte, müfredat değişikliği nedeniyle de stokta temkinli ilerlemektedir. Siparişlerini seçimlere göre tamamlayacaktır."}, {"bayi": "SED-KANGURU KITAP MUSAMETTIN KUCAK", "il": "MANISA", "ilce": "SEHZADELER", "gy": 5463, "by": 706, "gt": 5726, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz geçen yıl bölgesindeki büyük bir özel öğretim kursuna toplu ürün vermiştir; ancak kurum aynı yayını tekrar kullanmak istemediği için bu yıl 4K ürünlerini tercih etmemiştir. Bayi, kurumdan gelen iadeleri ve mevcut stoklarını başka kurumlarda değerlendirmiş, müfredat değişikliği nedeniyle stokta kontrollü ilerlemiştir."}, {"bayi": "SEGESTA KITAP KIRTASIYE DAGITIM LIMITED SIRKETI", "il": "ANTALYA", "ilce": "MURATPASA", "gy": 8359, "by": 3858, "gt": 8909, "durum": "Kırmızı (Düşük)", "aciklama": "Bölgedeki özel öğretim kurslarının bir bölümü bu yıl 11. sınıflarda ürünlerimizi tercih etmemiş, ayrıca geçen yıldan kalan stokları kullanmıştır. Kurum sayısında büyük bir kayıp olmamasına rağmen öğrenci sayılarındaki düşüş ve stokların değerlendirilmesi satış adetlerini aşağı çekmiştir."}, {"bayi": "SERKAN ISIK - AYRAC KITABEVI", "il": "AYDIN", "ilce": "NAZILLI", "gy": 60, "by": 34, "gt": 135, "durum": "Kırmızı (Düşük)", "aciklama": "Küçük bir ilçede faaliyet gösteren bayimizin bölgesinde özel öğretim kursu sayısı sınırlıdır. Bayimiz ağırlıklı olarak devlet okullarında çalışmaktadır."}, {"bayi": "TERCIH KITABEVI/GUROL SULUHAN", "il": "AYDIN", "ilce": "EFELER", "gy": 5806, "by": 6077, "gt": 6352, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz Aydın merkezde bulunan 11 özel öğretim kursuna toplu ürün vermiştir. Geçen yıldan kalan stokların kullanılması artışı sınırlasa da satış aynı dönemin üzerinde gerçekleşmiştir; ek siparişlerle rakamın yükselmesi beklenmektedir."}, {"bayi": "TURKER KIRTASIYE-FATIH BAS", "il": "MANISA", "ilce": "SOMA", "gy": 155, "by": 25, "gt": 249, "durum": "Kırmızı (Düşük)", "aciklama": "Küçük bir ilçede faaliyet gösteren bayimizin bölgesinde özel öğretim kurumu sayısı sınırlıdır. Bayimiz ürünleri ağırlıklı olarak devlet okullarına ve raftan satış yoluyla sunmaktadır."}, {"bayi": "UC YILDIZ KITABEVI (IBRAHIM YILDIZ)", "il": "ISPARTA", "ilce": "MERKEZ", "gy": 119, "by": 32, "gt": 213, "durum": "Kırmızı (Düşük)", "aciklama": "Bölge potansiyeli çok yüksek olmayan bayimiz bu yıl kurumsal satış gerçekleştirmiştir. Ancak kurumların konu özetli ürünleri tercih etmemesi ve marka bilinirliği yüksek yayınlara yönelmesi nedeniyle satışlar geçen yılın altında kalmıştır."}, {"bayi": "UMRAN KITAP KIRTASIYE - ADEM TETIK", "il": "BURDUR", "ilce": "MERKEZ", "gy": 12, "by": null, "gt": 31, "durum": "Kırmızı (Düşük)", "aciklama": "Küçük bir bölgede faaliyet gösteren bayimizin çevresindeki kurumların çoğu zincir yapıdadır. Bağımsız kurumlar ise marka bilinirliği yüksek yayınlara yönelmekte; bazı kurumlar konu özetli ürünleri tercih etmemektedir."}, {"bayi": "USAK KITAP MARKET-FATIH DULGER", "il": "USAK", "ilce": "MERKEZ", "gy": 110, "by": 157, "gt": 115, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz bu yıl bölgesindeki küçük bir kurumla anlaşmış, geçmiş yıllardan kalan stoklarını da değerlendirmiştir. Devlet okullarında da ürünlerimiz tercih edilmiş olup eylül ayında satışların bir miktar daha yükselmesi beklenmektedir."}, {"bayi": "YESIL BEYAZ YAYIN DAG(MITHAT APARCI)", "il": "KONYA", "ilce": "MERAM", "gy": 970, "by": 3466, "gt": 1120, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz bölgesindeki iki özel öğretim kursuyla toplu anlaşma yaparak ürün teslimatlarını gerçekleştirmiştir. Geçmiş stoklarını da değerlendiren bayi, müfredat değişikliği nedeniyle sınırlı stok tutmaktadır. Ek öğrenci kayıtları ve devlet okulu siparişleriyle satışın devam etmesi beklenmektedir."}, {"bayi": "YONCE YAYIN DAGITIM KITABEVI LTD.STI", "il": "BURSA", "ilce": "YILDIRIM", "gy": 16790, "by": 1788, "gt": 16870, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz geçen yıl sözleşme sonrasında yüksek miktarda stok çekmiştir. Bu yıl geçen yıldan kalan ürünleri ve kurumlardan gelen iadeleri yeni anlaşmalarında değerlendirdiği için yeni sipariş miktarı düşük kalmıştır. Bölge potansiyeli yüksek ve siparişler devam ediyor olsa da geçen yılki yüksek stoklu alım nedeniyle aynı seviyeye ulaşılması beklenmemektedir."}], "dealer_count": 26}, {"id": "kitaphane", "by": "M.Yasin Erdoğan", "urun": "4K KOSB - TYT-AYT (Kitaphane)", "raporlama": "1. Raporlama · 01.09.2026", "toplam": {"gy": 47669, "by": 34277, "gt": 84669, "degisim": 0.7190627032243176, "durum": null, "growth": -28.1}, "ozet": "Kitaphane zincirinde (Ankara, İstanbul, İzmir) 4K KOSB satışları geçen yılın bu dönemine göre 47.669 adetten 34.277 adede gerilemiştir. Ankara'da standart bir ivmeyle satış devam etmekte, geçen sene adetlerinin yakalanması öngörülmektedir. İstanbul'da geçen seneden kalan yüksek stok eritilmiş olup beklenen kurum siparişleri tedricen ilerlemektedir; geçen senenin adetlerinin yakalanamayacağı düşünülmektedir. İzmir'de geçen sene verilen bazı kurumlardan olumsuz geri bildirim alınmış, kurumlar alternatif ürünleri (3D SB) tercih etmiştir.", "dealers": [{"bayi": "KİTAPHANE", "il": "ANKARA", "ilce": null, "gy": 9539, "by": 18376, "gt": 19109, "durum": null, "aciklama": "Her sene olduğu gibi standart bir ivmeyle satışlarımız gerçekleşmektedir. Geçen sene adetlerinin yakalayacağımızı öngörmekteyiz ."}, {"bayi": "KİTAPHANE", "il": "İSTANBUL", "ilce": null, "gy": 25320, "by": 4775, "gt": 52510, "durum": null, "aciklama": "Geçen senedn kalan çok stok vardı. Onlar eritildi. Beklediğimiz kurumlar var . Siparişlerde tedricen ilerlenmektedir. Geçen sene ki adetleri yakalanmayacağı düşünülüyor. Hedef tutturmak için geçen sene  stok şişmişti."}, {"bayi": "KİTAPHANE", "il": "İZMİR", "ilce": null, "gy": 12810, "by": 11126, "gt": 13050, "durum": null, "aciklama": "İzmir'de Kosblarda hızlı bir ivme yakalanmıştı. Kurs  ve devlet okullarından güzel bir talep oluşmuştu. Bu sene beklentimiz daha yüksekti fakat. Geçen sene verilen kurumlardan olumsuz geri bildirimler oluştu. Alternatif ürünlerimiz tercih edildi.( 3D SB )"}], "dealer_count": 3}]
+</script>
+
+<script>
+const BLOCKS = JSON.parse(document.getElementById('reportData').textContent);
+
+function fmt(n){
+  if(n === null || n === undefined) return '—';
+  return Math.round(n).toLocaleString('tr-TR');
+}
+function pct(n){
+  if(n === null || n === undefined) return '—';
+  const s = n > 0 ? '+' : '';
+  return s + n.toLocaleString('tr-TR', {maximumFractionDigits:1}) + '%';
+}
+function growthClass(g){
+  if(g === null || g === undefined) return 'neu';
+  return g >= 0 ? 'up' : 'down';
+}
+function growthArrow(g){
+  if(g === null || g === undefined) return '↗';
+  return g >= 0 ? '▲' : '▼';
+}
+
+function getStatus(d){
+  if(d.aciklama && /iptal edil/i.test(d.aciklama)) return {label:'İptal', cls:'muted'};
+  if(d.durum){
+    const t = d.durum.toLowerCase();
+    if(t.indexOf('iyi') >= 0) return {label: d.durum, cls:'ok'};
+    if(t.indexOf('orta') >= 0) return {label: d.durum, cls:'warn'};
+    if(t.indexOf('düşük') >= 0 || t.indexOf('dusuk') >= 0) return {label: d.durum, cls:'risk'};
+  }
+  const gy = d.gy, by = d.by;
+  if((gy === null || gy === 0) && by){ return {label:'Yeni', cls:'blue'}; }
+  if(!by){ return gy ? {label:'Sipariş Yok', cls:'risk'} : {label:'Veri Yok', cls:'muted'}; }
+  if(!gy){ return {label:'Yeni', cls:'blue'}; }
+  const g = by/gy - 1;
+  if(g >= 0) return {label:'İyi', cls:'ok'};
+  if(g >= -0.4) return {label:'Orta', cls:'warn'};
+  return {label:'Düşük', cls:'risk'};
+}
+
+function degisimPct(d){
+  if(d.gy){ return Math.round((d.by||0)/d.gy*1000 - 1000)/10; }
+  return null;
+}
+
+// ── SUMMARY CARDS ──
+const grid = document.getElementById('summaryGrid');
+BLOCKS.forEach(b => {
+  const t = b.toplam;
+  const card = document.createElement('div');
+  card.className = 'sum-card';
+  card.innerHTML = `
+    <div class="name">${b.by}</div>
+    <div class="product">${b.urun}</div>
+    <div class="big-num">${fmt(t.by)}</div>
+    <div class="sub">${b.dealer_count} bayi · Geçen yıl BGK: ${fmt(t.gy)}</div>
+    <span class="growth ${growthClass(t.growth)}">${growthArrow(t.growth)} ${t.growth === null ? 'Yeni ürün · geçen yıl yok' : pct(t.growth) + ' büyüme'}</span>
+  `;
+  grid.appendChild(card);
+});
+
+// ── CHARTS ──
+const labels = BLOCKS.map(b => b.by.split(' ')[0] + (b.by.split(' ')[1] ? ' ' + b.by.split(' ')[1][0] + '.' : ''));
+const chartColors = { red: '#C8102E', ink: '#1a1a1a', green:'#1a7a4a', amber:'#b45309' };
+
+new Chart(document.getElementById('bgkChart'), {
+  type: 'bar',
+  data: {
+    labels: BLOCKS.map(b => b.by),
+    datasets: [
+      { label: 'Geçen Yıl BGK', data: BLOCKS.map(b => b.toplam.gy), backgroundColor: '#c9c9c9' },
+      { label: 'Bu Yıl BGK', data: BLOCKS.map(b => b.toplam.by), backgroundColor: chartColors.red }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 9 } } } }
+  }
+});
+
+new Chart(document.getElementById('growthChart'), {
+  type: 'bar',
+  data: {
+    labels: BLOCKS.map(b => b.by),
+    datasets: [{
+      label: 'Büyüme %',
+      data: BLOCKS.map(b => b.toplam.growth),
+      backgroundColor: BLOCKS.map(b => b.toplam.growth >= 0 ? chartColors.green : chartColors.amber)
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: { y: { ticks: { font: { size: 9 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 9 } } } }
+  }
+});
+
+// ── BLOCKS ──
+const container = document.getElementById('blocksContainer');
+
+function toggleRow(tr){
+  const erow = tr.nextElementSibling;
+  const icon = tr.querySelector('.expand-icon');
+  const open = erow.style.display !== 'none';
+  erow.style.display = open ? 'none' : 'table-row';
+  icon.textContent = open ? '▶' : '▼';
+}
+
+BLOCKS.forEach(b => {
+  const t = b.toplam;
+  const hasIlce = b.dealers.some(d => d.ilce);
+
+  const block = document.createElement('div');
+  block.className = 'report-block';
+
+  const top8 = [...b.dealers].filter(d => d.by).sort((a,c) => c.by - a.by).slice(0, 8);
+  const maxBy = Math.max(...top8.map(d => d.by), 1);
+
+  let barsHtml = top8.map(d => {
+    const width = Math.round((d.by / maxBy) * 100);
+    const cls = d.gy && d.by >= d.gy ? 'green' : (d.gy && d.by < d.gy * 0.6 ? 'amber' : '');
+    return `<div class="bar-row">
+      <div class="bar-label" title="${d.bayi}">${d.bayi}${d.il ? ' · ' + d.il : ''}</div>
+      <div class="bar-track"><div class="bar-fill ${cls}" style="width:${width}%"></div></div>
+      <div class="bar-num">${fmt(d.by)}</div>
+    </div>`;
+  }).join('');
+
+  let rowsHtml = b.dealers.map(d => {
+    const st = getStatus(d);
+    const g = degisimPct(d);
+    const aciklama = d.aciklama ? d.aciklama.replace(/</g,'&lt;') : null;
+    return `
+    <tr class="drow" onclick="toggleRow(this)">
+      <td class="bayi-cell" data-label="Bayi">${d.bayi || '—'}</td>
+      <td data-label="İl">${d.il || '—'}</td>
+      ${hasIlce ? `<td data-label="İlçe">${d.ilce || '—'}</td>` : ''}
+      <td class="num" data-label="Geçen Yıl BGK">${fmt(d.gy)}</td>
+      <td class="num" data-label="Bu Yıl BGK">${fmt(d.by)}</td>
+      <td class="num" data-label="Geçen Yıl Toplam">${fmt(d.gt)}</td>
+      <td class="num" data-label="Değişim">${g === null ? '—' : pct(g)}</td>
+      <td data-label="Durum"><span class="pill ${st.cls}">${st.label}</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="${hasIlce ? 9 : 8}">
+        <div class="erow-content">
+          <strong>BY Notu:</strong> ${aciklama ? aciklama : '<em>Açıklama yok</em>'}
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  block.innerHTML = `
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">${b.by} — ${b.urun}</div>
+        <div class="rb-product">${b.raporlama}</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">${b.dealer_count} Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: ${fmt(t.by)}</span>
+        <span class="rb-badge highlight">Geçen Yıl BGK: ${fmt(t.gy)}</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bayi Sayısı</div><div class="sc-val">${b.dealer_count}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">${fmt(t.by)}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">${fmt(t.gy)}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl Toplam</div><div class="sc-val">${fmt(t.gt)}</div><div class="sc-sub">tüm sezon</div></div>
+      <div class="stat-cell"><div class="sc-label">Büyüme</div><div class="sc-val">${t.growth === null ? '—' : pct(t.growth)}</div><div class="sc-sub">${t.growth === null ? 'geçen yıl yok' : 'BGK bazlı'}</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>${b.ozet}</p>
+    </div>
+    <div class="breakdown">
+      <h4>En Yüksek Hacimli ${top8.length} Bayi (Bu Yıl BGK)</h4>
+      ${barsHtml || '<p style="font-size:11px;color:var(--ink-light)">Yeterli veri yok.</p>'}
+    </div>
+    <div class="scrollnote">☞ Tabloyu görmek için yatay kaydırabilirsiniz.</div>
+    <div class="table-wrap">
+      <table class="dtable">
+        <thead>
+          <tr>
+            <th>Bayi</th>
+            <th>İl</th>
+            ${hasIlce ? '<th>İlçe</th>' : ''}
+            <th class="num">Geçen Yıl BGK</th>
+            <th class="num">Bu Yıl BGK</th>
+            <th class="num">Geçen Yıl Toplam</th>
+            <th class="num">Değişim</th>
+            <th>Durum</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+          <tr class="totr">
+            <td data-label="Bayi">TOPLAM</td>
+            <td data-label="İl"></td>
+            ${hasIlce ? '<td data-label="İlçe"></td>' : ''}
+            <td class="num" data-label="Geçen Yıl BGK">${fmt(t.gy)}</td>
+            <td class="num" data-label="Bu Yıl BGK">${fmt(t.by)}</td>
+            <td class="num" data-label="Geçen Yıl Toplam">${fmt(t.gt)}</td>
+            <td class="num" data-label="Değişim">${t.growth === null ? '—' : pct(t.growth)}</td>
+            <td data-label="Durum"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  container.appendChild(block);
+});
+
+// ── THEME / VIEW TOGGLES ──
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  try{ localStorage.setItem('cyg-theme', t); }catch(e){}
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+function applyView(v){
+  document.body.classList.toggle('mview', v === 'mobile');
+  try{ localStorage.setItem('cyg-view', v); }catch(e){}
+}
+function toggleView(){
+  const cur = document.body.classList.contains('mview') ? 'mobile' : 'web';
+  applyView(cur === 'mobile' ? 'web' : 'mobile');
+}
+(function init(){
+  let theme = 'light', view = 'web';
+  try{ theme = localStorage.getItem('cyg-theme') || 'light'; }catch(e){}
+  try{ view = localStorage.getItem('cyg-view') || 'web'; }catch(e){}
+  applyTheme(theme);
+  applyView(view);
+})();
+</script>
+
+</body>
+</html>
