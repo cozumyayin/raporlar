@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4K TKT TYT-AYT — 1. Raporlama · 28.08.2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --red: #C8102E;
+    --red-dark: #9b0c22;
+    --red-light: #fde8ec;
+    --ink: #1a1a1a;
+    --ink-mid: #444;
+    --ink-light: #888;
+    --border: #e0e0e0;
+    --bg: #f5f4f0;
+    --white: #ffffff;
+    --green: #1a7a4a;
+    --green-bg: #e8f5ee;
+    --amber: #b45309;
+    --amber-bg: #fef3c7;
+    --blue: #1d4ed8;
+    --blue-bg: #eff6ff;
+    --grey: #666;
+    --grey-bg: #eee;
+    --kritik: #d64545;
+    --karar-bg: #fdf6e3;
+    --karar-border: #e8dcae;
+  }
+
+  [data-theme="dark"] {
+    --ink: #eee;
+    --ink-mid: #c7c7c7;
+    --ink-light: #999;
+    --border: #333;
+    --bg: #161616;
+    --white: #202020;
+    --red-light: #3a1418;
+    --green-bg: #123425;
+    --amber-bg: #3a2c0d;
+    --blue-bg: #0f2440;
+    --grey-bg: #2a2a2a;
+    --karar-bg: #2a2510;
+    --karar-border: #4a4020;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header { background: var(--white); border-bottom: 4px solid var(--red); }
+  .header-top {
+    display: flex; align-items: center; gap: 20px; padding: 18px 40px; flex-wrap: wrap;
+  }
+  .logo-block { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .logo-circle {
+    width: 48px; height: 48px; background: var(--red); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 15px; letter-spacing: -0.5px;
+  }
+  .logo-text { font-size: 11px; color: var(--ink-mid); line-height: 1.3; }
+  .logo-text strong { font-size: 14px; color: var(--ink); display: block; }
+  .header-title { flex: 1; min-width: 260px; border-left: 2px solid var(--border); padding-left: 20px; }
+  .header-title h1 { font-size: 18px; font-weight: 700; color: var(--ink); letter-spacing: -0.3px; }
+  .header-title p { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+  .header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .date-badge {
+    background: var(--red); color: white; padding: 6px 16px; font-size: 12px; font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace; border-radius: 4px; white-space: nowrap;
+  }
+  .toggle-btn {
+    background: var(--white); border: 1px solid var(--border); color: var(--ink-mid);
+    padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .toggle-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── KPI BAND ── */
+  .kpi-band {
+    background: var(--red); color: white; padding: 8px 40px; font-size: 11px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .kpi-band .label { opacity: 0.75; font-weight: 400; }
+  .kpi-band .value { font-weight: 700; letter-spacing: 0.2px; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1160px; margin: 0 auto; padding: 28px 20px; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 1.5px;
+    text-transform: uppercase; padding-bottom: 8px; border-bottom: 2px solid var(--red);
+    margin-bottom: 16px; margin-top: 28px;
+  }
+
+  /* ── MISSING BY BANNER ── */
+  .missing-banner {
+    background: var(--amber-bg); border: 1px solid var(--amber); color: var(--amber);
+    border-radius: 4px; padding: 10px 16px; font-size: 12px; font-weight: 600;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── KARAR BOX ── */
+  .karar-box {
+    background: var(--karar-bg); border: 1px solid var(--karar-border); border-radius: 6px;
+    padding: 18px 22px; margin-bottom: 8px;
+  }
+  .karar-box h3 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+  .karar-box ul { list-style: none; }
+  .karar-box li { position: relative; padding-left: 18px; margin-bottom: 10px; font-size: 12.5px; color: var(--ink-mid); line-height: 1.65; }
+  .karar-box li:last-child { margin-bottom: 0; }
+  .karar-box li::before { content: "•"; position: absolute; left: 2px; color: var(--red); font-weight: 700; }
+  .karar-box b { color: var(--ink); }
+  .karar-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .karar-tags .tag { background: var(--blue-bg); color: var(--blue); font-size: 10.5px; font-weight: 600; padding: 2px 9px; border-radius: 20px; }
+  .karar-tags .tag.muted { background: var(--grey-bg); color: var(--grey); }
+  .karar-note { color: var(--kritik); }
+  .karar-meta { font-size: 10.5px; color: var(--ink-light); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--karar-border); }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 4px; }
+  .sum-card {
+    background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--red);
+    padding: 14px 16px; border-radius: 4px;
+  }
+  .sum-card .name { font-size: 11px; color: var(--ink-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .sum-card .product { font-size: 10px; color: var(--ink-mid); margin-bottom: 8px; min-height: 28px; }
+  .sum-card .big-num { font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; color: var(--ink); line-height: 1; }
+  .sum-card .sub { font-size: 10px; color: var(--ink-light); margin-top: 4px; }
+  .sum-card .growth { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+  .growth.up { background: var(--green-bg); color: var(--green); }
+  .growth.down { background: var(--amber-bg); color: var(--amber); }
+  .growth.neu { background: var(--blue-bg); color: var(--blue); }
+
+  /* ── CHARTS ── */
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 16px; }
+  .chart-card h4 { font-size: 10px; font-weight: 700; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .chart-card canvas { max-height: 240px; }
+
+  /* ── REPORT BLOCKS ── */
+  .report-block { background: var(--white); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
+  .report-block-header {
+    background: var(--ink); color: white; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  [data-theme="dark"] .report-block-header { background: #000; }
+  .report-block-header .rb-name { font-size: 13px; font-weight: 700; letter-spacing: 0.2px; }
+  .report-block-header .rb-product { font-size: 11px; opacity: 0.65; font-weight: 400; }
+  .report-block-header .rb-badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .rb-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; color: #fff; }
+  .rb-badge.highlight { background: var(--red); border-color: var(--red-dark); }
+
+  .stats-row { display: flex; gap: 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .stat-cell { flex: 1; min-width: 110px; padding: 10px 14px; border-right: 1px solid var(--border); text-align: center; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell .sc-label { font-size: 9px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  .stat-cell .sc-val { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: var(--ink); }
+  .stat-cell .sc-sub { font-size: 9px; color: var(--ink-light); }
+
+  /* ── ACIKLAMA BOX ── */
+  .aciklama-box { border-left: 4px solid var(--red); background: var(--red-light); padding: 12px 16px; margin: 14px 20px 0; border-radius: 0 4px 4px 0; }
+  .aciklama-label { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .aciklama-box p { font-size: 12px; color: var(--ink-mid); line-height: 1.65; }
+
+  /* ── BREAKDOWN BARS ── */
+  .breakdown { padding: 16px 20px 6px; }
+  .breakdown h4 { font-size: 10px; font-weight: 700; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .bar-label { width: 150px; font-size: 11px; color: var(--ink-mid); flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--red); border-radius: 3px; }
+  .bar-fill.green { background: var(--green); }
+  .bar-fill.amber { background: var(--amber); }
+  .bar-num { width: 60px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+
+  /* ── SCROLLNOTE ── */
+  .scrollnote { display: none; font-size: 10px; color: var(--ink-light); padding: 10px 20px 0; font-style: italic; }
+
+  /* ── TABLE ── */
+  .table-wrap { padding: 16px 20px 20px; overflow-x: auto; }
+  table.dtable { width: 100%; border-collapse: collapse; min-width: 720px; }
+  table.dtable th {
+    text-align: left; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-light); border-bottom: 2px solid var(--border); padding: 8px 8px; white-space: nowrap;
+  }
+  table.dtable td { padding: 8px 8px; font-size: 12px; color: var(--ink-mid); border-bottom: 1px solid var(--border); }
+  table.dtable td.num, table.dtable th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  tr.drow { cursor: pointer; }
+  tr.drow:hover { background: var(--bg); }
+  tr.drow td.bayi-cell { font-weight: 600; color: var(--ink); }
+  td.expand-icon { color: var(--red); font-size: 10px; width: 18px; text-align: center; }
+  tr.erow td { padding: 0; border-bottom: 1px solid var(--border); }
+  .erow-content { padding: 10px 16px; background: var(--bg); font-size: 12px; color: var(--ink-mid); border-left: 3px solid var(--red); }
+  .erow-content em { color: var(--ink-light); }
+
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 10.5px; font-weight: 700; white-space: nowrap; }
+  .pill.ok { background: var(--green-bg); color: var(--green); }
+  .pill.warn { background: var(--amber-bg); color: var(--amber); }
+  .pill.risk { background: #fbe4e4; color: var(--kritik); }
+  [data-theme="dark"] .pill.risk { background: #401414; }
+  .pill.blue { background: var(--blue-bg); color: var(--blue); }
+  .pill.muted { background: var(--grey-bg); color: var(--grey); }
+
+  tr.totr td { font-weight: 700; color: var(--ink); border-top: 2px solid var(--ink); border-bottom: none; background: var(--bg); }
+  tr.totr td.num { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 32px; border-top: 1px solid var(--border); padding-top: 14px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--ink-light); flex-wrap: wrap; gap: 6px;
+  }
+  .footer strong { color: var(--red); }
+  .watermark {
+    position: fixed; bottom: 30px; right: 30px; font-size: 32px; color: rgba(200,16,46,0.10);
+    font-weight: 700; letter-spacing: 4px; text-transform: uppercase; pointer-events: none; transform: rotate(-15deg); z-index: 0;
+  }
+
+  /* ── MOBILE VIEW TOGGLE (body.mview) ── */
+  body.mview .summary-grid { grid-template-columns: 1fr; }
+  body.mview .chart-grid { grid-template-columns: 1fr; }
+  body.mview .header-top { padding: 14px 16px; }
+  body.mview .header-title { border-left: none; padding-left: 0; flex-basis: 100%; order: 3; }
+  body.mview .kpi-band { padding: 8px 16px; }
+  body.mview .page { padding: 20px 12px; }
+  body.mview .report-block-body,
+  body.mview .report-block-header { flex-direction: column; align-items: flex-start; }
+  body.mview .rb-badges { justify-content: flex-start; }
+  body.mview .stats-row { flex-direction: column; }
+  body.mview .stat-cell { border-right: none; border-bottom: 1px solid var(--border); text-align: left; display: flex; justify-content: space-between; align-items: center; }
+  body.mview .stat-cell:last-child { border-bottom: none; }
+  body.mview .scrollnote { display: block; }
+  body.mview table.dtable thead { display: none; }
+  body.mview table.dtable, body.mview table.dtable tbody, body.mview table.dtable tr, body.mview table.dtable td { display: block; width: 100%; }
+  body.mview table.dtable td { min-width: 0; }
+  body.mview tr.drow { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; padding: 8px 10px; position: relative; }
+  body.mview tr.drow td { border-bottom: none; padding: 3px 0; display: flex; justify-content: space-between; gap: 10px; }
+  body.mview tr.drow td::before { content: attr(data-label); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-light); font-weight: 600; }
+  body.mview tr.drow td.bayi-cell { font-size: 13px; }
+  body.mview tr.drow td.bayi-cell::before { content: ''; }
+  body.mview td.expand-icon { position: absolute; top: 8px; right: 10px; }
+  body.mview tr.erow td { padding: 0; }
+  body.mview tr.totr { border: 2px solid var(--ink); border-radius: 6px; margin-top: 6px; }
+  body.mview tr.totr td { display: flex; justify-content: space-between; padding: 4px 10px; }
+  body.mview tr.totr td::before { content: attr(data-label); font-size: 9.5px; text-transform: uppercase; color: var(--ink-light); }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 12px; }
+    .watermark, .header-actions { display: none; }
+  }
+
+  @media (max-width: 700px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .chart-grid { grid-template-columns: 1fr; }
+    .scrollnote { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watermark">ÇÖZÜM</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-circle">ÇYG</div>
+      <div class="logo-text">
+        <strong>Çözüm Yayın Grubu</strong>
+        Satış &amp; Bölge Raporlaması
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>4K TKT TYT-AYT — 1. Raporlama</h1>
+      <p>Bölge Yöneticileri · Sezonsal Ürün Takip Takvimi · Konsolide Durum</p>
+    </div>
+    <div class="header-actions">
+      <button class="toggle-btn" id="themeBtn" onclick="toggleTheme()">🌓 Tema</button>
+      <button class="toggle-btn" id="viewBtn" onclick="toggleView()">📱 Mobil Görünüm</button>
+      <div class="date-badge">28.08.2026</div>
+    </div>
+  </div>
+  <div class="kpi-band">
+    <span class="label">KPI Maddesi:</span>
+    <span class="value">Sezonsal Ürün Takip Takvimindeki İş Süreçlerinin Zamanında Yerine Getirilmesi</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="missing-banner">⚠️ Kadir İlhan'ın bu döneme ait raporu iletilmemiştir — aşağıdaki rapor Vedat Adsan, Süleyman İşpınar, Muhsin Özbalcı ve M.Yasin Erdoğan (Kitaphane) verileriyle hazırlanmıştır.</div>
+
+  <!-- SATIŞ MÜDÜRÜ KARARLARI -->
+  <div class="section-title">Alınacak Kararlar — Satış Müdürü</div>
+  <div class="karar-box">
+    <ul>
+      <li><b>Karar 1:</b> TKT ürünleri sadece tek başına bir ürün olmasının yanı sıra, <b>ana kaynak setleri tamamlayan bir ürün olarak</b> da konumlandırılacak; bayi ve kurum çalışmalarında setlerle birlikte satış fırsatları sürekli gündemde tutulacaktır.</li>
+      <li><b>Karar 2:</b> Ürünün <b>optik formlu yapısı, ölçme-değerlendirme kolaylığı ve Tam Okul entegrasyonu</b> kurumsal görüşmelerde daha güçlü vurgulanacak; gerekli durumlarda fiyat/iskonto desteğiyle yüksek adetli satışlar desteklenecektir.</li>
+      <li><b>Karar 3:</b> TKT'de genel satış dışında <b>büyük hedef kitlelere de odaklanılacak</b>; belediyeler, Halk Eğitim Merkezleri vb. ve toplu alım potansiyeli bulunan kurumlar BY'lerin gündeminde tutulacak, hedeflerin üzerine çıkmak ve desteklemek adına <b>özel satış ve kurum çalışmaları artırılacaktır. BY talepleri beklenmektedir.</b>
+        <div class="karar-tags"><span class="tag">@Süleyman İşpınar</span><span class="tag">@Vedat Adsan</span><span class="tag">@Muhsin Özbalcı</span><span class="tag muted">@Kadir İlhan</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ÖZET KARTLAR -->
+  <div class="section-title">Bölge Bazlı Özet</div>
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <!-- GRAFİKLER -->
+  <div class="section-title">Genel Karşılaştırma</div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h4>BGK Karşılaştırma (Geçen Yıl vs Bu Yıl)</h4>
+      <canvas id="bgkChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Büyüme Oranı (%)</h4>
+      <canvas id="growthChart"></canvas>
+    </div>
+  </div>
+
+  <!-- BÖLGE DETAYLARI -->
+  <div class="section-title">Bölge Detayları</div>
+  <div id="blocksContainer"></div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><strong>Çözüm Yayın Grubu</strong> · Satış &amp; Raporlama Birimi · 1. Raporlama Dönemi</div>
+    <div>Power BI – Ürün Raporu baz alınarak hazırlanmıştır · 28.08.2026</div>
+  </div>
+
+</div>
+
+<script id="reportData" type="application/json">
+[{"id": "vedat", "by": "Vedat Adsan", "urun": "4K TKT TYT-AYT", "raporlama": "1. Raporlama · 28.08.2026", "toplam": {"gy": 5080, "by": 4330, "gt": 16800, "degisim": 0.8523622047244095, "durum": null, "growth": -14.8}, "ozet": "Geçtiğimiz yıl 4K TKT ürününü kullanan bayi ve kurumlardan alınan geri bildirimler genel olarak olumlu olup, ürünün içerik yapısı, sınav sistemine uygunluğu ve öğrenci başarısına katkısı açısından memnuniyet seviyesinin yüksek olduğu görülmektedir. Bazı kurumların erken dönem anlaşma ve öğrenci sayılarını henüz netleştirmemiş olması nedeniyle siparişlerin tamamı mevcut raporlama dönemine yansımamıştır. Özellikle devlet okullarında gerçekleştirilecek tanıtım çalışmaları ve Tam Okul anlaşmalarıyla birlikte Eylül-Ekim döneminde ek sipariş girişlerinin gerçekleşmesi, 2. raporlama döneminde satış adetlerinin artması beklenmektedir.", "dealers": [{"bayi": "AY KIRTASIYE KITAP TEK.TEM.INS", "il": "AGRI", "ilce": "MERKEZ", "gy": 1180, "by": null, "gt": 1180, "durum": null, "aciklama": "Bayimizle yapılan görüşmede, çalıştığı kurumlarda öğrenci sayılarının henüz netleşmemesi nedeniyle sipariş girişlerinin gerçekleştirilemediği bilgisi alınmıştır. Kurumların kesin öğrenci sayıları belli olduktan sonra bayimiz, Tam Okul ve TKT ürünlerini kurumlara sunarak sipariş girişlerini gerçekleştirecektir."}, {"bayi": "BILIM KITABEVI SEYIT ATES", "il": "SANLIURFA", "ilce": "VIRANSEHIR", "gy": 0, "by": null, "gt": 1699, "durum": null, "aciklama": "Bayimiz geçen sene tam kavrama testlerini fen liseleri  okullarındaki yerleri satmıştır okulların açılmasıyla birlikte Bayimizin tekrardan tanıtım yapacağı tam kavrama testlerinin sipariş girişlerini gerçekleştirecektir"}, {"bayi": "HEDEF KIRTASIYE-ZAFER YAVUZER", "il": "VAN", "ilce": "IPEKYOLU", "gy": 0, "by": null, "gt": 1884, "durum": null, "aciklama": "Bayimiz geçen sene tam kavrama testlerini fen liseleri  okullarındaki yerleri satmıştır okulların açılmasıyla birlikte Bayimizin tekrardan tanıtım yapacağı tam kavrama testlerinin sipariş girişlerini gerçekleştirecektir"}, {"bayi": "IGDIR KULTUR KITAP KIRTASIYE", "il": "IGDIR", "ilce": "MERKEZ", "gy": null, "by": 750, "gt": null, "durum": null, "aciklama": "Bayimiz bu yıl bir kuruma tam kavramın testini satmış olup satışların devamı için devlet okullarında fen liselerinin tanıtımı yaparak ek sipariş girişleri alınacak"}, {"bayi": "NAYIF AYDEMIR (VAROL KIRTASIYE)", "il": "BITLIS", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 1125, "durum": null, "aciklama": "Bayimiz TKT ürünlerini bu dönemde satışı olmadığı için genelde Bayimiz ürünlerimizi devlet okullarına satmaktadır seminerden sonra yapacağı tanıtımlarla birlikte Bayimiz sipariş girişlerini yapacak"}, {"bayi": "NURULLAH OLCAN KITABEVI", "il": "SIRNAK", "ilce": "MERKEZ", "gy": null, "by": 400, "gt": null, "durum": null, "aciklama": "Bayiimizin koruma yaptığı tanıtımlar sonucunda tam okul ile tam kavrama testlerin bir kısmı satmıştır kurumun öğrenci sayılarının netleşti taktirde tekrardan ek sipariş girişleri sağlanacaktır."}, {"bayi": "OKURKENT KIRTASIYE GIYASETTIN DEMIR", "il": "MUS", "ilce": "MERKEZ", "gy": null, "by": 2080, "gt": null, "durum": null, "aciklama": "Bayimiz tam okul ile tam kavrama testlerini seçkin kurs merkezine satmıştır kurumun henüz net sayıları netleşmediğinden dolayı ilerleyen dönemlerde ek sipariş girişleri yapılıcaktır"}, {"bayi": "POZITIF BOLGE YAYIN DAGITIM EGITIM KITAP", "il": "DIYARBAKIR", "ilce": "KAYAPINAR", "gy": 2500, "by": 1100, "gt": 6830, "durum": null, "aciklama": "Kurumlarda öğrenci sayıları henüz netleşmediği için sipariş beklemede. Sayılar kesinleştikten sonra Tam Okul ve TKT satışlarıyla sipariş girişi yapılacaktır."}, {"bayi": "SAH KIRTASIYE MINE BENZER", "il": "SANLIURFA", "ilce": "KARAKOPRU", "gy": 0, "by": null, "gt": 750, "durum": null, "aciklama": "Mehmet Bey ve Nihat Bey, TKT ürünümüzü geçen yıl olduğu gibi devlet okullarında tanıtarak siparişleri alacaklardır."}, {"bayi": "GENC CARSI KITAP KIRTASIYE", "il": "ERZINCAN", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 592, "durum": null, "aciklama": "Salim Bey, TKT ürünümüzü geçen yıl olduğu gibi devlet okullarında tanıtarak siparişleri alacaklardır."}, {"bayi": "SIVEREK AKADEMI KITAP KIRTASIYE", "il": "SANLIURFA", "ilce": "SIVEREK", "gy": 1400, "by": null, "gt": 2740, "durum": null, "aciklama": "Bayimizin geçen yıl çalıştığı kurumlar henüz TKT ürünü alımı konusunda karar vermemiştir. Kurum ve seminer döneminde yapılacak okul tanıtımları sonrasında, iki raporlama sürecinde ek sipariş girişleri beklenmektedir."}], "dealer_count": 11}, {"id": "suleyman", "by": "Süleyman İşpınar", "urun": "4K TKT", "raporlama": "1. Raporlama · 28.08.2026", "toplam": {"gy": 18988, "by": 8039, "gt": 23185, "degisim": null, "durum": null, "growth": -57.7}, "ozet": "4K Tam Kavrama Testleri ürün grubumuzda geçen yıla oranla sipariş adetlerinde yaşanan düşüşün temel nedenleri; önümüzdeki yıl gerçekleşecek müfredat değişikliği nedeniyle kurumların yaprak test ürünlerinin ellerinde kalma riskini göz önünde bulundurarak temkinli sipariş vermeleri ve geçen yıl anlaşma sağladığımız bazı kurumların mevcut stokları nedeniyle bu yıl yeniden sipariş oluşturmamalarıdır. YKS grubunda kurumsal deneme sınavlarına olan yoğun talep nedeniyle yaprak test ürünleri son yıllarda daha sınırlı tercih edilmektedir. ÖNERİ: 4K yayınlarının soru bankalarıyla birlikte set halinde sunulması ve Tam Okul entegrasyonunun tanıtım çalışmalarında daha yoğun vurgulanması sipariş adetlerine olumlu yansıyacaktır.", "dealers": [{"bayi": "ANTAKYA IKRA KIRTASIYECILIK SAN.VE TIC.LTD.STI.", "il": "HATAY", "ilce": "DEFNE", "gy": 2580, "by": 985, "gt": 3600, "durum": null, "aciklama": "Bayimiz, geçen yıl yaprak testi kullanan üç kuruma bu yıl da teklif götürmüş; ancak kurumlar, mezun öğrenci sayısındaki çakışma nedeniyle teklifi kabul etmemiştir. Yalnızca Metropol Eğitim Kurumları ile anlaşma sağlanmıştır."}, {"bayi": "ASEL KITAP KIRTASIYE ASLI CEKEN", "il": "AMASYA", "ilce": "SULUOVA", "gy": 1760, "by": null, "gt": 1760, "durum": null, "aciklama": "Bayi iptal edilmiştir. Bayi, geçen yıl ürünlerimizi verdiği kurumdan ücretini tahsil edemediğini belirtmiştir."}, {"bayi": "BI KITABEVI KIRTASIYE YAYINCILIK SANAYI VE TICARET LIMITED STI.", "il": "ÇORUM", "ilce": "MERKEZ", "gy": 470, "by": null, "gt": 470, "durum": null, "aciklama": "Bayimiz, tedarik sağladığı iki kuruma da teklifte bulunmuştur; ancak kurumlardan biri teklifi reddetmiş, diğeri ise ders analiz sınavlarımızı kullanmayı tercih etmiştir."}, {"bayi": "BOGAZICI KIRTASIYE AKIF OZDIL", "il": "OSMANIYE", "ilce": "MERKEZ", "gy": 2000, "by": null, "gt": 2016, "durum": null, "aciklama": "Geçen yıl Metot Eğitim Kurumları ile anlaşma sağlanmıştır; ancak kurum, geçen yıldan elinde ürün kaldığını iletmiştir. Bayimiz, diğer kurumlarında ürünün elde kalma ve müfredat değişikliği risklerini göz önünde bulundurarak bu yıl yaprak testi tercih etmemiştir."}, {"bayi": "CETIN KITAP KIRTASIYE SANAYI VE TICARET LIMITED SIRKETI", "il": "HATAY", "ilce": "DÖRTYOL", "gy": null, "by": 180, "gt": null, "durum": null, "aciklama": "İlçe bayimiz, yaptığı teklifler sonrasında bir kurumdan olumlu dönüş almış ve branş bazlı siparişlerini girmiştir."}, {"bayi": "CK KITAP DUNYASI KIRTASIYE OYN.HEDY. IHR.SAN.TIC.LTD.STI", "il": "ADANA", "ilce": "CUKUROVA", "gy": null, "by": 2900, "gt": null, "durum": null, "aciklama": "Bu yıl yeni anlaşma yaptığımız bayimizle birlikte Çınar Eğitim Kurumlarına tanıtım gerçekleştirilmiş, kurum bu doğrultuda ürünlerimizi kullanmayı tercih etmiştir. Bayimiz siparişlerini bu kapsamda girmiştir."}, {"bayi": "DEVELI YAPRAK DAGITIM DAVUT KENDIRCI", "il": "KAYSERI", "ilce": "DEVELI", "gy": 100, "by": null, "gt": 100, "durum": null, "aciklama": "Küçük ilçe bayimiz, geçen yıl branş bazlı ürün verdiği devlet okuluna bu yıl da teklif götürecektir. İlçede özel öğretim kurumlarının azlığı nedeniyle devlet okullarında aktif çalışma yürütülmektedir."}, {"bayi": "ETHEM DEMIRBAG (ERDEM KIRTASIYE)", "il": "ADANA", "ilce": "KOZAN", "gy": 155, "by": null, "gt": 155, "durum": null, "aciklama": "İlçe bayimiz, geçen yıl devlet okulu çalışmalarında sipariş aldığı branş bazlı ürünler için bu yıl da çalışmalarını sürdürecektir."}, {"bayi": "GARANTI AKADEMI EGT HIZ SAN TIC LTD STI .", "il": "KAYSERI", "ilce": "KOCASINAN", "gy": 5279, "by": 3944, "gt": 5279, "durum": null, "aciklama": "Bayimizin ilde tedarikçi olduğu kurumlarla yapılan anlaşmalarda yaprak testlerimizin de listeye eklenmesiyle sipariş adetleri bu seviyeye ulaşmıştır. Önümüzdeki süreçte devlet okulu çalışmalarıyla bu adetlerin artması beklenmektedir."}, {"bayi": "HASAN ACIKBAS - KULTUR KITABEVI", "il": "KARAMAN", "ilce": "ERMENEK", "gy": 40, "by": 30, "gt": 40, "durum": null, "aciklama": "Bayimiz, devlet okullarında branş bazlı sipariş almıştır ve bu yıl da devlet okulu çalışmalarını sürdürecektir."}, {"bayi": "ISKENDERUN EMEK KITABEVI COZUM SISTEMLERI SAN TIC LTD STI", "il": "HATAY", "ilce": "ISKENDERUN", "gy": 2340, "by": null, "gt": 3635, "durum": null, "aciklama": "Bayi iptal edilmiştir."}, {"bayi": "KARACA YAYIN BASIM DAGITIM EGITIM KIRT.HIZ.SAN VE TIC.LTD.STI", "il": "HATAY", "ilce": "ISKENDERUN", "gy": 1912, "by": null, "gt": 1912, "durum": null, "aciklama": "Geçen yıl anlaşma yaptığımız Ninova Kurs Merkezi, önceki yıldan elinde ürün kaldığını, bu nedenle bu yıl yeniden ürün almayı düşünmediğini belirtmiştir."}, {"bayi": "KARANFIL KITAP KIRTASIYE UMUT GOKMEN", "il": "OSMANIYE", "ilce": "MERKEZ", "gy": 0, "by": null, "gt": 660, "durum": null, "aciklama": "Bayimiz, ilde Eğitim Vadisi bayiliğini yürütmektedir. Geçen yıl bir kurumun talebi üzerine diğer bayimizden de onay alarak sipariş girişini gerçekleştirmiştir."}, {"bayi": "MARTIM KIRTASIYE SANAYI VE TICARET LTD.STI.", "il": "KAHRAMANMARAS", "ilce": "DULKADIROGLU", "gy": 630, "by": null, "gt": 630, "durum": null, "aciklama": "Bayimiz, ildeki kurumların genel olarak yaprak testlerine sıcak bakmadığını, YKS grubunda ağırlıklı olarak kurumsal deneme sınavları uyguladıklarını ve kamp dönemlerinde dahi kurumsal deneme ağırlıklı çalıştıklarını iletmektedir."}, {"bayi": "MINI KITAP KIRTASIYE ALPAY ERDAL", "il": "KAHRAMANMARAS", "ilce": "ELBISTAN", "gy": 405, "by": null, "gt": 405, "durum": null, "aciklama": "Bayimiz, küçük ilçede tek bir kuruma branş bazlı ürün tercih ettirmiştir. Bu yıl da görüşmeler yapılmış; ancak kurum, yaprak testi kullanmamayı tercih etmiştir."}, {"bayi": "MUHAMMET KEMAL SAYDAM - YERKOY AKADEMI KIRTASIYE", "il": "YOZGAT", "ilce": "YERKÖY", "gy": 80, "by": null, "gt": 80, "durum": null, "aciklama": "Küçük ilçede bayimiz, bir devlet okulundan branş bazlı sipariş almıştır."}, {"bayi": "NEVSEHIR-ATLAS KITAP KIRTASIYE-FATMA KURTDOGAN", "il": "NEVSEHIR", "ilce": "MERKEZ", "gy": 192, "by": null, "gt": 192, "durum": null, "aciklama": "Bayimiz, geçen yıl bir kuruma branş bazlı ürünlerimizi değiştirerek sunmuştur; ancak kurum, bu yıl yaprak testi kullanmayı düşünmediğini ifade etmiştir."}, {"bayi": "OLUŞUM GLOBAL", "il": "GAZİANTEP", "ilce": "ŞEHİTKAMİL", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimiz bu yıl bir çok kuruma tam kavrama testlerimizi örnek olarak götürmüş fakat kurumlardan bu yıl yaprak test kullanımı ile ilgili olumsuz geri bildirimler almışlardır"}, {"bayi": "PARK OZEL EGITIM KIRTASIYE TUR SEY TIC LTD STI", "il": "MERSIN", "ilce": "TARSUS", "gy": 760, "by": null, "gt": 950, "durum": null, "aciklama": "İlçe bayimiz, bu yıl kurum çalışmalarında kurumların geçen yıldan elinde kalan kurumsal deneme ve yaprak testlerini de dikkate alarak seçim yaptıklarını iletmiş, bu nedenle satışların düşük seyrettiğini belirtmiştir."}, {"bayi": "VIZYON PLUS KITABEVI OKKES ANIL MART", "il": "OSMANIYE", "ilce": "DÜZIÇI", "gy": 285, "by": null, "gt": 285, "durum": null, "aciklama": "İlçe bayimiz, anlaşma yaptığı tek kurum olan Lider Eğitim Kurumlarına bu yıl da teklif götürmüş; ancak kurum, bu yıl yaprak testi kullanmayı tercih etmemiştir."}], "dealer_count": 20}, {"id": "muhsin", "by": "Muhsin Özbalcı", "urun": "4K TYT-AYT TKT", "raporlama": "1. Raporlama · 28.08.2026", "toplam": {"gy": 9011, "by": 7879, "gt": 12386, "degisim": null, "durum": null, "growth": -12.6}, "ozet": "TKT ürün grubumuz, içerik kalitesi ve kazanım odaklı yapısı itibarıyla sahada olumlu geri bildirimler almaktadır; ancak ana kaynak ürünler kadar yüksek hacimli bir kategori olmayıp daha çok tamamlayıcı ürün niteliğinde konumlanmaktadır. Satışların beklenen seviyenin altında kalmasının başlıca nedenleri: ürünlerin muhafaza sürecinde yaşanan zorluk ve iade edilememesi, kurumların maliyet hassasiyeti, dershane modelinden küçük ölçekli/VIP sisteme geçişle öğrenci sayılarının azalması ve dökme test/ara ürün grubuna talebin sınırlı olmasıdır. ÖNERİ: Ürünlerin ana kaynak setlerle paket halinde konumlandırılması, yüksek iskontolu kurumsal satış modeli, belediyeler ve Halk Eğitim Merkezleri gibi toplu alım yapan kurumlarla görüşmelere ağırlık verilmesi, optik formlu yapının ölçme-değerlendirme avantajının ve Tam Okul entegrasyonunun kurumlara net şekilde anlatılması önerilmektedir.", "dealers": [{"bayi": "ADRES KITAP KIRTASIYE-MUCAHIT AZAKLI", "il": "KÜTAHYA", "ilce": "MERKEZ", "gy": 2000, "by": null, "gt": 2655, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz, geçen yıl ürünü verdiği kurumun testleri verimli kullanamadığını ve çok sayıda testin kullanılmadan kaldığını belirtti. Kurumun bu nedenle bu yıl TKT ürünü yerine bir adet daha fazla soru bankası almayı tercih ettiğini ifade etti."}, {"bayi": "ATAK OFIS KITAP KIRTASIYE SAN TIC LTD STI", "il": "ESKISEHIR", "ilce": "TEPEBASI", "gy": 1500, "by": null, "gt": 1500, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz, ürünleri geçen yıl bir koleje verdiğini; aynı kurumun kullanım ve muhafaza sürecinde zorluk yaşadığı için bu yıl ürünü almayacağını belirtti. Kurumda ürünlerin düzenli şekilde saklanabileceği dolapların bulunmaması, testlerin muhafazasını zorlaştırmıştır."}, {"bayi": "BENYAY KITAP KIRTASIYE TURZM.INS.ITH.IHR.TIC.LTD.STI", "il": "ANTALYA", "ilce": "MURATPASA", "gy": null, "by": 650, "gt": null, "durum": null, "aciklama": "Bayimiz, ürünü küçük ölçekli bir kuruma Tam Okul paketiyle birlikte satmıştır."}, {"bayi": "CETIN YAYIN DAGITIM A.S", "il": "BALIKESIR", "ilce": "KARESI", "gy": 4560, "by": 6060, "gt": 5485, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz, YDS Eğitim Kurumları ile anlaşarak ürünü toplu olarak satmıştır. Kurum, ürünlerimizi geçen yıl da kullanmış olup yüksek memnuniyet bildirmiştir."}, {"bayi": "SED-KANGURU KITAP MUSAMETTIN KUCAK", "il": "MANISA", "ilce": "SEHZADELER", "gy": 420, "by": null, "gt": 465, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz, geçen yıl bir kurumun ürünü 11. sınıf öğrencileri için satın aldığını; ancak kurumun aynı ürünü 12. sınıflarda kullanamadığını belirtti. 11. sınıf müfredatındaki değişiklik nedeniyle bu yıl aynı kuruma satış gerçekleştirilememiştir."}, {"bayi": "SEGESTA KITAP KIRTASIYE DAGITIM LIMITED SIRKETI", "il": "ANTALYA", "ilce": "MURATPASA", "gy": null, "by": 120, "gt": null, "durum": null, "aciklama": "Bayimiz, ürünü branş bazlı çalışan bir kuruma satmıştır. Ayrıca bölgesindeki büyük bir belediye kursuna teklif sunduğunu ve diğer kurumlara da Tam Okul paketiyle birlikte satış yapmak üzere görüşmelerini sürdürdüğünü ifade etmiştir."}, {"bayi": "TERCIH KITABEVI/GUROL SULUHAN", "il": "AYDIN", "ilce": "EFELER", "gy": 20, "by": 489, "gt": 900, "durum": "Yeşil (İyi)", "aciklama": "Bayimiz, geçen yıl anlaşma yaptığı kuruma bu yıl da ürünümüzü vermiştir; ancak kurumun öğrenci sayısında kısmi azalma bulunmaktadır. Ayrıca bölgesinde henüz kitap alımı yapmayan birkaç kuruma teklif sunmuş olup ürünü Tam Okul paketiyle birlikte satmaya yönelik görüşmelerini sürdürmektedir."}, {"bayi": "YESIL BEYAZ YAYIN DAG(MITHAT APARCI)", "il": "KONYA", "ilce": "MERAM", "gy": 0, "by": 560, "gt": 100, "durum": null, "aciklama": "Bayimiz, ürünü küçük ölçekli bir kuruma Tam Okul paketiyle birlikte satmıştır. Ayrıca belediye kursuna teklif sunmuş ve görüşmelerde son aşamaya gelmiştir."}, {"bayi": "YONCE YAYIN DAGITIM KITABEVI LTD.STI", "il": "BURSA", "ilce": "YILDIRIM", "gy": 511, "by": null, "gt": 1281, "durum": "Kırmızı (Düşük)", "aciklama": "Bayimiz, geçen yıl satış yaptığı kurumun kullanım zorluğu nedeniyle ürünü bu yıl tercih etmek istemediğini; ancak içeriklerin beğenilmesi üzerine kurumun ürünü yeniden değerlendirmeye aldığını belirtti. Ayrıca bölgesinde henüz kitap alımı yapmayan kurumlarla ve Tam Okul paketi sunabileceği kurumlarla satış görüşmelerini sürdürmektedir."}, {"bayi": "BAŞARIRLAR YAYIN DAĞITIM", "il": "DENİZLİ", "ilce": "MERKEZ", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimiz, bölgesindeki özel kurumların artık dökme test kullanmadığını; ürün maliyetinin öğrencilere yansıtılamadığını ve yüksek öğrenci sayısına sahip kursların azaldığını belirtmiştir."}, {"bayi": "MUĞLA ERAY KIRTASİYE", "il": "MUĞLA", "ilce": "MENTEŞE", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimizin bölgesinde büyük ölçekli kurum sayısı sınırlıdır. Mevcut kurumların çoğu VIP eğitim modelinde hizmet vermekte, daha fazla kitap tercih etmekte ve dökme test kullanmamaktadır."}, {"bayi": "UŞAK KİTAP MARKET", "il": "UŞAK", "ilce": "MERKEZ", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimiz, daha önce belediye kursuna toplu ürün satışı gerçekleştirmiştir. Belediye kursunun kapanmasının ardından özel kurumlara bu ürünü satamadığını; kurumların eski dershane modeli yerine kitap ve branş denemesi ağırlıklı kaynakları tercih ettiğini belirtmiştir."}, {"bayi": "MEDRESE KİTABEVİ", "il": "AFYON", "ilce": "MERKEZ", "gy": null, "by": null, "gt": "", "durum": null, "aciklama": "Bayimiz, bu yıl bölgede açılan belediye kursuna Tam Okul paketiyle birlikte teklif sunmuştur. Ancak özel kurumların bu ürüne ilgisinin azalması nedeniyle henüz satış gerçekleştiremediğini belirtmiştir."}, {"bayi": "EDEBALİ KİTAP KIRTASİYE", "il": "BİLECİK", "ilce": "MERKEZ", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimizin faaliyet bölgesi küçük olup bölgede yalnızca bir kurs bulunmaktadır. Dökme test satışı yapılabilecek büyük ölçekli kurum sayısı bu nedenle oldukça sınırlıdır."}, {"bayi": "METOT KİTABEVİ", "il": "ÇANAKKALE", "ilce": "MERKEZ", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimiz, bölgesindeki özel öğretim kurumlarının artık dökme test almadığını ve artan maliyetler nedeniyle yalnızca bir ürün grubunu tercih edebildiklerini belirtmiştir. Bu nedenle henüz satış gerçekleştirilememiştir."}, {"bayi": "ÜÇ YILDIZ KİTABEVİ", "il": "ISPARTA", "ilce": "MERKEZ", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimiz, bölgedeki büyük kurumların çoğunun zincir kurumlardan oluştuğunu; küçük kurumların ise VIP eğitim modeliyle ilerlediğini ve dökme test tercih etmediğini belirtmiştir."}, {"bayi": "ÜMRAN KİTAP KIRT", "il": "BURDUR", "ilce": "MERKEZ", "gy": null, "by": null, "gt": null, "durum": null, "aciklama": "Bayimiz, belediyenin açtığı kursa teklif sunmuş olup geri dönüş beklemektedir. Bununla birlikte bölgedeki özel kurumların bu tür ürünleri tercih etmediğini belirtmiştir."}], "dealer_count": 17}, {"id": "kitaphane", "by": "M.Yasin Erdoğan", "urun": "4K TKT TYT-AYT (Kitaphane)", "raporlama": "3. Raporlama · 01.09.2026", "toplam": {"gy": 21951, "by": 19488, "gt": 25522, "degisim": 0.8877955446221129, "durum": null, "growth": -11.2}, "ozet": "Kitaphane zincirinde (Ankara, İstanbul, İzmir) 4K TKT satışları geçen yılın bu dönemine göre 21.951 adetten 19.488 adede gerilemiştir. Ankara'da geçen sene ürün verilen 2 büyük kurumdan bu sene sipariş alınamamış, maliyetlerin yükseldiği gerekçe gösterilmiştir. İstanbul'da henüz bir hareketlilik yok; çalışılan kurumlarda TKT'ler üçüncü bir kaynak olarak fiyat yönünden tercih edilmiyor. İzmir'de içerik beğenilmekte, ara sınıflarda öğrenci sayıları azalmış; bayi dökme test yerine poşet yaprak test formatının daha çok rağbet göreceğini belirtmiştir.", "dealers": [{"bayi": "KİTAPHANE", "il": "ANKARA", "ilce": null, "gy": 8371, "by": 6294, "gt": 9295, "durum": null, "aciklama": "Geçen sene verdiğimiz Büyük 2 kurumdan bu sene sipariş  alamadık maliyetlerin yükseldiğinden bahsedilmiş."}, {"bayi": "KİTAPHANE", "il": "İSTANBUL", "ilce": null, "gy": 3950, "by": 6464, "gt": 6597, "durum": null, "aciklama": "Henüz bir hareketlilik yok TKTlerde. Çalıştığımız kurumlarda 3'uncu bir kaynak olarak tercih edilmiyor. Fiyat yönünden tercih edilmiyor."}, {"bayi": "KİTAPHANE", "il": "İZMİR", "ilce": null, "gy": 9630, "by": 6730, "gt": 9630, "durum": null, "aciklama": "İçerik olarak beğeniliyor.  Ara sınıflarda öğrenci sayıları azaldı. Öneri olarak; Dökme test yerine poşet yaprak test olursa daha çok sipariş ve revaç olacağını belirtildi."}], "dealer_count": 3}]
+</script>
+
+<script>
+const BLOCKS = JSON.parse(document.getElementById('reportData').textContent);
+
+function fmt(n){
+  if(n === null || n === undefined) return '—';
+  return Math.round(n).toLocaleString('tr-TR');
+}
+function pct(n){
+  if(n === null || n === undefined) return '—';
+  const s = n > 0 ? '+' : '';
+  return s + n.toLocaleString('tr-TR', {maximumFractionDigits:1}) + '%';
+}
+function growthClass(g){
+  if(g === null || g === undefined) return 'neu';
+  return g >= 0 ? 'up' : 'down';
+}
+function growthArrow(g){
+  if(g === null || g === undefined) return '↗';
+  return g >= 0 ? '▲' : '▼';
+}
+
+function getStatus(d){
+  if(d.aciklama && /iptal edil/i.test(d.aciklama)) return {label:'İptal', cls:'muted'};
+  if(d.durum){
+    const t = d.durum.toLowerCase();
+    if(t.indexOf('iyi') >= 0) return {label: d.durum, cls:'ok'};
+    if(t.indexOf('orta') >= 0) return {label: d.durum, cls:'warn'};
+    if(t.indexOf('düşük') >= 0 || t.indexOf('dusuk') >= 0) return {label: d.durum, cls:'risk'};
+  }
+  const gy = d.gy, by = d.by;
+  if((gy === null || gy === 0) && by){ return {label:'Yeni', cls:'blue'}; }
+  if(!by){ return gy ? {label:'Sipariş Yok', cls:'risk'} : {label:'Veri Yok', cls:'muted'}; }
+  if(!gy){ return {label:'Yeni', cls:'blue'}; }
+  const g = by/gy - 1;
+  if(g >= 0) return {label:'İyi', cls:'ok'};
+  if(g >= -0.4) return {label:'Orta', cls:'warn'};
+  return {label:'Düşük', cls:'risk'};
+}
+
+function degisimPct(d){
+  if(d.gy){ return Math.round((d.by||0)/d.gy*1000 - 1000)/10; }
+  return null;
+}
+
+// ── SUMMARY CARDS ──
+const grid = document.getElementById('summaryGrid');
+BLOCKS.forEach(b => {
+  const t = b.toplam;
+  const card = document.createElement('div');
+  card.className = 'sum-card';
+  card.innerHTML = `
+    <div class="name">${b.by}</div>
+    <div class="product">${b.urun}</div>
+    <div class="big-num">${fmt(t.by)}</div>
+    <div class="sub">${b.dealer_count} bayi · Geçen yıl BGK: ${fmt(t.gy)}</div>
+    <span class="growth ${growthClass(t.growth)}">${growthArrow(t.growth)} ${t.growth === null ? 'Yeni ürün · geçen yıl yok' : pct(t.growth) + ' büyüme'}</span>
+  `;
+  grid.appendChild(card);
+});
+
+// ── CHARTS ──
+const labels = BLOCKS.map(b => b.by.split(' ')[0] + (b.by.split(' ')[1] ? ' ' + b.by.split(' ')[1][0] + '.' : ''));
+const chartColors = { red: '#C8102E', ink: '#1a1a1a', green:'#1a7a4a', amber:'#b45309' };
+
+new Chart(document.getElementById('bgkChart'), {
+  type: 'bar',
+  data: {
+    labels: BLOCKS.map(b => b.by),
+    datasets: [
+      { label: 'Geçen Yıl BGK', data: BLOCKS.map(b => b.toplam.gy), backgroundColor: '#c9c9c9' },
+      { label: 'Bu Yıl BGK', data: BLOCKS.map(b => b.toplam.by), backgroundColor: chartColors.red }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 9 } } } }
+  }
+});
+
+new Chart(document.getElementById('growthChart'), {
+  type: 'bar',
+  data: {
+    labels: BLOCKS.map(b => b.by),
+    datasets: [{
+      label: 'Büyüme %',
+      data: BLOCKS.map(b => b.toplam.growth),
+      backgroundColor: BLOCKS.map(b => b.toplam.growth >= 0 ? chartColors.green : chartColors.amber)
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: { y: { ticks: { font: { size: 9 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 9 } } } }
+  }
+});
+
+// ── BLOCKS ──
+const container = document.getElementById('blocksContainer');
+
+function toggleRow(tr){
+  const erow = tr.nextElementSibling;
+  const icon = tr.querySelector('.expand-icon');
+  const open = erow.style.display !== 'none';
+  erow.style.display = open ? 'none' : 'table-row';
+  icon.textContent = open ? '▶' : '▼';
+}
+
+BLOCKS.forEach(b => {
+  const t = b.toplam;
+  const hasIlce = b.dealers.some(d => d.ilce);
+
+  const block = document.createElement('div');
+  block.className = 'report-block';
+
+  const top8 = [...b.dealers].filter(d => d.by).sort((a,c) => c.by - a.by).slice(0, 8);
+  const maxBy = Math.max(...top8.map(d => d.by), 1);
+
+  let barsHtml = top8.map(d => {
+    const width = Math.round((d.by / maxBy) * 100);
+    const cls = d.gy && d.by >= d.gy ? 'green' : (d.gy && d.by < d.gy * 0.6 ? 'amber' : '');
+    return `<div class="bar-row">
+      <div class="bar-label" title="${d.bayi}">${d.bayi}${d.il ? ' · ' + d.il : ''}</div>
+      <div class="bar-track"><div class="bar-fill ${cls}" style="width:${width}%"></div></div>
+      <div class="bar-num">${fmt(d.by)}</div>
+    </div>`;
+  }).join('');
+
+  let rowsHtml = b.dealers.map(d => {
+    const st = getStatus(d);
+    const g = degisimPct(d);
+    const aciklama = d.aciklama ? d.aciklama.replace(/</g,'&lt;') : null;
+    return `
+    <tr class="drow" onclick="toggleRow(this)">
+      <td class="bayi-cell" data-label="Bayi">${d.bayi || '—'}</td>
+      <td data-label="İl">${d.il || '—'}</td>
+      ${hasIlce ? `<td data-label="İlçe">${d.ilce || '—'}</td>` : ''}
+      <td class="num" data-label="Geçen Yıl BGK">${fmt(d.gy)}</td>
+      <td class="num" data-label="Bu Yıl BGK">${fmt(d.by)}</td>
+      <td class="num" data-label="Geçen Yıl Toplam">${fmt(d.gt)}</td>
+      <td class="num" data-label="Değişim">${g === null ? '—' : pct(g)}</td>
+      <td data-label="Durum"><span class="pill ${st.cls}">${st.label}</span></td>
+      <td class="expand-icon">▶</td>
+    </tr>
+    <tr class="erow" style="display:none">
+      <td colspan="${hasIlce ? 9 : 8}">
+        <div class="erow-content">
+          <strong>BY Notu:</strong> ${aciklama ? aciklama : '<em>Açıklama yok</em>'}
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  block.innerHTML = `
+    <div class="report-block-header">
+      <div>
+        <div class="rb-name">${b.by} — ${b.urun}</div>
+        <div class="rb-product">${b.raporlama}</div>
+      </div>
+      <div class="rb-badges">
+        <span class="rb-badge">${b.dealer_count} Bayi</span>
+        <span class="rb-badge">Bu Yıl BGK: ${fmt(t.by)}</span>
+        <span class="rb-badge highlight">Geçen Yıl BGK: ${fmt(t.gy)}</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="sc-label">Bayi Sayısı</div><div class="sc-val">${b.dealer_count}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Bu Yıl BGK</div><div class="sc-val">${fmt(t.by)}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl BGK</div><div class="sc-val">${fmt(t.gy)}</div><div class="sc-sub">adet</div></div>
+      <div class="stat-cell"><div class="sc-label">Geçen Yıl Toplam</div><div class="sc-val">${fmt(t.gt)}</div><div class="sc-sub">tüm sezon</div></div>
+      <div class="stat-cell"><div class="sc-label">Büyüme</div><div class="sc-val">${t.growth === null ? '—' : pct(t.growth)}</div><div class="sc-sub">${t.growth === null ? 'geçen yıl yok' : 'BGK bazlı'}</div></div>
+    </div>
+    <div class="aciklama-box">
+      <div class="aciklama-label">BY Genel Değerlendirmesi</div>
+      <p>${b.ozet}</p>
+    </div>
+    <div class="breakdown">
+      <h4>En Yüksek Hacimli ${top8.length} Bayi (Bu Yıl BGK)</h4>
+      ${barsHtml || '<p style="font-size:11px;color:var(--ink-light)">Yeterli veri yok.</p>'}
+    </div>
+    <div class="scrollnote">☞ Tabloyu görmek için yatay kaydırabilirsiniz.</div>
+    <div class="table-wrap">
+      <table class="dtable">
+        <thead>
+          <tr>
+            <th>Bayi</th>
+            <th>İl</th>
+            ${hasIlce ? '<th>İlçe</th>' : ''}
+            <th class="num">Geçen Yıl BGK</th>
+            <th class="num">Bu Yıl BGK</th>
+            <th class="num">Geçen Yıl Toplam</th>
+            <th class="num">Değişim</th>
+            <th>Durum</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+          <tr class="totr">
+            <td data-label="Bayi">TOPLAM</td>
+            <td data-label="İl"></td>
+            ${hasIlce ? '<td data-label="İlçe"></td>' : ''}
+            <td class="num" data-label="Geçen Yıl BGK">${fmt(t.gy)}</td>
+            <td class="num" data-label="Bu Yıl BGK">${fmt(t.by)}</td>
+            <td class="num" data-label="Geçen Yıl Toplam">${fmt(t.gt)}</td>
+            <td class="num" data-label="Değişim">${t.growth === null ? '—' : pct(t.growth)}</td>
+            <td data-label="Durum"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  container.appendChild(block);
+});
+
+// ── THEME / VIEW TOGGLES ──
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  try{ localStorage.setItem('cyg-theme', t); }catch(e){}
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+function applyView(v){
+  document.body.classList.toggle('mview', v === 'mobile');
+  try{ localStorage.setItem('cyg-view', v); }catch(e){}
+}
+function toggleView(){
+  const cur = document.body.classList.contains('mview') ? 'mobile' : 'web';
+  applyView(cur === 'mobile' ? 'web' : 'mobile');
+}
+(function init(){
+  let theme = 'light', view = 'web';
+  try{ theme = localStorage.getItem('cyg-theme') || 'light'; }catch(e){}
+  try{ view = localStorage.getItem('cyg-view') || 'web'; }catch(e){}
+  applyTheme(theme);
+  applyView(view);
+})();
+</script>
+
+</body>
+</html>
