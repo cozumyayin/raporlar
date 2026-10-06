@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yayın Taahhüt Raporu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1c2745; --navy2:#2a3760; --red:#d7263d; --orange:#e98b2a; --green:#1f8a5b; --blue:#2f5fb3;
+  --bg:#eef1f6; --card:#fff; --line:#e3e7ef; --ink:#1a2238; --muted:#667085; --soft:#f6f8fb;
+  --chip-g:#e6f5ee; --chip-o:#fff3e3; --chip-r:#fde8eb; --chip-b:#e8effb; --chip-n:#eef0f4;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:14px;line-height:1.45}
+.wrap{max-width:1280px;margin:0 auto;padding:16px}
+header.top{background:var(--navy);color:#fff;border-radius:12px 12px 0 0;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.top h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em}
+.top p{margin:4px 0 0;color:#c4cbe0;font-size:13px}
+.top .date{text-align:right}
+.top .date small{display:block;font-size:10px;letter-spacing:.18em;color:#9aa5c4;font-weight:600}
+.top .date b{font-size:20px}
+.stripe{height:5px;background:linear-gradient(90deg,var(--red) 0 34%,var(--orange) 34% 54%,var(--navy2) 54%);border-radius:0 0 4px 4px;margin-bottom:16px}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 8px;border-radius:9px;background:var(--red);color:#fff;font-weight:800;font-size:15px;flex-shrink:0}
+.badge.sm{min-width:34px;height:34px;font-size:12px;border-radius:7px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.panel h2{margin:0;padding:14px 18px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.panel h2 span{font-size:11px;letter-spacing:0;text-transform:none;font-weight:500;color:var(--muted)}
+.pad{padding:16px 18px}
+/* overview cards */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.pub{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:flex;flex-direction:column;gap:12px;transition:transform .12s, box-shadow .12s, border-color .12s;position:relative}
+.pub:hover,.pub:focus-visible{transform:translateY(-2px);box-shadow:0 8px 24px rgba(28,39,69,.12);border-color:#c9d1e3;outline:none}
+.pub .hd{display:flex;gap:12px;align-items:center}
+.pub .hd b{display:block;font-size:16px;font-weight:800}
+.pub .hd small{color:var(--muted);font-size:12px}
+.pub .big{font-family:var(--mono);font-size:20px;font-weight:700;letter-spacing:-.02em}
+.pub .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.pub .rows{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pub .rows div b{display:block;font-family:var(--mono);font-size:15px}
+.pub .go{margin-top:auto;font-size:12px;font-weight:700;color:var(--blue);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px}
+.pub .accent{position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 3px 3px 0}
+.chip{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap;border:1px solid transparent}
+.c-g{background:var(--chip-g);color:#156b46;border-color:#bfe5d2}
+.c-o{background:var(--chip-o);color:#a85a08;border-color:#f6d3a6}
+.c-r{background:var(--chip-r);color:#b11a30;border-color:#f5bcc5}
+.c-b{background:var(--chip-b);color:#244c93;border-color:#c5d5f2}
+.c-n{background:var(--chip-n);color:#555f73;border-color:#dde1e8}
+.date-pill{display:inline-block;font-family:var(--mono);font-weight:700;font-size:12px;padding:3px 8px;border-radius:6px;background:var(--chip-r);color:#b11a30;border:1px solid #f1a9b4;white-space:nowrap}
+.date-pill.o{background:#fff6e8;color:#8a4a06;border-color:#f3c98c}
+.date-pill.n{background:var(--chip-n);color:#555f73;border-color:#dde1e8}
+/* timeline */
+.tl{display:flex;flex-direction:column}
+.tl-row{display:grid;grid-template-columns:150px 70px 1fr;gap:14px;padding:12px 18px;border-bottom:1px solid var(--line);align-items:start}
+.tl-row:last-child{border-bottom:0}
+.tl-row .d{font-weight:700;font-size:14px}
+.tl-row .n{font-family:var(--mono);font-weight:700;font-size:18px;text-align:center}
+.tl-row .n small{display:block;font-family:Inter,sans-serif;font-size:10px;color:var(--muted);font-weight:600}
+.tl-items{display:flex;flex-direction:column;gap:6px}
+.tl-item{display:flex;gap:8px;align-items:baseline}
+.tl-item .what{flex:1}
+.tl-item .who{font-weight:800;font-size:12px;min-width:92px}
+.tl-item .what{color:#3b4458}
+.month{background:var(--soft);font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--muted);padding:7px 18px;border-bottom:1px solid var(--line);text-transform:uppercase}
+/* tables */
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:left;padding:10px 10px;background:var(--soft);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr.main td{border-bottom:0}
+td.num{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+td.idx{font-family:var(--mono);color:var(--muted);font-size:12px;width:34px}
+td .b{font-weight:800;font-size:14px}
+td .s{color:var(--muted);font-size:12px}
+td.note{color:#3b4458;font-size:12.5px;min-width:240px}
+.bar{height:6px;background:#e9edf3;border-radius:4px;overflow:hidden;width:80px;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--green)}
+.bar.d i{background:var(--blue)}
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font-family:var(--mono);font-size:20px;font-weight:700;letter-spacing:-.02em}
+.kpi span{display:block;font-weight:700;font-size:12px;margin-top:2px}
+.kpi small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.k-g{border-left-color:var(--green)}.k-r{border-left-color:var(--red)}.k-o{border-left-color:var(--orange)}.k-b{border-left-color:var(--blue)}
+/* detail */
+.back{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink);margin-bottom:12px}
+.back:hover{border-color:#c4cbdb}
+.tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tab{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer;color:var(--muted)}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cols{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
+.list{margin:0;padding:0;list-style:none}
+.list li{display:flex;gap:10px;padding:10px 18px;border-bottom:1px solid var(--line);font-size:13px}
+.list li:last-child{border-bottom:0}
+.list li i{font-style:normal;flex-shrink:0;width:22px;height:22px;border-radius:6px;background:var(--chip-r);color:#b11a30;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+.list.chk li i{background:var(--chip-o);color:#a85a08}
+.quote{border-left:4px solid var(--red);background:var(--soft);padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;line-height:1.6;margin:0}
+.quote footer{margin-top:8px;font-size:12px;color:var(--muted);font-weight:600}
+.ms{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ms div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--soft)}
+.ms b{display:block;font-family:var(--mono);font-size:17px}
+.ms span{font-size:12px;color:var(--muted)}
+.rule{background:var(--soft);padding:12px 18px;font-size:12.5px;color:#3b4458;border-top:1px solid var(--line)}
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.prod-grid>div{padding:0}
+.prod-grid>div+div{border-left:1px solid var(--line)}
+.prod-grid h3{margin:0;padding:12px 18px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line);background:var(--soft);display:flex;justify-content:space-between}
+.prod-grid ol{margin:0;padding:6px 18px 12px 40px}
+.prod-grid li{padding:5px 0;font-size:13px;border-bottom:1px dashed #edf0f5}
+.prod-grid li:last-child{border-bottom:0}
+.prod-grid a{color:var(--ink);text-decoration:none}
+.prod-grid a:hover{color:var(--blue);text-decoration:underline}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.mini>div{padding:12px 18px;border-right:1px solid var(--line)}
+.mini>div:last-child{border-right:0}
+.mini b{display:block}
+.mini small{color:var(--muted)}
+.mini .v{font-family:var(--mono);font-weight:700}
+.src{font-size:11.5px;color:var(--muted);margin-top:4px}
+footer.foot{font-size:11.5px;color:var(--muted);text-align:center;padding:8px 0 18px}
+.hide{display:none!important}
+@media (max-width:1100px){.grid4{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr}}
+@media (max-width:640px){
+  .wrap{padding:16px}
+  .grid4{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}
+  .tl-row{grid-template-columns:1fr;gap:6px}.tl-row .n{text-align:left}
+  .ms,.mini,.prod-grid{grid-template-columns:1fr}.prod-grid>div+div{border-left:0;border-top:1px solid var(--line)}
+  .mini>div{border-right:0;border-bottom:1px solid var(--line)}
+  .top .date{text-align:left}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div style="display:flex;gap:14px;align-items:center">
+      <span class="badge" style="background:var(--red)">ÇYG</span>
+      <div>
+        <h1 id="pageTitle">2026–2027 Sezonu · Kitap Üretimi ve Baskı Taahhütleri</h1>
+        <p id="pageSub">Yayın müdürlerinin taahhütlerinin birleşik raporu · 4K · Eğitim Vadisi · 3D Ortaokul · 3D Lise</p>
+      </div>
+    </div>
+    <div class="date"><small>RAPOR TARİHİ</small><b>6 Ekim 2026</b></div>
+  </header>
+  <div class="stripe"></div>
+
+  <main id="app"></main>
+
+  <footer class="foot">Kaynak: yayın müdürlerinin paylaştığı taahhüt ve süreç ekranları (25.09.2026 – 06.10.2026)</footer>
+</div>
+
+<script>
+/* ============ VERİ ============ */
+const PUBS = {
+  "3d": {
+    code:"3D", sub:"LİSE", color:"#d7263d", name:"3D Lise", scope:"TYT Yeni Müfredat Soru Bankası ve Video Destekli Defter Serisi",
+    dataDate:"06.10.2026 · Rev. 3", status:["3 kitap planlanıyor","c-o"]
+  },
+  "4k": {
+    code:"4K", color:"#c81e3a", name:"4K Yayınları", scope:"KOSB Soru Bankası Üretim Programı",
+    dataDate:"05.10.2026", status:["Tarihler verildi","c-g"]
+  },
+  "ev": {
+    code:"EV", color:"#d7263d", name:"Eğitim Vadisi", scope:"TYT TAK (Tam Anlatım) · TYT TİK (Test İçerikli)",
+    dataDate:"25.09.2026 taahhüt · 05.10.2026 ilerleyiş", status:["Tarihler verildi","c-g"]
+  },
+  "3do": {
+    code:"3D", sub:"ORT", color:"#b3192f", name:"3D Ortaokul", scope:"8. Sınıf LGS Maarif Modeli Soru Bankası",
+    dataDate:"05.10.2026 · Rev. 3", status:["2 branş plan bekliyor","c-o"]
+  }
+};
+
+/* --- 3D Lise --- */
+const D3 = {
+  kpis:[["16","Kitap","9 soru bankası · 7 video destekli defter",""],["31.01","SB Baskı Taahhüdü","9 soru bankası · Ocak 2027","k-r"],["01.03","VDD Son Teslim","Baskı taahhüdü 15.04.2027 (−1,5 ay)","k-o"],["31.12","SB Son Teslim","Taahhüt −1 ay · tashih ve çapraz","k-g"],["86 gün","SB Teslimine Kalan","VDD teslimine 146 gün","k-b"],["3","Planlanıyor Durumunda","Coğrafya SB, Coğrafya VDD, Din SB",""]],
+  // [ders, kitap, tür, durum, yazar, plan dosyası, not, notion yorum]
+  rows:[
+    ["TÜRKÇE","TYT Türkçe Soru Bankası","SB","Hazırlanıyor","Asiye Karagöz","Bölüm listesi var; test, sayfa ve tarih sütunları boş","11 bölüm planlı. <b>Test ve sayfa sayıları</b> plana işlenmeli; ara teslimler buna göre bölünecek.",1],
+    ["TÜRKÇE","TYT Türkçe Video Destekli Defter","VDD","Hazırlanıyor","Tufan Taş, Dinçer Özkan","Plan dosyası bağlı","İki yazarlı. Bölüm paylaşımı ve her yazarın 01.03 öncesi ara teslimi netleşmeli.",0],
+    ["TARİH","TYT Tarih Soru Bankası","SB","Hazırlanıyor","Aycan Söylemez","9–10. sınıf: 61 test · 122 syf; 11–12. sınıf boş","Plana yalnız 9–10. sınıf işlenmiş, <b>11–12. sınıf (8 ünite) test sayısı yok</b>. Teslim tarihi sütunu boş.",3],
+    ["TARİH","TYT Tarih Video Destekli Defter","VDD","Hazırlanıyor","Aycan Söylemez","Plan dosyası bağlı","Aynı yazar SB'yi de yürütüyor; önce SB (31.12), ardından VDD (01.03). 4 açık yorum var.",4],
+    ["COĞRAFYA","TYT Coğrafya Soru Bankası","SB","Planlanıyor","Muharrem Yiğit","Plan tarihleri 2025 döngüsünden (01.11.2025)","<b>Durum hâlâ Planlanıyor.</b> 86 gün kala güncel plan ve ünite takvimi ilk iş çıkarılmalı.",0],
+    ["COĞRAFYA","TYT Coğrafya Video Destekli Defter","VDD","Planlanıyor","Muharrem Yiğit","Plan dosyası bağlı","<b>Durum Planlanıyor.</b> Teslime 146 gün var; SB ile birlikte güncel plan çıkarılmalı.",0],
+    ["FELSEFE","TYT Felsefe Soru Bankası","SB","Hazırlanıyor","Çağlayan Ulaş Küpeli","Plan tarihleri 2025 döngüsünden (01.11.2025)","VDD'si yok, tek kitap. Plandaki tarihler güncellenmeli; 3 açık yorum var.",3],
+    ["DİN KÜLTÜRÜ","TYT Din Kültürü ve Ahlak Bilgisi SB","SB","Planlanıyor","Mustafa Kızılova","Plan tarihleri 2025 döngüsünden (31.07.2025)","<b>Durum Planlanıyor.</b> Yeni teslim takvimi plana girilmeli.",0],
+    ["MATEMATİK","TYT Matematik Soru Bankası","SB","Hazırlanıyor","Özgür Balcı","Tema blokları var; teslim tarihi sütunu yok","Plan dosyasına <b>teslim tarihi sütunu eklenmeli</b>; tema blokları 31.12'ye göre dağıtılmalı.",0],
+    ["MATEMATİK","TYT Matematik Video Destekli Defter","VDD","Hazırlanıyor","Özgür Balcı","Notion'da plan bağlantısı yok","<b>Ürün planı Notion'a bağlanmamış.</b> En geniş görev listesi (41 görev) bu kitapta.",0],
+    ["FİZİK","TYT Fizik Soru Bankası","SB","Hazırlanıyor","Alper Emrah Gümüş","149 test · 298 syf; tarihler 25.06.2025–01.02","Plan eksiksiz ama tarihleri eski döngüye ait; son blok \"1.02.2025\" yazılmış, yıl hatası olabilir.",0],
+    ["FİZİK","TYT Fizik Video Destekli Defter","VDD","Hazırlanıyor","Alper Emrah Gümüş","Plan dosyası bağlı","Aynı yazar 298 sayfalık SB'yi de yürütüyor; iş yükü en ağır yazarlardan biri.",2],
+    ["KİMYA","TYT Kimya Soru Bankası","SB","Hazırlanıyor","Ali Dindar","Plan tarihleri 2025 döngüsünden (08.08.2025)","Plandaki teslim tarihleri yeni takvime göre güncellenmeli.",0],
+    ["KİMYA","TYT Kimya Video Destekli Defter","VDD","Hazırlanıyor","Ali Dindar","Plan dosyası bağlı","Aynı yazar SB ile birlikte; SB 31.12'de kapanınca VDD'ye geçilebilir.",0],
+    ["BİYOLOJİ","TYT Biyoloji Soru Bankası","SB","Hazırlanıyor","Hüsniye Çiçek Aydemir","Plan tarihleri 2025 döngüsünden (19.09.2025)","1. çapraz okuma olumlu; <b>virüsler konusu MEB kitabına göre ağır</b> bulunmuş. 6 açık yorum var.",6],
+    ["BİYOLOJİ","TYT Biyoloji Video Destekli Defter","VDD","Hazırlanıyor","Hüsniye Çiçek Aydemir","Plan dosyası bağlı","Aynı yazar SB ile birlikte; 3 açık yorum var.",3]
+  ],
+  dual:[["Aycan Söylemez","Tarih SB + VDD"],["Muharrem Yiğit","Coğrafya SB + VDD"],["Özgür Balcı","Matematik SB + VDD"],["Alper Emrah Gümüş","Fizik SB + VDD"],["Ali Dindar","Kimya SB + VDD"],["Hüsniye Çiçek Aydemir","Biyoloji SB + VDD"]],
+  rule:"<b>Taahhüt kuralı:</b> Baskı taahhüt tarihi = son teslim tarihi + 1 ay ile + 1,5 ay arası. SB'lerin taahhüdü 31 Ocak 2027'ye sabit; yalnız tashih ve çapraz inceleme olduğu için 1 aylık pay yeterli, <b>SB'lerin tam teslimi en geç 31 Aralık 2026</b>. VDD'lerin baskı taahhüdü <b>15 Nisan 2027</b>; video çekimi için 1,5 aylık pay geriye düşülünce <b>VDD'lerin tam teslimi en geç 1 Mart 2027</b>. Her kitapta hedef son teslim, baskı taahhüdünden önce kalacak şekilde hesaplandı.",
+  src:"<b>Veri kaynağı:</b> Notion Süreç Takip (Kitap) veritabanı, sınav grubu \"TYT VDD &amp; SB Y.Müfredat\"; SharePoint Ürün Planları klasöründeki SB plan dosyaları. Plan dosyalarındaki teslim tarihleri 2025 döngüsüne ait ya da boş olduğundan yazar penceresi plan değil, güncel hedef tarihlerden (SB 31.12, VDD 01.03) çizilmiştir. Ünite bazlı ara teslimler yazarlarla netleştirilmeli."
+};
+
+/* --- 4K --- */
+const K4 = {
+  kpis:[["10","Takipteki Ürün","9 × TYT · 1 × 11. sınıf",""],["5","Üretimi Aktif","Fizik · Coğrafya · Tarih · Geometri · 11. Tarih","k-g"],["4","Başlangıç Bekleniyor","Türkçe · Matematik · Biyoloji · Felsefe","k-o"],["1","Planlama Bekleniyor","TYT Kimya","k-r"],["6","Sözleşmesi Tamamlanmayan","4 devam · 1 imza · 1 kargoda","k-r"],["9","Planlaması Hazır Ürün","10 üründe 9'u tamam","k-b"]],
+  rows:[
+    ["TYT Türkçe","Mennan Kızıltunç · Muhammed Duman","Miray · Nur Sena",["Tamamlandı","c-g"],["Mevcut","c-g"],"01.10.2026","Belge gelmedi","20 Şubat 2027",["Başlangıç Bekleniyor","c-r"],"Hocalar 1 Ekim'de belge göndermeye başlayacaktı, akış başlamadı. Bugün hatırlatma yapılacak ve yeni teslim tarihi alınacak."],
+    ["TYT Kimya","Ali Dindar","Miray · İlayda",["Başlandı","c-o"],["Bekleniyor","c-o"],"Netleşmedi","","20 Şubat 2027",["Planlama Bekleniyor","c-r"],"Hocanın 3D'deki yoğunluğu nedeniyle sürece başlanamadı. Planlama için bu hafta görüşülecek."],
+    ["TYT Matematik","Ali Rıza Özata · Şerif Karataş · Şaban Yaman","Selin · Semra",["Başlandı","c-o"],["Mevcut","c-g"],"Netleşmedi","","20 Mart 2027",["Başlangıç Bekleniyor","c-o"],"3. yazar belirlendi, planlama paylaşıldı. Hocalardan net başlama tarihi alınmalı."],
+    ["TYT Biyoloji","Murat · Elif Sarışık","Selin · Hanne",["İmza Bekleniyor","c-o"],["Mevcut","c-g"],"05.10.2026","","20 Şubat 2027",["Başlangıç Bekleniyor","c-o"],"Hoca 05.10.2026'da ofiste sözleşmeyi imzalayacağını bildirdi. Aynı gün ilk belge bekleniyor."],
+    ["TYT Felsefe","Selim Çepni","Miray · İlayda",["Tamamlandı","c-g"],["Mevcut","c-g"],"10.10.2026","","20 Şubat 2027",["Başlangıç Bekleniyor","c-o"],"Planlama ve sözleşme tamam. İlk belge bu hafta içinde bekleniyor."],
+    ["TYT Fizik","Yiğit Sucuer","Selin · Semra",["Kargoda","c-o"],["Mevcut","c-g"],"16.03.2026","","20 Şubat 2027",["Aktif","c-g"],"İlk 3 temanın telif belgeleri alındı, 1. tema dizildi. Hoca 5. temaya kadar yazdı. Sözleşme bir hafta içinde hoca tarafından tarafımıza kargolanacak."],
+    ["11. Sınıf Tarih","Ahmet Özpek","Selin · Nur Sena",["Başlandı","c-o"],["Mevcut","c-g"],"24.09.2026","","20 Şubat 2027",["Aktif","c-g"],"İlk iki test geldi, dizgisi yapılıp hocaya iletildi; ilk tashihler girildi. Sözleşme tamamlanmalı."],
+    ["TYT Tarih","Aycan Söylemez","Miray · İlayda 2",["Gönderildi","c-o"],["Mevcut","c-g"],"01.10.2026","","20 Şubat 2027",["Aktif","c-g"],"Belge gönderimi 1 Ekim'de başladı. İmzalı sözleşme nüshası yazardan bekleniyor."],
+    ["TYT Coğrafya","Halil Tekinarslan","Selin · İlayda 2",["Tamamlandı","c-g"],["Mevcut","c-g"],"02.10.2026","","20 Şubat 2027",["Aktif","c-g"],"02.10.2026'da ilk test geldi; güncel olarak iki test teslim edildi. Akış düzenli."],
+    ["TYT Geometri","Feyyaz Kalmaz · Hidayet Demir","Miray · Hanne",["Tamamlandı","c-g"],["Mevcut","c-g"],"Başladı","","20 Şubat 2027",["Aktif","c-g"],"Süreç sorunsuz ilerliyor. İlk 6 bölümün telif belgeleri alındı; sözleşme ve planlama tamam."]
+  ],
+  note:"<b>Baskı taahhüt notu:</b> Belirtilen tarihler taahhüt edilen <b>en geç</b> baskı tarihleridir. Üretimi planlanandan önce tamamlanan branşlarda daha erken baskıya çıkılması için elimizden gelen yapılacaktır. TYT Matematik, başlama tarihinin netleşmemiş olması nedeniyle bir ay ileri tarihlidir.",
+  actions:[
+    "<b>TYT Türkçe</b> belge akışı taahhüt edilen tarihte başlamadı; bugün hatırlatma ve yazılı yeni teslim tarihi.",
+    "<b>TYT Kimya</b> hocanın 3D yoğunluğu nedeniyle duruyor; bu hafta görüşülüp planlama kapatılmalı.",
+    "<b>TYT Fizik</b> sözleşmesi bu hafta hoca tarafından kargolanacak; teslim alınıp dosya kapatılmalı.",
+    "<b>TYT Matematik</b> yazar kadrosu ve planlama tamam; hocalardan başlama tarihi alınmalı.",
+    "<b>Biyoloji</b> imzası ve <b>TYT Tarih</b> imzalı nüshası bu hafta teslim alınmalı."
+  ]
+};
+
+/* --- EV --- */
+// [branş, föy/sayfa, yazarlar[[ad,son]], ilk teslim, son föy teslimi (veya {foy,deneme}), +1ay, baskı, durum chip, not, ilerleyiş{yon,telif,dizgi,t1,t2,plan,gelen,uyum}]
+const EV = {
+  TAK:{
+    title:"TYT TAK · Tam Anlatım Kitabı Serisi",
+    kpis:[["9","Branş","TDE · Mat · Geo · Fiz · Kim · Bly · Tar · Coğ · Fel",""],["274","Föy","2.192 sayfa · 4 syf konu + 4 syf test",""],["08.11","İlk Biten Branş","Tarih TAK (Özpek)","k-g"],["31.12","Son Biten Branş","Kimya · Biyoloji TAK","k-r"],["15.02 – 20.02","Baskı Taahhüt Aralığı","Tüm TAK'lar Şubat 2027","k-o"],["12,86%","Ortalama Telif (05.10)","Dizgi 8,57% · 1. Tashih 2,04%","k-b"]],
+    rows:[
+      ["Coğrafya","30 föy · 240 syf",[["H. Tekinarslan","11.12"],["M. Adıgüzel","11.12"]],"20.09.2026","11.12.2026","11.01.2027","15 Şubat 2027",["Plan içinde","c-g"],"İki yazar paralel, 6 günlük aralıklarla teslim. Föy 1–2 ve 16–17 tarihi geçti; teyit alınmalı.",{yon:"Hatem",telif:13.33,dizgi:6.67,t1:0,t2:0,plan:6,gelen:"4 / 30",uyum:["-2 geride","c-o"]}],
+      ["Felsefe","24 föy · 192 syf",[["Burcu Zengin","16.12"],["Cengiz Bektaşoğlu","16.12"]],"30.09.2026","16.12.2026","16.01.2027","15 Şubat 2027",["Aralık sonu","c-o"],"İki yazar paralel, haftalık teslim düzeni; ikisi de 16.12'de tamamlıyor.",{yon:"Eda Odabaş",telif:4.17,dizgi:4.17,t1:0,t2:0,plan:2,gelen:"1 / 24",uyum:["-1 geride","c-o"]}],
+      ["Fizik","32 föy · 256 syf",[["Selim Arslan","29.11"]],"20.09.2026","29.11.2026","29.12.2026","15 Şubat 2027",["Plan içinde","c-g"],"Tek yazar, haftada 2–3 föy. İlk 3 föyün tarihi (20.09) geçti; teslim teyidi alınmalı.",{yon:"Esin Çakmak Kut",telif:15.63,dizgi:6.25,t1:0,t2:0,plan:9,gelen:"5 / 32",uyum:["-4 geride","c-r"]}],
+      ["Matematik","32 föy · 256 syf",[["Ali İhsan Özkan","31.10"],["Furkan Şahin","30.11"]],"16.09.2026","30.11.2026","30.12.2026","15 Şubat 2027",["Plan içinde","c-g"],"Özkan 31.10'da, Şahin 30.11'de tamamlıyor. TAK 1–4 teslim tarihi geçti; teslim teyidi alınmalı.",{yon:"Eda Odabaş",telif:21.88,dizgi:18.75,t1:15.63,t2:15.63,plan:7,gelen:"7 / 32",uyum:["Planda","c-g"]}],
+      ["Tarih","36 föy · 288 syf",[["Ahmet Özpek","08.11"],["Seyfettin Yaman","28.10"]],"21.09.2026","08.11.2026","08.12.2026","15 Şubat 2027",["Plan içinde","c-g"],"9–12. sınıf (TYT-AYT) kapsamı. Dosyada iki yazar/tarih sütunu var; esas takvim netleşmeli. Föy 1–5 tarihi geçti.",{yon:"Hatem",telif:13.89,dizgi:11.11,t1:2.78,t2:0,plan:13,gelen:"5 / 36",uyum:["-8 geride","c-r"]}],
+      ["Biyoloji","32 föy · 256 syf",[["İlknur Genç","31.12"]],"28.09.2026","31.12.2026","31.01.2027","20 Şubat 2027",["Aralık sonu","c-o"],"Tek yazar, haftalık bloklar (2–3 föy). Son blok (Föy 30–32) 31.12. Föy 1 teslimi 28.09.",{yon:"Esin Çakmak Kut",telif:3.13,dizgi:0,t1:0,t2:0,plan:2,gelen:"1 / 32",uyum:["-1 geride","c-o"]}],
+      ["Geometri","24 föy · 192 syf",[["Tuğba Gökşen","09.11"],["Mustafa Parlar","20.12"]],"15.09.2026","20.12.2026","20.01.2027","20 Şubat 2027",["Aralık sonu","c-o"],"Gökşen 09.11'de bitiriyor; Parlar'ın analitik föyleri (Tak 21–24) 20.12'ye uzanıyor. Tak 6 tarihi (15.09) sıra dışı.",{yon:"Hatem",telif:25.00,dizgi:20.83,t1:0,t2:0,plan:5,gelen:"6 / 24",uyum:["+1 önde","c-g"]}],
+      ["Kimya","32 föy · 256 syf",[["Gökhan Duygu","31.12"],["Ersin Özdemir","31.12"]],"30.09.2026","31.12.2026","31.01.2027","20 Şubat 2027",["Aralık sonu","c-o"],"Tarihler 4 föylük aylık bloklar (ay sonu) olarak verilmiş; son blok 31.12. Ara takip için föy bazlı tarih istenmeli.",{yon:"Eda Odabaş",telif:12.50,dizgi:6.25,t1:0,t2:0,plan:4,gelen:"4 / 32",uyum:["Planda","c-g"]}],
+      ["TDE","32 föy · 256 syf",[["Hasan Kelkit","20.12"]],"03.10.2026","20.12.2026","20.01.2027","20 Şubat 2027",["Aralık sonu","c-o"],"Tek yazar, 5–6 föylük bloklar hâlinde teslim. Son blok (Föy 28–32) 20.12.",{yon:"Esin Çakmak Kut",telif:6.25,dizgi:3.13,t1:0,t2:0,plan:6,gelen:"2 / 32",uyum:["-4 geride","c-r"]}]
+    ],
+    rule:"<b>Taahhüt kuralı:</b> Baskı taahhüt tarihi = branşın son teslim tarihi + 1 ay ile + 1,5 ay arası. Bu süre tashih, çapraz inceleme ve video çekim aşamaları için ayrılmıştır. <b>TAK taahhütleri:</b> Tarih, Fizik, Matematik, Coğrafya, Felsefe 15 Şubat 2027; Geometri, TDE, Kimya, Biyoloji 20 Şubat 2027. Toplu baskı yapılırsa tüm TAK branşları için en geç tarih <b>20 Şubat 2027</b>.",
+    warn:[
+      "<b>Tarih TAK</b> dosyasında iki yazar/teslim sütunu var (Özpek 08.11 · Yaman 28.10). Esas takvim netleşmeli.",
+      "<b>Kimya TAK</b> tarihleri föy bazlı değil, 4 föylük aylık blok. Son blok (Föy 13–16 ve 29–32) 31.12'de toplu geliyor.",
+      "25.09 itibarıyla <b>19 föyün</b> teslim tarihi geçti: Tarih 5, Matematik 4, Coğrafya 4, Fizik 3, Geometri 3. Teslim alındı mı teyit edilmeli.",
+      "<b>Geometri Tak 6</b> tarihi (15.09), Tak 5'ten (09.10) önce görünüyor. Sıra kontrol edilmeli.",
+      "05.10 ilerleyişine göre <b>Tarih TAK 8</b>, <b>TDE TAK</b> ve <b>Fizik TAK 4'er</b> föy geride. Bu üç branşta yazarla teslim takvimi görüşülmeli.",
+      "<b>Matematik TAK</b> 2. tashihe ulaşan tek ürün (15,63%). Geometri telifte planın 1 föy önünde."
+    ]
+  },
+  TIK:{
+    title:"TYT TİK · Test İçerikli Kitap Serisi",
+    kpis:[["9","Branş","TDE · Mat · Geo · Fiz · Kim · Bly · Tar · Coğ · Fel",""],["288 + 66","Föy + Deneme","2.528 sayfa · 4 test / föy",""],["10.12","İlk Biten Branş","TDE TİK (Kılıç)","k-g"],["15.01.27","Son Biten Branş","Geometri TİK · denemeler","k-r"],["20.02 – 28.02","Baskı Taahhüt Aralığı","Tüm TİK'ler Şubat 2027","k-o"],["5,37%","Ortalama Telif (05.10)","Dizgi 0,90% · Tashih 0%","k-b"]],
+    rows:[
+      ["TDE","32 föy + 4 deneme · 304 syf",[["Hüseyin Kılıç","10.12"]],"30.09.2026",{f:"10.12.2026",d:"10.12.2026"},"10.01.2027","20 Şubat 2027",["Plan içinde","c-g"],"Tek yazar. 4 deneme planlanmış (diğer branşlarda 6–8); deneme sayısı teyit edilmeli.",{yon:"Esin Çakmak Kut",telif:33.33,dizgi:5.56,t1:0,t2:0,plan:3,gelen:"12 / 36",uyum:["+9 önde","c-g"]}],
+      ["Biyoloji","32 föy + 8 deneme · 272 syf",[["İlknur Genç","30.12"],["Murat Sarıışık","17.11"]],"10.10.2026",{f:"26.12.2026",d:"30.12.2026"},"30.01.2027","25 Şubat 2027",["Aralık sonu","c-o"],"Genç haftalık teslim, son föy 26.12, Deneme 5–8 30.12. Sarışık föyleri blok tarihli (19.10 · 02.11), Deneme 1–4 17.11.",{yon:"Esin Çakmak Kut",telif:0,dizgi:0,t1:0,t2:0,plan:0,gelen:"0 / 40",uyum:["Henüz başlamadı","c-n"]}],
+      ["Coğrafya","32 föy + 8 deneme · 272 syf",[["H. Tekinarslan","30.12"],["M. Adıgüzel","30.12"]],"20.09.2026",{f:"14.12.2026",d:"30.12.2026"},"30.01.2027","25 Şubat 2027",["Aralık sonu","c-o"],"Föyler 14.12'de bitiyor; denemeler 17–30.12 arasında. Föy 1–2 ve 17–18 tarihi geçti.",{yon:"Hatem",telif:10.00,dizgi:0,t1:0,t2:0,plan:6,gelen:"4 / 40",uyum:["-2 geride","c-o"]}],
+      ["Felsefe","32 föy + 8 deneme · 272 syf",[["Burcu Zengin","30.12"],["Cengiz Bektaşoğlu","30.12"]],"05.10.2026",{f:"20.12.2026",d:"30.12.2026"},"30.01.2027","25 Şubat 2027",["Aralık sonu","c-o"],"İki yazar paralel; föyler 20.12'de, 8 deneme 30.12'de tamamlanıyor.",{yon:"Eda Odabaş",telif:0,dizgi:0,t1:0,t2:0,plan:2,gelen:"0 / 40",uyum:["-2 geride","c-o"]}],
+      ["Fizik","32 föy + 8 deneme · 272 syf",[["H. Gazi Yücel","28.12"]],"21.09.2026",{f:"28.12.2026",d:"28.12.2026"},"28.01.2027","25 Şubat 2027",["Aralık sonu","c-o"],"Tek yazar, haftada 2–3 föy. Deneme 2–8 tarihsiz; Deneme-1 ile aynı gün (28.12) varsayıldı.",{yon:"Esin Çakmak Kut",telif:5.00,dizgi:2.50,t1:0,t2:0,plan:4,gelen:"2 / 40",uyum:["-2 geride","c-o"]}],
+      ["Kimya","32 föy + 8 deneme · 272 syf",[["Ersin Özdemir","31.12"],["Gökhan Duygu","31.12"]],"30.10.2026",{f:"31.12.2026",d:"31.12.2026"},"31.01.2027","25 Şubat 2027",["Aralık sonu","c-o"],"Aylık bloklar (ay sonu teslim); föyler ve 8 deneme 31.12. Föy bazlı ara tarih istenmeli.",{yon:"Eda Odabaş",telif:0,dizgi:0,t1:0,t2:0,plan:0,gelen:"0 / 40",uyum:["Henüz başlamadı","c-n"]}],
+      ["Tarih","32 föy + 8 deneme · 272 syf",[["Seyfettin Yaman","25.12"]],"10.11.2026",{f:"25.12.2026",d:"25.12.2026"},"25.01.2027","25 Şubat 2027",["Aralık sonu","c-o"],"Tek yazar, 15 günlük bloklar (8–9 föy). Son blok ve 8 deneme aynı gün: 25.12. Yoğun son teslim.",{yon:"Hatem",telif:0,dizgi:0,t1:0,t2:0,plan:0,gelen:"0 / 40",uyum:["Henüz başlamadı","c-n"]}],
+      ["Geometri","32 föy + 8 deneme · 288 syf",[["Tuğba Gökşen","12.01.27"],["Mustafa Parlar","15.01.27"]],"02.11.2026",{f:"05.01.2027",d:"15.01.2027"},"15.02.2027","28 Şubat 2027",["Ocak'a sarkıyor","c-r"],"En geç biten TİK: föyler 05.01, denemeler 15.01.2027. Tik 8 tarihi dosyada 02.01.2026 (hatalı) görünüyor.",{yon:"Hatem",telif:0,dizgi:0,t1:0,t2:0,plan:0,gelen:"0 / 40",uyum:["Henüz başlamadı","c-n"]}],
+      ["Matematik","32 föy + 6 deneme · 304 syf",[["Ali İhsan Özkan","08.12"],["Furkan Şahin","10.01.27"]],"02.11.2026",{f:"25.12.2026",d:"10.01.2027"},"10.02.2027","28 Şubat 2027",["Ocak'a sarkıyor","c-r"],"Föyler 25.12'de bitiyor. Deneme 4–6 tarihi dosyada 01.10.2027 yazılı; 10.01.2027 olarak yorumlandı, teyit edilmeli.",{yon:"Eda Odabaş",telif:0,dizgi:0,t1:0,t2:0,plan:0,gelen:"0 / 38",uyum:["Henüz başlamadı","c-n"]}]
+    ],
+    rule:"<b>Taahhüt kuralı:</b> Baskı taahhüt tarihi = branşın son teslim tarihi (TİK'lerde son föy ya da son deneme, hangisi sonraysa) + 1 ay ile + 1,5 ay arası. <b>TİK taahhütleri:</b> en erken biten TDE 20 Şubat 2027; Aralık sonunda bitenler (Tarih, Fizik, Coğrafya, Felsefe, Kimya, Biyoloji) 25 Şubat 2027; Ocak'ta bitenler (Matematik, Geometri) 28 Şubat 2027. Toplu baskı yapılırsa tüm TİK branşları için en geç tarih <b>28 Şubat 2027</b>.",
+    warn:[
+      "<b>Matematik TİK</b> Deneme 4–6 tarihi 01.10.2027 yazılı; gün/ay karışıklığı varsayılıp <b>10.01.2027</b> alındı.",
+      "<b>Geometri TİK</b> Tik 8 tarihi 02.01.2026 (geçmiş yıl). Muhtemelen 02.01.2027; son tarihi değiştirmiyor.",
+      "<b>Geometri TİK</b> denemeleri 15.01.2027'ye kadar sürüyor; 28 Şubat taahhüdüyle kontrol payı yaklaşık 1,5 ay.",
+      "<b>Biyoloji TİK</b> Sarışık föyleri blok tarihli (Föy 9–18: 19.10, Föy 27–32: 02.11).",
+      "<b>Fizik TİK</b> Deneme 2–8 tarihsiz; Deneme-1 ile aynı gün (28.12) varsayıldı.",
+      "<b>Deneme sayıları</b> farklı: TDE 4, Matematik 6, diğerleri 8. Planın tutarlılığı teyit edilmeli.",
+      "25.09 itibarıyla <b>6 föyün</b> teslim tarihi geçti (Coğrafya 4, Fizik 2).",
+      "05.10 itibarıyla 6 branşta telif %0 (Felsefe, Biyoloji, Kimya, Tarih, Geometri, Matematik); <b>TDE TİK</b> planın 9 föy önünde."
+    ]
+  },
+  yon:[["Esin Çakmak Kut","TDE · Fizik · Biyoloji · 6 ürün","8,34%","12,78%"],["Eda Odabaş","Matematik · Kimya · Felsefe · 6 ürün","12,85%","0,00%"],["Hatem","Geometri · Tarih · Coğrafya · 6 ürün","17,41%","3,33%"]]
+};
+
+/* --- 3D Ortaokul --- */
+const O3 = {
+  kpis:[["6","Branş","4 planlı · İngilizce ve Türkçe yazardan bekleniyor",""],["486","Test","1.024 sayfa (jenerik dahil)",""],["28.10","İlk Teslim","Matematik · Tema 1 bloğu","k-g"],["01.02","Son Biten Branş","Fen Bilimleri · 2027","k-r"],["28.02 – 15.03","Baskı Taahhüt Aralığı","Son teslim +1 / +1,5 ay · Mart 2027","k-o"],["0","Tarihi Geçen Teslim","Ana planlara göre · Mat. Detay sayfası hariç","k-b"]],
+  rows:[
+    ["İnkılap Tarihi","99 test · 208 syf",["Plan içinde","c-g"],"4 ünite · 4 test türü","Ünite blokları (ay sonu)","30.10.2026","29.01.2027","28.02.2027","15 Mart 2027","Tarihler öne çekildi: 30.10, 30.11, 27.12, 29.01. En yoğun blok Millî Mücadele (29 test). TOPLAM artık jenerik dahil 208."],
+    ["Matematik","152 test · 320 syf",["Detay çelişkisi","c-o"],"7 tema · 4 test türü","Tema blokları (Sayfa1)","28.10.2026","30.01.2027","28.02.2027","15 Mart 2027","Günlük takvimden tema bloklarına geçildi; tarihi geçen teslim yok. Detay sayfasındaki günlük takvim 27.02'ye uzanıyor, hangisi esas netleşmeli."],
+    ["Din Kültürü","94 test · 200 syf",["Plan içinde","c-g"],"5 ünite · 3 test türü","Ünite blokları","30.10.2026","30.01.2027","28.02.2027","15 Mart 2027","Ünite 3 teslimi 27.12'ye çekildi. Ocak'ta iki blok (15.01 ve 30.01). Beceri İnşası test türü yok; teyit bekliyor."],
+    ["Fen Bilimleri","141 test · 296 syf",["Plan içinde","c-g"],"7 ünite · 4 test türü","Ünite blokları (2–3 hafta)","30.10.2026","01.02.2027","01.03.2027","15 Mart 2027","Kalıtım sayfaları düzeltildi, toplam 296 tutuyor. 7 ünite yaklaşık 2 haftada bir; ara takip için test bazlı tarih istenebilir."],
+    ["İngilizce","Plan yok",["Yazardan bekleniyor","c-o"],"—","","—","—","—",null,"Soru bankası planı yazardan bekleniyor. Test sayısı, sayfa ve teslim tarihleri plan geldiğinde rapora eklenecek."],
+    ["Türkçe","Plan yok",["Yazardan bekleniyor","c-o"],"—","","—","—","—",null,"Soru bankası planı yazardan bekleniyor. Test sayısı, sayfa ve teslim tarihleri plan geldiğinde rapora eklenecek."]
+  ],
+  rule:"<b>Taahhüt kuralı:</b> Baskı taahhüt tarihi = branşın son teslim tarihi + 1 ay ile + 1,5 ay arası. Bu süre tashih, çapraz inceleme ve video çekim aşamaları için ayrılmıştır. Dört branşın son teslimi 29.01–01.02.2027 arasında toplandığı için <b>önerilen taahhüt dördü için de 15 Mart 2027</b>; en erken taahhüt verilebilecek tarih 28 Şubat 2027 (Fen için 1 Mart). Matematik için Sayfa1 tema blokları esas alındı."
+};
+
+/* --- Birleşik baskı takvimi --- */
+const CAL = [
+  {m:"Ocak 2027", d:"31 Ocak 2027", items:[["3d","3D Lise","TYT Soru Bankası · Türkçe, Tarih, Coğrafya, Felsefe, Din Kültürü, Matematik, Fizik, Kimya, Biyoloji",9]]},
+  {m:"Şubat 2027", d:"15 Şubat 2027", items:[["ev","EV · TAK","Coğrafya, Felsefe, Fizik, Matematik, Tarih",5]]},
+  {m:"Şubat 2027", d:"20 Şubat 2027", items:[["4k","4K","TYT Türkçe, Kimya, Biyoloji, Felsefe, Fizik, Tarih, Coğrafya, Geometri · 11. Sınıf Tarih",9],["ev","EV · TAK","Biyoloji, Geometri, Kimya, TDE",4],["ev","EV · TİK","TDE",1]]},
+  {m:"Şubat 2027", d:"25 Şubat 2027", items:[["ev","EV · TİK","Biyoloji, Coğrafya, Felsefe, Fizik, Kimya, Tarih",6]]},
+  {m:"Şubat 2027", d:"28 Şubat 2027", items:[["ev","EV · TİK","Geometri, Matematik",2]]},
+  {m:"Mart 2027", d:"15 Mart 2027", items:[["3do","3D Ortaokul","8. Sınıf SB · İnkılap Tarihi, Matematik, Din Kültürü, Fen Bilimleri",4]]},
+  {m:"Mart 2027", d:"20 Mart 2027", items:[["4k","4K","TYT Matematik (başlama tarihi netleşmediği için bir ay ileri)",1]]},
+  {m:"Nisan 2027", d:"15 Nisan 2027", items:[["3d","3D Lise","TYT Video Destekli Defter · Türkçe, Tarih, Coğrafya, Matematik, Fizik, Kimya, Biyoloji",7]]},
+  {m:"Tarih verilmedi", d:"Bekleniyor", items:[["3do","3D Ortaokul","8. Sınıf SB · İngilizce, Türkçe — plan yazardan bekleniyor",2]]}
+];
+
+/* ============ YARDIMCILAR ============ */
+const $app = document.getElementById('app');
+const esc = s => String(s);
+const chip = c => c ? `<span class="chip ${c[1]}">${c[0]}</span>` : '';
+const pill = (d,cls='') => d ? `<span class="date-pill ${cls}">${d}</span>` : `<span class="date-pill n">Plan gelince</span>`;
+const pct = v => v.toFixed(2).replace('.',',') + '%';
+const kpis = arr => `<div class="kpis">${arr.map(k=>`<div class="kpi ${k[3]}"><b>${k[0]}</b><span>${k[1]}</span><small>${k[2]}</small></div>`).join('')}</div>`;
+const badge = (p,sm) => `<span class="badge ${sm?'sm':''}" style="background:${p.color}">${p.code}${p.sub?`<small style="font-size:10px;margin-left:3px;font-weight:700">${p.sub}</small>`:''}</span>`;
+const list = (arr,cls='') => `<ul class="list ${cls}">${arr.map((t,i)=>`<li><i>${i+1}</i><div>${t}</div></li>`).join('')}</ul>`;
+
+function setHeader(title, sub){
+  document.getElementById('pageTitle').textContent = title;
+  document.getElementById('pageSub').textContent = sub;
+}
+
+/* ============ GENEL BAKIŞ ============ */
+function overview(){
+  setHeader("2026–2027 Sezonu · Kitap Üretimi ve Baskı Taahhütleri","Yayın müdürlerinin taahhütlerinin birleşik raporu · 4K · Eğitim Vadisi · 3D Ortaokul · 3D Lise");
+  const cards = [
+    {id:"4k", lines:[["Takipteki ürün","10"],["Üretimi aktif","5"],["20 Şubat 2027","9 ürün"],["20 Mart 2027","1 ürün (Mat.)"]], big:"20.02 – 20.03", bigL:"Baskı taahhüt aralığı (2027)"},
+    {id:"ev", lines:[["Ürün","9 TAK + 9 TİK"],["Sayfa","2.192 + 2.528"],["TAK ort. telif","12,86%"],["TİK ort. telif","5,37%"]], big:"15.02 – 28.02", bigL:"Baskı taahhüt aralığı (2027)"},
+    {id:"3do", lines:[["Branş","6 (4 planlı)"],["Test / sayfa","486 / 1.024"],["Son teslim","29.01 – 01.02"],["Plan bekleyen","İngilizce, Türkçe"]], big:"15 Mart 2027", bigL:"Önerilen baskı taahhüdü (4 branş)"},
+    {id:"3d", lines:[["Kitap","16 (9 SB · 7 VDD)"],["Planlanıyor","3 kitap"],["SB son teslim","31.12.2026"],["VDD son teslim","01.03.2027"]], big:"31.01 · 15.04", bigL:"Baskı taahhüdü SB · VDD (2027)"}
+  ];
+  const cardHtml = cards.map(c=>{
+    const p = PUBS[c.id];
+    return `<button class="pub" data-go="${c.id}" aria-label="${p.name} detayını aç">
+      <span class="accent" style="background:${p.status[1]==='c-g'?'var(--green)':'var(--orange)'}"></span>
+      <div class="hd">${badge(p)}<div><b>${p.name}</b><small>${p.scope}</small></div></div>
+      <div><div class="big">${c.big}</div><div class="lbl">${c.bigL}</div></div>
+      <div class="rows">${c.lines.map(l=>`<div><span class="lbl">${l[0]}</span><b>${l[1]}</b></div>`).join('')}</div>
+      <div>${chip(p.status)} <span class="src">Veri: ${p.dataDate}</span></div>
+      <div class="go"><span>Detayı görüntüle</span><span>→</span></div>
+    </button>`;
+  }).join('');
+
+  let lastM = '';
+  const tl = CAL.map(r=>{
+    let head = '';
+    if(r.m!==lastM){ head = `<div class="month">${r.m}</div>`; lastM = r.m; }
+    const total = r.items.reduce((a,b)=>a+(b[3]||0),0);
+    return head + `<div class="tl-row">
+      <div class="d">${r.d==='Bekleniyor'?'<span class="date-pill n">Tarih yok</span>':`<span class="date-pill">${r.d}</span>`}</div>
+      <div class="n">${total||'—'}<small>ürün</small></div>
+      <div class="tl-items">${r.items.map(i=>`<div class="tl-item"><span class="who" style="cursor:pointer;color:var(--blue)" data-go="${i[0]}">${i[1]}</span><span class="what">${i[2]}${i[3]?` <span class="s" style="color:var(--muted)">(${i[3]})</span>`:''}</span></div>`).join('')}</div>
+    </div>`;
+  }).join('');
+
+  $app.innerHTML = `
+    <div class="grid4">${cardHtml}</div>
+    <div class="cols">
+      <section class="panel"><h2>Birleşik Baskı Taahhüt Takvimi <span>Taahhüt edilen en geç baskı tarihlerine göre</span></h2>
+        <div class="tl">${tl}</div>
+      </section>
+      <div>
+        <section class="panel"><h2>Ay Bazında Baskı Yükü</h2>
+          <div class="mini" style="grid-template-columns:1fr">
+            <div><small>Ocak 2027</small><b class="v" style="font-size:22px">9 ürün</b><small>3D Lise 9 SB</small></div>
+            <div><small>Şubat 2027</small><b class="v" style="font-size:22px">27 ürün</b><small>EV 18 (TAK 9 · TİK 9) · 4K 9</small></div>
+            <div><small>Mart 2027</small><b class="v" style="font-size:22px">5 ürün</b><small>3D Ortaokul 4 · 4K 1</small></div>
+            <div><small>Nisan 2027</small><b class="v" style="font-size:22px">7 ürün</b><small>3D Lise 7 VDD</small></div>
+            <div><small>Tarih bekleyen</small><b class="v" style="font-size:22px">2 ürün</b><small>3D Ortaokul İngilizce, Türkçe</small></div>
+          </div>
+        </section>
+        <section class="panel"><h2>Hasan Bey'in Dikkatine</h2>
+          ${list([
+            "<b>3D Lise</b> sezonun ilk baskısı: 9 SB <b>31 Ocak 2027</b> (teslim 31.12, 86 gün kaldı). 3 kitap hâlâ Planlanıyor; çoğu plan dosyasında tarihler 2025 döngüsünden.",
+            "<b>20 Şubat 2027</b> en yoğun gün: 14 ürün (4K 9 · EV TAK 4 · EV TİK 1).",
+            "<b>4K TYT Türkçe</b> belge akışı başlamadı; <b>TYT Kimya</b> planlaması yazarın 3D yoğunluğu nedeniyle duruyor.",
+            "<b>EV TAK</b>: Tarih 8, TDE ve Fizik 4'er föy planın gerisinde (05.10).",
+            "<b>3D Ortaokul</b>: İngilizce ve Türkçe planları yazardan bekleniyor; Matematik takviminde çelişki var."
+          ])}
+        </section>
+        <section class="panel"><h2>Birden Fazla Yayında Yazan Yazarlar <span>Kaynaklardaki adlarla</span></h2>
+          <div class="tbl-wrap"><table style="min-width:0"><tbody>
+            <tr><td><b>Ali Dindar</b><div class="s">3D Lise Kimya SB + VDD · 4K TYT Kimya</div></td><td><span class="chip c-r">4K'da duruyor</span></td></tr>
+            <tr><td><b>Aycan Söylemez</b><div class="s">3D Lise Tarih SB + VDD · 4K TYT Tarih</div></td><td></td></tr>
+            <tr><td><b>Ahmet Özpek</b><div class="s">EV Tarih TAK · 4K 11. Sınıf Tarih</div></td><td></td></tr>
+            <tr><td><b>H. Tekinarslan</b><div class="s">EV Coğrafya TAK + TİK · 4K TYT Coğrafya (Halil Tekinarslan)</div></td><td></td></tr>
+          </tbody></table></div>
+        </section>
+      </div>
+    </div>`;
+}
+
+/* ============ DETAY: 3D Lise ============ */
+function detail3d(){
+  setHeader("3D Lise · TYT SB & VDD Baskı Taahhüt Çalışması","3D Yayınları · TYT Yeni Müfredat Soru Bankası ve Video Destekli Defter Serisi · 2026–2027 · Rev. 3 · 06.10.2026");
+  let last='';
+  const rows = D3.rows.map((r,i)=>{
+    const sb = r[2]==='SB';
+    let head='';
+    if(r[0]!==last){ head=`<tr><td colspan="7" style="background:var(--soft);font-size:11px;font-weight:800;letter-spacing:.08em;color:#3b4458;padding:7px 10px">${r[0]}</td></tr>`; last=r[0]; }
+    return head+`<tr>
+      <td class="idx">${String(i+1).padStart(2,'0')}</td>
+      <td style="min-width:230px"><div class="b">${r[1]}</div><div style="margin-top:4px"><span class="chip ${sb?'c-b':'c-n'}" style="${sb?'':'background:#f3e8fb;color:#7a2fa3;border-color:#e2c6f2'}">${r[2]}</span> ${chip([r[3], r[3]==='Planlanıyor'?'c-o':'c-g'])}</div></td>
+      <td style="min-width:150px">${r[4]}</td>
+      <td style="min-width:180px;color:#3b4458;font-size:12.5px">${r[5]}</td>
+      <td class="num">${sb?'31.12.2026':'01.03.2027'}<div style="color:var(--orange);font-family:Inter;font-size:11px;font-weight:700">${sb?'taahhüt −1 ay':'taahhüt −1,5 ay (video)'}</div></td>
+      <td>${pill(sb?'31 Ocak 2027':'15 Nisan 2027')}</td>
+      <td class="note">${r[6]}${r[7]?`<div style="color:var(--blue);font-family:var(--mono);font-size:11.5px;margin-top:3px">Notion: ${r[7]} yorum</div>`:''}</td>
+    </tr>`;}).join('');
+  $app.innerHTML = `
+    ${backBtn()}
+    ${kpis(D3.kpis)}
+    <section class="panel"><h2>Kitap Bazında Hedef Teslim ve Baskı Taahhüt Tarihleri <span>Sıralama: derse göre, SB ve VDD yan yana</span></h2>
+      <div class="tbl-wrap"><table style="min-width:1050px">
+        <thead><tr><th></th><th>Kitap</th><th>Yazar</th><th>Plan dosyası</th><th>Hedef son teslim</th><th>Baskı taahhüt</th><th>Not</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>
+      <div class="rule">${D3.rule}<br><br>${D3.src}</div>
+    </section>
+    <div class="cols" style="grid-template-columns:1fr 1fr 1fr">
+      <section class="panel"><h2>Teslim Sırası <span>Önerilen</span></h2>
+        <div class="mini" style="grid-template-columns:1fr">
+          <div><small>31.12.2026</small><b class="v">9 soru bankası teslim</b></div>
+          <div><small>31.01.2027</small><b class="v">SB baskı</b></div>
+          <div><small>01.03.2027</small><b class="v">7 VDD teslim</b></div>
+          <div><small>15.04.2027</small><b class="v">VDD baskı</b></div>
+        </div>
+      </section>
+      <section class="panel"><h2>Çift Kitap Yürüten Yazarlar</h2>
+        <div class="tbl-wrap"><table style="min-width:0"><tbody>
+        ${D3.dual.map(d=>`<tr><td><b>${d[0]}</b></td><td class="s" style="text-align:right">${d[1]}</td></tr>`).join('')}
+        </tbody></table></div>
+      </section>
+      <section class="panel" style="background:var(--navy);color:#fff;border-color:var(--navy);align-self:stretch">
+        <div class="pad"><div style="font-size:11px;letter-spacing:.12em;color:#9aa5c4;font-weight:700">TOPLU BASKI YAPILIRSA</div>
+        <div style="font-size:22px;font-weight:800;margin:6px 0">SB 31 Ocak · VDD 15 Nisan</div>
+        <div style="font-size:13px;color:#d3d9ea">Baskı iki dalgaya ayrıldı. Çift kitap yürüten altı yazar önce SB'yi 31 Aralık'ta teslim edip ardından VDD'ye 1 Mart'a kadar 2 ay ayırabilir.</div></div>
+      </section>
+    </div>
+    <section class="panel"><h2>Netleştirilmesi Gerekenler</h2>${list([
+      "<b>Planlanıyor</b> durumundaki 3 kitap: Coğrafya SB, Coğrafya VDD ve Din Kültürü SB için güncel plan ve teslim takvimi çıkarılmalı.",
+      "Plan tarihleri <b>2025 döngüsünden</b> kalan kitaplar (Coğrafya, Felsefe, Din Kültürü, Kimya, Biyoloji SB; Fizik SB'de tarihler eski döngüye ait) yeni takvime göre güncellenmeli.",
+      "<b>Türkçe SB</b> test/sayfa sayıları, <b>Tarih SB</b> 11–12. sınıf test sayıları, <b>Matematik SB</b> teslim tarihi sütunu plana eklenmeli.",
+      "<b>Matematik VDD</b> ürün planı Notion'a bağlanmalı; <b>Türkçe VDD</b>'de iki yazarın bölüm paylaşımı netleşmeli.",
+      "Biyoloji SB'de virüsler konusu MEB kitabına göre ağır bulunmuş; 6 açık yorum kapatılmalı."
+    ],'chk')}</section>`;
+}
+
+/* ============ DETAY: 4K ============ */
+function detail4k(){
+  setHeader("4K Yayınları · Soru Bankası Süreç Özeti","KOSB Soru Bankası Üretim Programı · Yönetim Özeti · 05.10.2026");
+  const rows = K4.rows.map((r,i)=>`<tr>
+    <td class="idx">${String(i+1).padStart(2,'0')}</td>
+    <td style="min-width:120px"><div class="b">${r[0]}</div></td>
+    <td style="min-width:170px">${r[1]}<div class="s">${r[2]}</div></td>
+    <td>${chip(r[3])}</td><td>${chip(r[4])}</td>
+    <td class="num">${r[5]}${r[6]?`<div style="color:var(--red);font-family:Inter;font-size:11px;font-weight:700">${r[6]}</div>`:''}</td>
+    <td>${pill(r[7], r[7].includes('Mart')?'':'o')}</td>
+    <td>${chip(r[8])}</td>
+    <td class="note">${r[9]}</td></tr>`).join('');
+  $app.innerHTML = `
+    ${backBtn()}
+    ${kpis(K4.kpis)}
+    <div>
+      <section class="panel"><h2>Ürün Bazında Süreç Durumu <span>Sıralama: kritiklik düzeyine göre</span></h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th></th><th>Ürün</th><th>Yazar / Hoca · Sorumlular</th><th>Sözleşme</th><th>Planlama</th><th>Başlangıç</th><th>Baskı Taahhüt</th><th>Genel Durum</th><th>Beklenen Aksiyon</th></tr></thead>
+          <tbody>${rows}</tbody></table></div>
+        <div class="rule">${K4.note}</div>
+      </section>
+      <div class="cols" style="grid-template-columns:1fr 2fr">
+        <section class="panel"><h2>Süreç Sağlığı <span>10 ürün</span></h2>
+          <div class="mini" style="grid-template-columns:1fr">
+            <div><small>Sözleşme</small><b class="v">4 tamam · 6 süreçte</b></div>
+            <div><small>Planlama</small><b class="v">9 mevcut · 1 bekleniyor</b></div>
+            <div><small>Üretim başlangıcı</small><b class="v">5 aktif · 2 tarihli · 3 belirsiz</b></div>
+          </div>
+        </section>
+        <section class="panel"><h2>Kritik Aksiyonlar <span>Bu hafta</span></h2>${list(K4.actions)}</section>
+      </div>
+    </div>`;
+}
+
+/* ============ DETAY: EV ============ */
+let evTab = 'TAK';
+function detailEv(){
+  setHeader("Eğitim Vadisi · TYT TAK / TİK Baskı Taahhütleri","Yayın & Ürün Müdürlüğü · Taahhüt çalışması 25.09.2026 · Üretim ilerleyişi 05.10.2026 (Notion)");
+  const S = EV[evTab];
+  const rows = S.rows.map((r,i)=>{
+    const g=r[9];
+    const son = typeof r[4]==='object' ? `<div><span class="s">Föy</span> ${r[4].f}</div><div><span class="s">Deneme</span> ${r[4].d}</div>` : r[4];
+    return `<tr class="main">
+      <td class="idx">${String(i+1).padStart(2,'0')}</td>
+      <td style="min-width:150px"><div class="b">${r[0]}</div><div class="s">${r[1]}</div><div style="margin-top:4px">${chip(r[7])}</div></td>
+      <td style="min-width:190px">${r[2].map(a=>`<div style="display:flex;justify-content:space-between;gap:10px"><span style="white-space:nowrap">${a[0]}</span><b style="font-family:var(--mono);font-size:12px">${a[1]}</b></div>`).join('')}<div class="s" style="margin-top:4px">Yönetmen: ${g.yon}</div></td>
+      <td class="num">${r[3]}</td>
+      <td class="num">${son}</td>
+      <td class="num">${r[5]}</td>
+      <td>${pill(r[6])}</td>
+      <td class="num" style="min-width:120px"><div style="display:flex;justify-content:space-between"><span class="s">Telif</span>${pct(g.telif)}</div><div class="bar" style="width:100%"><i style="width:${Math.min(100,g.telif)}%"></i></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="s">Dizgi</span>${pct(g.dizgi)}</div><div class="bar d" style="width:100%"><i style="width:${Math.min(100,g.dizgi)}%"></i></div><div class="s" style="margin-top:6px">Tashih ${pct(g.t1)} / ${pct(g.t2)}</div></td>
+      <td class="num" style="min-width:130px"><div><span class="s">Planlanan</span> ${g.plan} föy</div><div><span class="s">Gelen</span> ${g.gelen}</div><div style="margin-top:5px">${chip(g.uyum)}</div></td>
+    </tr><tr class="sub"><td></td><td colspan="9" class="note" style="padding-top:0"><span class="s" style="font-weight:700">Not:</span> ${r[8]}</td></tr>`;}).join('');
+  $app.innerHTML = `
+    ${backBtn()}
+    <div class="tabs">
+      <button class="tab ${evTab==='TAK'?'on':''}" data-ev="TAK">TYT TAK · Tam Anlatım</button>
+      <button class="tab ${evTab==='TIK'?'on':''}" data-ev="TIK">TYT TİK · Test İçerikli</button>
+    </div>
+    ${kpis(S.kpis)}
+    <section class="panel"><h2>${S.title} · Bitiş, Baskı Taahhüt ve İlerleyiş <span>Sıralama: baskı taahhüt tarihine göre</span></h2>
+      <div class="tbl-wrap"><table style="min-width:960px">
+        <thead><tr><th></th><th>Branş</th><th>Yazar · Son teslim</th><th>İlk teslim</th><th>Son teslim</th><th>Taahhüt +1 ay</th><th>Baskı taahhüt</th><th>İlerleyiş (05.10)<br><span style="font-weight:500">telif · dizgi · tashih</span></th><th>Plan uyumu<br><span style="font-weight:500">05.10'a kadar</span></th></tr></thead>
+        <tbody>${rows}</tbody></table></div>
+      <div class="rule">${S.rule}<br><span class="s">İlerleyiş yüzdeleri Notion'daki tamamlanan görev oranıdır; “gelen telif föy” = telif % × görev sayısı (yaklaşık). Planlanan föy: branş Excel'lerindeki teslim tarihlerine göre 05.10'a kadar gelmesi gerekenler.</span></div>
+    </section>
+    <div class="cols" style="grid-template-columns:1fr 1fr">
+      <section class="panel"><h2>Veri Uyarıları <span>Excel + Notion</span></h2>${list(S.warn,'chk')}</section>
+      <section class="panel"><h2>Süreç Yönetmeni <span>Ortalama telif · 05.10</span></h2>
+        <div class="tbl-wrap"><table style="min-width:0"><thead><tr><th>Yönetmen</th><th>TAK</th><th>TİK</th></tr></thead><tbody>
+        ${EV.yon.map(y=>`<tr><td><div class="b" style="font-size:13px">${y[0]}</div><div class="s">${y[1]}</div></td><td class="num">${y[2]}</td><td class="num">${y[3]}</td></tr>`).join('')}
+        </tbody></table></div>
+        <div class="rule">Çapraz okuma · Onay · PDF · Video aşamalarında <b>%0</b> — hiçbir üründe başlamadı (05.10).</div>
+      </section>
+    </div>`;
+}
+
+/* ============ DETAY: 3D ORTAOKUL ============ */
+function detail3do(){
+  setHeader("3D Ortaokul · 8. Sınıf SB Baskı Taahhüt Çalışması","3D Yayınları · LGS Maarif Modeli Soru Bankası Serisi · 2026–2027 · Güncel planlar Rev. 3");
+  const rows = O3.rows.map((r,i)=>`<tr>
+    <td class="idx">${String(i+1).padStart(2,'0')}</td>
+    <td><div class="b">${r[0]}</div><div class="s">${r[1]}</div><div style="margin-top:4px">${chip(r[2])}</div></td>
+    <td>${r[3]}<div class="s">${r[4]}</div></td>
+    <td class="num">${r[5]}</td><td class="num">${r[6]}</td><td class="num">${r[7]}</td>
+    <td>${r[8]?pill(r[8])+'<div style="color:var(--orange);font-size:11px;font-weight:700;margin-top:3px">+1,5 ay sınırı</div>':pill(null)}</td>
+    <td class="note">${r[9]}</td></tr>`).join('');
+  $app.innerHTML = `
+    ${backBtn()}
+    ${kpis(O3.kpis)}
+    <div>
+      <section class="panel"><h2>Branş Bazında Bitiş ve Baskı Taahhüt Tarihleri <span>Sıralama: son teslim tarihine göre</span></h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th></th><th>Branş</th><th>Yapı · Teslim düzeni</th><th>İlk teslim</th><th>Son teslim</th><th>Taahhüt +1 ay</th><th>Baskı taahhüt (önerilen)</th><th>Not</th></tr></thead>
+          <tbody>${rows}</tbody></table></div>
+        <div class="rule">${O3.rule}</div>
+      </section>
+      <div class="cols" style="grid-template-columns:1fr 2fr">
+        <section class="panel" style="background:var(--navy);color:#fff;border-color:var(--navy);align-self:stretch">
+          <div class="pad"><div style="font-size:11px;letter-spacing:.12em;color:#9aa5c4;font-weight:700">TOPLU BASKI YAPILIRSA</div>
+          <div style="font-size:24px;font-weight:800;margin:6px 0">15 Mart 2027</div>
+          <div style="font-size:13px;color:#d3d9ea">Planı gelen 4 branş için en geç tarih; İngilizce ve Türkçe planları bekleniyor.</div></div>
+        </section>
+        <section class="panel"><h2>Netleştirilmesi Gerekenler</h2>${list([
+          "<b>İngilizce</b> ve <b>Türkçe</b> soru bankası planları yazardan bekleniyor.",
+          "<b>Matematik</b>: Sayfa1 tema blokları (son teslim 30.01) ile Detay sayfasındaki günlük takvim (27.02'ye uzanıyor) çelişiyor; esas takvim netleşmeli.",
+          "<b>Din Kültürü</b>: Beceri İnşası test türü yok; teyit bekleniyor.",
+          "<b>Fen Bilimleri</b>: ara takip için test bazlı tarih istenebilir."
+        ],'chk')}</section>
+      </div>
+    </div>`;
+}
+
+function backBtn(){ return `<button class="back" data-go="home">← Tüm yayınlar</button>`; }
+
+/* ============ YÖNLENDİRME ============ */
+const VIEWS = {home:overview, "3d":detail3d, "4k":detail4k, ev:detailEv, "3do":detail3do};
+function route(){
+  const h = (location.hash||'#home').slice(1);
+  (VIEWS[h]||overview)();
+  window.scrollTo(0,0);
+}
+document.addEventListener('click', e=>{
+  const g = e.target.closest('[data-go]');
+  if(g){ const id=g.dataset.go; if(location.hash.slice(1)===id) route(); else location.hash = id; return; }
+  const t = e.target.closest('[data-ev]');
+  if(t){ evTab = t.dataset.ev; detailEv(); }
+});
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
