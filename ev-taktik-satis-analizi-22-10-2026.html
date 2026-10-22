@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EV TAK–TİK Satış Analizi · 22.10.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8102E;--red-dark:#9b0c22;--green:#1a7a4a;--green-bg:#e8f5ee;--amber:#b45309;--amber-bg:#fef3c7;
+  --ink:#1a1a1a;--ink-mid:#444;--ink-light:#777;--bg:#f5f4f0;--white:#fff;--border:#e2e0da;--row:#fafaf8;--bar:#e9e7e1;
+}
+[data-theme="dark"]{
+  --ink:#ecebe7;--ink-mid:#c9c7c1;--ink-light:#9a9893;--bg:#16161a;--white:#212126;--border:#34343a;--row:#26262b;--bar:#34343a;
+  --green-bg:#173a2a;--green:#5fd39a;--amber-bg:#3d2c10;--amber:#f2b25c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,sans-serif;font-size:14px;line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px 40px;position:relative}
+.wm{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;font-size:160px;font-weight:700;color:var(--red);opacity:.035;transform:rotate(-20deg);z-index:0}
+header{background:var(--red);color:#fff;padding:20px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{width:48px;height:48px;border-radius:50%;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.htxt{flex:1;min-width:220px}
+.htxt h1{margin:0;font-size:20px;font-weight:700}
+.htxt p{margin:2px 0 0;font-size:12.5px;opacity:.9}
+.badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 12px;font-size:12px;font-family:'IBM Plex Mono',monospace}
+.tbtn{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:inherit}
+.band{background:var(--red-dark);color:#fff;padding:8px 24px;font-size:12.5px}
+main{position:relative;z-index:1}
+.sec{margin-top:26px}
+.st{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1.2px;margin:0 0 10px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:16px 20px}
+.ozet{border-left:5px solid var(--red)}
+.ozet p{margin:0 0 8px}.ozet p:last-child{margin:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:14px 16px}
+.kl{font-size:10.5px;font-weight:700;color:var(--ink-light);text-transform:uppercase;letter-spacing:.8px}
+.kv{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:700;margin:6px 0 4px}
+.kv small{font-size:13px;color:var(--ink-light);font-weight:500}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:700;font-family:'IBM Plex Mono',monospace}
+.up{background:var(--green-bg);color:var(--green)}
+.down{background:var(--amber-bg);color:var(--amber)}
+.flat{background:var(--bar);color:var(--ink-mid)}
+.tw{overflow-x:auto;background:var(--white);border:1px solid var(--border);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{background:var(--row);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-light);padding:9px 12px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:8px 12px;border-bottom:1px solid var(--border);white-space:nowrap}
+td.n,th.n{text-align:right;font-family:'IBM Plex Mono',monospace}
+tr:last-child td{border-bottom:none}
+.totr td{font-weight:700;background:var(--row)}
+.hl td{background:rgba(200,16,46,.07)}
+.note{font-size:12.5px;color:var(--ink-mid);margin:10px 2px 0}
+.bars .r{display:grid;grid-template-columns:90px 1fr 64px;align-items:center;gap:10px;margin:7px 0}
+.bars .lb{font-size:13px}
+.bars .tr{position:relative;height:14px;background:var(--bar);border-radius:3px}
+.bars .f{position:absolute;top:0;height:14px;border-radius:3px}
+.bars .mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--ink-light)}
+.bars .v{font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-align:right;font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.two{grid-template-columns:1fr}.wm{font-size:90px}}
+.find{display:flex;gap:12px;align-items:flex-start;margin:0 0 12px}
+.find:last-child{margin:0}
+.num{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.find p{margin:0}
+.oneri{border-left:5px solid var(--green)}
+.oneri ol{margin:0;padding-left:20px}.oneri li{margin:0 0 8px}.oneri li:last-child{margin:0}
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--border);font-size:11.5px;color:var(--ink-light)}
+</style>
+</head>
+<body>
+<div class="wm">ÇÖZÜM</div>
+<header>
+  <div class="logo">ÇYG</div>
+  <div class="htxt">
+    <h1>Eğitim Vadisi TAK–TİK Satış Analizi</h1>
+    <p>9. ve 10. Sınıf · 2026 ile 2025 aynı dönem karşılaştırması</p>
+  </div>
+  <span class="badge">22.10.2026</span>
+  <button class="tbtn" id="tb" type="button">Koyu tema</button>
+</header>
+<div class="band">Hasan Bey’in bilgisine sunulmuştur.</div>
+
+<div class="wrap"><main>
+
+<div class="sec">
+  <div class="st">Kısaca</div>
+  <div class="card ozet">
+    <p>TAK–TİK satışlarında <b>9. sınıf geçen yılın üzerinde</b>, <b>10. sınıf ise bütün branşlarda geride</b>. İlk bakışta matematikte bir sorun var gibi görünüyordu. Diğer branşlara bakınca düşüşün matematiğe özel olmadığı, 10. sınıfın genelinde olduğu anlaşıldı.</p>
+    <p>Bayileri kaybetmiş değiliz. TAK–TİK’i azaltan bayilerin çoğu EV’nin diğer ürünlerini almaya devam ediyor. Düşüş büyük ölçüde iki bölgede (Kadir İlhan ve Muhsin Özbalcı) ve belirli bayilerde toplanıyor.</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="st">Genel Tablo (TAK + TİK, tüm branşlar, net adet)</div>
+  <div class="kpis">
+    <div class="kpi"><div class="kl">9. Sınıf</div><div class="kv">99.802 <small>/ 95.963</small></div><span class="pill up">▲ %4,0</span></div>
+    <div class="kpi"><div class="kl">10. Sınıf</div><div class="kv">121.328 <small>/ 148.749</small></div><span class="pill down">▼ %18,4</span></div>
+    <div class="kpi"><div class="kl">9 + 10 Toplam</div><div class="kv">221.130 <small>/ 244.712</small></div><span class="pill down">▼ %9,6</span></div>
+    <div class="kpi"><div class="kl">11. Sınıf Matematik (ilk yıl)</div><div class="kv">33.313</div><span class="pill flat">TAK 15.665 · TİK 17.648</span></div>
+  </div>
+  <p class="note">Büyük rakam 2026, küçük rakam 2025’in aynı dönemidir.</p>
+</div>
+
+<div class="sec">
+  <div class="st">1 · Düşüş 10. sınıfın genelinde, sadece matematikte değil</div>
+  <div class="two">
+    <div class="card">
+      <div class="kl" style="margin-bottom:8px">10. Sınıf · branş bazında değişim</div>
+      <div class="bars" id="b10"></div>
+    </div>
+    <div class="card">
+      <div class="kl" style="margin-bottom:8px">9. Sınıf · branş bazında değişim</div>
+      <div class="bars" id="b9"></div>
+    </div>
+  </div>
+  <p class="note">10. sınıfta Felsefe dışında bütün branşlar geride, çoğu %16 ile %24 arasında. Matematik %27 ile en çok düşen branş, ama tek başına değil. Hemen her branşta anlatım kitabı (TAK) izleme kitabından (TİK) daha çok kaybetmiş.</p>
+</div>
+
+<div class="sec">
+  <div class="st">2 · Matematik: sınıf ve ürün bazında</div>
+  <div class="tw"><table>
+    <tr><th>Ürün</th><th>Sınıf</th><th class="n">2025</th><th class="n">2026</th><th class="n">Değişim</th></tr>
+    <tr><td>TAK Matematik</td><td>9</td><td class="n">6.585</td><td class="n">6.799</td><td class="n"><span class="pill up">+%3,2</span></td></tr>
+    <tr><td>TİK Matematik</td><td>9</td><td class="n">8.745</td><td class="n">9.588</td><td class="n"><span class="pill up">+%9,6</span></td></tr>
+    <tr class="hl"><td>TAK Matematik</td><td>10</td><td class="n">10.490</td><td class="n">7.103</td><td class="n"><span class="pill down">−%32,3</span></td></tr>
+    <tr class="hl"><td>TİK Matematik</td><td>10</td><td class="n">11.618</td><td class="n">9.005</td><td class="n"><span class="pill down">−%22,5</span></td></tr>
+    <tr class="totr"><td>Toplam (9+10)</td><td></td><td class="n">37.438</td><td class="n">32.495</td><td class="n"><span class="pill down">−%13,2</span></td></tr>
+  </table></div>
+</div>
+
+<div class="sec">
+  <div class="st">3 · Kanal ve bölge (Matematik, 9+10)</div>
+  <div class="two">
+    <div class="tw"><table>
+      <tr><th>Kanal</th><th class="n">2025</th><th class="n">2026</th><th class="n">Fark</th></tr>
+      <tr><td>Bayi</td><td class="n">20.496</td><td class="n">16.245</td><td class="n"><span class="pill down">−%20,7</span></td></tr>
+      <tr><td>Kitaphane</td><td class="n">10.606</td><td class="n">11.420</td><td class="n"><span class="pill up">+%7,7</span></td></tr>
+      <tr><td>Kolej</td><td class="n">3.049</td><td class="n">3.174</td><td class="n"><span class="pill up">+%4,1</span></td></tr>
+      <tr><td>Kurs</td><td class="n">1.802</td><td class="n">1.563</td><td class="n"><span class="pill down">−%13,3</span></td></tr>
+      <tr><td>Kitapbulal</td><td class="n">1.189</td><td class="n">86</td><td class="n"><span class="pill down">−%92,8</span></td></tr>
+      <tr><td>Zincir Okullar</td><td class="n">296</td><td class="n">7</td><td class="n"><span class="pill down">−%97,6</span></td></tr>
+    </table></div>
+    <div class="tw"><table>
+      <tr><th>Bölge</th><th class="n">2025</th><th class="n">2026</th><th class="n">Fark</th></tr>
+      <tr class="hl"><td>Kadir İlhan</td><td class="n">5.620</td><td class="n">2.635</td><td class="n"><span class="pill down">−%53,1</span></td></tr>
+      <tr class="hl"><td>Muhsin Özbalcı</td><td class="n">8.478</td><td class="n">5.838</td><td class="n"><span class="pill down">−%31,1</span></td></tr>
+      <tr><td>Süleyman İşpınar</td><td class="n">4.743</td><td class="n">4.883</td><td class="n"><span class="pill up">+%3,0</span></td></tr>
+      <tr><td>Vedat Adsan</td><td class="n">2.625</td><td class="n">2.880</td><td class="n"><span class="pill up">+%9,7</span></td></tr>
+      <tr><td>Merkez</td><td class="n">11.121</td><td class="n">11.522</td><td class="n"><span class="pill up">+%3,6</span></td></tr>
+      <tr><td>Merkez Kolej</td><td class="n">3.049</td><td class="n">3.174</td><td class="n"><span class="pill up">+%4,1</span></td></tr>
+      <tr><td>Merkez Beyaz Kalem</td><td class="n">1.802</td><td class="n">1.563</td><td class="n"><span class="pill down">−%13,3</span></td></tr>
+    </table></div>
+  </div>
+  <p class="note">Toplamdaki 4.943 adetlik düşüşün tamamı iki bölgeden geliyor. Kadir İlhan bölgesi 2.985, Muhsin Özbalcı bölgesi 2.640 adet geride. Diğer bölgelerin toplamı artıda.</p>
+</div>
+
+<div class="sec">
+  <div class="st">4 · Bayiler EV’yi bırakmadı, TAK–TİK’i azalttı</div>
+  <div class="tw"><table>
+    <tr><th>Bayi</th><th>İl</th><th class="n">EV toplam (TL)</th><th class="n">TAK+TİK Mat. (adet)</th></tr>
+    <tr><td>Mega Mağaza</td><td>Sivas</td><td class="n">1,09 mn → 0,83 mn</td><td class="n">1.133 → 174</td></tr>
+    <tr><td>Yeşil Beyaz Yayın</td><td>Konya</td><td class="n">1,29 mn → 1,24 mn</td><td class="n">705 → 441</td></tr>
+    <tr><td>Atak Ofis</td><td>Eskişehir</td><td class="n">1,21 mn → 1,00 mn</td><td class="n">462 → 198</td></tr>
+    <tr><td>Ant Yayın</td><td>Trabzon</td><td class="n">1,16 mn → 1,04 mn</td><td class="n">290 → 55</td></tr>
+    <tr><td>Adres Kitap</td><td>Kütahya</td><td class="n">591 bin → 394 bin</td><td class="n">378 → 46</td></tr>
+    <tr><td>Muğla Eray</td><td>Muğla</td><td class="n">414 bin → 226 bin</td><td class="n">455 → 84</td></tr>
+    <tr><td>Sed-Kanguru</td><td>Manisa</td><td class="n">414 bin → 338 bin</td><td class="n">428 → 126</td></tr>
+    <tr><td>Karadeniz Basın</td><td>Rize</td><td class="n">227 bin → 343 bin</td><td class="n">280 → 140</td></tr>
+  </table></div>
+  <p class="note">Bu bayilerde EV alımı ya yerinde ya hafif düşük, ama TAK–TİK matematik çok daha sert düşmüş. Yani sorun bayiyle değil, ürünle ilgili.</p>
+  <p class="note">EV’nin genelinde de belirgin düşüş olan bayiler var: Erhan Çiçek (Bolu, −%72), Özdeniz Kitap (Malatya, −%67) ve Türker Kırtasiye (Manisa Soma, −%66). Bu bayilerde TAK–TİK’teki kayıp, genel uzaklaşmanın parçası.</p>
+</div>
+
+<div class="sec">
+  <div class="st">5 · Bayi değişiklikleri</div>
+  <div class="card">
+    <p style="margin:0 0 8px">Bazı illerde bir bayi düşerken aynı yere yeni bir bayi gelmiş. Bu yerlerde iş kısmen el değiştirmiş:</p>
+    <div class="tw" style="border:none"><table>
+      <tr><th>İl</th><th>Düşen</th><th>Gelen</th><th class="n">Birleşik (adet)</th></tr>
+      <tr><td>Kocaeli</td><td>Detay Kitap, Edanur Bayraktar Detay</td><td>Ahtera Kasıbeyaz</td><td class="n">641 → 681</td></tr>
+      <tr><td>Antalya</td><td>Akdeniz Lider</td><td>Benyay Kitap</td><td class="n">974 → 645</td></tr>
+      <tr><td>Yalova</td><td>Bİ Kitabevi</td><td>YKM Kitap</td><td class="n">348 → 39</td></tr>
+      <tr><td>Uşak</td><td>MSM Kırtasiye</td><td>Uşak Kitap Market</td><td class="n">250 → 117</td></tr>
+    </table></div>
+    <p class="note">Sistemde onaylı devir yalnızca Afyon’da var (Kümbet → Medrese, 42 → 95). Yukarıdakiler aynı il ve ilçeye bakılarak yapılmış tespitlerdir, bölge yöneticileriyle teyit edilmelidir. Kocaeli dışında yeni bayi eskisinin hacmine ulaşamamış.</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="st">Tespitler</div>
+  <div class="card">
+    <div class="find"><div class="num">1</div><p>9. sınıf TAK–TİK büyüyor (+%4). Ürün serisinde genel bir sorun yok.</p></div>
+    <div class="find"><div class="num">2</div><p>10. sınıf bütün branşlarda geride (−%18). En çok düşen matematik (−%27), ama tarih, edebiyat ve coğrafya da −%23 civarında.</p></div>
+    <div class="find"><div class="num">3</div><p>Düşüş en çok anlatım kitabında (TAK). İzleme kitabı (TİK) daha iyi tutunuyor.</p></div>
+    <div class="find"><div class="num">4</div><p>Kayıp ağırlıkla Kadir İlhan ve Muhsin Özbalcı bölgelerinde ve birkaç büyük bayide. Kitaphane ve kolej kanalları büyüyor.</p></div>
+    <div class="find"><div class="num">5</div><p>Bayilerin çoğu EV’nin diğer ürünlerini almaya devam ediyor. TAK–TİK’i azaltmalarının sebebi ürüne ya da 10. sınıfa özgü görünüyor.</p></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="st">Öneriler</div>
+  <div class="card oneri">
+    <ol>
+      <li><b>Bölge yöneticilerine sorulmalı:</b> 10. sınıfta TAK–TİK’in yerine başka bir yayının ürünü mü tercih edildi, yoksa okullar bu tür kitabı bu yıl hiç mi istemedi?</li>
+      <li><b>Kadir İlhan ve Muhsin Özbalcı bölgelerinde</b> Sivas, Bolu, Samsun, Manisa, Konya, Muğla ve Kütahya’daki bayilerle tek tek görüşülmeli.</li>
+      <li><b>Bayi değişiklikleri sistemde netleştirilmeli:</b> Kocaeli, Antalya, Yalova ve Uşak’taki geçişler teyit edilip cari devri olarak işlenmeli.</li>
+    </ol>
+  </div>
+</div>
+
+<footer>
+  Kaynak: Çözüm B2B satış verisi. Rakamlar net satış adedidir (fatura eksi iade). 2025 rakamları 1 Ocak–21 Ekim 2025, 2026 rakamları 1 Ocak–21 Ekim 2026 dönemine aittir. Eski ve yeni baskısı ayrı stok kodunda olan branşlarda iki baskı birleştirilmiştir. Bayi bazında EV toplamı TL olarak verilmiştir, tutarlar zamsızdır. 2024 verisi sistemde bulunmadığı ve 9–10. sınıf ürünleri 2025’te satışa çıktığı için kıyas iki yıllıktır. Tam Okul satışları siparişten ölçüldüğünden pano rakamlarıyla küçük farklar olabilir.
+</footer>
+
+</main></div>
+
+<script>
+var d10=[["Felsefe",1.2],["Kimya",-8.2],["Fizik",-16.4],["Biyoloji",-16.7],["Coğrafya",-22.6],["Edebiyat",-22.9],["Tarih",-23.8],["Matematik",-27.1]];
+var d9=[["Kimya",29.7],["Coğrafya",11.4],["Matematik",6.9],["Biyoloji",4.8],["Tarih",2.2],["Edebiyat",-7.6],["Fizik",-8.6]];
+function draw(id,data){
+  var el=document.getElementById(id),max=30,h="";
+  data.forEach(function(x){
+    var v=x[1],w=Math.min(Math.abs(v),max)/max*50,left=v>=0?50:50-w,col=v>=0?"var(--green)":"var(--amber)";
+    if(x[0]==="Matematik")col=v>=0?"var(--green)":"var(--red)";
+    var s=(v>0?"+":v<0?"−":"")+"%"+Math.abs(v).toFixed(1).replace(".",",");
+    h+='<div class="r"><div class="lb">'+(x[0]==="Matematik"?"<b>"+x[0]+"</b>":x[0])+'</div><div class="tr"><div class="mid"></div><div class="f" style="left:'+left+'%;width:'+w+'%;background:'+col+'"></div></div><div class="v">'+s+'</div></div>';
+  });
+  el.innerHTML=h;
+}
+draw("b10",d10);draw("b9",d9);
+var tb=document.getElementById("tb");
+function setT(t){document.documentElement.setAttribute("data-theme",t);tb.textContent=t==="dark"?"Açık tema":"Koyu tema";try{localStorage.setItem("ev-taktik-tema",t)}catch(e){}}
+try{var s=localStorage.getItem("ev-taktik-tema");if(s)setT(s)}catch(e){}
+tb.onclick=function(){setT(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")};
+</script>
+</body>
+</html>
