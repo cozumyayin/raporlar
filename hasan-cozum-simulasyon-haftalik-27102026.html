@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8. Sınıf Simülasyon ve SYN KOSB · Haftalık Satış Takibi · 3. hafta (20–27 Ekim 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ece6dc; --paper:#faf8f3; --ink:#22201c; --muted:#6b645b; --line:#e8cfc2; --soft:#f6e7df;
+  --red:#962f2f; --rust:#9f4a34; --green:#3e6b4f; --gsoft:#e5eee6; --rsoft:#f3e2e2; --hl:#efd77a; --head:#22201c; --headtx:#f5efe6;
+  --disp:"Barlow Condensed","Arial Narrow",Arial,sans-serif; --body:"IBM Plex Sans","Segoe UI",Helvetica,Arial,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1c1a17; --paper:#25221e; --ink:#eee7dc; --muted:#a59c90; --line:#4a3b34; --soft:#2e2924;
+  --red:#e07a72; --rust:#d98a6d; --green:#86b896; --gsoft:#24302a; --rsoft:#3a2626; --hl:#7a6420; --head:#0f0e0c; --headtx:#eee7dc; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1c1a17; --paper:#25221e; --ink:#eee7dc; --muted:#a59c90; --line:#4a3b34; --soft:#2e2924;
+  --red:#e07a72; --rust:#d98a6d; --green:#86b896; --gsoft:#24302a; --rsoft:#3a2626; --hl:#7a6420; --head:#0f0e0c; --headtx:#eee7dc; color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.tools{display:flex;justify-content:flex-end;gap:10px;max-width:1240px;margin:0 auto;padding:12px 20px 0}
+.tools button{font:600 15px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:9px 18px;cursor:pointer}
+.tools button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:16px 20px 60px}
+.sheet{position:relative;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:44px 52px 40px 108px;overflow:hidden}
+.sheet::before{content:"";position:absolute;left:0;top:0;bottom:0;width:78px;border-right:1.5px solid var(--line);
+  background:repeating-linear-gradient(to bottom,transparent 0 56px,var(--ink) 56px 64px,transparent 64px 82px);
+  -webkit-mask:linear-gradient(to right,transparent 22px,#000 22px,#000 56px,transparent 56px);mask:linear-gradient(to right,transparent 22px,#000 22px,#000 56px,transparent 56px)}
+.kicker{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:600 15px var(--disp);letter-spacing:.14em;color:var(--red);padding-bottom:12px;border-bottom:3px double var(--line)}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:26px 0 30px}
+.meta div{border:1.5px solid var(--line);border-radius:6px;padding:12px 18px}
+.meta span{display:block;font:600 14px var(--disp);letter-spacing:.14em;color:var(--red)}
+.meta b{font:600 24px var(--disp);letter-spacing:.01em}
+h1{font:800 clamp(44px,7vw,92px)/0.98 var(--disp);letter-spacing:-.01em;margin:0}
+.lede-sub{color:var(--muted);font-size:18px;margin:8px 0 22px}
+.lede{font-size:19px;line-height:1.7;max-width:62em;margin:0 0 30px}
+.lede .alert{color:var(--red);font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi{border:2px solid var(--ink);border-radius:6px;padding:20px 22px}
+.kpi.warn{border-color:var(--red);background:var(--rsoft)}
+.kpi span{display:block;font:600 15px var(--disp);letter-spacing:.14em;color:var(--rust)}
+.kpi b{display:inline-block;font:800 54px/1.05 var(--disp);margin:10px 0 6px;background:linear-gradient(transparent 62%,var(--hl) 62%)}
+.kpi p{margin:0;color:var(--muted);font-size:15.5px}
+.kpi.warn p{color:var(--red)}
+.yetiyor{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1.5px solid var(--line);margin-top:30px;padding-top:22px}
+.yetiyor h3{margin:0;font:700 17px var(--disp);letter-spacing:.14em;color:var(--red)}
+.yetiyor p{margin:4px 0 0;color:var(--muted);font-size:15.5px;max-width:30em}
+.dots{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.dot{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font:700 17px var(--disp);letter-spacing:.04em}
+.dot.yes{background:var(--ink);color:var(--paper)}
+.dot.no{border:2.5px solid var(--red);color:var(--red)}
+.legend{font-size:15px;color:var(--muted);line-height:2}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:8px}
+section{margin-top:64px}
+.sh{display:flex;align-items:center;gap:16px;margin:0 0 8px}
+.num-badge{flex:none;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font:700 22px var(--disp)}
+.num-badge.red{background:var(--red)}
+h2{font:800 clamp(28px,4vw,46px)/1.05 var(--disp);margin:0}
+h3.t{font:700 26px var(--disp);margin:34px 0 14px}
+.intro{color:var(--muted);font-size:17px;max-width:64em;margin:6px 0 22px}
+.bars{border:1.5px solid var(--line);border-radius:12px;background:var(--paper);padding:20px 28px}
+.brow{display:grid;grid-template-columns:240px 1fr 70px;align-items:center;gap:18px;padding:8px 0}
+.brow .tr{height:20px;border-radius:5px;background:var(--soft);overflow:hidden}
+.brow .tr span{display:block;height:100%;background:var(--ink);border-radius:5px}
+.brow b{font:700 24px var(--disp);text-align:right}
+.brow b.z{color:var(--red)}
+.note{border:1.5px solid var(--line);border-radius:12px;background:var(--paper);padding:16px 26px;margin-top:14px;font-size:16.5px}
+.note strong{font-weight:700}
+.tbl{overflow-x:auto;border:1.5px solid var(--line);border-radius:10px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:16.5px}
+thead th{background:var(--head);color:var(--headtx);font:600 15px/1.2 var(--disp);letter-spacing:.08em;text-align:right;padding:14px 14px;white-space:nowrap}
+thead th:first-child{text-align:left}
+tbody th{text-align:left;font:600 20px/1.2 var(--disp);padding:12px 14px}
+tbody th.child{font:500 17px var(--body)}
+.hook{color:var(--rust);margin-right:8px}
+td{padding:12px 14px;border-top:1px solid var(--line)}
+tbody tr:nth-child(even){background:var(--soft)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.muted{color:var(--muted)}
+.chg.up{color:var(--green);font-weight:600}.chg.dn{color:var(--red);font-weight:600}
+.chg .ar{font-size:.85em}
+.wk.pos,.pos{color:var(--green);font-weight:600}.wk.zero{color:var(--muted);font-weight:600}.neg{color:var(--red)}
+.b,tr.sub td,tr.sub th,tr.bold td{font-weight:700}
+tr.tot td,tr.tot th{border-top:3px solid var(--ink);font-weight:700;background:var(--paper)}
+tr.tot th{font:700 20px var(--disp)}
+tr.risk th{color:var(--red)}
+.covcell{white-space:nowrap}
+.bar{display:inline-block;width:60px;height:14px;border-radius:7px;background:var(--soft);vertical-align:middle;overflow:hidden;margin-right:12px}
+.bar span{display:block;height:100%;background:var(--ink);border-radius:7px}
+tr.risk .bar span{background:var(--red)}
+.covv{font-weight:700}
+tr.risk .covv,tr.risk .tuk{color:var(--red);font-weight:700}
+.prevc{display:block;font-size:13px;color:var(--muted);margin-left:72px}
+.foot{color:var(--muted);font-size:15.5px;margin:14px 0 0;max-width:70em}
+.call{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:22px}
+.call div{border:1.5px solid var(--green);background:var(--gsoft);border-radius:12px;padding:20px 24px}
+.call div.r{border-color:var(--red);background:var(--rsoft)}
+.call h4{margin:0 0 8px;font:700 26px var(--disp);color:var(--green)}
+.call div.r h4{color:var(--red)}
+.call p{margin:0;font-size:16.5px}
+.k4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}
+.k4 div{border:1.5px solid var(--line);border-radius:8px;padding:16px 22px}
+.k4 div.w{border-color:var(--red);background:var(--rsoft)}
+.k4 span{font:600 15px var(--disp);letter-spacing:.14em;color:var(--rust)}
+.k4 b{display:block;font:800 42px/1.1 var(--disp);margin:6px 0}
+.k4 div.w b{color:var(--red)}
+.k4 p{margin:0;color:var(--muted);font-size:15px}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px}
+.charts figure{margin:0;border:1.5px solid var(--line);border-radius:12px;padding:16px 18px 8px;background:var(--paper)}
+.charts svg{width:100%;height:auto;display:block}
+.charts figcaption{font-size:14px;color:var(--muted);padding:2px 4px 8px}
+.ct{font:700 17px var(--disp);fill:var(--ink)}
+.tick{font:13px var(--body);fill:var(--muted)}
+.grid{stroke:var(--line);stroke-width:1}
+.b25{fill:var(--line)}
+.lg i{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin:0 6px 0 12px}
+.dec{border:1.5px solid var(--line);border-radius:12px;background:var(--paper);padding:18px 26px;margin-top:14px;display:grid;grid-template-columns:44px 1fr;gap:6px 14px}
+.dec.open{border-color:var(--red)}
+.dec .st{width:32px;height:32px;border-radius:50%;border:2.5px solid var(--ink);margin-top:2px}
+.dec .st.full{background:var(--ink)}
+.dec .st.half{background:linear-gradient(to right,var(--ink) 50%,transparent 50%)}
+.dec .st.half.r{border-color:var(--red);background:linear-gradient(to right,var(--red) 50%,transparent 50%)}
+.dec .st.empty{border-color:var(--red)}
+.dec h4{margin:0;font:700 23px var(--disp)}
+.dec h4 small{font:400 17px var(--body);color:var(--muted)}
+.dec p{grid-column:2;margin:0;font-size:16.5px}
+.rec{border:1.5px solid var(--line);border-radius:12px;background:var(--paper);padding:20px 28px;margin-top:16px;display:grid;grid-template-columns:52px 1fr;gap:4px 12px}
+.rec .no{font:700 30px var(--disp);color:var(--rust)}
+.rec h4{margin:4px 0 0;font:700 18px var(--body);line-height:1.5}
+.rec h4 span{font-weight:400}
+.tag{display:inline-block;grid-column:2;justify-self:start;margin:12px 0 8px;font:600 15px var(--disp);letter-spacing:.12em;color:var(--green);border:1.5px solid var(--green);background:var(--gsoft);border-radius:999px;padding:4px 16px}
+.tag.y{color:var(--rust);border-color:var(--rust);background:var(--soft)}
+.rec p{grid-column:2;margin:0;font-size:16.5px}
+.src{border-top:2px solid var(--rust);margin-top:56px;padding-top:20px;font-size:15.5px;color:var(--muted)}
+.src p{margin:0 0 12px}.src b{color:var(--ink)}
+/* mobil */
+body.mview .wrap,body.mview .tools{max-width:440px}
+@media (max-width:860px){
+  .sheet{padding:28px 20px 28px 20px}.sheet::before{display:none}
+  .meta,.kpis,.k4{grid-template-columns:1fr 1fr}
+  .call,.charts{grid-template-columns:1fr}
+  .brow{grid-template-columns:130px 1fr 54px;gap:10px}
+  .lede{font-size:17px}.kpi b{font-size:42px}
+}
+body.mview .sheet{padding:28px 18px}body.mview .sheet::before{display:none}
+body.mview .meta,body.mview .kpis,body.mview .k4{grid-template-columns:1fr 1fr}
+body.mview .call,body.mview .charts{grid-template-columns:1fr}
+body.mview .brow{grid-template-columns:120px 1fr 50px;gap:10px}
+body.mview h1{font-size:44px}body.mview .kpi b{font-size:38px}body.mview .lede{font-size:16.5px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="tools">
+  <button type="button" id="mbtn">📱 Mobil görünüm</button>
+  <button type="button" id="tbtn">🌙 Koyu tema</button>
+</div>
+<div class="wrap"><main class="sheet">
+  <div class="kicker"><span>ÇÖZÜM YAYINLARI · İCRA KURULU · ICRA-1119</span><span>HAFTALIK SATIŞ TAKİBİ · 3. HAFTA</span></div>
+  <div class="meta">
+    <div><span>HAFTA</span><b>20–27 Ekim 2026</b></div>
+    <div><span>KESİT</span><b>27.10.2026 · 09:04</b></div>
+    <div><span>KAYNAK</span><b>Çözüm B2B</b></div>
+    <div><span>ÖLÇÜ</span><b>Net satış (fatura – iade)</b></div>
+  </div>
+  <h1>8. Sınıf Simülasyon ve SYN KOSB</h1>
+  <p class="lede-sub">Bir haftada ne değişti: satış, bölge, stok ve karar takibi</p>
+  <p class="lede">Satış biraz toparlandı: <b>546 adet</b> net satış, geçen hafta 134. Geçen yılın aynı haftası 2.904'tü ama bunun 2.500'ü Kitaphane'nin tek bir alımıydı. Bu alımın karşılığı bu yıl olmadığı için sezon farkı +%11,2'den +%5,9'a indi; bayi kanalında fark ise korunuyor. Satışın çoğu Vedat ve Süleyman Beylerden geldi, Kadir Bey bölgesi üç hafta sonra ilk satışını yaptı. Simülasyonda hâlâ baskı talebi yok: <span class="alert">Türkçe Aralık ortasında, Fen Aralık sonunda bitiyor</span>. Dil Bilgisi KOSB'nin baskısı 21 Ekim'de geldi ve bir haftada 2.624 adet satıldı; bu hızla mevcut stok Kasım'ın ilk yarısında yeniden bitiyor.</p>
+  <div class="kpis">
+    <div class="kpi"><span>HAFTALIK NET SATIŞ</span><b>+546</b><p>Geçen yıl aynı hafta +2.904</p></div>
+    <div class="kpi"><span>SEZON (HAZİRAN →)</span><b>+%5,9</b><p>20.10'da +%11,2</p></div>
+    <div class="kpi"><span>TAKVİM YILI</span><b>−%16,2</b><p>20.10'da −%14,8</p></div>
+    <div class="kpi warn"><span>ANA DEPO STOK</span><b>24.456</b><p>−524 · açık baskı talebi yok</p></div>
+  </div>
+  <div class="yetiyor">
+    <div><h3>31 ARALIK'A YETİYOR MU?</h3><p>Geçen yılın 28.10–31.12 satışı × bu sezonun branş büyümesi</p></div>
+    <div class="dots"><span class="dot no" title="Türkçe: %64">TÜR</span><span class="dot no" title="Fen Bilimleri: %93">FEN</span><span class="dot yes" title="Matematik: %153">MAT</span><span class="dot yes" title="İnkılap Tarihi: %304">İNK</span><span class="dot yes" title="Din Kültürü: %980">DİN</span><span class="dot yes" title="İngilizce: %1297">İNG</span></div>
+    <div class="legend"><div><i style="background:var(--ink)"></i>yetiyor</div><div><i style="border:2px solid var(--red)"></i>yetmiyor</div></div>
+  </div>
+
+  <section>
+    <div class="sh"><span class="num-badge">1</span><h2>Haftanın satışı nereden geldi</h2></div>
+    <p class="intro">20–27 Ekim arasında 546 adet net satış oldu, iade yok. Geçen yıl aynı hafta 2.904 adetti; bunun 2.500'ü Kitaphane'den gelmişti.</p>
+    <div class="bars">
+      <div class="brow"><span>Vedat Adsan</span><div class="tr"><span style="width:100%"></span></div><b>+252</b></div>
+      <div class="brow"><span>Süleyman İşpınar</span><div class="tr"><span style="width:87.3%"></span></div><b>+220</b></div>
+      <div class="brow"><span>Kadir İlhan</span><div class="tr"><span style="width:18.3%"></span></div><b>+46</b></div>
+      <div class="brow"><span>KitapBulal ve merkez</span><div class="tr"><span style="width:5.2%"></span></div><b>+13</b></div>
+      <div class="brow"><span>Muhsin Özbalcı</span><div class="tr"><span style="width:3.6%"></span></div><b>+9</b></div>
+      <div class="brow"><span>Kolej</span><div class="tr"><span style="width:2.4%"></span></div><b>+6</b></div>
+      <div class="brow"><span>Kitaphane</span><div class="tr"></div><b class="z">0</b></div>
+      <div class="brow"><span>Beyaz Kalem (kurs)</span><div class="tr"></div><b class="z">0</b></div>
+    </div>
+    <div class="note"><strong>Geçen yılla fark Kitaphane'de.</strong> Geçen yıl 21–27 Ekim'de Kitaphane 2.500 adet aldı; bu yıl Kitaphane üç haftadır sıfırda. Bölgelerde ise bu yıl geçen yılın önünde: dört bölgenin bayileri 527 adet aldı, geçen yılın aynı haftası 390.</div>
+    <div class="note"><strong>Vedat Adsan · +252 ve Süleyman İşpınar · +220:</strong> tamamı bayi kanalından.</div>
+    <div class="note"><strong>Kadir İlhan · +46:</strong> üç hafta sonra ilk satış. Giresun'dan Bulancak Kitap Merkezi (26) ve Bolu'dan Kampüs Kitap Kırtasiye (20). İade tarafında değişiklik yok.</div>
+    <div class="note"><strong>Muhsin Özbalcı · +9, kolej · +6, KitapBulal ve merkez · +13.</strong> Kitaphane ve Beyaz Kalem 0.</div>
+    <div class="note"><strong>Bekleyen fuar siparişi:</strong> TÜYAP İstanbul (1.070) ve Ankara (660) için 1.730 adet simülasyon siparişi hâlâ bekliyor; bu hafta sevk edilmedi.</div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="num-badge">2</span><h2>Bölge tablosu, 27 Ekim kesiti</h2></div>
+    <p class="intro">Yöntem aynı. 20.10 rakamları bu yöntemle birebir yeniden üretildi (114.109 / 133.918); fark yalnız haftanın hareketi.</p>
+    <h3 class="t">Takvim yılı (Ocak → kesit), geçen yılın aynı gününe kadar</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>BÖLGE / KANAL</th><th>2026</th><th>2025 AYNI GÜN</th><th>DEĞİŞİM</th><th>20.10'DA</th><th>BU HAFTA</th><th>GY AYNI HAFTA</th></tr></thead>
+      <tbody><tr><th scope="row">Muhsin Özbalcı</th><td class="num">18.432</td><td class="num">16.180</td><td class="num chg up"><span class="ar">▲</span> +%13,9</td><td class="num muted">+%16,2</td><td class="num wk pos">+9</td><td class="num muted">+320</td></tr><tr><th scope="row">Kadir İlhan</th><td class="num">10.376</td><td class="num">17.396</td><td class="num chg dn"><span class="ar">▼</span> −%40,4</td><td class="num muted">−%40,6</td><td class="num wk pos">+46</td><td class="num muted">+10</td></tr><tr><th scope="row">Süleyman İşpınar</th><td class="num">13.155</td><td class="num">17.041</td><td class="num chg dn"><span class="ar">▼</span> −%22,8</td><td class="num muted">−%24,0</td><td class="num wk pos">+220</td><td class="num muted">+20</td></tr><tr><th scope="row">Vedat Adsan</th><td class="num">8.603</td><td class="num">15.209</td><td class="num chg dn"><span class="ar">▼</span> −%43,4</td><td class="num muted">−%44,9</td><td class="num wk pos">+252</td><td class="num muted">+40</td></tr><tr class="sub"><th scope="row">4 bölge toplamı</th><td class="num">50.566</td><td class="num">65.826</td><td class="num chg dn b"><span class="ar">▼</span> −%23,2</td><td class="num">−%23,5</td><td class="num wk pos">+527</td><td class="num">+390</td></tr><tr><th scope="row">Beyaz Kalem (kurs)</th><td class="num">24.542</td><td class="num">26.192</td><td class="num chg dn"><span class="ar">▼</span> −%6,3</td><td class="num muted">−%6,3</td><td class="num wk zero">0</td><td class="num muted">+12</td></tr><tr><th scope="row">Kitaphane</th><td class="num">32.364</td><td class="num">38.290</td><td class="num chg dn"><span class="ar">▼</span> −%15,5</td><td class="num muted">−%9,6</td><td class="num wk zero">0</td><td class="num b">+2.500</td></tr><tr><th scope="row">Kolej</th><td class="num">4.998</td><td class="num">5.496</td><td class="num chg dn"><span class="ar">▼</span> −%9,1</td><td class="num muted">−%9,2</td><td class="num wk pos">+6</td><td class="num muted">0</td></tr><tr><th scope="row">KitapBulal ve merkez örnek takip</th><td class="num">2.185</td><td class="num">1.018</td><td class="num muted">—</td><td class="num muted">—</td><td class="num wk pos">+13</td><td class="num muted">+2</td></tr><tr class="tot"><th scope="row">Toplam</th><td class="num">114.655</td><td class="num">136.822</td><td class="num chg dn b"><span class="ar">▼</span> −%16,2</td><td class="num">−%14,8</td><td class="num">+546</td><td class="num">+2.904</td></tr></tbody>
+    </table></div>
+    <h3 class="t">Sezon (Haziran → kesit): asıl karşılaştırma</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>KANAL / BÖLGE</th><th>BU SEZON</th><th>GEÇEN SEZON AYNI GÜN</th><th>20.10'DA</th><th>27.10'DA</th><th>BU HAFTA</th></tr></thead>
+      <tbody><tr class="bold"><th scope="row">Bayi kanalı</th><td class="num">10.735</td><td class="num">8.713</td><td class="num muted">+%22,6</td><td class="num chg up"><span class="ar">▲</span> +%23,2</td><td class="num wk pos">+527</td></tr><tr class=""><th scope="row" class="child"><span class="hook" aria-hidden="true">↳</span>Muhsin Özbalcı</th><td class="num">4.531</td><td class="num">2.633</td><td class="num muted">+%95,5</td><td class="num chg up"><span class="ar">▲</span> +%72,1</td><td class="num wk pos">+9</td></tr><tr class=""><th scope="row" class="child"><span class="hook" aria-hidden="true">↳</span>Kadir İlhan</th><td class="num">320</td><td class="num">1.952</td><td class="num muted">−%85,9</td><td class="num chg dn"><span class="ar">▼</span> −%83,6</td><td class="num wk pos">+46</td></tr><tr class=""><th scope="row" class="child"><span class="hook" aria-hidden="true">↳</span>Süleyman İşpınar</th><td class="num">4.526</td><td class="num">2.968</td><td class="num muted">+%46,1</td><td class="num chg up"><span class="ar">▲</span> +%52,5</td><td class="num wk pos">+220</td></tr><tr class=""><th scope="row" class="child"><span class="hook" aria-hidden="true">↳</span>Vedat Adsan</th><td class="num">1.358</td><td class="num">1.160</td><td class="num muted">−%1,3</td><td class="num chg up"><span class="ar">▲</span> +%17,1</td><td class="num wk pos">+252</td></tr><tr class=""><th scope="row">Beyaz Kalem (kurs)</th><td class="num">23.065</td><td class="num">25.867</td><td class="num muted">−%10,8</td><td class="num chg dn"><span class="ar">▼</span> −%10,8</td><td class="num wk zero">0</td></tr><tr class=""><th scope="row">Kitaphane</th><td class="num">15.160</td><td class="num">11.640</td><td class="num muted">+%65,9</td><td class="num chg up"><span class="ar">▲</span> +%30,2</td><td class="num wk zero">0</td></tr><tr class=""><th scope="row">Kolej</th><td class="num">4.992</td><td class="num">5.496</td><td class="num muted">−%9,3</td><td class="num chg dn"><span class="ar">▼</span> −%9,2</td><td class="num wk pos">+6</td></tr><tr><th scope="row">KitapBulal ve diğer</th><td class="num">262</td><td class="num">−545</td><td class="num muted">—</td><td class="num muted">—</td><td class="num wk pos">+13</td></tr><tr class="tot"><th scope="row">Toplam</th><td class="num">54.214</td><td class="num">51.171</td><td class="num">+%11,2</td><td class="num chg up b"><span class="ar">▲</span> +%5,9</td><td class="num">+546</td></tr></tbody>
+    </table></div>
+    <div class="call">
+      <div><h4>Bayi kanalında fark korunuyor</h4><p>Sezon bayi satışı 10.735, geçen yılın aynı dönemi 8.713 (+%23,2; geçen hafta +%22,6). Vedat Bey sezonda eksiden artıya geçti (−%1,3 → +%17,1).</p></div>
+      <div class="r"><h4>Kitaphane avantajı yarıya indi</h4><p>Sezonda Kitaphane 15.160, geçen yıl aynı dönem 11.640 (+%30,2; geçen hafta +%65,9). Sezon farkının +%11,2'den +%5,9'a inmesinin sebebi bu: geçen yılın bu haftasındaki 2.500 adetlik alımın bu yıl karşılığı yok.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="num-badge red">3</span><h2>Stok ve baskı: Türkçe ve Fen Aralık'a hâlâ yetmiyor</h2></div>
+    <p class="intro">Ana depo bir haftada 24.980'den 24.456'ya indi (−524; haftanın net satışı 546). Altı branşın hiçbirinde açık ya da planlanmış baskı talebi yok (B2B baskı verisi, 27.10 · 09:04). Karşılama oranları bu hafta belirgin yükseldi ama stok artmadı. İki sebebi var: geçen yılın 21–27 Ekim satışı (2.904 adet) hesap penceresinden çıktı ve bu sezonun branş büyümesi düştü (Türkçe +%18,6'dan +%12,4'e). Tahmin, bu yılın satışı yavaş kaldığı için iyileşiyor.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>BRANŞ</th><th>STOK<br>20.10</th><th>STOK<br>27.10</th><th>DEPO<br>ÇIKIŞI</th><th>FUAR<br>BEKLEYEN</th><th>SEZON<br>BÜYÜMESİ</th><th>GY 28.10–<br>31.12</th><th style="text-align:left">31.12'YE<br>KARŞILAMA</th><th>SEZON<br>SONUNA</th><th style="text-align:left">TAHMİNİ<br>TÜKENME</th></tr></thead>
+      <tbody><tr class="risk"><th scope="row">Türkçe</th><td class="num muted">2.163</td><td class="num b">2.044</td><td class="num">119</td><td class="num">320</td><td class="num pos">+%12,4</td><td class="num">2.822</td><td class="covcell"><span class="bar"><span style="width:64%"></span></span><span class="covv">%64</span><span class="prevc">20.10: %54</span></td><td class="num">%12</td><td class="tuk">Aralık ortası</td></tr><tr class="risk"><th scope="row">Fen Bilimleri</th><td class="num muted">2.850</td><td class="num b">2.737</td><td class="num">113</td><td class="num">390</td><td class="num pos">+%17,5</td><td class="num">2.491</td><td class="covcell"><span class="bar"><span style="width:93%"></span></span><span class="covv">%93</span><span class="prevc">20.10: %75</span></td><td class="num">%17</td><td class="tuk">Aralık sonu</td></tr><tr class=""><th scope="row">Matematik</th><td class="num muted">4.872</td><td class="num b">4.742</td><td class="num">130</td><td class="num">420</td><td class="num pos">+%10,8</td><td class="num">2.790</td><td class="covcell"><span class="bar"><span style="width:100%"></span></span><span class="covv">%153</span><span class="prevc">20.10: %123</span></td><td class="num">%30</td><td class="tuk">Şubat başı</td></tr><tr class=""><th scope="row">İnkılap Tarihi</th><td class="num muted">4.238</td><td class="num b">4.173</td><td class="num">65</td><td class="num">200</td><td class="num neg">−%4,3</td><td class="num">1.435</td><td class="covcell"><span class="bar"><span style="width:100%"></span></span><span class="covv">%304</span><span class="prevc">20.10: %210</span></td><td class="num">%48</td><td class="tuk">Şubat sonu</td></tr><tr class=""><th scope="row">Din Kültürü</th><td class="num muted">4.888</td><td class="num b">4.882</td><td class="num">6</td><td class="num">180</td><td class="num pos">+%1,3</td><td class="num">492</td><td class="covcell"><span class="bar"><span style="width:100%"></span></span><span class="covv">%980</span><span class="prevc">20.10: %632</span></td><td class="num">%74</td><td class="tuk">Nisan ortası</td></tr><tr class=""><th scope="row">İngilizce</th><td class="num muted">5.969</td><td class="num b">5.878</td><td class="num">91</td><td class="num">220</td><td class="num neg">−%0,6</td><td class="num">456</td><td class="covcell"><span class="bar"><span style="width:100%"></span></span><span class="covv">%1.297</span><span class="prevc">20.10: %737</span></td><td class="num">%87</td><td class="tuk">Nisan sonu</td></tr><tr class="tot"><th scope="row">Toplam</th><td class="num">24.980</td><td class="num">24.456</td><td class="num">524</td><td class="num">1.730</td><td class="num">+%6,6</td><td class="num">10.486</td><td class="num">—</td><td class="num">%34</td><td class="tuk">—</td></tr></tbody>
+    </table></div>
+    <p class="foot">Karşılama = ana depo ÷ (geçen yılın aynı dönem satışı × bu sezonun branş büyümesi). Sezon sonuna = ana depo ÷ geçen yılın 28.10–31.05 satışı. Tükenme tarihi geçen sezonun aylık takvimi aynı büyümeyle tekrarlanırsa geçerli; ay içi satış eşit dağıtıldı. Branş büyümesi altı simülasyon stok koduyla hesaplandı (+%6,6); bölge tablosundaki +%5,9 eski branş denemelerini de içeriyor. <b>Fuar siparişleri düşüldüğünde Türkçe'nin 31 Aralık karşılaması %54'e, Fen'inki %80'e iner; Türkçe Aralık başında biter.</b></p>
+  </section>
+
+  <section>
+    <div class="sh"><span class="num-badge">4</span><h2>SYN KOSB ve Dil Bilgisi KOSB</h2></div>
+    <p class="intro">Dil Bilgisi KOSB'nin baskısı zamanında geldi ve satış hemen karşılık verdi. Şimdiki risk, bu hızla stoğun yine kısa sürede bitmesi.</p>
+    <div class="k4">
+      <div><span>SYN BU HAFTA</span><b>+98</b><p>2026 toplamı 11.148</p></div>
+      <div><span>SYN ANA DEPO</span><b>7.506</b><p>+982 diğer depolarda · baskı gerekmiyor</p></div>
+      <div class="w"><span>DİL BİLGİSİ KOSB ANA DEPO</span><b>3.329</b><p>646 bekleyen sipariş · bu hafta 2.624 satış</p></div>
+      <div class="w"><span>MATBAADA</span><b>1.787</b><p>#1718 kalan · teslim 14.09 geçti<br>yeni baskı talebi yok</p></div>
+    </div>
+    <div class="note"><strong>Baskı zamanında geldi.</strong> Talep #1870'ten 7.570 adet 21 Ekim'de teslim alındı (talep 7.500). Bekleyen sipariş 2.227'den 646'ya indi; kalanın 600'ü merkez örnek takip, 30'u bayi, 16'sı KitapBulal.</div>
+    <div class="note"><strong>Stok yine kısa sürede bitiyor.</strong> Dil Bilgisi KOSB bu hafta 2.624 adet sattı, geçen yılın aynı haftası 2.975. Ana depoda bekleyenler düşülünce 2.683 adet serbest stok var; geçen yıl Kasım'da 7.907 adet satılmıştı. Bu tempoyla stok Kasım'ın ilk yarısında biter ve açık baskı talebi yok; #1718'in 1.787 kalanı altı haftadır gecikmede.</div>
+    <div class="note"><strong>SYN paket hedefinin altında.</strong> SYN bu hafta 98 adet sattı (geçen hafta 89). Dil Bilgisi stoğa girince SYN'de beklenen artış görünmedi: bu hafta Dil Bilgisi'nin her 100 satışına SYN'den 4 düştü, hedef 15–20'ydi. İkisi birlikte sezonda −%8,5 (geçen hafta −%8,5).</div>
+    <div class="charts">
+      <figure><svg viewBox="0 0 460 250" role="img" aria-label="Dil Bilgisi KOSB · aylık net satış"><text x="44" y="16" class="ct">Dil Bilgisi KOSB · aylık net satış</text><line x1="44" x2="448" y1="216.0" y2="216.0" class="grid"/><text x="38" y="220.0" class="tick" text-anchor="end">0</text><line x1="44" x2="448" y1="168.5" y2="168.5" class="grid"/><text x="38" y="172.5" class="tick" text-anchor="end">7K</text><line x1="44" x2="448" y1="121.0" y2="121.0" class="grid"/><text x="38" y="125.0" class="tick" text-anchor="end">14K</text><line x1="44" x2="448" y1="73.5" y2="73.5" class="grid"/><text x="38" y="77.5" class="tick" text-anchor="end">21K</text><line x1="44" x2="448" y1="26.0" y2="26.0" class="grid"/><text x="38" y="30.0" class="tick" text-anchor="end">28K</text><rect x="55.3" y="193.3" width="27.5" height="22.7" class="b25"><title>Haz 2025: 3.349</title></rect><rect x="84.8" y="172.6" width="27.5" height="43.4" style="fill:var(--ink)"><title>Haz 2026: 6.396</title></rect><text x="84.4" y="238" class="tick" text-anchor="middle">Haz</text><rect x="136.1" y="157.2" width="27.5" height="58.8" class="b25"><title>Tem 2025: 8.658</title></rect><rect x="165.6" y="143.1" width="27.5" height="72.9" style="fill:var(--ink)"><title>Tem 2026: 10.746</title></rect><text x="165.2" y="238" class="tick" text-anchor="middle">Tem</text><rect x="216.9" y="121.0" width="27.5" height="95.0" class="b25"><title>Ağu 2025: 13.999</title></rect><rect x="246.4" y="138.3" width="27.5" height="77.7" style="fill:var(--ink)"><title>Ağu 2026: 11.445</title></rect><text x="246.0" y="238" class="tick" text-anchor="middle">Ağu</text><rect x="297.7" y="42.4" width="27.5" height="173.6" class="b25"><title>Eyl 2025: 25.577</title></rect><rect x="327.2" y="65.3" width="27.5" height="150.7" style="fill:var(--ink)"><title>Eyl 2026: 22.208</title></rect><text x="326.8" y="238" class="tick" text-anchor="middle">Eyl</text><rect x="378.5" y="104.2" width="27.5" height="111.8" class="b25"><title>Eki* 2025: 16.477</title></rect><rect x="408.0" y="192.8" width="27.5" height="23.2" style="fill:var(--ink)"><title>Eki* 2026: 3.415</title></rect><text x="407.6" y="238" class="tick" text-anchor="middle">Eki*</text></svg><figcaption><span class="lg"><i style="background:var(--line);margin-left:0"></i>2025<i style="background:var(--ink)"></i>2026</span> · *Ekim: 27'sine kadar</figcaption></figure>
+      <figure><svg viewBox="0 0 460 250" role="img" aria-label="SYN KOSB · aylık net satış (2026)"><text x="44" y="16" class="ct">SYN KOSB · aylık net satış (2026)</text><line x1="44" x2="448" y1="216.0" y2="216.0" class="grid"/><text x="38" y="220.0" class="tick" text-anchor="end">0</text><line x1="44" x2="448" y1="152.7" y2="152.7" class="grid"/><text x="38" y="156.7" class="tick" text-anchor="end">1K</text><line x1="44" x2="448" y1="89.3" y2="89.3" class="grid"/><text x="38" y="93.3" class="tick" text-anchor="end">2K</text><line x1="44" x2="448" y1="26.0" y2="26.0" class="grid"/><text x="38" y="30.0" class="tick" text-anchor="end">3K</text><rect x="68.2" y="149.4" width="27.5" height="66.6" style="fill:var(--rust)"><title>Haz 2026: 1.052</title></rect><text x="84.4" y="238" class="tick" text-anchor="middle">Haz</text><rect x="149.0" y="81.2" width="27.5" height="134.8" style="fill:var(--rust)"><title>Tem 2026: 2.128</title></rect><text x="165.2" y="238" class="tick" text-anchor="middle">Tem</text><rect x="229.8" y="59.2" width="27.5" height="156.8" style="fill:var(--rust)"><title>Ağu 2026: 2.476</title></rect><text x="246.0" y="238" class="tick" text-anchor="middle">Ağu</text><rect x="310.6" y="93.7" width="27.5" height="122.3" style="fill:var(--rust)"><title>Eyl 2026: 1.931</title></rect><text x="326.8" y="238" class="tick" text-anchor="middle">Eyl</text><rect x="391.4" y="186.1" width="27.5" height="29.9" style="fill:var(--rust)"><title>Eki* 2026: 472</title></rect><text x="407.6" y="238" class="tick" text-anchor="middle">Eki*</text></svg><figcaption>SYN Aralık 2025'te çıktı; geçen yılın aynı ayları yok · *Ekim: 27'sine kadar</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="num-badge">5</span><h2>Karar maddeleri: bu hafta ne oldu</h2></div>
+    <p class="intro">Notion'daki altı öneri ve İcra kararları. Durum işaretleri optik formdaki gibi: dolu tamam, yarım kısmen, boş açık. ICRA-1119 sayfasına 20.10'da yalnız geçen haftanın rapor linki eklendi; yorumlar bu kesitte okunamadı.</p>
+    <div class="dec"><span class="st full"></span><h4>Bölge tablosu net satışla yenilensin <small>· Mervenur Aslan</small></h4><p>Tamam. Tablo bu raporda da aynı yöntemle güncellendi.</p></div>
+    <div class="dec open"><span class="st empty"></span><h4>Ek baskı kararı Kasım sonuna kadar <small>· Emre Erdoğan</small></h4><p>Açık. Üç haftadır altı branşta da baskı talebi yok. Türkçe ve Fen için önerilen 31 Ekim'e dört gün kaldı (Bölüm 3).</p></div>
+    <div class="dec"><span class="st half"></span><h4>Bölge odağı: Vedat ve Kadir Beyler <small>· Vedat Adsan, Kadir İlhan</small></h4><p>Kısmen. Vedat Bey bu hafta +252, sezonda eksiden artıya geçti. Kadir Bey'de iki bayiden 46 adet satış var; iade açıklaması hâlâ gelmedi.</p></div>
+    <div class="dec"><span class="st half"></span><h4>Beyaz Kalem ve kolej düşüşü merkezde ayrı madde <small>· Osman Selçuk Uğur</small></h4><p>Kısmen. Ayrı madde kaydı görünmüyor. Bu hafta Beyaz Kalem 0, kolej +6; sezonda Beyaz Kalem −%10,8, kolej −%9,2.</p></div>
+    <div class="dec open"><span class="st half r"></span><h4>SYN KOSB: yeni baskı yok, Dil Bilgisi KOSB ile paket</h4><p>SYN için baskı yapılmadı, Dil Bilgisi KOSB de stoğa girdi. Ama paket oranı hedefin altında: Dil Bilgisi'nin her 100 satışına SYN'den 4.</p></div>
+    <div class="dec"><span class="st half"></span><h4>Hedefli örnekleme (Ankara öncelikli) <small>· Emre Erdoğan, M. Yasin Erdoğan</small></h4><p>Kısmen. Örnek planı sayfada hâlâ yok.</p></div>
+    <div class="dec"><span class="st full"></span><h4>İcra kararları</h4><p>06.10: tüm birimlerden stok eritme aksiyonu istendi. 13.10: haftalık satış takibi yapılacak. 20.10: ikinci rapor Notion'a eklendi. Bu rapor üçüncü sayısı.</p></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="num-badge">6</span><h2>Öneriler</h2></div>
+    <div class="rec"><span class="no">01</span><h4>Türkçe ve Fen ek baskı talebi 31 Ekim 2026'ya kadar girilsin; Matematik Kasım sonu takviminde kalsın. <span>Sorumlu: Emre Erdoğan.</span></h4><span class="tag">ÖLÇÜLMÜŞ</span><p>Üçüncü haftadır öneriliyor, dört gün kaldı. Ana depo Türkçe 2.044, Fen 2.737; fuar siparişleri düşülünce 1.724 ve 2.347. Son üç Türkçe baskısında teslim 7–27 gün sürdü.</p></div>
+    <div class="rec"><span class="no">02</span><h4>Dil Bilgisi KOSB için yeni baskı talebi bu hafta girilsin; #1718'in 1.787 adetlik kalanının durumu netleşsin. <span>Sorumlu: Emre Erdoğan.</span></h4><span class="tag">ÖLÇÜLMÜŞ</span><p>Serbest stok 2.683, bu haftaki satış 2.624, geçen yıl Kasım satışı 7.907. #1870 dokuz günde teslim edildi; aynı sürede bir baskı Kasım ortasına yetişir.</p></div>
+    <div class="rec"><span class="no">03</span><h4>TÜYAP fuar siparişleri (1.730 adet) sevk edilmeden önce Türkçe ve Fen'den gidecek adet gözden geçirilsin. <span>Sorumlu: yayın ve baskı takibi.</span></h4><span class="tag">ÖLÇÜLMÜŞ</span><p>Fuar için Türkçe 320, Fen 390 adet bekliyor. Bunlar çıkınca Türkçe'nin Aralık'a karşılaması %54'e, Fen'inki %80'e iner.</p></div>
+    <div class="rec"><span class="no">04</span><h4>Kadir İlhan bölgesi için iade açıklaması ve bayi bazında sipariş planı 3 Kasım İcra'sına gelsin. <span>Sorumlu: Kadir İlhan, Osman Selçuk Uğur.</span></h4><span class="tag">ÖLÇÜLMÜŞ</span><p>İki haftadır isteniyor. Bu hafta iki bayiden 46 adet satış geldi; sezon bayi satışı 320, geçen yıl 1.952; 2026 iadesi 6.084 adet.</p></div>
+  </section>
+
+  <div class="src">
+    <p><b>Kaynak:</b> Çözüm B2B (Raporlar veritabanı, net satış = fatura – iade; örnek ve bedelsiz gönderiler hariç) · Stok Durum Raporu 27.10.2026 09:04 · baskı verisi 27.10.2026 09:04 · ICRA-1119 Notion sayfası.</p>
+    <p><b>Kapsam:</b> 8. Sınıf Simülasyon = altı branş stok kodu (Türkçe, Matematik, Fen, İnkılap, Din, İngilizce; 26-27 baskısı). SYN = TYT Ses Yazım Noktalama KOSB. Dil Bilgisi KOSB = TYT KOSB Dil Bilgisi.</p>
+    <p><b>Kesit:</b> 20.10 08:58 → 27.10 09:04. Geçen yıl kıyası aynı güne kadar, gün dahil (B2B "bugüne kadar" mantığı). Bölge = carinin plasiyeri (bayi + KitapBulal kanalı); Beyaz Kalem, Kitaphane ve kolej merkez kanalları ayrı satırda. Haftalık hareket, iki kesitteki kümülatif rakamların farkıdır.</p>
+    <p>Hazırlanma 27.10.2026 · Bir sonraki kesit 03.11.2026 (Salı)</p>
+  </div>
+</main></div>
+<script>
+(function(){
+  var root=document.documentElement,tb=document.getElementById('tbtn'),mb=document.getElementById('mbtn');
+  function isDark(){var t=root.getAttribute('data-theme');if(t)return t==='dark';return window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches;}
+  function label(){tb.textContent=isDark()?'☀️ Açık tema':'🌙 Koyu tema';mb.textContent=document.body.classList.contains('mview')?'🖥️ Web görünümü':'📱 Mobil görünüm';}
+  try{var s=localStorage.getItem('sim-tema');if(s)root.setAttribute('data-theme',s);if(localStorage.getItem('sim-mobil')==='1')document.body.classList.add('mview');}catch(e){}
+  tb.addEventListener('click',function(){var t=isDark()?'light':'dark';root.setAttribute('data-theme',t);try{localStorage.setItem('sim-tema',t)}catch(e){}label();});
+  mb.addEventListener('click',function(){document.body.classList.toggle('mview');try{localStorage.setItem('sim-mobil',document.body.classList.contains('mview')?'1':'0')}catch(e){}label();});
+  label();
+})();
+</script>
+</body>
+</html>
